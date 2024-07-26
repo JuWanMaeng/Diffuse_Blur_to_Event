@@ -1,0 +1,10 @@
+/workspace/data/vimeo/train/000018/blur/000018.png
+/workspace/data/vimeo/train/001000/blur/001000.png
+/workspace/data/vimeo/train/003000/blur/003000.png
+/workspace/data/vimeo/train/004000/blur/004000.png
+/workspace/data/vimeo/train/005000/blur/005000.png
+/workspace/data/vimeo/train/006000/blur/006000.png
+/workspace/data/vimeo/train/007000/blur/007000.png
+/workspace/data/vimeo/train/008000/blur/008000.png
+/workspace/data/vimeo/train/009000/blur/009000.png
+/workspace/data/vimeo/train/010000/blur/010000.png

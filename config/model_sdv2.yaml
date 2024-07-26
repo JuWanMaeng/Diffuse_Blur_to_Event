@@ -1,0 +1,4 @@
+model:
+  name: B2FPipeline
+  pretrained_path: my
+  latent_scale_factor: 0.18215

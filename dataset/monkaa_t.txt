@@ -1,0 +1,8 @@
+/workspace/data/Monkaa_my/train/000001/blur/000001.png
+/workspace/data/Monkaa_my/train/001000/blur/001000.png
+/workspace/data/Monkaa_my/train/002000/blur/002000.png
+/workspace/data/Monkaa_my/train/003000/blur/003000.png
+/workspace/data/Monkaa_my/train/004000/blur/004000.png
+/workspace/data/Monkaa_my/train/005000/blur/005000.png
+/workspace/data/Monkaa_my/train/006000/blur/006000.png
+/workspace/data/Monkaa_my/train/007000/blur/007000.png

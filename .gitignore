@@ -1,0 +1,27 @@
+
+# ignore these folders
+/checkpoint
+/data
+/input
+/output
+/temp
+/wandb
+/venv
+/cache
+
+**/.ipynb_checkpoints/
+.vscode/
+.idea
+.vscode/
+
+# ignore these types
+*.pyc
+*.out
+*.log
+*.mexa64
+*.pdf
+*.tar
+*.bin
+*.png
+
+
