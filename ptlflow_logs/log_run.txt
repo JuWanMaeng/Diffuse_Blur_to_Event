@@ -411,3 +411,28 @@
 07/11/2024 18:06:02 - INFO: Found 1111 images
 07/11/2024 18:06:06 - INFO: scale_invariant: True, shift_invariant: True
 07/11/2024 18:06:06 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 10, processing resolution = 768, seed = None; color_map = Spectral.
+08/02/2024 14:28:49 - INFO: output dir = results/Gopro_with_gt
+08/02/2024 14:28:49 - INFO: device = cuda
+08/02/2024 14:28:49 - INFO: Found 2103 images
+08/02/2024 14:28:54 - INFO: scale_invariant: True, shift_invariant: True
+08/02/2024 14:28:54 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 10, processing resolution = 768, seed = None; color_map = Spectral.
+08/02/2024 14:34:28 - INFO: output dir = results/Gopro_with_gt
+08/02/2024 14:34:28 - INFO: device = cuda
+08/02/2024 14:34:28 - INFO: Found 2103 images
+08/02/2024 14:34:33 - INFO: scale_invariant: True, shift_invariant: True
+08/02/2024 14:34:33 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 10, processing resolution = 768, seed = None; color_map = Spectral.
+08/02/2024 14:42:58 - INFO: output dir = results/Gopro_with_gt
+08/02/2024 14:42:58 - INFO: device = cuda
+08/02/2024 14:42:58 - INFO: Found 2103 images
+08/02/2024 14:43:03 - INFO: scale_invariant: True, shift_invariant: True
+08/02/2024 14:43:03 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 10, processing resolution = 768, seed = None; color_map = Spectral.
+08/02/2024 14:48:05 - INFO: output dir = results/Gopro_with_gt
+08/02/2024 14:48:05 - INFO: device = cuda
+08/02/2024 14:48:05 - INFO: Found 2103 images
+08/02/2024 14:48:09 - INFO: scale_invariant: True, shift_invariant: True
+08/02/2024 14:48:09 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 10, processing resolution = 768, seed = None; color_map = Spectral.
+08/02/2024 15:14:37 - INFO: output dir = results/Gopro_with_gt
+08/02/2024 15:14:37 - INFO: device = cuda
+08/02/2024 15:14:37 - INFO: Found 2103 images
+08/02/2024 15:14:41 - INFO: scale_invariant: True, shift_invariant: True
+08/02/2024 15:14:41 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 10, processing resolution = 768, seed = None; color_map = Spectral.
