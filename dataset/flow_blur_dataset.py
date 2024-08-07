@@ -53,7 +53,7 @@ class Flow_Blur_dataset(data.Dataset):
         flow[nan_mask] = 0
         flow = np.clip(flow, -max_flow, max_flow)
 
-        flow_rgb = flow_to_rgb(flow)
+        flow_rgb = flow_to_rgb(flow,flow_max_radius=150)  # 150 
         flow_rgb = (flow_rgb - 127.5) / 127.5
 
         # Random horizontal flipping

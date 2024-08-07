@@ -77,7 +77,7 @@ if "__main__" == __name__:
         help="Path of checkpoint to be resumed. If given, will ignore --config, and checkpoint in the config",
     )
     parser.add_argument(
-        "--output_dir", type=str, default='output/Monkaa+Vimeo->Gopro', help="directory to save checkpoints"
+        "--output_dir", type=str, default='output/Monkaa+Vimeo_B', help="directory to save checkpoints"
     )
     parser.add_argument("--no_cuda", action="store_true", help="Do not use cuda.")
     parser.add_argument(
@@ -258,10 +258,9 @@ if "__main__" == __name__:
 
     # Training dataset
     train_dataset = Flow_Blur_dataset(
-        blur_txt_path='/workspace/data/Gopro_my_2/train/train.txt',
+        blur_txt_path='/workspace/Marigold/dataset/train/train_vimeo+monkaa_B.txt',
         seed=loader_seed  # Seed를 설정하여 무작위성 고정
     )
-
 
     train_loader = DataLoader(
         dataset=train_dataset,
