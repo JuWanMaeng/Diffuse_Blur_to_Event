@@ -5,7 +5,8 @@ from collections import Counter
 
 
 
-def get_dominant_color(image, k=4):
+
+def get_dominant_color(image, k=4, n_init=10):
     # Convert image to RGB (OpenCV uses BGR by default)
     image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
     
@@ -13,7 +14,7 @@ def get_dominant_color(image, k=4):
     pixels = image.reshape((image.shape[0] * image.shape[1], 3))
     
     # Perform k-means clustering to find dominant colors
-    kmeans = KMeans(n_clusters=k)
+    kmeans = KMeans(n_clusters=k, n_init=n_init)
     kmeans.fit(pixels)
     
     # Get the most common cluster

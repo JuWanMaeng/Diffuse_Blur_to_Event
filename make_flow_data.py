@@ -39,7 +39,7 @@ EXTENSION_LIST = [".jpg", ".jpeg", ".png"]
 
 
 if "__main__" == __name__:
-    os.environ['CUDA_VISIBLE_DEVICES'] = '0'
+    os.environ['CUDA_VISIBLE_DEVICES'] = '3'
     logging.basicConfig(level=logging.INFO)
 
     # -------------------- Arguments --------------------
@@ -56,7 +56,7 @@ if "__main__" == __name__:
     parser.add_argument(
         "--input_rgb_dir",
         type=str,
-        default='dataset/train_into_future.txt',
+        default='dataset/train_part4.txt',
         help="Path to the input image folder.",
     )
 
@@ -267,9 +267,10 @@ if "__main__" == __name__:
             cv2.imwrite(os.path.join(ensemble_candidate_path,'1.png'),past_gt_img)
 
             idx = 2
-            counter = {'future':0, 'past':0}
+            counter = {'future':1, 'past':1}
 
             while True:
+                print(img_num, counter)
                 if counter['future'] == 10 and counter['past'] == 10:
                     break
                 
@@ -295,7 +296,7 @@ if "__main__" == __name__:
                     distant_to_past = compare_colors(gen_dominant_color, past_dominant_color)
 
                     if distant_to_future > distant_to_past:
-                        if counter['future'] <10:
+                        if counter['future'] < 10:
                             counter['future'] += 1
                             cv2.imwrite(os.path.join(ensemble_candidate_path,f'{idx}.png'),out_img)
                             idx += 1
