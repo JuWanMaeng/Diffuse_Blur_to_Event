@@ -31,7 +31,7 @@ from tqdm.auto import tqdm
 from marigold.b2f_pipeline import B2FPipeline
 import cv2
 from ptlflow.utils import flow_utils
-from ptlflow.utils.flow_utils import flow_to_rgb
+from ptlflow.utils.flow_utils import flow_read, flow_to_rgb
 
 from color import get_dominant_color, compare_colors
 
@@ -252,11 +252,13 @@ if "__main__" == __name__:
             p_img_num = f'{p_img_num:06}'
             
             # psudo-GT flow imgs
-            future_gt = f'/workspace/data/Gopro_my/train/{img_num}/flow/flows_viz/{img_num}.png'
-            past_gt = f'/workspace/data/Gopro_my/train/{p_img_num}/flow/flows_viz/{p_img_num}.png'
+            future_gt = f'/workspace/data/Gopro_my/train/{img_num}/flow/flows/{img_num}.flo'
+            past_gt = f'/workspace/data/Gopro_my/train/{p_img_num}/flow/flows/{p_img_num}.flo'
 
-            future_gt_img = cv2.imread(future_gt)
-            past_gt_img = cv2.imread(past_gt)
+            future_gt_flow = flow_read(future_gt)
+            future_gt_img = flow_to_rgb(future_gt_flow, max_radius=150)
+            past_gt_flow = flow_read(past_gt)
+            past_gt_img = flow_to_rgb(past_gt_flow, max_radius=150)
 
             # find dominat color
             future_dominant_color = get_dominant_color(future_gt_img)
