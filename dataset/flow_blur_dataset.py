@@ -54,13 +54,13 @@ class Flow_Blur_dataset(data.Dataset):
         flow = np.clip(flow, -max_flow, max_flow)
 
         ### 2d version ###
-        # flow_padded = np.pad(flow, ((0, 0), (0, 0), (0, 1)), mode='constant', constant_values=0)
-        # flow_rgb = flow_padded # 2d -> 3d with zero padding, actucally not rgb       
+        flow_padded = np.pad(flow, ((0, 0), (0, 0), (0, 1)), mode='constant', constant_values=0)
+        flow_rgb = flow_padded # 2d -> 3d with zero padding, actucally not rgb       
 
 
         ### rgb version ###
-        flow_rgb = flow_to_rgb(flow,flow_max_radius=150)  # 150 
-        flow_rgb = (flow_rgb - 127.5) / 127.5
+        # flow_rgb = flow_to_rgb(flow,flow_max_radius=150)  # 150 
+        # flow_rgb = (flow_rgb - 127.5) / 127.5
 
         # Random horizontal flipping
         if np.random.rand() > 0.5:

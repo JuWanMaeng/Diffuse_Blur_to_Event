@@ -37,7 +37,7 @@ EXTENSION_LIST = [".jpg", ".jpeg", ".png"]
 
 
 if "__main__" == __name__:
-    os.environ['CUDA_VISIBLE_DEVICES'] = '0'
+    os.environ['CUDA_VISIBLE_DEVICES'] = '3'
     logging.basicConfig(level=logging.INFO)
 
     # -------------------- Arguments --------------------
@@ -54,14 +54,14 @@ if "__main__" == __name__:
     parser.add_argument(
         "--input_rgb_dir",
         type=str,
-        default='dataset/train_into_future.txt',
+        default='dataset/gopro_t_part.txt',
         help="Path to the input image folder.",
     )
 
     parser.add_argument(
         "--dataset_name",
         type=str,
-        default='Gopro_with_gt',
+        default='Gopro_part_B_30000',
         help="Path to the input image folder.",
     )
 
@@ -262,8 +262,8 @@ if "__main__" == __name__:
 
 
             for idx,out_img in enumerate(pipe_out):
-                # cv2.imwrite(os.path.join(ensemble_candidate_path,f'{idx}.png'),out_img)
-                cv2.imwrite(out_path, out_img)
+                cv2.imwrite(os.path.join(ensemble_candidate_path,f'{idx}.png'),out_img)
+                # cv2.imwrite(out_path, out_img)
                 input_image.save(input_path)
                 
 
