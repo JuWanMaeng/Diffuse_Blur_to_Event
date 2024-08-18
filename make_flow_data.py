@@ -256,17 +256,21 @@ if "__main__" == __name__:
             past_gt = f'/workspace/data/Gopro_my/train/{p_img_num}/flow/flows/{p_img_num}.flo'
 
             future_gt_flow = flow_read(future_gt)
-            future_gt_img = flow_to_rgb(future_gt_flow, max_radius=150)
+            future_gt_img = flow_to_rgb(future_gt_flow, flow_max_radius=150)
+
             past_gt_flow = flow_read(past_gt)
-            past_gt_img = flow_to_rgb(past_gt_flow, max_radius=150)
+            past_gt_img = flow_to_rgb(past_gt_flow, flow_max_radius=150)
+
 
             # find dominat color
             future_dominant_color = get_dominant_color(future_gt_img)
             past_dominant_color = get_dominant_color(past_gt_img)
 
             # save pusdo-GT flow
-            cv2.imwrite(os.path.join(ensemble_candidate_path,'0.png'),future_gt_img)
-            cv2.imwrite(os.path.join(ensemble_candidate_path,'1.png'),past_gt_img)
+            future_gt_img = Image.fromarray(future_gt_img)
+            past_gt_img = Image.fromarray(past_gt_img)
+            future_gt_img.save(os.path.join(ensemble_candidate_path,'0.png'))
+            past_gt_img.save(os.path.join(ensemble_candidate_path,'1.png'))
 
             idx = 2
             counter = {'future':1, 'past':1}

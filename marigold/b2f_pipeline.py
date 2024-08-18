@@ -251,7 +251,7 @@ class B2FPipeline(DiffusionPipeline):
         depth_pred_ls = []
         if show_progress_bar:
             iterable = tqdm(
-                single_rgb_loader, desc=" " * 2 + "Inference batches", leave=False
+                single_rgb_loader, desc=" " * 2 + "Inference batches", leave=False, ncols=80
             )
         else:
             iterable = single_rgb_loader
@@ -391,6 +391,7 @@ class B2FPipeline(DiffusionPipeline):
                 total=len(timesteps),
                 leave=False,
                 desc=" " * 4 + "Diffusion denoising",
+                ncols=80
             )
         else:
             iterable = enumerate(timesteps)
