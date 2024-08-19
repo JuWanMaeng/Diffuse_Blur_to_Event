@@ -1,8 +1,11 @@
+/workspace/data/Gopro_my/test/000432/blur/000432.png
 /workspace/data/Gopro_my/test/000015/blur/000015.png
 /workspace/data/Gopro_my/test/000103/blur/000103.png
 /workspace/data/Gopro_my/test/000234/blur/000234.png
 /workspace/data/Gopro_my/test/000413/blur/000413.png
+/workspace/data/Gopro_my/test/000521/blur/000521.png
 /workspace/data/Gopro_my/test/000524/blur/000524.png
 /workspace/data/Gopro_my/test/000567/blur/000567.png
 /workspace/data/Gopro_my/test/000687/blur/000687.png
+/workspace/data/Gopro_my/test/000679/blur/000679.png
 /workspace/data/Gopro_my/test/000752/blur/000752.png

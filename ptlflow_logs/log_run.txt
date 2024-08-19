@@ -557,3 +557,56 @@
 08/18/2024 15:04:38 - INFO: Found 513 images
 08/18/2024 15:04:43 - INFO: scale_invariant: True, shift_invariant: True
 08/18/2024 15:04:43 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 10, processing resolution = 768, seed = None; color_map = Spectral.
+08/18/2024 16:15:53 - INFO: output dir = results/Gopro_with_gt
+08/18/2024 16:15:53 - INFO: device = cuda
+08/18/2024 16:15:53 - INFO: Found 530 images
+08/18/2024 16:15:59 - INFO: scale_invariant: True, shift_invariant: True
+08/18/2024 16:15:59 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 10, processing resolution = 768, seed = None; color_map = Spectral.
+08/18/2024 16:18:38 - INFO: output dir = results/Gopro_with_gt
+08/18/2024 16:18:38 - INFO: device = cuda
+08/18/2024 16:18:38 - INFO: Found 530 images
+08/18/2024 16:18:44 - INFO: scale_invariant: True, shift_invariant: True
+08/18/2024 16:18:44 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 10, processing resolution = 768, seed = None; color_map = Spectral.
+08/18/2024 16:19:33 - INFO: output dir = results/Gopro_with_gt
+08/18/2024 16:19:33 - INFO: device = cuda
+08/18/2024 16:19:33 - INFO: Found 530 images
+08/18/2024 16:19:38 - INFO: scale_invariant: True, shift_invariant: True
+08/18/2024 16:19:38 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 10, processing resolution = 768, seed = None; color_map = Spectral.
+08/18/2024 16:19:54 - INFO: output dir = results/Gopro_with_gt
+08/18/2024 16:19:54 - INFO: device = cuda
+08/18/2024 16:19:54 - INFO: Found 513 images
+08/18/2024 16:20:00 - INFO: scale_invariant: True, shift_invariant: True
+08/18/2024 16:20:00 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 10, processing resolution = 768, seed = None; color_map = Spectral.
+08/19/2024 10:14:44 - INFO: output dir = results/Gopro_part_B_30000
+08/19/2024 10:14:44 - INFO: device = cuda
+08/19/2024 10:14:44 - INFO: Found 10 images
+08/19/2024 10:14:53 - INFO: scale_invariant: True, shift_invariant: True
+08/19/2024 10:14:53 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 10, processing resolution = 768, seed = None; color_map = Spectral.
+08/19/2024 11:13:34 - INFO: output dir = results/Gopro_part_Raw_30000
+08/19/2024 11:13:34 - INFO: device = cuda
+08/19/2024 11:13:34 - INFO: Found 10 images
+08/19/2024 11:13:44 - INFO: scale_invariant: True, shift_invariant: True
+08/19/2024 11:13:44 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 10, processing resolution = 768, seed = None; color_map = Spectral.
+08/19/2024 11:15:32 - INFO: output dir = results/Gopro_part_Raw_30000
+08/19/2024 11:15:32 - INFO: device = cuda
+08/19/2024 11:15:32 - INFO: Found 10 images
+08/19/2024 11:15:45 - INFO: scale_invariant: True, shift_invariant: True
+08/19/2024 11:15:45 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 10, processing resolution = 768, seed = None; color_map = Spectral.
+08/19/2024 13:11:22 - INFO: output dir = results/Gopro_part_B_30000
+08/19/2024 13:11:22 - INFO: device = cuda
+08/19/2024 13:11:22 - INFO: Found 11 images
+08/19/2024 13:11:28 - INFO: scale_invariant: True, shift_invariant: True
+08/19/2024 13:11:28 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 10, processing resolution = 768, seed = None; color_map = Spectral.
+08/19/2024 13:13:57 - INFO: output dir = results/Gopro_part_B_30000
+08/19/2024 13:13:57 - INFO: device = cuda
+08/19/2024 13:13:57 - INFO: Found 11 images
+08/19/2024 13:14:29 - INFO: output dir = results/Gopro_part_B_30000
+08/19/2024 13:14:29 - INFO: device = cuda
+08/19/2024 13:14:29 - INFO: Found 11 images
+08/19/2024 13:14:35 - INFO: scale_invariant: True, shift_invariant: True
+08/19/2024 13:14:35 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 10, processing resolution = 768, seed = None; color_map = Spectral.
+08/19/2024 13:23:58 - INFO: output dir = results/Gopro_part_Raw_30000
+08/19/2024 13:23:58 - INFO: device = cuda
+08/19/2024 13:23:58 - INFO: Found 11 images
+08/19/2024 13:24:03 - INFO: scale_invariant: True, shift_invariant: True
+08/19/2024 13:24:03 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 10, processing resolution = 768, seed = None; color_map = Spectral.

@@ -31,15 +31,13 @@ from tqdm.auto import tqdm
 from marigold.b2f_pipeline import B2FPipeline
 import cv2
 from ptlflow.utils import flow_utils
-from ptlflow.utils.flow_utils import flow_read, flow_to_rgb
-
-from color import get_dominant_color, compare_colors
+from ptlflow.utils.flow_utils import flow_to_rgb
 
 EXTENSION_LIST = [".jpg", ".jpeg", ".png"]
 
 
 if "__main__" == __name__:
-    os.environ['CUDA_VISIBLE_DEVICES'] = '3'
+    os.environ['CUDA_VISIBLE_DEVICES'] = '0'
     logging.basicConfig(level=logging.INFO)
 
     # -------------------- Arguments --------------------
@@ -56,14 +54,14 @@ if "__main__" == __name__:
     parser.add_argument(
         "--input_rgb_dir",
         type=str,
-        default='dataset/train_part4.txt',
+        default='dataset/gopro_t_part.txt',
         help="Path to the input image folder.",
     )
 
     parser.add_argument(
         "--dataset_name",
         type=str,
-        default='Gopro_with_gt',
+        default='Gopro_part_Raw_30000',
         help="Path to the input image folder.",
     )
 
@@ -228,11 +226,9 @@ if "__main__" == __name__:
     # -------------------- Inference and saving --------------------
     max_flow = 10000
     with torch.no_grad():
-            
         os.makedirs(output_dir, exist_ok=True)
 
-        for i,rgb_path in enumerate(tqdm(rgb_filename_list, desc="Estimating depth", leave=True)):
-
+        for idx,rgb_path in enumerate(tqdm(rgb_filename_list, desc="Estimating depth", leave=True)):
             # Read input image
             input_image = Image.open(rgb_path)
             img_name = rgb_path.split('/')[-1]
@@ -245,85 +241,31 @@ if "__main__" == __name__:
                 generator = torch.Generator(device=device)
                 generator.manual_seed(seed)
 
-            # make save path
-            if os.path.exists(os.path.join(output_dir,img_num)):
-                continue
+            # Predict depth
+            pipe_out = pipe(
+                input_image,
+                denoising_steps=denoise_steps,
+                ensemble_size=ensemble_size,
+                processing_res=processing_res,
+                match_input_res=match_input_res,
+                batch_size=batch_size,
+                color_map=color_map,
+                show_progress_bar=True,
+                resample_method=resample_method,
+                generator=generator,
+            )
 
             os.makedirs(os.path.join(output_dir,img_num),exist_ok=True)
+            out_path = os.path.join(output_dir, img_num, 'out.png')
+            input_path = os.path.join(output_dir,img_num,'input.png')
             ensemble_candidate_path = os.path.join(output_dir,img_num)
 
-            p_img_num = int(img_num) + 2103
-            p_img_num = f'{p_img_num:06}'
-            
-            # psudo-GT flow imgs
-            future_gt = f'/workspace/data/Gopro_my/train/{img_num}/flow/flows/{img_num}.flo'
-            past_gt = f'/workspace/data/Gopro_my/train/{p_img_num}/flow/flows/{p_img_num}.flo'
 
-            future_gt_flow = flow_read(future_gt)
-            future_gt_img = flow_to_rgb(future_gt_flow, flow_max_radius=150)
-
-            past_gt_flow = flow_read(past_gt)
-            past_gt_img = flow_to_rgb(past_gt_flow, flow_max_radius=150)
-
-
-            # find dominat color
-            future_dominant_color = get_dominant_color(future_gt_img)
-            past_dominant_color = get_dominant_color(past_gt_img)
-
-            # save pusdo-GT flow
-            future_gt_img = Image.fromarray(future_gt_img)
-            past_gt_img = Image.fromarray(past_gt_img)
-            future_gt_img.save(os.path.join(ensemble_candidate_path,'0.png'))
-            past_gt_img.save(os.path.join(ensemble_candidate_path,'1.png'))
-
-            idx = 2
-            counter = {'future':1, 'past':1}
-
-            endure = 0
-            while True:
-                endure += 1
-                print(img_num, counter, endure)
-
-                if endure > 10:
-                    break
-                if counter['future'] == 10 and counter['past'] == 10:
-                    break
+            for idx,out_img in enumerate(pipe_out):
+                out_img = out_img[:,:,:2]
+                out_img = flow_to_rgb(out_img)
+                cv2.imwrite(os.path.join(ensemble_candidate_path,f'{idx}.png'),out_img)
+                # cv2.imwrite(out_path, out_img)
+                input_image.save(input_path)
                 
-                # Predict depth
-                pipe_out = pipe(
-                    input_image,
-                    denoising_steps=denoise_steps,
-                    ensemble_size=ensemble_size,
-                    processing_res=processing_res,
-                    match_input_res=match_input_res,
-                    batch_size=batch_size,
-                    color_map=color_map,
-                    show_progress_bar=True,
-                    resample_method=resample_method,
-                    generator=generator,
-                )
-
-
-                for out_img in pipe_out:
-                    gen_dominant_color = get_dominant_color(out_img)
-
-                    distant_to_future = compare_colors(gen_dominant_color,future_dominant_color)
-                    distant_to_past = compare_colors(gen_dominant_color, past_dominant_color)
-
-                    if distant_to_future > distant_to_past:
-                        if counter['future'] < 10:
-                            counter['future'] += 1
-                            cv2.imwrite(os.path.join(ensemble_candidate_path,f'{idx}.png'),out_img)
-                            idx += 1
-                        else:
-                            continue
-                    else:
-                        if counter['past'] < 10:
-                            counter['past'] +=1
-                            cv2.imwrite(os.path.join(ensemble_candidate_path,f'{idx}.png'),out_img)
-                            idx += 1
-                        else:
-                            continue
-
-
 
