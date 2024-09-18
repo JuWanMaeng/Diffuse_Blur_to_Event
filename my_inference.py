@@ -54,14 +54,14 @@ if "__main__" == __name__:
     parser.add_argument(
         "--input_rgb_dir",
         type=str,
-        default='dataset/gopro_t_part.txt',
+        default='dataset/gopro_val.txt',
         help="Path to the input image folder.",
     )
 
     parser.add_argument(
         "--dataset_name",
         type=str,
-        default='Gopro_part_B_30000',
+        default='Gopro_B_val',
         help="Path to the input image folder.",
     )
 

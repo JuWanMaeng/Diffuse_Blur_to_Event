@@ -1,0 +1,7 @@
+/workspace/data/Gopro_my/val/000001/flow.png
+/workspace/data/Gopro_my/val/000101/flow.png
+/workspace/data/Gopro_my/val/000301/flow.png
+/workspace/data/Gopro_my/val/000401/flow.png
+/workspace/data/Gopro_my/val/000501/flow.png
+/workspace/data/Gopro_my/val/000570/flow.png
+/workspace/data/Gopro_my/val/000672/flow.png
