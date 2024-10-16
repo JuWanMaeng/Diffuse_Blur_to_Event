@@ -79,7 +79,7 @@ if "__main__" == __name__:
     parser.add_argument(
         "--ensemble_size",
         type=int,
-        default=10,
+        default=1,
         help="Number of predictions to be ensembled, more inference gives better results but runs slower.",
     )
     parser.add_argument(

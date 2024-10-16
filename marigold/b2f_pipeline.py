@@ -247,7 +247,7 @@ class B2FPipeline(DiffusionPipeline):
             single_rgb_dataset, batch_size=_bs, shuffle=False
         )
 
-        # Predict depth maps (batched)
+        # Predict flow maps (batched)
         depth_pred_ls = []
         if show_progress_bar:
             iterable = tqdm(
