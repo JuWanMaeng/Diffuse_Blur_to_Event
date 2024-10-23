@@ -69,7 +69,8 @@ class Flow_Blur_dataset(data.Dataset):
 
 
         blur_img_h, blur_img_w = blur_img.shape[0],blur_img.shape[1]
-        target_h, target_w = 540,960
+        target_h, target_w = 480,640
+        # target_h, target_w = 540,960
 
         if blur_img_h > target_h and blur_img_w  > target_w:
             blur_img, flow_rgb = self.paired_random_crop(blur_img, flow_rgb, patch_size=[target_h,target_w])

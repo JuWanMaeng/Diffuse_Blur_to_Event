@@ -94,7 +94,7 @@ if "__main__" == __name__:
     parser.add_argument(
         "--base_ckpt_dir",
         type=str,
-        default='/workspace/Marigold/checkpoint/768-v-ema.ckpt',
+        default='/workspace/Marigold/checkpoint/stable-diffusion-2/768-v-ema.ckpt',
         help="directory of pretrained checkpoint",
     )
     parser.add_argument(

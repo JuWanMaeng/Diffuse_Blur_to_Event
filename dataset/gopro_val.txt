@@ -1,2 +1,1 @@
-/workspace/data/Gopro_my/train/001591/blur/001591.png
-/workspace/data/Gopro_my/train/001592/blur/001592.png
+/workspace/data/Gopro_my/train/001438/blur/001438.png

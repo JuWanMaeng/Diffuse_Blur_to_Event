@@ -98,6 +98,10 @@ def resize_max_res(
     assert 4 == img.dim(), f"Invalid input shape {img.shape}"
 
     original_height, original_width = img.shape[-2:]
+
+    ##########
+    # max_edge_resolution = 960 #############
+
     downscale_factor = min(
         max_edge_resolution / original_width, max_edge_resolution / original_height
     )

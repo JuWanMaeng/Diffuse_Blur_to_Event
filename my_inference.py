@@ -79,7 +79,7 @@ if "__main__" == __name__:
     parser.add_argument(
         "--ensemble_size",
         type=int,
-        default=1,
+        default=10,
         help="Number of predictions to be ensembled, more inference gives better results but runs slower.",
     )
     parser.add_argument(
@@ -127,7 +127,7 @@ if "__main__" == __name__:
     parser.add_argument(
         "--batch_size",
         type=int,
-        default=0,
+        default=5,
         help="Inference batch size. Default: 0 (will be set automatically).",
     )
     parser.add_argument(
