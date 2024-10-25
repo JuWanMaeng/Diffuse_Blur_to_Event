@@ -31,7 +31,7 @@ from accelerate import Accelerator
 from accelerate.logging import get_logger
 from accelerate.utils import DistributedType, ProjectConfiguration, set_seed
 from datasets import load_dataset
-from discriminator import Discriminator
+from marigold.discriminator import Discriminator
 from huggingface_hub import create_repo
 from packaging import version
 from PIL import Image
@@ -44,13 +44,14 @@ from diffusers import VQModel
 from diffusers.optimization import get_scheduler
 from diffusers.training_utils import EMAModel
 from diffusers.utils import check_min_version, is_wandb_available
+from dataset import flow_blur_dataset
 
 
 if is_wandb_available():
     import wandb
 
 # Will error if the minimal version of diffusers is not installed. Remove at your own risks.
-check_min_version("0.32.0.dev0")
+# check_min_version("0.32.0.dev0")
 
 logger = get_logger(__name__, log_level="INFO")
 
@@ -148,7 +149,14 @@ def log_validation(model, args, validation_transform, accelerator, global_step):
     elif accelerator.mixed_precision == "bf16":
         dtype = torch.bfloat16
     original_images = []
-    for image_path in args.validation_images:
+    validation_images=[]
+
+    with open (args.validation_images, 'r') as f:
+        paths = f.readlines()
+        for path in paths:
+            validation_images.append(path)
+
+    for image_path in validation_images:
         image = PIL.Image.open(image_path)
         if not image.mode == "RGB":
             image = image.convert("RGB")
@@ -217,7 +225,7 @@ def parse_args():
     parser.add_argument(
         "--validation_steps",
         type=int,
-        default=100,
+        default=None,
         help=(
             "Run validation every X steps. Validation consists of running reconstruction on images in"
             " `args.validation_images` and logging the reconstructed images."
@@ -256,7 +264,7 @@ def parse_args():
     parser.add_argument(
         "--model_config_name_or_path",
         type=str,
-        default=None,
+        default='',
         help="The config of the Vq model to train, leave as None to use standard Vq model configuration.",
     )
     parser.add_argument(
@@ -314,7 +322,6 @@ def parse_args():
         "--validation_images",
         type=str,
         default=None,
-        nargs="+",
         help=("A set of validation images evaluated every `--validation_steps` and logged to `--report_to`."),
     )
     parser.add_argument(
@@ -329,11 +336,11 @@ def parse_args():
         default=None,
         help="The directory where the downloaded models and datasets will be stored.",
     )
-    parser.add_argument("--seed", type=int, default=None, help="A seed for reproducible training.")
+    parser.add_argument("--seed", type=int, default=22, help="A seed for reproducible training.")
     parser.add_argument(
         "--resolution",
         type=int,
-        default=512,
+        default=768,
         help=(
             "The resolution for input images, all the images in the train/validation dataset will be resized to this"
             " resolution"
@@ -354,7 +361,7 @@ def parse_args():
         help="whether to randomly flip images horizontally",
     )
     parser.add_argument(
-        "--train_batch_size", type=int, default=16, help="Batch size (per device) for the training dataloader."
+        "--train_batch_size", type=int, default=1, help="Batch size (per device) for the training dataloader."
     )
     parser.add_argument("--num_train_epochs", type=int, default=100)
     parser.add_argument(
@@ -438,7 +445,7 @@ def parse_args():
     parser.add_argument(
         "--dataloader_num_workers",
         type=int,
-        default=0,
+        default=8,
         help=(
             "Number of subprocesses to use for data loading. 0 means that the data will be loaded in the main process."
         ),
@@ -535,8 +542,8 @@ def parse_args():
         args.local_rank = env_local_rank
 
     # Sanity checks
-    if args.dataset_name is None and args.train_data_dir is None:
-        raise ValueError("Need either a dataset name or a training folder.")
+    # if args.dataset_name is None and args.train_data_dir is None:
+    #     raise ValueError("Need either a dataset name or a training folder.")
 
     # default to using the same revision for the non-ema model if not specified
     if args.non_ema_revision is None:
@@ -767,7 +774,7 @@ def main():
 
     # Preprocessing the datasets.
     # We need to tokenize inputs and targets.
-    column_names = dataset["train"].column_names
+    column_names = dataset["train"].column_names   # column_names = image
 
     # 6. Get the column names for input/target.
     assert args.image_column is not None
@@ -1034,15 +1041,15 @@ def main():
                         logger.info(f"Saved state to {save_path}")
 
                 # Generate images
-                if global_step % args.validation_steps == 0:
-                    if args.use_ema:
-                        # Store the VQGAN parameters temporarily and load the EMA parameters to perform inference.
-                        ema_model.store(model.parameters())
-                        ema_model.copy_to(model.parameters())
-                    log_validation(model, args, validation_transform, accelerator, global_step)
-                    if args.use_ema:
-                        # Switch back to the original VQGAN parameters.
-                        ema_model.restore(model.parameters())
+                # if global_step % args.validation_steps == 0:
+                #     if args.use_ema:
+                #         # Store the VQGAN parameters temporarily and load the EMA parameters to perform inference.
+                #         ema_model.store(model.parameters())
+                #         ema_model.copy_to(model.parameters())
+                #     log_validation(model, args, validation_transform, accelerator, global_step)
+                #     if args.use_ema:
+                #         # Switch back to the original VQGAN parameters.
+                #         ema_model.restore(model.parameters())
             end = time.time()
             # Stop training if max steps is reached
             if global_step >= args.max_train_steps:

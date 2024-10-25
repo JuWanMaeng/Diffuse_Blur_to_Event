@@ -680,3 +680,689 @@
 10/16/2024 14:22:44 - INFO: Found 1 images
 10/16/2024 14:22:48 - INFO: scale_invariant: True, shift_invariant: True
 10/16/2024 14:22:48 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 10, processing resolution = 768, seed = None; color_map = Spectral.
+10/25/2024 10:47:52 - WARNING: Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+10/25/2024 10:47:52 - INFO: Loading models and optimizer
+10/25/2024 10:48:00 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/25/2024 10:48:01 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/25/2024 10:48:01 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/25/2024 10:48:01 - INFO: Creating dataloaders and lr_scheduler
+10/25/2024 10:50:56 - INFO: Preparing model, optimizer and dataloaders
+10/25/2024 10:50:56 - INFO: ***** Running training *****
+10/25/2024 10:50:56 - INFO:   Num examples = 2
+10/25/2024 10:50:56 - INFO:   Num Epochs = 100
+10/25/2024 10:50:56 - INFO:   Instantaneous batch size per device = 16
+10/25/2024 10:50:56 - INFO:   Total train batch size (w. parallel, distributed & accumulation) = 16
+10/25/2024 10:50:56 - INFO:   Gradient Accumulation steps = 1
+10/25/2024 10:50:56 - INFO:   Total optimization steps = None
+10/25/2024 10:51:30 - WARNING: Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+10/25/2024 10:51:30 - INFO: Loading models and optimizer
+10/25/2024 10:51:34 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/25/2024 10:51:35 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/25/2024 10:51:35 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/25/2024 10:51:35 - INFO: Creating dataloaders and lr_scheduler
+10/25/2024 10:51:37 - INFO: Preparing model, optimizer and dataloaders
+10/25/2024 10:51:38 - INFO: ***** Running training *****
+10/25/2024 10:51:38 - INFO:   Num examples = 2
+10/25/2024 10:51:38 - INFO:   Num Epochs = 100
+10/25/2024 10:51:38 - INFO:   Instantaneous batch size per device = 16
+10/25/2024 10:51:38 - INFO:   Total train batch size (w. parallel, distributed & accumulation) = 16
+10/25/2024 10:51:38 - INFO:   Gradient Accumulation steps = 1
+10/25/2024 10:51:38 - INFO:   Total optimization steps = None
+10/25/2024 10:58:20 - WARNING: Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+10/25/2024 10:58:20 - INFO: Loading models and optimizer
+10/25/2024 10:58:24 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/25/2024 10:58:25 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/25/2024 10:58:25 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/25/2024 10:58:25 - INFO: Creating dataloaders and lr_scheduler
+10/25/2024 10:58:47 - INFO: Preparing model, optimizer and dataloaders
+10/25/2024 10:58:49 - INFO: ***** Running training *****
+10/25/2024 10:58:49 - INFO:   Num examples = 2
+10/25/2024 10:58:51 - INFO:   Num Epochs = 100
+10/25/2024 10:58:53 - INFO:   Instantaneous batch size per device = 1
+10/25/2024 10:58:58 - INFO:   Total train batch size (w. parallel, distributed & accumulation) = 1
+10/25/2024 10:59:01 - INFO:   Gradient Accumulation steps = 1
+10/25/2024 10:59:02 - INFO:   Total optimization steps = None
+10/25/2024 11:12:39 - INFO: Added key: store_based_barrier_key:1 to store for rank: 1
+10/25/2024 11:12:39 - INFO: Added key: store_based_barrier_key:1 to store for rank: 2
+10/25/2024 11:12:39 - INFO: Added key: store_based_barrier_key:1 to store for rank: 3
+10/25/2024 11:12:39 - INFO: Added key: store_based_barrier_key:1 to store for rank: 0
+10/25/2024 11:12:39 - INFO: Rank 0: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/25/2024 11:12:39 - INFO: Rank 2: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/25/2024 11:12:39 - INFO: Rank 3: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/25/2024 11:12:39 - INFO: Rank 1: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/25/2024 11:12:39 - WARNING: Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+10/25/2024 11:12:43 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/25/2024 11:12:43 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/25/2024 11:12:44 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/25/2024 11:12:44 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/25/2024 11:12:44 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/25/2024 11:12:44 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/25/2024 11:12:44 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/25/2024 11:12:44 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/25/2024 11:12:44 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/25/2024 11:12:49 - INFO: Loading models and optimizer
+10/25/2024 11:12:53 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/25/2024 11:12:53 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/25/2024 11:12:53 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/25/2024 11:12:54 - INFO: Creating dataloaders and lr_scheduler
+10/25/2024 11:13:01 - INFO: Preparing model, optimizer and dataloaders
+10/25/2024 11:13:02 - INFO: ***** Running training *****
+10/25/2024 11:13:02 - INFO:   Num examples = 50000
+10/25/2024 11:13:02 - INFO:   Num Epochs = 100
+10/25/2024 11:13:02 - INFO:   Instantaneous batch size per device = 2
+10/25/2024 11:13:02 - INFO:   Total train batch size (w. parallel, distributed & accumulation) = 64
+10/25/2024 11:13:02 - INFO:   Gradient Accumulation steps = 8
+10/25/2024 11:13:02 - INFO:   Total optimization steps = None
+10/25/2024 11:13:04 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/25/2024 11:13:04 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/25/2024 11:13:04 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/25/2024 11:13:04 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/25/2024 11:13:04 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/25/2024 11:13:04 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/25/2024 11:13:04 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/25/2024 11:13:04 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/25/2024 11:13:40 - INFO: Generating images...
+10/25/2024 11:21:02 - INFO: Added key: store_based_barrier_key:1 to store for rank: 1
+10/25/2024 11:21:02 - INFO: Added key: store_based_barrier_key:1 to store for rank: 2
+10/25/2024 11:21:02 - INFO: Added key: store_based_barrier_key:1 to store for rank: 0
+10/25/2024 11:21:02 - INFO: Added key: store_based_barrier_key:1 to store for rank: 3
+10/25/2024 11:21:02 - INFO: Rank 3: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/25/2024 11:21:02 - INFO: Rank 2: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/25/2024 11:21:02 - INFO: Rank 1: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/25/2024 11:21:02 - INFO: Rank 0: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/25/2024 11:21:02 - WARNING: Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+10/25/2024 11:21:06 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/25/2024 11:21:06 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/25/2024 11:21:06 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/25/2024 11:21:06 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/25/2024 11:21:06 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/25/2024 11:21:06 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/25/2024 11:21:06 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/25/2024 11:21:06 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/25/2024 11:21:06 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/25/2024 11:22:02 - INFO: Added key: store_based_barrier_key:1 to store for rank: 2
+10/25/2024 11:22:02 - INFO: Added key: store_based_barrier_key:1 to store for rank: 1
+10/25/2024 11:22:02 - INFO: Added key: store_based_barrier_key:1 to store for rank: 0
+10/25/2024 11:22:02 - INFO: Added key: store_based_barrier_key:1 to store for rank: 3
+10/25/2024 11:22:02 - INFO: Rank 3: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/25/2024 11:22:02 - INFO: Rank 2: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/25/2024 11:22:02 - INFO: Rank 1: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/25/2024 11:22:02 - INFO: Rank 0: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/25/2024 11:22:02 - WARNING: Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+10/25/2024 11:22:06 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/25/2024 11:22:06 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/25/2024 11:22:06 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/25/2024 11:22:06 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/25/2024 11:22:06 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/25/2024 11:22:06 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/25/2024 11:22:07 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/25/2024 11:22:07 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/25/2024 11:22:07 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/25/2024 11:22:11 - INFO: Loading models and optimizer
+10/25/2024 11:22:16 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/25/2024 11:22:16 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/25/2024 11:22:16 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/25/2024 11:22:17 - INFO: Creating dataloaders and lr_scheduler
+10/25/2024 11:22:20 - INFO: Preparing model, optimizer and dataloaders
+10/25/2024 11:22:20 - INFO: ***** Running training *****
+10/25/2024 11:22:20 - INFO:   Num examples = 2
+10/25/2024 11:22:20 - INFO:   Num Epochs = 100
+10/25/2024 11:22:20 - INFO:   Instantaneous batch size per device = 1
+10/25/2024 11:22:20 - INFO:   Total train batch size (w. parallel, distributed & accumulation) = 32
+10/25/2024 11:22:20 - INFO:   Gradient Accumulation steps = 8
+10/25/2024 11:22:20 - INFO:   Total optimization steps = None
+10/25/2024 11:22:27 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/25/2024 11:22:27 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/25/2024 11:22:27 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/25/2024 11:22:27 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/25/2024 11:22:27 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/25/2024 11:22:27 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/25/2024 11:22:27 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/25/2024 11:22:27 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/25/2024 11:29:54 - WARNING: Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+10/25/2024 11:29:55 - INFO: Loading models and optimizer
+10/25/2024 11:29:59 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/25/2024 11:29:59 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/25/2024 11:29:59 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/25/2024 11:30:00 - INFO: Creating dataloaders and lr_scheduler
+10/25/2024 11:30:03 - INFO: Preparing model, optimizer and dataloaders
+10/25/2024 11:30:08 - INFO: ***** Running training *****
+10/25/2024 11:30:08 - INFO:   Num examples = 2
+10/25/2024 11:30:08 - INFO:   Num Epochs = 100
+10/25/2024 11:30:08 - INFO:   Instantaneous batch size per device = 1
+10/25/2024 11:30:08 - INFO:   Total train batch size (w. parallel, distributed & accumulation) = 1
+10/25/2024 11:30:08 - INFO:   Gradient Accumulation steps = 1
+10/25/2024 11:30:08 - INFO:   Total optimization steps = None
+10/25/2024 11:38:17 - WARNING: Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+10/25/2024 11:38:17 - INFO: Loading models and optimizer
+10/25/2024 11:38:21 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/25/2024 11:38:21 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/25/2024 11:38:21 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/25/2024 11:38:22 - INFO: Creating dataloaders and lr_scheduler
+10/25/2024 11:38:23 - INFO: Preparing model, optimizer and dataloaders
+10/25/2024 11:38:24 - INFO: ***** Running training *****
+10/25/2024 11:38:24 - INFO:   Num examples = 2
+10/25/2024 11:38:24 - INFO:   Num Epochs = 100
+10/25/2024 11:38:24 - INFO:   Instantaneous batch size per device = 1
+10/25/2024 11:38:24 - INFO:   Total train batch size (w. parallel, distributed & accumulation) = 1
+10/25/2024 11:38:24 - INFO:   Gradient Accumulation steps = 1
+10/25/2024 11:38:24 - INFO:   Total optimization steps = None
+10/25/2024 12:15:49 - INFO: Added key: store_based_barrier_key:1 to store for rank: 0
+10/25/2024 12:15:50 - INFO: Added key: store_based_barrier_key:1 to store for rank: 1
+10/25/2024 12:15:50 - INFO: Added key: store_based_barrier_key:1 to store for rank: 2
+10/25/2024 12:15:51 - INFO: Added key: store_based_barrier_key:1 to store for rank: 3
+10/25/2024 12:15:51 - INFO: Rank 3: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/25/2024 12:15:51 - INFO: Rank 2: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/25/2024 12:15:51 - INFO: Rank 1: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/25/2024 12:15:51 - INFO: Rank 0: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/25/2024 12:15:51 - WARNING: Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+10/25/2024 12:15:51 - INFO: Loading models and optimizer
+10/25/2024 12:15:55 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/25/2024 12:15:55 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/25/2024 12:15:55 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/25/2024 12:15:55 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/25/2024 12:15:56 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/25/2024 12:15:56 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/25/2024 12:15:56 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/25/2024 12:15:56 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/25/2024 12:15:56 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/25/2024 12:15:56 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/25/2024 12:15:56 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/25/2024 12:15:56 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/25/2024 12:15:57 - INFO: Creating dataloaders and lr_scheduler
+10/25/2024 12:16:00 - INFO: Preparing model, optimizer and dataloaders
+10/25/2024 12:16:00 - INFO: ***** Running training *****
+10/25/2024 12:16:00 - INFO:   Num examples = 4
+10/25/2024 12:16:00 - INFO:   Num Epochs = 100
+10/25/2024 12:16:00 - INFO:   Instantaneous batch size per device = 1
+10/25/2024 12:16:00 - INFO:   Total train batch size (w. parallel, distributed & accumulation) = 4
+10/25/2024 12:16:00 - INFO:   Gradient Accumulation steps = 1
+10/25/2024 12:16:00 - INFO:   Total optimization steps = None
+10/25/2024 12:19:30 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/25/2024 12:19:31 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/25/2024 12:19:33 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/25/2024 12:19:33 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/25/2024 12:19:35 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/25/2024 12:19:35 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/25/2024 12:19:35 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/25/2024 12:19:35 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/25/2024 12:22:12 - WARNING: Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+10/25/2024 12:22:12 - INFO: Loading models and optimizer
+10/25/2024 12:22:17 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/25/2024 12:22:17 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/25/2024 12:22:17 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/25/2024 12:22:18 - INFO: Creating dataloaders and lr_scheduler
+10/25/2024 12:22:19 - INFO: Preparing model, optimizer and dataloaders
+10/25/2024 12:22:19 - INFO: ***** Running training *****
+10/25/2024 12:22:19 - INFO:   Num examples = 4
+10/25/2024 12:22:19 - INFO:   Num Epochs = 100
+10/25/2024 12:22:19 - INFO:   Instantaneous batch size per device = 1
+10/25/2024 12:22:19 - INFO:   Total train batch size (w. parallel, distributed & accumulation) = 1
+10/25/2024 12:22:19 - INFO:   Gradient Accumulation steps = 1
+10/25/2024 12:22:19 - INFO:   Total optimization steps = None
+10/25/2024 12:24:20 - INFO: Generating images...
+10/25/2024 12:26:11 - WARNING: Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+10/25/2024 12:26:11 - INFO: Loading models and optimizer
+10/25/2024 12:26:15 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/25/2024 12:26:15 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/25/2024 12:26:16 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/25/2024 12:26:16 - INFO: Creating dataloaders and lr_scheduler
+10/25/2024 12:26:17 - INFO: Preparing model, optimizer and dataloaders
+10/25/2024 12:26:17 - INFO: ***** Running training *****
+10/25/2024 12:26:17 - INFO:   Num examples = 4
+10/25/2024 12:26:17 - INFO:   Num Epochs = 100
+10/25/2024 12:26:17 - INFO:   Instantaneous batch size per device = 1
+10/25/2024 12:26:17 - INFO:   Total train batch size (w. parallel, distributed & accumulation) = 1
+10/25/2024 12:26:17 - INFO:   Gradient Accumulation steps = 1
+10/25/2024 12:26:17 - INFO:   Total optimization steps = None
+10/25/2024 12:27:46 - WARNING: Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+10/25/2024 12:27:46 - INFO: Loading models and optimizer
+10/25/2024 12:27:50 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/25/2024 12:27:50 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/25/2024 12:27:51 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/25/2024 12:27:52 - INFO: Creating dataloaders and lr_scheduler
+10/25/2024 12:27:52 - INFO: Preparing model, optimizer and dataloaders
+10/25/2024 12:27:53 - INFO: ***** Running training *****
+10/25/2024 12:27:53 - INFO:   Num examples = 4
+10/25/2024 12:27:53 - INFO:   Num Epochs = 100
+10/25/2024 12:27:53 - INFO:   Instantaneous batch size per device = 1
+10/25/2024 12:27:53 - INFO:   Total train batch size (w. parallel, distributed & accumulation) = 16
+10/25/2024 12:27:53 - INFO:   Gradient Accumulation steps = 16
+10/25/2024 12:27:53 - INFO:   Total optimization steps = None
+10/25/2024 12:29:35 - WARNING: Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+10/25/2024 12:29:36 - INFO: Loading models and optimizer
+10/25/2024 12:29:40 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/25/2024 12:29:40 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/25/2024 12:29:40 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/25/2024 12:29:41 - INFO: Creating dataloaders and lr_scheduler
+10/25/2024 12:29:42 - INFO: Preparing model, optimizer and dataloaders
+10/25/2024 12:29:42 - INFO: ***** Running training *****
+10/25/2024 12:29:42 - INFO:   Num examples = 4
+10/25/2024 12:29:42 - INFO:   Num Epochs = 100
+10/25/2024 12:29:42 - INFO:   Instantaneous batch size per device = 1
+10/25/2024 12:29:42 - INFO:   Total train batch size (w. parallel, distributed & accumulation) = 1
+10/25/2024 12:29:42 - INFO:   Gradient Accumulation steps = 1
+10/25/2024 12:29:42 - INFO:   Total optimization steps = None
+10/25/2024 12:31:44 - INFO: Generating images...
+10/25/2024 12:32:50 - WARNING: Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+10/25/2024 12:32:50 - INFO: Loading models and optimizer
+10/25/2024 12:32:54 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/25/2024 12:32:55 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/25/2024 12:32:55 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/25/2024 12:32:56 - INFO: Creating dataloaders and lr_scheduler
+10/25/2024 12:32:57 - INFO: Preparing model, optimizer and dataloaders
+10/25/2024 12:32:57 - INFO: ***** Running training *****
+10/25/2024 12:32:57 - INFO:   Num examples = 4
+10/25/2024 12:32:57 - INFO:   Num Epochs = 100
+10/25/2024 12:32:57 - INFO:   Instantaneous batch size per device = 1
+10/25/2024 12:32:57 - INFO:   Total train batch size (w. parallel, distributed & accumulation) = 1
+10/25/2024 12:32:57 - INFO:   Gradient Accumulation steps = 1
+10/25/2024 12:32:57 - INFO:   Total optimization steps = None
+10/25/2024 12:38:28 - WARNING: Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+10/25/2024 12:38:29 - INFO: Loading models and optimizer
+10/25/2024 12:38:33 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/25/2024 12:38:34 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/25/2024 12:38:34 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/25/2024 12:38:35 - INFO: Creating dataloaders and lr_scheduler
+10/25/2024 12:38:35 - INFO: Preparing model, optimizer and dataloaders
+10/25/2024 12:38:36 - INFO: ***** Running training *****
+10/25/2024 12:38:36 - INFO:   Num examples = 4
+10/25/2024 12:38:36 - INFO:   Num Epochs = 100
+10/25/2024 12:38:36 - INFO:   Instantaneous batch size per device = 1
+10/25/2024 12:38:36 - INFO:   Total train batch size (w. parallel, distributed & accumulation) = 8
+10/25/2024 12:38:36 - INFO:   Gradient Accumulation steps = 8
+10/25/2024 12:38:36 - INFO:   Total optimization steps = None
+10/25/2024 12:43:20 - WARNING: Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+10/25/2024 12:43:21 - INFO: Loading models and optimizer
+10/25/2024 12:43:25 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/25/2024 12:43:26 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/25/2024 12:43:26 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/25/2024 12:43:27 - INFO: Creating dataloaders and lr_scheduler
+10/25/2024 12:43:28 - INFO: Preparing model, optimizer and dataloaders
+10/25/2024 12:43:28 - INFO: ***** Running training *****
+10/25/2024 12:43:28 - INFO:   Num examples = 4
+10/25/2024 12:43:28 - INFO:   Num Epochs = 100
+10/25/2024 12:43:28 - INFO:   Instantaneous batch size per device = 1
+10/25/2024 12:43:28 - INFO:   Total train batch size (w. parallel, distributed & accumulation) = 8
+10/25/2024 12:43:28 - INFO:   Gradient Accumulation steps = 8
+10/25/2024 12:43:28 - INFO:   Total optimization steps = 100
+10/25/2024 12:44:04 - WARNING: Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+10/25/2024 12:44:05 - INFO: Loading models and optimizer
+10/25/2024 12:44:09 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/25/2024 12:44:09 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/25/2024 12:44:09 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/25/2024 12:44:10 - INFO: Creating dataloaders and lr_scheduler
+10/25/2024 12:44:11 - INFO: Preparing model, optimizer and dataloaders
+10/25/2024 12:44:11 - INFO: ***** Running training *****
+10/25/2024 12:44:11 - INFO:   Num examples = 4
+10/25/2024 12:44:11 - INFO:   Num Epochs = 100
+10/25/2024 12:44:11 - INFO:   Instantaneous batch size per device = 1
+10/25/2024 12:44:11 - INFO:   Total train batch size (w. parallel, distributed & accumulation) = 8
+10/25/2024 12:44:11 - INFO:   Gradient Accumulation steps = 8
+10/25/2024 12:44:11 - INFO:   Total optimization steps = 100
+10/25/2024 12:52:48 - WARNING: Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+10/25/2024 12:52:48 - INFO: Loading models and optimizer
+10/25/2024 12:52:52 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/25/2024 12:52:53 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/25/2024 12:52:53 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/25/2024 12:52:53 - INFO: Creating dataloaders and lr_scheduler
+10/25/2024 12:52:54 - INFO: Preparing model, optimizer and dataloaders
+10/25/2024 12:52:55 - INFO: ***** Running training *****
+10/25/2024 12:52:55 - INFO:   Num examples = 4
+10/25/2024 12:52:55 - INFO:   Num Epochs = 100
+10/25/2024 12:52:55 - INFO:   Instantaneous batch size per device = 1
+10/25/2024 12:52:55 - INFO:   Total train batch size (w. parallel, distributed & accumulation) = 2
+10/25/2024 12:52:55 - INFO:   Gradient Accumulation steps = 2
+10/25/2024 12:52:55 - INFO:   Total optimization steps = 100
+10/25/2024 13:02:13 - WARNING: Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+10/25/2024 13:02:13 - INFO: Loading models and optimizer
+10/25/2024 13:02:17 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/25/2024 13:02:17 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/25/2024 13:02:17 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/25/2024 13:02:18 - INFO: Creating dataloaders and lr_scheduler
+10/25/2024 13:02:19 - INFO: Preparing model, optimizer and dataloaders
+10/25/2024 13:02:19 - INFO: ***** Running training *****
+10/25/2024 13:02:19 - INFO:   Num examples = 4
+10/25/2024 13:02:19 - INFO:   Num Epochs = 100
+10/25/2024 13:02:19 - INFO:   Instantaneous batch size per device = 1
+10/25/2024 13:02:19 - INFO:   Total train batch size (w. parallel, distributed & accumulation) = 1
+10/25/2024 13:02:19 - INFO:   Gradient Accumulation steps = 1
+10/25/2024 13:02:19 - INFO:   Total optimization steps = 100
+10/25/2024 13:03:06 - INFO: Generating images...
+10/25/2024 13:03:58 - WARNING: Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+10/25/2024 13:03:59 - INFO: Loading models and optimizer
+10/25/2024 13:04:03 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/25/2024 13:04:03 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/25/2024 13:04:03 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/25/2024 13:04:04 - INFO: Creating dataloaders and lr_scheduler
+10/25/2024 13:04:05 - INFO: Preparing model, optimizer and dataloaders
+10/25/2024 13:04:05 - INFO: ***** Running training *****
+10/25/2024 13:04:05 - INFO:   Num examples = 4
+10/25/2024 13:04:05 - INFO:   Num Epochs = 100
+10/25/2024 13:04:05 - INFO:   Instantaneous batch size per device = 1
+10/25/2024 13:04:05 - INFO:   Total train batch size (w. parallel, distributed & accumulation) = 1
+10/25/2024 13:04:05 - INFO:   Gradient Accumulation steps = 1
+10/25/2024 13:04:05 - INFO:   Total optimization steps = 100
+10/25/2024 13:04:15 - INFO: Generating images...
+10/25/2024 13:05:24 - WARNING: Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+10/25/2024 13:05:25 - INFO: Loading models and optimizer
+10/25/2024 13:05:29 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/25/2024 13:05:29 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/25/2024 13:05:29 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/25/2024 13:05:30 - INFO: Creating dataloaders and lr_scheduler
+10/25/2024 13:05:30 - INFO: Preparing model, optimizer and dataloaders
+10/25/2024 13:05:31 - INFO: ***** Running training *****
+10/25/2024 13:05:31 - INFO:   Num examples = 4
+10/25/2024 13:05:31 - INFO:   Num Epochs = 100
+10/25/2024 13:05:31 - INFO:   Instantaneous batch size per device = 1
+10/25/2024 13:05:31 - INFO:   Total train batch size (w. parallel, distributed & accumulation) = 1
+10/25/2024 13:05:31 - INFO:   Gradient Accumulation steps = 1
+10/25/2024 13:05:31 - INFO:   Total optimization steps = 100
+10/25/2024 13:05:48 - INFO: Generating images...
+10/25/2024 13:10:43 - WARNING: Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+10/25/2024 13:10:44 - INFO: Loading models and optimizer
+10/25/2024 13:10:48 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/25/2024 13:10:48 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/25/2024 13:10:48 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/25/2024 13:10:49 - INFO: Creating dataloaders and lr_scheduler
+10/25/2024 13:10:50 - INFO: Preparing model, optimizer and dataloaders
+10/25/2024 13:10:50 - INFO: ***** Running training *****
+10/25/2024 13:10:50 - INFO:   Num examples = 4
+10/25/2024 13:10:50 - INFO:   Num Epochs = 100
+10/25/2024 13:10:50 - INFO:   Instantaneous batch size per device = 1
+10/25/2024 13:10:50 - INFO:   Total train batch size (w. parallel, distributed & accumulation) = 1
+10/25/2024 13:10:50 - INFO:   Gradient Accumulation steps = 1
+10/25/2024 13:10:50 - INFO:   Total optimization steps = 100
+10/25/2024 13:11:00 - INFO: Generating images...
+10/25/2024 13:12:05 - WARNING: Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+10/25/2024 13:12:05 - INFO: Loading models and optimizer
+10/25/2024 13:12:09 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/25/2024 13:12:09 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/25/2024 13:12:09 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/25/2024 13:12:10 - INFO: Creating dataloaders and lr_scheduler
+10/25/2024 13:12:11 - INFO: Preparing model, optimizer and dataloaders
+10/25/2024 13:12:12 - INFO: ***** Running training *****
+10/25/2024 13:12:12 - INFO:   Num examples = 4
+10/25/2024 13:12:12 - INFO:   Num Epochs = 100
+10/25/2024 13:12:12 - INFO:   Instantaneous batch size per device = 1
+10/25/2024 13:12:12 - INFO:   Total train batch size (w. parallel, distributed & accumulation) = 1
+10/25/2024 13:12:12 - INFO:   Gradient Accumulation steps = 1
+10/25/2024 13:12:12 - INFO:   Total optimization steps = 100
+10/25/2024 13:12:22 - INFO: Generating images...
+10/25/2024 13:14:16 - INFO: Generating images...
+10/25/2024 13:14:40 - INFO: Generating images...
+10/25/2024 13:14:54 - INFO: Generating images...
+10/25/2024 13:15:31 - INFO: Generating images...
+10/25/2024 13:29:54 - INFO: Generating images...
+10/25/2024 13:32:57 - WARNING: Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+10/25/2024 13:32:57 - INFO: Loading models and optimizer
+10/25/2024 13:33:01 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/25/2024 13:33:02 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/25/2024 13:33:02 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/25/2024 13:33:03 - INFO: Creating dataloaders and lr_scheduler
+10/25/2024 13:33:03 - INFO: Preparing model, optimizer and dataloaders
+10/25/2024 13:33:04 - INFO: ***** Running training *****
+10/25/2024 13:33:04 - INFO:   Num examples = 4
+10/25/2024 13:33:04 - INFO:   Num Epochs = 100
+10/25/2024 13:33:04 - INFO:   Instantaneous batch size per device = 1
+10/25/2024 13:33:04 - INFO:   Total train batch size (w. parallel, distributed & accumulation) = 1
+10/25/2024 13:33:04 - INFO:   Gradient Accumulation steps = 1
+10/25/2024 13:33:04 - INFO:   Total optimization steps = 100
+10/25/2024 13:33:28 - WARNING: Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+10/25/2024 13:33:28 - INFO: Loading models and optimizer
+10/25/2024 13:33:33 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/25/2024 13:33:33 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/25/2024 13:33:33 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/25/2024 13:33:34 - INFO: Creating dataloaders and lr_scheduler
+10/25/2024 13:33:34 - INFO: Preparing model, optimizer and dataloaders
+10/25/2024 13:33:35 - INFO: ***** Running training *****
+10/25/2024 13:33:35 - INFO:   Num examples = 4
+10/25/2024 13:33:35 - INFO:   Num Epochs = 100
+10/25/2024 13:33:35 - INFO:   Instantaneous batch size per device = 1
+10/25/2024 13:33:35 - INFO:   Total train batch size (w. parallel, distributed & accumulation) = 1
+10/25/2024 13:33:35 - INFO:   Gradient Accumulation steps = 1
+10/25/2024 13:33:35 - INFO:   Total optimization steps = 100
+10/25/2024 13:34:22 - WARNING: Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+10/25/2024 13:34:23 - INFO: Loading models and optimizer
+10/25/2024 13:34:27 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/25/2024 13:34:27 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/25/2024 13:34:27 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/25/2024 13:34:28 - INFO: Creating dataloaders and lr_scheduler
+10/25/2024 13:34:29 - INFO: Preparing model, optimizer and dataloaders
+10/25/2024 13:34:29 - INFO: ***** Running training *****
+10/25/2024 13:34:29 - INFO:   Num examples = 4
+10/25/2024 13:34:29 - INFO:   Num Epochs = 100
+10/25/2024 13:34:29 - INFO:   Instantaneous batch size per device = 1
+10/25/2024 13:34:29 - INFO:   Total train batch size (w. parallel, distributed & accumulation) = 1
+10/25/2024 13:34:29 - INFO:   Gradient Accumulation steps = 1
+10/25/2024 13:34:29 - INFO:   Total optimization steps = 100
+10/25/2024 13:35:16 - INFO: Saving current state to vqgan-output/checkpoint-10
+10/25/2024 13:35:18 - INFO: Optimizer state saved in vqgan-output/checkpoint-10/optimizer.bin
+10/25/2024 13:35:19 - INFO: Optimizer state saved in vqgan-output/checkpoint-10/optimizer_1.bin
+10/25/2024 13:35:19 - INFO: Scheduler state saved in vqgan-output/checkpoint-10/scheduler.bin
+10/25/2024 13:35:19 - INFO: Scheduler state saved in vqgan-output/checkpoint-10/scheduler_1.bin
+10/25/2024 13:35:19 - INFO: Random states saved in vqgan-output/checkpoint-10/random_states_0.pkl
+10/25/2024 13:35:39 - INFO: Saved state to vqgan-output/checkpoint-10
+10/25/2024 13:36:43 - INFO: Saving current state to vqgan-output/checkpoint-20
+10/25/2024 13:36:45 - INFO: Optimizer state saved in vqgan-output/checkpoint-20/optimizer.bin
+10/25/2024 13:36:45 - INFO: Optimizer state saved in vqgan-output/checkpoint-20/optimizer_1.bin
+10/25/2024 13:36:45 - INFO: Scheduler state saved in vqgan-output/checkpoint-20/scheduler.bin
+10/25/2024 13:36:45 - INFO: Scheduler state saved in vqgan-output/checkpoint-20/scheduler_1.bin
+10/25/2024 13:36:45 - INFO: Random states saved in vqgan-output/checkpoint-20/random_states_0.pkl
+10/25/2024 13:36:45 - INFO: Saved state to vqgan-output/checkpoint-20
+10/25/2024 13:37:13 - INFO: Saving current state to vqgan-output/checkpoint-30
+10/25/2024 13:37:15 - INFO: Optimizer state saved in vqgan-output/checkpoint-30/optimizer.bin
+10/25/2024 13:37:15 - INFO: Optimizer state saved in vqgan-output/checkpoint-30/optimizer_1.bin
+10/25/2024 13:37:15 - INFO: Scheduler state saved in vqgan-output/checkpoint-30/scheduler.bin
+10/25/2024 13:37:15 - INFO: Scheduler state saved in vqgan-output/checkpoint-30/scheduler_1.bin
+10/25/2024 13:37:15 - INFO: Random states saved in vqgan-output/checkpoint-30/random_states_0.pkl
+10/25/2024 13:37:15 - INFO: Saved state to vqgan-output/checkpoint-30
+10/25/2024 13:37:42 - INFO: Saving current state to vqgan-output/checkpoint-40
+10/25/2024 13:37:44 - INFO: Optimizer state saved in vqgan-output/checkpoint-40/optimizer.bin
+10/25/2024 13:37:44 - INFO: Optimizer state saved in vqgan-output/checkpoint-40/optimizer_1.bin
+10/25/2024 13:37:44 - INFO: Scheduler state saved in vqgan-output/checkpoint-40/scheduler.bin
+10/25/2024 13:37:44 - INFO: Scheduler state saved in vqgan-output/checkpoint-40/scheduler_1.bin
+10/25/2024 13:37:44 - INFO: Random states saved in vqgan-output/checkpoint-40/random_states_0.pkl
+10/25/2024 13:37:44 - INFO: Saved state to vqgan-output/checkpoint-40
+10/25/2024 13:38:12 - INFO: Saving current state to vqgan-output/checkpoint-50
+10/25/2024 13:38:14 - INFO: Optimizer state saved in vqgan-output/checkpoint-50/optimizer.bin
+10/25/2024 13:38:15 - INFO: Optimizer state saved in vqgan-output/checkpoint-50/optimizer_1.bin
+10/25/2024 13:38:15 - INFO: Scheduler state saved in vqgan-output/checkpoint-50/scheduler.bin
+10/25/2024 13:38:15 - INFO: Scheduler state saved in vqgan-output/checkpoint-50/scheduler_1.bin
+10/25/2024 13:38:15 - INFO: Random states saved in vqgan-output/checkpoint-50/random_states_0.pkl
+10/25/2024 13:38:15 - INFO: Saved state to vqgan-output/checkpoint-50
+10/25/2024 13:38:41 - INFO: Saving current state to vqgan-output/checkpoint-60
+10/25/2024 13:38:43 - INFO: Optimizer state saved in vqgan-output/checkpoint-60/optimizer.bin
+10/25/2024 13:38:43 - INFO: Optimizer state saved in vqgan-output/checkpoint-60/optimizer_1.bin
+10/25/2024 13:38:43 - INFO: Scheduler state saved in vqgan-output/checkpoint-60/scheduler.bin
+10/25/2024 13:38:43 - INFO: Scheduler state saved in vqgan-output/checkpoint-60/scheduler_1.bin
+10/25/2024 13:38:43 - INFO: Random states saved in vqgan-output/checkpoint-60/random_states_0.pkl
+10/25/2024 13:38:44 - INFO: Saved state to vqgan-output/checkpoint-60
+10/25/2024 13:39:11 - INFO: Saving current state to vqgan-output/checkpoint-70
+10/25/2024 13:39:13 - INFO: Optimizer state saved in vqgan-output/checkpoint-70/optimizer.bin
+10/25/2024 13:39:14 - INFO: Optimizer state saved in vqgan-output/checkpoint-70/optimizer_1.bin
+10/25/2024 13:39:14 - INFO: Scheduler state saved in vqgan-output/checkpoint-70/scheduler.bin
+10/25/2024 13:39:14 - INFO: Scheduler state saved in vqgan-output/checkpoint-70/scheduler_1.bin
+10/25/2024 13:39:14 - INFO: Random states saved in vqgan-output/checkpoint-70/random_states_0.pkl
+10/25/2024 13:39:14 - INFO: Saved state to vqgan-output/checkpoint-70
+10/25/2024 13:41:59 - WARNING: Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+10/25/2024 13:42:08 - INFO: Loading models and optimizer
+10/25/2024 13:42:12 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/25/2024 13:42:12 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/25/2024 13:42:12 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/25/2024 13:42:13 - INFO: Creating dataloaders and lr_scheduler
+10/25/2024 13:42:14 - INFO: Preparing model, optimizer and dataloaders
+10/25/2024 13:42:14 - INFO: ***** Running training *****
+10/25/2024 13:42:14 - INFO:   Num examples = 2
+10/25/2024 13:42:14 - INFO:   Num Epochs = 100
+10/25/2024 13:42:14 - INFO:   Instantaneous batch size per device = 1
+10/25/2024 13:42:14 - INFO:   Total train batch size (w. parallel, distributed & accumulation) = 1
+10/25/2024 13:42:14 - INFO:   Gradient Accumulation steps = 1
+10/25/2024 13:42:14 - INFO:   Total optimization steps = 100
+10/25/2024 13:42:42 - INFO: Saving current state to vqgan-output/checkpoint-10
+10/25/2024 13:42:44 - INFO: Optimizer state saved in vqgan-output/checkpoint-10/optimizer.bin
+10/25/2024 13:42:44 - INFO: Optimizer state saved in vqgan-output/checkpoint-10/optimizer_1.bin
+10/25/2024 13:42:44 - INFO: Scheduler state saved in vqgan-output/checkpoint-10/scheduler.bin
+10/25/2024 13:42:44 - INFO: Scheduler state saved in vqgan-output/checkpoint-10/scheduler_1.bin
+10/25/2024 13:42:44 - INFO: Random states saved in vqgan-output/checkpoint-10/random_states_0.pkl
+10/25/2024 13:42:44 - INFO: Saved state to vqgan-output/checkpoint-10
+10/25/2024 13:43:10 - INFO: Saving current state to vqgan-output/checkpoint-20
+10/25/2024 13:43:12 - INFO: Optimizer state saved in vqgan-output/checkpoint-20/optimizer.bin
+10/25/2024 13:43:13 - INFO: Optimizer state saved in vqgan-output/checkpoint-20/optimizer_1.bin
+10/25/2024 13:43:13 - INFO: Scheduler state saved in vqgan-output/checkpoint-20/scheduler.bin
+10/25/2024 13:43:13 - INFO: Scheduler state saved in vqgan-output/checkpoint-20/scheduler_1.bin
+10/25/2024 13:43:13 - INFO: Random states saved in vqgan-output/checkpoint-20/random_states_0.pkl
+10/25/2024 13:43:13 - INFO: Saved state to vqgan-output/checkpoint-20
+10/25/2024 13:43:39 - INFO: Saving current state to vqgan-output/checkpoint-30
+10/25/2024 14:00:24 - INFO: device = cuda
+10/25/2024 14:01:22 - INFO: device = cuda
+10/25/2024 14:02:24 - INFO: device = cuda
+10/25/2024 14:04:15 - INFO: device = cuda
+10/25/2024 14:07:54 - INFO: device = cuda
+10/25/2024 14:10:46 - INFO: device = cuda
+10/25/2024 14:19:08 - INFO: device = cuda
+10/25/2024 14:22:37 - INFO: device = cuda
+10/25/2024 15:22:03 - INFO: device = cuda
+10/25/2024 15:22:25 - INFO: device = cuda
+10/25/2024 15:36:26 - INFO: device = cuda
+10/25/2024 16:04:16 - WARNING: Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+10/25/2024 16:04:16 - INFO: Loading models and optimizer
+10/25/2024 16:04:21 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/25/2024 16:04:21 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/25/2024 16:04:21 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/25/2024 16:04:22 - INFO: Creating dataloaders and lr_scheduler
+10/25/2024 16:04:23 - INFO: Preparing model, optimizer and dataloaders
+10/25/2024 16:04:24 - INFO: ***** Running training *****
+10/25/2024 16:04:24 - INFO:   Num examples = 4
+10/25/2024 16:04:24 - INFO:   Num Epochs = 100
+10/25/2024 16:04:24 - INFO:   Instantaneous batch size per device = 1
+10/25/2024 16:04:24 - INFO:   Total train batch size (w. parallel, distributed & accumulation) = 1
+10/25/2024 16:04:24 - INFO:   Gradient Accumulation steps = 1
+10/25/2024 16:04:24 - INFO:   Total optimization steps = 100
+10/25/2024 16:05:50 - INFO: Saving current state to vqgan-output/checkpoint-10
+10/25/2024 16:05:52 - INFO: Optimizer state saved in vqgan-output/checkpoint-10/optimizer.bin
+10/25/2024 16:05:53 - INFO: Optimizer state saved in vqgan-output/checkpoint-10/optimizer_1.bin
+10/25/2024 16:05:53 - INFO: Scheduler state saved in vqgan-output/checkpoint-10/scheduler.bin
+10/25/2024 16:05:53 - INFO: Scheduler state saved in vqgan-output/checkpoint-10/scheduler_1.bin
+10/25/2024 16:05:53 - INFO: Random states saved in vqgan-output/checkpoint-10/random_states_0.pkl
+10/25/2024 16:05:53 - INFO: Saved state to vqgan-output/checkpoint-10
+10/25/2024 16:06:19 - INFO: Saving current state to vqgan-output/checkpoint-20
+10/25/2024 16:06:21 - INFO: Optimizer state saved in vqgan-output/checkpoint-20/optimizer.bin
+10/25/2024 16:06:22 - INFO: Optimizer state saved in vqgan-output/checkpoint-20/optimizer_1.bin
+10/25/2024 16:06:22 - INFO: Scheduler state saved in vqgan-output/checkpoint-20/scheduler.bin
+10/25/2024 16:06:22 - INFO: Scheduler state saved in vqgan-output/checkpoint-20/scheduler_1.bin
+10/25/2024 16:06:22 - INFO: Random states saved in vqgan-output/checkpoint-20/random_states_0.pkl
+10/25/2024 16:06:22 - INFO: Saved state to vqgan-output/checkpoint-20
+10/25/2024 16:06:49 - INFO: Saving current state to vqgan-output/checkpoint-30
+10/25/2024 16:06:51 - INFO: Optimizer state saved in vqgan-output/checkpoint-30/optimizer.bin
+10/25/2024 16:06:51 - INFO: Optimizer state saved in vqgan-output/checkpoint-30/optimizer_1.bin
+10/25/2024 16:06:51 - INFO: Scheduler state saved in vqgan-output/checkpoint-30/scheduler.bin
+10/25/2024 16:06:51 - INFO: Scheduler state saved in vqgan-output/checkpoint-30/scheduler_1.bin
+10/25/2024 16:06:51 - INFO: Random states saved in vqgan-output/checkpoint-30/random_states_0.pkl
+10/25/2024 16:06:51 - INFO: Saved state to vqgan-output/checkpoint-30
+10/25/2024 16:07:17 - INFO: Saving current state to vqgan-output/checkpoint-40
+10/25/2024 16:07:19 - INFO: Optimizer state saved in vqgan-output/checkpoint-40/optimizer.bin
+10/25/2024 16:07:19 - INFO: Optimizer state saved in vqgan-output/checkpoint-40/optimizer_1.bin
+10/25/2024 16:07:19 - INFO: Scheduler state saved in vqgan-output/checkpoint-40/scheduler.bin
+10/25/2024 16:07:19 - INFO: Scheduler state saved in vqgan-output/checkpoint-40/scheduler_1.bin
+10/25/2024 16:07:19 - INFO: Random states saved in vqgan-output/checkpoint-40/random_states_0.pkl
+10/25/2024 16:07:19 - INFO: Saved state to vqgan-output/checkpoint-40
+10/25/2024 16:07:47 - INFO: Saving current state to vqgan-output/checkpoint-50
+10/25/2024 16:07:49 - INFO: Optimizer state saved in vqgan-output/checkpoint-50/optimizer.bin
+10/25/2024 16:07:49 - INFO: Optimizer state saved in vqgan-output/checkpoint-50/optimizer_1.bin
+10/25/2024 16:07:49 - INFO: Scheduler state saved in vqgan-output/checkpoint-50/scheduler.bin
+10/25/2024 16:07:49 - INFO: Scheduler state saved in vqgan-output/checkpoint-50/scheduler_1.bin
+10/25/2024 16:07:49 - INFO: Random states saved in vqgan-output/checkpoint-50/random_states_0.pkl
+10/25/2024 16:07:49 - INFO: Saved state to vqgan-output/checkpoint-50
+10/25/2024 16:08:15 - INFO: Saving current state to vqgan-output/checkpoint-60
+10/25/2024 16:08:17 - INFO: Optimizer state saved in vqgan-output/checkpoint-60/optimizer.bin
+10/25/2024 16:08:18 - INFO: Optimizer state saved in vqgan-output/checkpoint-60/optimizer_1.bin
+10/25/2024 16:08:18 - INFO: Scheduler state saved in vqgan-output/checkpoint-60/scheduler.bin
+10/25/2024 16:08:18 - INFO: Scheduler state saved in vqgan-output/checkpoint-60/scheduler_1.bin
+10/25/2024 16:08:18 - INFO: Random states saved in vqgan-output/checkpoint-60/random_states_0.pkl
+10/25/2024 16:08:18 - INFO: Saved state to vqgan-output/checkpoint-60
+10/25/2024 16:08:45 - INFO: Saving current state to vqgan-output/checkpoint-70
+10/25/2024 16:08:47 - INFO: Optimizer state saved in vqgan-output/checkpoint-70/optimizer.bin
+10/25/2024 16:08:47 - INFO: Optimizer state saved in vqgan-output/checkpoint-70/optimizer_1.bin
+10/25/2024 16:08:47 - INFO: Scheduler state saved in vqgan-output/checkpoint-70/scheduler.bin
+10/25/2024 16:08:47 - INFO: Scheduler state saved in vqgan-output/checkpoint-70/scheduler_1.bin
+10/25/2024 16:08:47 - INFO: Random states saved in vqgan-output/checkpoint-70/random_states_0.pkl
+10/25/2024 16:08:47 - INFO: Saved state to vqgan-output/checkpoint-70
+10/25/2024 16:09:14 - INFO: Saving current state to vqgan-output/checkpoint-80
+10/25/2024 16:09:16 - INFO: Optimizer state saved in vqgan-output/checkpoint-80/optimizer.bin
+10/25/2024 16:09:16 - INFO: Optimizer state saved in vqgan-output/checkpoint-80/optimizer_1.bin
+10/25/2024 16:09:16 - INFO: Scheduler state saved in vqgan-output/checkpoint-80/scheduler.bin
+10/25/2024 16:09:16 - INFO: Scheduler state saved in vqgan-output/checkpoint-80/scheduler_1.bin
+10/25/2024 16:09:16 - INFO: Random states saved in vqgan-output/checkpoint-80/random_states_0.pkl
+10/25/2024 16:09:16 - INFO: Saved state to vqgan-output/checkpoint-80
+10/25/2024 16:09:43 - INFO: Saving current state to vqgan-output/checkpoint-90
+10/25/2024 16:09:45 - INFO: Optimizer state saved in vqgan-output/checkpoint-90/optimizer.bin
+10/25/2024 16:09:46 - INFO: Optimizer state saved in vqgan-output/checkpoint-90/optimizer_1.bin
+10/25/2024 16:09:46 - INFO: Scheduler state saved in vqgan-output/checkpoint-90/scheduler.bin
+10/25/2024 16:09:46 - INFO: Scheduler state saved in vqgan-output/checkpoint-90/scheduler_1.bin
+10/25/2024 16:09:46 - INFO: Random states saved in vqgan-output/checkpoint-90/random_states_0.pkl
+10/25/2024 16:09:46 - INFO: Saved state to vqgan-output/checkpoint-90
+10/25/2024 16:10:12 - INFO: Saving current state to vqgan-output/checkpoint-100
+10/25/2024 16:10:14 - INFO: Optimizer state saved in vqgan-output/checkpoint-100/optimizer.bin
+10/25/2024 16:10:14 - INFO: Optimizer state saved in vqgan-output/checkpoint-100/optimizer_1.bin
+10/25/2024 16:10:14 - INFO: Scheduler state saved in vqgan-output/checkpoint-100/scheduler.bin
+10/25/2024 16:10:14 - INFO: Scheduler state saved in vqgan-output/checkpoint-100/scheduler_1.bin
+10/25/2024 16:10:14 - INFO: Random states saved in vqgan-output/checkpoint-100/random_states_0.pkl
+10/25/2024 16:10:14 - INFO: Saved state to vqgan-output/checkpoint-100
+10/25/2024 16:18:15 - WARNING: Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+10/25/2024 16:18:16 - INFO: Loading models and optimizer
+10/25/2024 16:18:29 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/25/2024 16:18:29 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/25/2024 16:18:29 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/25/2024 16:18:50 - INFO: Creating dataloaders and lr_scheduler
+10/25/2024 16:18:51 - INFO: Preparing model, optimizer and dataloaders
+10/25/2024 16:18:52 - INFO: ***** Running training *****
+10/25/2024 16:18:52 - INFO:   Num examples = 4
+10/25/2024 16:18:52 - INFO:   Num Epochs = 100
+10/25/2024 16:18:52 - INFO:   Instantaneous batch size per device = 1
+10/25/2024 16:18:52 - INFO:   Total train batch size (w. parallel, distributed & accumulation) = 1
+10/25/2024 16:18:52 - INFO:   Gradient Accumulation steps = 1
+10/25/2024 16:18:52 - INFO:   Total optimization steps = 100
+10/25/2024 16:21:47 - INFO: device = cuda
+10/25/2024 16:28:06 - WARNING: Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+10/25/2024 16:28:06 - INFO: Loading models and optimizer
+10/25/2024 16:28:22 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/25/2024 16:28:22 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/25/2024 16:28:22 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/25/2024 16:28:23 - INFO: Creating dataloaders and lr_scheduler
+10/25/2024 16:28:24 - INFO: Preparing model, optimizer and dataloaders
+10/25/2024 16:28:24 - INFO: ***** Running training *****
+10/25/2024 16:28:24 - INFO:   Num examples = 4
+10/25/2024 16:28:24 - INFO:   Num Epochs = 100
+10/25/2024 16:28:24 - INFO:   Instantaneous batch size per device = 1
+10/25/2024 16:28:24 - INFO:   Total train batch size (w. parallel, distributed & accumulation) = 1
+10/25/2024 16:28:24 - INFO:   Gradient Accumulation steps = 1
+10/25/2024 16:28:24 - INFO:   Total optimization steps = 100
+10/25/2024 16:29:42 - WARNING: Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+10/25/2024 16:29:42 - INFO: Loading models and optimizer
+10/25/2024 16:29:47 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/25/2024 16:29:47 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/25/2024 16:29:47 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/25/2024 16:29:48 - INFO: Creating dataloaders and lr_scheduler
+10/25/2024 16:29:49 - INFO: Preparing model, optimizer and dataloaders
+10/25/2024 16:29:49 - INFO: ***** Running training *****
+10/25/2024 16:29:49 - INFO:   Num examples = 4
+10/25/2024 16:29:49 - INFO:   Num Epochs = 100
+10/25/2024 16:29:49 - INFO:   Instantaneous batch size per device = 1
+10/25/2024 16:29:49 - INFO:   Total train batch size (w. parallel, distributed & accumulation) = 1
+10/25/2024 16:29:49 - INFO:   Gradient Accumulation steps = 1
+10/25/2024 16:29:49 - INFO:   Total optimization steps = 100
+10/25/2024 16:32:04 - INFO: Saving current state to vqgan-output/checkpoint-10
+10/25/2024 16:32:06 - INFO: Optimizer state saved in vqgan-output/checkpoint-10/optimizer.bin
+10/25/2024 16:32:07 - INFO: Optimizer state saved in vqgan-output/checkpoint-10/optimizer_1.bin
+10/25/2024 16:32:07 - INFO: Scheduler state saved in vqgan-output/checkpoint-10/scheduler.bin
+10/25/2024 16:32:07 - INFO: Scheduler state saved in vqgan-output/checkpoint-10/scheduler_1.bin
+10/25/2024 16:32:07 - INFO: Random states saved in vqgan-output/checkpoint-10/random_states_0.pkl
+10/25/2024 16:32:07 - INFO: Saved state to vqgan-output/checkpoint-10
+10/25/2024 16:32:33 - INFO: Saving current state to vqgan-output/checkpoint-20
+10/25/2024 16:32:35 - INFO: Optimizer state saved in vqgan-output/checkpoint-20/optimizer.bin
+10/25/2024 16:32:35 - INFO: Optimizer state saved in vqgan-output/checkpoint-20/optimizer_1.bin
+10/25/2024 16:32:35 - INFO: Scheduler state saved in vqgan-output/checkpoint-20/scheduler.bin
+10/25/2024 16:32:35 - INFO: Scheduler state saved in vqgan-output/checkpoint-20/scheduler_1.bin
+10/25/2024 16:32:35 - INFO: Random states saved in vqgan-output/checkpoint-20/random_states_0.pkl
+10/25/2024 16:32:35 - INFO: Saved state to vqgan-output/checkpoint-20
