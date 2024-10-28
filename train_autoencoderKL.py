@@ -44,7 +44,7 @@ from diffusers import VQModel, AutoencoderKL
 from diffusers.optimization import get_scheduler
 from diffusers.training_utils import EMAModel
 from diffusers.utils import check_min_version, is_wandb_available
-from dataset import flow_blur_dataset
+from dataset.flow_dataset import Flow_dataset
 
 
 if is_wandb_available():
@@ -140,64 +140,6 @@ def gradient_penalty(images, output, weight=10):
     return weight * ((gradients.norm(2, dim=1) - 1) ** 2).mean()
 
 
-@torch.no_grad()
-def log_validation(model, args, validation_transform, accelerator, global_step):
-    logger.info("Generating images...")
-    dtype = torch.float32
-    if accelerator.mixed_precision == "fp16":
-        dtype = torch.float16
-    elif accelerator.mixed_precision == "bf16":
-        dtype = torch.bfloat16
-    original_images = []
-    validation_images=[]
-
-    with open (args.validation_images, 'r') as f:
-        paths = f.readlines()
-        for path in paths:
-            validation_images.append(path)
-
-    for image_path in validation_images:
-        image = PIL.Image.open(image_path)
-        if not image.mode == "RGB":
-            image = image.convert("RGB")
-        image = validation_transform(image).to(accelerator.device, dtype=dtype)
-        original_images.append(image[None])
-    # Generate images
-    model.eval()
-    images = []
-    for original_image in original_images:
-        image = accelerator.unwrap_model(model)(original_image).sample
-        images.append(image)
-    model.train()
-    original_images = torch.cat(original_images, dim=0)
-    images = torch.cat(images, dim=0)
-
-    # Convert to PIL images
-    images = torch.clamp(images, 0.0, 1.0)
-    original_images = torch.clamp(original_images, 0.0, 1.0)
-    images *= 255.0
-    original_images *= 255.0
-    images = images.permute(0, 2, 3, 1).cpu().numpy().astype(np.uint8)
-    original_images = original_images.permute(0, 2, 3, 1).cpu().numpy().astype(np.uint8)
-    images = np.concatenate([original_images, images], axis=2)
-    images = [Image.fromarray(image) for image in images]
-
-    # Log images
-    for tracker in accelerator.trackers:
-        if tracker.name == "tensorboard":
-            np_images = np.stack([np.asarray(img) for img in images])
-            tracker.writer.add_images("validation", np_images, global_step, dataformats="NHWC")
-        if tracker.name == "wandb":
-            tracker.log(
-                {
-                    "validation": [
-                        wandb.Image(image, caption=f"{i}: Original, Generated") for i, image in enumerate(images)
-                    ]
-                },
-                step=global_step,
-            )
-    torch.cuda.empty_cache()
-    return images
 
 
 def log_grad_norm(model, accelerator, global_step):
@@ -219,17 +161,8 @@ def parse_args():
     parser.add_argument(
         "--log_steps",
         type=int,
-        default=50,
+        default=10,
         help=("Print logs every X steps."),
-    )
-    parser.add_argument(
-        "--validation_steps",
-        type=int,
-        default=None,
-        help=(
-            "Run validation every X steps. Validation consists of running reconstruction on images in"
-            " `args.validation_images` and logging the reconstructed images."
-        ),
     )
     parser.add_argument(
         "--vae_loss",
@@ -280,54 +213,11 @@ def parse_args():
         required=False,
         help="Revision of pretrained model identifier from huggingface.co/models.",
     )
-    parser.add_argument(
-        "--dataset_name",
-        type=str,
-        default=None,
-        help=(
-            "The name of the Dataset (from the HuggingFace hub) to train on (could be your own, possibly private,"
-            " dataset). It can also be a path pointing to a local copy of a dataset in your filesystem,"
-            " or to a folder containing files that 🤗 Datasets can understand."
-        ),
-    )
-    parser.add_argument(
-        "--dataset_config_name",
-        type=str,
-        default=None,
-        help="The config of the Dataset, leave as None if there's only one config.",
-    )
-    parser.add_argument(
-        "--train_data_dir",
-        type=str,
-        default=None,
-        help=(
-            "A folder containing the training data. Folder contents must follow the structure described in"
-            " https://huggingface.co/docs/datasets/image_dataset#imagefolder. In particular, a `metadata.jsonl` file"
-            " must exist to provide the captions for the images. Ignored if `dataset_name` is specified."
-        ),
-    )
-    parser.add_argument(
-        "--image_column", type=str, default="image", help="The column of the dataset containing an image."
-    )
-    parser.add_argument(
-        "--max_train_samples",
-        type=int,
-        default=None,
-        help=(
-            "For debugging purposes or quicker training, truncate the number of training examples to this "
-            "value if set."
-        ),
-    )
-    parser.add_argument(
-        "--validation_images",
-        type=str,
-        default=None,
-        help=("A set of validation images evaluated every `--validation_steps` and logged to `--report_to`."),
-    )
+
     parser.add_argument(
         "--output_dir",
         type=str,
-        default="AE-output",
+        default="/workspace/data/AE-output",
         help="The output directory where the model predictions and checkpoints will be written.",
     )
     parser.add_argument(
@@ -347,27 +237,13 @@ def parse_args():
         ),
     )
     parser.add_argument(
-        "--center_crop",
-        default=False,
-        action="store_true",
-        help=(
-            "Whether to center crop the input images to the resolution. If not set, the images will be randomly"
-            " cropped. The images will be resized to the resolution first before cropping."
-        ),
-    )
-    parser.add_argument(
-        "--random_flip",
-        action="store_true",
-        help="whether to randomly flip images horizontally",
-    )
-    parser.add_argument(
         "--train_batch_size", type=int, default=1, help="Batch size (per device) for the training dataloader."
     )
     parser.add_argument("--num_train_epochs", type=int, default=100)
     parser.add_argument(
         "--max_train_steps",
         type=int,
-        default=None,
+        default=50000,
         help="Total number of training steps to perform.  If provided, overrides num_train_epochs.",
     )
     parser.add_argument(
@@ -384,13 +260,13 @@ def parse_args():
     parser.add_argument(
         "--discr_learning_rate",
         type=float,
-        default=1e-4,
+        default=5e-5,
         help="Initial learning rate (after the potential warmup period) to use.",
     )
     parser.add_argument(
         "--learning_rate",
         type=float,
-        default=1e-4,
+        default=5e-5,
         help="Initial learning rate (after the potential warmup period) to use.",
     )
     parser.add_argument(
@@ -402,7 +278,7 @@ def parse_args():
     parser.add_argument(
         "--lr_scheduler",
         type=str,
-        default="constant",
+        default="cosine",
         help=(
             'The scheduler type to use. Choose between ["linear", "cosine", "cosine_with_restarts", "polynomial",'
             ' "constant", "constant_with_warmup"]'
@@ -411,7 +287,7 @@ def parse_args():
     parser.add_argument(
         "--discr_lr_scheduler",
         type=str,
-        default="constant",
+        default="cosine",
         help=(
             'The scheduler type to use. Choose between ["linear", "cosine", "cosine_with_restarts", "polynomial",'
             ' "constant", "constant_with_warmup"]'
@@ -534,6 +410,12 @@ def parse_args():
             "The `project_name` argument passed to Accelerator.init_trackers for"
             " more information see https://huggingface.co/docs/accelerate/v0.17.0/en/package_reference/accelerator#accelerate.Accelerator"
         ),
+    )
+    parser.add_argument(
+        "--validation_images",
+        type=str,
+        default=None,
+        help=("A set of validation images evaluated every `--validation_steps` and logged to `--report_to`."),
     )
 
     args = parser.parse_args()
@@ -717,72 +599,14 @@ def main():
     args.train_batch_size * accelerator.num_processes
     total_batch_size = args.train_batch_size * accelerator.num_processes * args.gradient_accumulation_steps
 
-    # DataLoaders creation:
-    if args.dataset_name is not None:
-        # Downloading and loading a dataset from the hub.
-        dataset = load_dataset(
-            args.dataset_name,
-            args.dataset_config_name,
-            cache_dir=args.cache_dir,
-            data_dir=args.train_data_dir,
-        )
-    else:
-        data_files = {}
-        if args.train_data_dir is not None:
-            data_files["train"] = os.path.join(args.train_data_dir, "**")
-        dataset = load_dataset(
-            "imagefolder",
-            data_files=data_files,
-            cache_dir=args.cache_dir,
-        )
-        # See more about loading custom images at
-        # https://huggingface.co/docs/datasets/v2.4.0/en/image_load#imagefolder
 
-    # Preprocessing the datasets.
-    # We need to tokenize inputs and targets.
-    column_names = dataset["train"].column_names   # column_names = image
-
-    # 6. Get the column names for input/target.
-    assert args.image_column is not None
-    image_column = args.image_column
-    if image_column not in column_names:
-        raise ValueError(f"--image_column' value '{args.image_column}' needs to be one of: {', '.join(column_names)}")
-    # Preprocessing the datasets.
-    train_transforms = transforms.Compose(
-        [
-            transforms.Resize(args.resolution, interpolation=transforms.InterpolationMode.BILINEAR),
-            transforms.CenterCrop(args.resolution) if args.center_crop else transforms.RandomCrop(args.resolution),
-            transforms.RandomHorizontalFlip() if args.random_flip else transforms.Lambda(lambda x: x),
-            transforms.ToTensor(),
-        ]
-    )
-    validation_transform = transforms.Compose(
-        [
-            transforms.Resize(args.resolution, interpolation=transforms.InterpolationMode.BILINEAR),
-            transforms.ToTensor(),
-        ]
-    )
-
-    def preprocess_train(examples):
-        images = [image.convert("RGB") for image in examples[image_column]]
-        examples["pixel_values"] = [train_transforms(image) for image in images]
-        return examples
-
-    with accelerator.main_process_first():
-        if args.max_train_samples is not None:
-            dataset["train"] = dataset["train"].shuffle(seed=args.seed).select(range(args.max_train_samples))
-        train_dataset = dataset["train"].with_transform(preprocess_train)
-
-    def collate_fn(examples):
-        pixel_values = torch.stack([example["pixel_values"] for example in examples])
-        pixel_values = pixel_values.to(memory_format=torch.contiguous_format).float()
-        return {"pixel_values": pixel_values}
+    train_data = "/workspace/Marigold/dataset/train/train_vae.txt"
+    train_dataset = Flow_dataset(train_data, seed = 42)
 
     # DataLoaders creation:
     train_dataloader = torch.utils.data.DataLoader(
         train_dataset,
         shuffle=True,
-        collate_fn=collate_fn,
         batch_size=args.train_batch_size,
         num_workers=args.dataloader_num_workers,
     )
@@ -869,8 +693,8 @@ def main():
         model.train()
         discriminator.train()
         for i, batch in enumerate(train_dataloader):
-            pixel_values = batch["pixel_values"]
-            pixel_values = pixel_values.to(accelerator.device, non_blocking=True)
+            flow = batch["flow"]
+            flow = flow.to(accelerator.device, non_blocking=True)
             data_time_m.update(time.time() - end)
             generator_step = ((i // args.gradient_accumulation_steps) % 2) == 0
             # Train Step
@@ -883,18 +707,18 @@ def main():
                 discr_optimizer.zero_grad(set_to_none=True)
             # encode images to the latent space and get the commit loss from vq tokenization
             # Return commit loss
-            fmap = model(pixel_values, return_dict=False)[0]
+            fmap = model(flow, return_dict=False)[0]
 
             if generator_step:
                 with accelerator.accumulate(model):
                     # reconstruction loss. Pixel level differences between input vs output
                     if args.vae_loss == "l2":
-                        loss = F.mse_loss(pixel_values, fmap)
+                        loss = F.mse_loss(flow, fmap)
                     else:
-                        loss = F.l1_loss(pixel_values, fmap)
+                        loss = F.l1_loss(flow, fmap)
                     # perceptual loss. The high level feature mean squared error loss
                     perceptual_loss = get_perceptual_loss(
-                        pixel_values,
+                        flow,
                         fmap,
                         timm_model,
                         timm_model_resolution=timm_model_resolution,
@@ -931,11 +755,11 @@ def main():
                 # Return discriminator loss
                 with accelerator.accumulate(discriminator):
                     fmap.detach_()
-                    pixel_values.requires_grad_()
-                    real = discriminator(pixel_values)
+                    flow.requires_grad_()
+                    real = discriminator(flow)
                     fake = discriminator(fmap)
                     loss = (F.relu(1 + fake) + F.relu(1 - real)).mean()
-                    gp = gradient_penalty(pixel_values, real)
+                    gp = gradient_penalty(flow, real)
                     loss += gp
                     avg_discr_loss = accelerator.gather(loss.repeat(args.train_batch_size)).mean()
                     accelerator.backward(loss)

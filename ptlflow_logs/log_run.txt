@@ -1366,3 +1366,166 @@
 10/25/2024 16:32:35 - INFO: Scheduler state saved in vqgan-output/checkpoint-20/scheduler_1.bin
 10/25/2024 16:32:35 - INFO: Random states saved in vqgan-output/checkpoint-20/random_states_0.pkl
 10/25/2024 16:32:35 - INFO: Saved state to vqgan-output/checkpoint-20
+10/28/2024 15:20:49 - WARNING: Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+10/28/2024 15:20:49 - INFO: Loading models and optimizer
+10/28/2024 15:21:18 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/28/2024 15:21:18 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/28/2024 15:21:18 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/28/2024 15:21:19 - INFO: Creating dataloaders and lr_scheduler
+10/28/2024 15:21:35 - INFO: Preparing model, optimizer and dataloaders
+10/28/2024 15:21:39 - INFO: ***** Running training *****
+10/28/2024 15:21:40 - INFO:   Num examples = 199447
+10/28/2024 15:21:41 - INFO:   Num Epochs = 100
+10/28/2024 15:22:22 - INFO:   Instantaneous batch size per device = 1
+10/28/2024 15:22:24 - INFO:   Total train batch size (w. parallel, distributed & accumulation) = 1
+10/28/2024 15:22:25 - INFO:   Gradient Accumulation steps = 1
+10/28/2024 15:22:26 - INFO:   Total optimization steps = 100
+10/28/2024 16:14:31 - WARNING: Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+10/28/2024 16:14:31 - INFO: Loading models and optimizer
+10/28/2024 16:14:35 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/28/2024 16:14:35 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/28/2024 16:14:35 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/28/2024 16:14:36 - INFO: Creating dataloaders and lr_scheduler
+10/28/2024 16:23:59 - INFO: Preparing model, optimizer and dataloaders
+10/28/2024 16:24:01 - INFO: ***** Running training *****
+10/28/2024 16:24:01 - INFO:   Num examples = 199447
+10/28/2024 16:24:02 - INFO:   Num Epochs = 100
+10/28/2024 16:24:02 - INFO:   Instantaneous batch size per device = 1
+10/28/2024 16:24:02 - INFO:   Total train batch size (w. parallel, distributed & accumulation) = 1
+10/28/2024 16:24:02 - INFO:   Gradient Accumulation steps = 1
+10/28/2024 16:24:03 - INFO:   Total optimization steps = 100
+10/28/2024 16:25:38 - WARNING: Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+10/28/2024 16:25:38 - INFO: Loading models and optimizer
+10/28/2024 16:25:42 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/28/2024 16:25:42 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/28/2024 16:25:42 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/28/2024 16:25:43 - INFO: Creating dataloaders and lr_scheduler
+10/28/2024 16:25:46 - INFO: Preparing model, optimizer and dataloaders
+10/28/2024 16:25:46 - INFO: ***** Running training *****
+10/28/2024 16:25:46 - INFO:   Num examples = 199447
+10/28/2024 16:25:46 - INFO:   Num Epochs = 100
+10/28/2024 16:25:46 - INFO:   Instantaneous batch size per device = 1
+10/28/2024 16:25:46 - INFO:   Total train batch size (w. parallel, distributed & accumulation) = 1
+10/28/2024 16:25:46 - INFO:   Gradient Accumulation steps = 1
+10/28/2024 16:25:46 - INFO:   Total optimization steps = 100
+10/28/2024 16:47:43 - INFO: Added key: store_based_barrier_key:1 to store for rank: 0
+10/28/2024 16:47:43 - INFO: Added key: store_based_barrier_key:1 to store for rank: 1
+10/28/2024 16:47:43 - INFO: Added key: store_based_barrier_key:1 to store for rank: 3
+10/28/2024 16:47:43 - INFO: Added key: store_based_barrier_key:1 to store for rank: 2
+10/28/2024 16:47:43 - INFO: Rank 2: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/28/2024 16:47:43 - INFO: Rank 0: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/28/2024 16:47:43 - INFO: Rank 1: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/28/2024 16:47:43 - INFO: Rank 3: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/28/2024 16:47:43 - WARNING: Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+10/28/2024 16:50:23 - INFO: Added key: store_based_barrier_key:1 to store for rank: 2
+10/28/2024 16:50:23 - INFO: Added key: store_based_barrier_key:1 to store for rank: 0
+10/28/2024 16:50:23 - INFO: Added key: store_based_barrier_key:1 to store for rank: 3
+10/28/2024 16:50:23 - INFO: Added key: store_based_barrier_key:1 to store for rank: 1
+10/28/2024 16:50:23 - INFO: Rank 1: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/28/2024 16:50:23 - INFO: Rank 2: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/28/2024 16:50:23 - INFO: Rank 0: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/28/2024 16:50:23 - INFO: Rank 3: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/28/2024 16:50:23 - WARNING: Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+10/28/2024 16:50:26 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/28/2024 16:50:26 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/28/2024 16:50:26 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/28/2024 16:50:27 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/28/2024 16:50:27 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/28/2024 16:50:27 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/28/2024 16:50:27 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/28/2024 16:50:27 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/28/2024 16:50:27 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/28/2024 16:50:32 - INFO: Loading models and optimizer
+10/28/2024 16:50:36 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/28/2024 16:50:36 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/28/2024 16:50:36 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/28/2024 16:50:37 - INFO: Creating dataloaders and lr_scheduler
+10/28/2024 16:50:37 - INFO: Preparing model, optimizer and dataloaders
+10/28/2024 16:50:39 - INFO: ***** Running training *****
+10/28/2024 16:50:39 - INFO:   Num examples = 199447
+10/28/2024 16:50:39 - INFO:   Num Epochs = 100
+10/28/2024 16:50:39 - INFO:   Instantaneous batch size per device = 1
+10/28/2024 16:50:39 - INFO:   Total train batch size (w. parallel, distributed & accumulation) = 4
+10/28/2024 16:50:39 - INFO:   Gradient Accumulation steps = 1
+10/28/2024 16:50:39 - INFO:   Total optimization steps = 50000
+10/28/2024 16:50:47 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/28/2024 16:50:47 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/28/2024 16:50:47 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/28/2024 16:50:47 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/28/2024 16:50:47 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/28/2024 16:50:47 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/28/2024 16:50:47 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/28/2024 16:50:47 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/28/2024 17:10:55 - INFO: Saving current state to AE-output/checkpoint-500
+10/28/2024 17:10:57 - INFO: Optimizer state saved in AE-output/checkpoint-500/optimizer.bin
+10/28/2024 17:10:57 - INFO: Optimizer state saved in AE-output/checkpoint-500/optimizer_1.bin
+10/28/2024 17:10:57 - INFO: Scheduler state saved in AE-output/checkpoint-500/scheduler.bin
+10/28/2024 17:10:57 - INFO: Scheduler state saved in AE-output/checkpoint-500/scheduler_1.bin
+10/28/2024 17:10:57 - INFO: Random states saved in AE-output/checkpoint-500/random_states_0.pkl
+10/28/2024 17:10:57 - INFO: Saved state to AE-output/checkpoint-500
+10/28/2024 17:23:34 - INFO: Added key: store_based_barrier_key:1 to store for rank: 2
+10/28/2024 17:23:34 - INFO: Added key: store_based_barrier_key:1 to store for rank: 3
+10/28/2024 17:23:34 - INFO: Added key: store_based_barrier_key:1 to store for rank: 1
+10/28/2024 17:23:34 - INFO: Added key: store_based_barrier_key:1 to store for rank: 0
+10/28/2024 17:23:34 - INFO: Rank 0: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/28/2024 17:23:34 - INFO: Rank 3: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/28/2024 17:23:34 - INFO: Rank 2: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/28/2024 17:23:34 - INFO: Rank 1: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/28/2024 17:23:34 - WARNING: Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+10/28/2024 17:24:10 - INFO: Added key: store_based_barrier_key:1 to store for rank: 3
+10/28/2024 17:24:10 - INFO: Added key: store_based_barrier_key:1 to store for rank: 0
+10/28/2024 17:24:10 - INFO: Added key: store_based_barrier_key:1 to store for rank: 1
+10/28/2024 17:24:10 - INFO: Added key: store_based_barrier_key:1 to store for rank: 2
+10/28/2024 17:24:10 - INFO: Rank 2: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/28/2024 17:24:10 - INFO: Rank 3: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/28/2024 17:24:10 - INFO: Rank 0: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/28/2024 17:24:10 - INFO: Rank 1: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/28/2024 17:24:10 - WARNING: Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+10/28/2024 18:02:27 - INFO: Added key: store_based_barrier_key:1 to store for rank: 0
+10/28/2024 18:02:27 - INFO: Added key: store_based_barrier_key:1 to store for rank: 1
+10/28/2024 18:02:27 - INFO: Added key: store_based_barrier_key:1 to store for rank: 2
+10/28/2024 18:02:27 - INFO: Added key: store_based_barrier_key:1 to store for rank: 3
+10/28/2024 18:02:27 - INFO: Rank 3: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/28/2024 18:02:27 - INFO: Rank 0: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/28/2024 18:02:27 - INFO: Rank 1: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/28/2024 18:02:27 - INFO: Rank 2: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/28/2024 18:02:27 - WARNING: Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+10/28/2024 18:03:20 - INFO: Added key: store_based_barrier_key:1 to store for rank: 1
+10/28/2024 18:03:20 - INFO: Added key: store_based_barrier_key:1 to store for rank: 2
+10/28/2024 18:03:20 - INFO: Added key: store_based_barrier_key:1 to store for rank: 3
+10/28/2024 18:03:20 - INFO: Added key: store_based_barrier_key:1 to store for rank: 0
+10/28/2024 18:03:20 - INFO: Rank 0: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/28/2024 18:03:20 - INFO: Rank 1: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/28/2024 18:03:20 - INFO: Rank 2: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/28/2024 18:03:20 - INFO: Rank 3: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/28/2024 18:03:20 - WARNING: Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+10/28/2024 18:03:23 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/28/2024 18:03:23 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/28/2024 18:03:23 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/28/2024 18:03:24 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/28/2024 18:03:24 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/28/2024 18:03:24 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/28/2024 18:03:24 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/28/2024 18:03:24 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/28/2024 18:03:24 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/28/2024 18:03:29 - INFO: Loading models and optimizer
+10/28/2024 18:03:33 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/28/2024 18:03:33 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/28/2024 18:03:33 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/28/2024 18:03:34 - INFO: Creating dataloaders and lr_scheduler
+10/28/2024 18:03:34 - INFO: Preparing model, optimizer and dataloaders
+10/28/2024 18:03:36 - INFO: ***** Running training *****
+10/28/2024 18:03:36 - INFO:   Num examples = 199447
+10/28/2024 18:03:36 - INFO:   Num Epochs = 100
+10/28/2024 18:03:36 - INFO:   Instantaneous batch size per device = 1
+10/28/2024 18:03:36 - INFO:   Total train batch size (w. parallel, distributed & accumulation) = 4
+10/28/2024 18:03:36 - INFO:   Gradient Accumulation steps = 1
+10/28/2024 18:03:36 - INFO:   Total optimization steps = 50000
+10/28/2024 18:03:43 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/28/2024 18:03:43 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/28/2024 18:03:43 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/28/2024 18:03:43 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/28/2024 18:03:43 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/28/2024 18:03:43 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/28/2024 18:03:43 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/28/2024 18:03:43 - INFO: Reducer buckets have been rebuilt in this iteration.

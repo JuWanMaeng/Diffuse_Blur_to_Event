@@ -34,6 +34,7 @@ class Flow_dataset(data.Dataset):
         index = index % len(self.paths)
 
         blur_path = self.paths[index]        
+        dataset_name = blur_path.split('/')[3]  # vimeo . Monkaa, Gopro
 
         # Optical flow array
         flow_path = blur_path.replace('blur', 'flow/flows')
@@ -51,6 +52,11 @@ class Flow_dataset(data.Dataset):
         flow[nan_mask] = 0
         flow = np.clip(flow, -max_flow, max_flow)
 
+        # crop vimeo dataset
+        if dataset_name == 'vimeo':
+            flow = flow[50:-50,:,:]
+
+
         ### resize or random crop ###
         flow_h, flow_w = flow.shape[0],flow.shape[1]
         target_h, target_w = 768, 768
@@ -59,7 +65,7 @@ class Flow_dataset(data.Dataset):
             flow = self.random_crop(flow, patch_size=[target_h,target_w])
 
         else:
-            flow = cv2.resize(flow, (target_w,target_h),interpolation=cv2.INTER_LANCZOS4)
+            flow = cv2.resize(flow, (target_w,target_h), interpolation=cv2.INTER_LANCZOS4)
 
         ### augment flow ###
         # Randomly select an augmentation command
