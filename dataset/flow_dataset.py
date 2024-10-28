@@ -14,6 +14,7 @@ class Flow_dataset(data.Dataset):
         # blur path will change to flow path
         self.blur_txt_path = blur_txt_path
         self.paths = []
+        self.max_magnitude = 147  # M
 
         # Seed 설정
         if seed is not None:
@@ -72,7 +73,7 @@ class Flow_dataset(data.Dataset):
         n_flow = self.normalize_flow_to_tensor(flow)
 
 
-        flow_tensor = torch.from_numpy(n_flow).float()  # [u', v', r]
+        flow_tensor = torch.from_numpy(n_flow.transpose(2, 0, 1)).float()  # [3,H,W]
 
         return {
             'flow_path': flow_path,
@@ -149,7 +150,9 @@ class Flow_dataset(data.Dataset):
         M = magnitude.max()
         
         # Normalize the magnitude to [0, 1] range for the z component
-        z = magnitude / M
+        z = magnitude / self.max_magnitude
+        z = np.clip(z, 0, 1) 
+
 
         # Stack x, y, and z to create the 3D tensor C with shape (H, W, 3)
         C = np.stack((x, y, z), axis=-1)
