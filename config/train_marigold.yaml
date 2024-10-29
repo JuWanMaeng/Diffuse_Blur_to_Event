@@ -9,7 +9,7 @@ base_config:
 
 pipeline:
   # name: MarigoldPipeline
-  name: B2FPipeline
+  name: B2FPipeline_C
   kwargs:
     scale_invariant: true
     shift_invariant: true
@@ -33,9 +33,9 @@ dataloader:
 # Training settings
 trainer:
   # name: MarigoldTrainer
-  name: B2FTrainer
+  name: B2FTrainer_C
   training_noise_scheduler:
-    pretrained_path: my
+    pretrained_path: stable-diffusion-2
   init_seed: 2024  # use null to train w/o seeding
   save_period: 100
   backup_period: 999999

@@ -40,7 +40,7 @@ from torch.utils.data import DataLoader
 from tqdm import tqdm
 from PIL import Image
 
-from marigold.b2f_pipeline import B2FPipeline
+from marigold.b2f_pipeline_C import B2FPipeline_C
 from src.util import metric
 from src.util.data_loader import skip_first_batches
 from src.util.logging_util import tb_logger, eval_dic_to_text
@@ -57,7 +57,7 @@ class B2FTrainer:
     def __init__(
         self,
         cfg: OmegaConf,
-        model: B2FPipeline,
+        model: B2FPipeline_C,
         train_dataloader: DataLoader,
         device,
         base_ckpt_dir,
@@ -69,7 +69,7 @@ class B2FTrainer:
         vis_dataloaders: List[DataLoader] = None,
     ):
         self.cfg: OmegaConf = cfg
-        self.model: B2FPipeline = model
+        self.model: B2FPipeline_C = model
         self.device = device
         self.seed: Union[int, None] = (
             self.cfg.trainer.init_seed
@@ -95,6 +95,7 @@ class B2FTrainer:
         # Trainability
         self.model.vae.requires_grad_(False)
         self.model.text_encoder.requires_grad_(False)
+        self.model.img_vae.reguires_grad(False)
         self.model.unet.requires_grad_(True)
 
         # Optimizer !should be defined after input layer is adapted
@@ -229,11 +230,9 @@ class B2FTrainer:
 
                 with torch.no_grad():
                     # Encode image
-                    rgb_latent = self.model.encode_rgb(rgb)  # [B, 4, h, w]
-                    # Encode GT depth
-                    gt_depth_latent = self.model.encode_rgb(
-                        flow_gt_for_latent
-                    )  # [B, 4, h, w]
+                    flow_latent = self.model.encode_flow(flow_gt_for_latent)  # [B, 4, h, w]
+                    rgb_latent = self.model.encode_rgb(rgb)
+                
 
                 # Sample a random timestep for each image
                 timesteps = torch.randint(
@@ -251,7 +250,7 @@ class B2FTrainer:
                         # calculate strength depending on t
                         strength = strength * (timesteps / self.scheduler_timesteps)
                     noise = multi_res_noise_like(
-                        gt_depth_latent,
+                        flow_latent,
                         strength=strength,
                         downscale_strategy=self.mr_noise_downscale_strategy,
                         generator=rand_num_generator,
@@ -259,14 +258,14 @@ class B2FTrainer:
                     )
                 else:
                     noise = torch.randn(
-                        gt_depth_latent.shape,
+                        flow_latent.shape,
                         device=device,
                         generator=rand_num_generator,
                     )  # [B, 4, h, w]
 
                 # Add noise to the latents (diffusion forward process)
                 noisy_latents = self.training_noise_scheduler.add_noise(
-                    gt_depth_latent, noise, timesteps
+                    flow_latent, noise, timesteps
                 )  # [B, 4, h, w]
 
                 # Text embedding
@@ -289,23 +288,16 @@ class B2FTrainer:
 
                 # Get the target for loss depending on the prediction type
                 if "sample" == self.prediction_type:
-                    target = gt_depth_latent
+                    target = flow_latent
                 elif "epsilon" == self.prediction_type:
                     target = noise
                 elif "v_prediction" == self.prediction_type:
                     target = self.training_noise_scheduler.get_velocity(
-                        gt_depth_latent, noise, timesteps
+                        flow_latent, noise, timesteps
                     )  # [B, 4, h, w]
                 else:
                     raise ValueError(f"Unknown prediction type {self.prediction_type}")
 
-                # # Masked latent loss
-                # if self.gt_mask_type is not None:
-                #     latent_loss = self.loss(
-                #         model_pred.float(),
-                #         target.float(),
-                #     )
-                # else:
                 latent_loss = self.loss(model_pred.float(), target.float())
 
                 loss = latent_loss.mean()
@@ -378,21 +370,7 @@ class B2FTrainer:
             # Epoch end
             self.n_batch_in_epoch = 0
 
-    # def encode_depth(self, depth_in):
-    #     # stack depth into 3-channel
-    #     stacked = self.stack_depth_images(depth_in)
-    #     # encode using VAE encoder
-    #     depth_latent = self.model.encode_rgb(stacked)
-    #     return depth_latent
 
-    @staticmethod
-    def stack_depth_images(depth_in):
-        if 4 == len(depth_in.shape):
-            stacked = depth_in.repeat(1, 3, 1, 1)
-        elif 3 == len(depth_in.shape):
-            stacked = depth_in.unsqueeze(1)
-            stacked = depth_in.repeat(1, 3, 1, 1)
-        return stacked
 
     def _train_step_callback(self):
         """Executed after every iteration"""

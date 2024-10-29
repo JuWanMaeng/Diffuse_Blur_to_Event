@@ -1529,3 +1529,676 @@
 10/28/2024 18:03:43 - INFO: Reducer buckets have been rebuilt in this iteration.
 10/28/2024 18:03:43 - INFO: Reducer buckets have been rebuilt in this iteration.
 10/28/2024 18:03:43 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/28/2024 18:23:49 - INFO: Saving current state to /workspace/data/AE-output/checkpoint-500
+10/28/2024 18:23:50 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-500/optimizer.bin
+10/28/2024 18:23:50 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-500/optimizer_1.bin
+10/28/2024 18:23:50 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-500/scheduler.bin
+10/28/2024 18:23:50 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-500/scheduler_1.bin
+10/28/2024 18:23:50 - INFO: Random states saved in /workspace/data/AE-output/checkpoint-500/random_states_0.pkl
+10/28/2024 18:23:50 - INFO: Saved state to /workspace/data/AE-output/checkpoint-500
+10/28/2024 18:44:01 - INFO: Saving current state to /workspace/data/AE-output/checkpoint-1000
+10/28/2024 18:44:02 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-1000/optimizer.bin
+10/28/2024 18:44:02 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-1000/optimizer_1.bin
+10/28/2024 18:44:02 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-1000/scheduler.bin
+10/28/2024 18:44:02 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-1000/scheduler_1.bin
+10/28/2024 18:44:02 - INFO: Random states saved in /workspace/data/AE-output/checkpoint-1000/random_states_0.pkl
+10/28/2024 18:44:02 - INFO: Saved state to /workspace/data/AE-output/checkpoint-1000
+10/28/2024 18:54:38 - INFO: output dir = results/Gopro_B_val
+10/28/2024 18:54:38 - INFO: device = cuda
+10/28/2024 18:54:38 - INFO: Found 1 images
+10/28/2024 18:54:52 - INFO: scale_invariant: True, shift_invariant: True
+10/28/2024 18:54:52 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 10, processing resolution = 768, seed = None; color_map = Spectral.
+10/28/2024 19:04:13 - INFO: Saving current state to /workspace/data/AE-output/checkpoint-1500
+10/28/2024 19:04:14 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-1500/optimizer.bin
+10/28/2024 19:04:14 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-1500/optimizer_1.bin
+10/28/2024 19:04:14 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-1500/scheduler.bin
+10/28/2024 19:04:14 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-1500/scheduler_1.bin
+10/28/2024 19:04:14 - INFO: Random states saved in /workspace/data/AE-output/checkpoint-1500/random_states_0.pkl
+10/28/2024 19:04:14 - INFO: Saved state to /workspace/data/AE-output/checkpoint-1500
+10/28/2024 19:24:23 - INFO: Saving current state to /workspace/data/AE-output/checkpoint-2000
+10/28/2024 19:24:24 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-2000/optimizer.bin
+10/28/2024 19:24:24 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-2000/optimizer_1.bin
+10/28/2024 19:24:24 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-2000/scheduler.bin
+10/28/2024 19:24:24 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-2000/scheduler_1.bin
+10/28/2024 19:24:24 - INFO: Random states saved in /workspace/data/AE-output/checkpoint-2000/random_states_0.pkl
+10/28/2024 19:24:24 - INFO: Saved state to /workspace/data/AE-output/checkpoint-2000
+10/28/2024 19:44:33 - INFO: Saving current state to /workspace/data/AE-output/checkpoint-2500
+10/28/2024 19:44:34 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-2500/optimizer.bin
+10/28/2024 19:44:34 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-2500/optimizer_1.bin
+10/28/2024 19:44:34 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-2500/scheduler.bin
+10/28/2024 19:44:34 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-2500/scheduler_1.bin
+10/28/2024 19:44:34 - INFO: Random states saved in /workspace/data/AE-output/checkpoint-2500/random_states_0.pkl
+10/28/2024 19:44:34 - INFO: Saved state to /workspace/data/AE-output/checkpoint-2500
+10/28/2024 20:04:43 - INFO: Saving current state to /workspace/data/AE-output/checkpoint-3000
+10/28/2024 20:04:44 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-3000/optimizer.bin
+10/28/2024 20:04:44 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-3000/optimizer_1.bin
+10/28/2024 20:04:44 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-3000/scheduler.bin
+10/28/2024 20:04:44 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-3000/scheduler_1.bin
+10/28/2024 20:04:44 - INFO: Random states saved in /workspace/data/AE-output/checkpoint-3000/random_states_0.pkl
+10/28/2024 20:04:44 - INFO: Saved state to /workspace/data/AE-output/checkpoint-3000
+10/28/2024 20:24:53 - INFO: Saving current state to /workspace/data/AE-output/checkpoint-3500
+10/28/2024 20:24:54 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-3500/optimizer.bin
+10/28/2024 20:24:54 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-3500/optimizer_1.bin
+10/28/2024 20:24:54 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-3500/scheduler.bin
+10/28/2024 20:24:54 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-3500/scheduler_1.bin
+10/28/2024 20:24:54 - INFO: Random states saved in /workspace/data/AE-output/checkpoint-3500/random_states_0.pkl
+10/28/2024 20:24:54 - INFO: Saved state to /workspace/data/AE-output/checkpoint-3500
+10/28/2024 20:45:03 - INFO: Saving current state to /workspace/data/AE-output/checkpoint-4000
+10/28/2024 20:45:04 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-4000/optimizer.bin
+10/28/2024 20:45:04 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-4000/optimizer_1.bin
+10/28/2024 20:45:04 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-4000/scheduler.bin
+10/28/2024 20:45:04 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-4000/scheduler_1.bin
+10/28/2024 20:45:04 - INFO: Random states saved in /workspace/data/AE-output/checkpoint-4000/random_states_0.pkl
+10/28/2024 20:45:04 - INFO: Saved state to /workspace/data/AE-output/checkpoint-4000
+10/28/2024 21:05:13 - INFO: Saving current state to /workspace/data/AE-output/checkpoint-4500
+10/28/2024 21:05:14 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-4500/optimizer.bin
+10/28/2024 21:05:14 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-4500/optimizer_1.bin
+10/28/2024 21:05:14 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-4500/scheduler.bin
+10/28/2024 21:05:14 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-4500/scheduler_1.bin
+10/28/2024 21:05:14 - INFO: Random states saved in /workspace/data/AE-output/checkpoint-4500/random_states_0.pkl
+10/28/2024 21:05:14 - INFO: Saved state to /workspace/data/AE-output/checkpoint-4500
+10/28/2024 21:25:21 - INFO: Saving current state to /workspace/data/AE-output/checkpoint-5000
+10/28/2024 21:25:22 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-5000/optimizer.bin
+10/28/2024 21:25:23 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-5000/optimizer_1.bin
+10/28/2024 21:25:23 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-5000/scheduler.bin
+10/28/2024 21:25:23 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-5000/scheduler_1.bin
+10/28/2024 21:25:23 - INFO: Random states saved in /workspace/data/AE-output/checkpoint-5000/random_states_0.pkl
+10/28/2024 21:25:23 - INFO: Saved state to /workspace/data/AE-output/checkpoint-5000
+10/28/2024 21:45:31 - INFO: Saving current state to /workspace/data/AE-output/checkpoint-5500
+10/28/2024 21:45:32 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-5500/optimizer.bin
+10/28/2024 21:45:32 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-5500/optimizer_1.bin
+10/28/2024 21:45:32 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-5500/scheduler.bin
+10/28/2024 21:45:32 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-5500/scheduler_1.bin
+10/28/2024 21:45:32 - INFO: Random states saved in /workspace/data/AE-output/checkpoint-5500/random_states_0.pkl
+10/28/2024 21:45:32 - INFO: Saved state to /workspace/data/AE-output/checkpoint-5500
+10/28/2024 22:05:40 - INFO: Saving current state to /workspace/data/AE-output/checkpoint-6000
+10/28/2024 22:05:41 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-6000/optimizer.bin
+10/28/2024 22:05:41 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-6000/optimizer_1.bin
+10/28/2024 22:05:41 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-6000/scheduler.bin
+10/28/2024 22:05:41 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-6000/scheduler_1.bin
+10/28/2024 22:05:41 - INFO: Random states saved in /workspace/data/AE-output/checkpoint-6000/random_states_0.pkl
+10/28/2024 22:05:41 - INFO: Saved state to /workspace/data/AE-output/checkpoint-6000
+10/28/2024 22:25:49 - INFO: Saving current state to /workspace/data/AE-output/checkpoint-6500
+10/28/2024 22:25:50 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-6500/optimizer.bin
+10/28/2024 22:25:50 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-6500/optimizer_1.bin
+10/28/2024 22:25:50 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-6500/scheduler.bin
+10/28/2024 22:25:50 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-6500/scheduler_1.bin
+10/28/2024 22:25:50 - INFO: Random states saved in /workspace/data/AE-output/checkpoint-6500/random_states_0.pkl
+10/28/2024 22:25:50 - INFO: Saved state to /workspace/data/AE-output/checkpoint-6500
+10/28/2024 22:45:58 - INFO: Saving current state to /workspace/data/AE-output/checkpoint-7000
+10/28/2024 22:45:59 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-7000/optimizer.bin
+10/28/2024 22:45:59 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-7000/optimizer_1.bin
+10/28/2024 22:45:59 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-7000/scheduler.bin
+10/28/2024 22:45:59 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-7000/scheduler_1.bin
+10/28/2024 22:45:59 - INFO: Random states saved in /workspace/data/AE-output/checkpoint-7000/random_states_0.pkl
+10/28/2024 22:45:59 - INFO: Saved state to /workspace/data/AE-output/checkpoint-7000
+10/28/2024 23:06:08 - INFO: Saving current state to /workspace/data/AE-output/checkpoint-7500
+10/28/2024 23:06:09 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-7500/optimizer.bin
+10/28/2024 23:06:09 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-7500/optimizer_1.bin
+10/28/2024 23:06:09 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-7500/scheduler.bin
+10/28/2024 23:06:09 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-7500/scheduler_1.bin
+10/28/2024 23:06:09 - INFO: Random states saved in /workspace/data/AE-output/checkpoint-7500/random_states_0.pkl
+10/28/2024 23:06:09 - INFO: Saved state to /workspace/data/AE-output/checkpoint-7500
+10/28/2024 23:26:18 - INFO: Saving current state to /workspace/data/AE-output/checkpoint-8000
+10/28/2024 23:26:19 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-8000/optimizer.bin
+10/28/2024 23:26:19 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-8000/optimizer_1.bin
+10/28/2024 23:26:19 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-8000/scheduler.bin
+10/28/2024 23:26:19 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-8000/scheduler_1.bin
+10/28/2024 23:26:19 - INFO: Random states saved in /workspace/data/AE-output/checkpoint-8000/random_states_0.pkl
+10/28/2024 23:26:19 - INFO: Saved state to /workspace/data/AE-output/checkpoint-8000
+10/28/2024 23:46:28 - INFO: Saving current state to /workspace/data/AE-output/checkpoint-8500
+10/28/2024 23:46:29 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-8500/optimizer.bin
+10/28/2024 23:46:29 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-8500/optimizer_1.bin
+10/28/2024 23:46:29 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-8500/scheduler.bin
+10/28/2024 23:46:29 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-8500/scheduler_1.bin
+10/28/2024 23:46:29 - INFO: Random states saved in /workspace/data/AE-output/checkpoint-8500/random_states_0.pkl
+10/28/2024 23:46:29 - INFO: Saved state to /workspace/data/AE-output/checkpoint-8500
+10/29/2024 00:06:37 - INFO: Saving current state to /workspace/data/AE-output/checkpoint-9000
+10/29/2024 00:06:38 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-9000/optimizer.bin
+10/29/2024 00:06:38 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-9000/optimizer_1.bin
+10/29/2024 00:06:38 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-9000/scheduler.bin
+10/29/2024 00:06:38 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-9000/scheduler_1.bin
+10/29/2024 00:06:38 - INFO: Random states saved in /workspace/data/AE-output/checkpoint-9000/random_states_0.pkl
+10/29/2024 00:06:38 - INFO: Saved state to /workspace/data/AE-output/checkpoint-9000
+10/29/2024 00:26:46 - INFO: Saving current state to /workspace/data/AE-output/checkpoint-9500
+10/29/2024 00:26:47 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-9500/optimizer.bin
+10/29/2024 00:26:47 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-9500/optimizer_1.bin
+10/29/2024 00:26:47 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-9500/scheduler.bin
+10/29/2024 00:26:47 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-9500/scheduler_1.bin
+10/29/2024 00:26:47 - INFO: Random states saved in /workspace/data/AE-output/checkpoint-9500/random_states_0.pkl
+10/29/2024 00:26:47 - INFO: Saved state to /workspace/data/AE-output/checkpoint-9500
+10/29/2024 00:46:56 - INFO: Saving current state to /workspace/data/AE-output/checkpoint-10000
+10/29/2024 00:46:57 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-10000/optimizer.bin
+10/29/2024 00:46:57 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-10000/optimizer_1.bin
+10/29/2024 00:46:57 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-10000/scheduler.bin
+10/29/2024 00:46:57 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-10000/scheduler_1.bin
+10/29/2024 00:46:57 - INFO: Random states saved in /workspace/data/AE-output/checkpoint-10000/random_states_0.pkl
+10/29/2024 00:46:57 - INFO: Saved state to /workspace/data/AE-output/checkpoint-10000
+10/29/2024 01:07:05 - INFO: Saving current state to /workspace/data/AE-output/checkpoint-10500
+10/29/2024 01:07:06 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-10500/optimizer.bin
+10/29/2024 01:07:06 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-10500/optimizer_1.bin
+10/29/2024 01:07:06 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-10500/scheduler.bin
+10/29/2024 01:07:06 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-10500/scheduler_1.bin
+10/29/2024 01:07:06 - INFO: Random states saved in /workspace/data/AE-output/checkpoint-10500/random_states_0.pkl
+10/29/2024 01:07:06 - INFO: Saved state to /workspace/data/AE-output/checkpoint-10500
+10/29/2024 01:27:15 - INFO: Saving current state to /workspace/data/AE-output/checkpoint-11000
+10/29/2024 01:27:16 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-11000/optimizer.bin
+10/29/2024 01:27:16 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-11000/optimizer_1.bin
+10/29/2024 01:27:16 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-11000/scheduler.bin
+10/29/2024 01:27:16 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-11000/scheduler_1.bin
+10/29/2024 01:27:16 - INFO: Random states saved in /workspace/data/AE-output/checkpoint-11000/random_states_0.pkl
+10/29/2024 01:27:16 - INFO: Saved state to /workspace/data/AE-output/checkpoint-11000
+10/29/2024 01:47:23 - INFO: Saving current state to /workspace/data/AE-output/checkpoint-11500
+10/29/2024 01:47:24 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-11500/optimizer.bin
+10/29/2024 01:47:24 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-11500/optimizer_1.bin
+10/29/2024 01:47:24 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-11500/scheduler.bin
+10/29/2024 01:47:24 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-11500/scheduler_1.bin
+10/29/2024 01:47:24 - INFO: Random states saved in /workspace/data/AE-output/checkpoint-11500/random_states_0.pkl
+10/29/2024 01:47:24 - INFO: Saved state to /workspace/data/AE-output/checkpoint-11500
+10/29/2024 02:07:33 - INFO: Saving current state to /workspace/data/AE-output/checkpoint-12000
+10/29/2024 02:07:34 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-12000/optimizer.bin
+10/29/2024 02:07:34 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-12000/optimizer_1.bin
+10/29/2024 02:07:34 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-12000/scheduler.bin
+10/29/2024 02:07:34 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-12000/scheduler_1.bin
+10/29/2024 02:07:34 - INFO: Random states saved in /workspace/data/AE-output/checkpoint-12000/random_states_0.pkl
+10/29/2024 02:07:34 - INFO: Saved state to /workspace/data/AE-output/checkpoint-12000
+10/29/2024 02:27:42 - INFO: Saving current state to /workspace/data/AE-output/checkpoint-12500
+10/29/2024 02:27:43 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-12500/optimizer.bin
+10/29/2024 02:27:43 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-12500/optimizer_1.bin
+10/29/2024 02:27:43 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-12500/scheduler.bin
+10/29/2024 02:27:43 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-12500/scheduler_1.bin
+10/29/2024 02:27:43 - INFO: Random states saved in /workspace/data/AE-output/checkpoint-12500/random_states_0.pkl
+10/29/2024 02:27:43 - INFO: Saved state to /workspace/data/AE-output/checkpoint-12500
+10/29/2024 02:47:52 - INFO: Saving current state to /workspace/data/AE-output/checkpoint-13000
+10/29/2024 02:47:53 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-13000/optimizer.bin
+10/29/2024 02:47:53 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-13000/optimizer_1.bin
+10/29/2024 02:47:53 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-13000/scheduler.bin
+10/29/2024 02:47:53 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-13000/scheduler_1.bin
+10/29/2024 02:47:53 - INFO: Random states saved in /workspace/data/AE-output/checkpoint-13000/random_states_0.pkl
+10/29/2024 02:47:53 - INFO: Saved state to /workspace/data/AE-output/checkpoint-13000
+10/29/2024 03:08:01 - INFO: Saving current state to /workspace/data/AE-output/checkpoint-13500
+10/29/2024 03:08:02 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-13500/optimizer.bin
+10/29/2024 03:08:02 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-13500/optimizer_1.bin
+10/29/2024 03:08:02 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-13500/scheduler.bin
+10/29/2024 03:08:02 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-13500/scheduler_1.bin
+10/29/2024 03:08:02 - INFO: Random states saved in /workspace/data/AE-output/checkpoint-13500/random_states_0.pkl
+10/29/2024 03:08:02 - INFO: Saved state to /workspace/data/AE-output/checkpoint-13500
+10/29/2024 03:28:11 - INFO: Saving current state to /workspace/data/AE-output/checkpoint-14000
+10/29/2024 03:28:12 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-14000/optimizer.bin
+10/29/2024 03:28:12 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-14000/optimizer_1.bin
+10/29/2024 03:28:12 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-14000/scheduler.bin
+10/29/2024 03:28:12 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-14000/scheduler_1.bin
+10/29/2024 03:28:12 - INFO: Random states saved in /workspace/data/AE-output/checkpoint-14000/random_states_0.pkl
+10/29/2024 03:28:12 - INFO: Saved state to /workspace/data/AE-output/checkpoint-14000
+10/29/2024 03:48:20 - INFO: Saving current state to /workspace/data/AE-output/checkpoint-14500
+10/29/2024 03:48:22 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-14500/optimizer.bin
+10/29/2024 03:48:22 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-14500/optimizer_1.bin
+10/29/2024 03:48:22 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-14500/scheduler.bin
+10/29/2024 03:48:22 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-14500/scheduler_1.bin
+10/29/2024 03:48:22 - INFO: Random states saved in /workspace/data/AE-output/checkpoint-14500/random_states_0.pkl
+10/29/2024 03:48:22 - INFO: Saved state to /workspace/data/AE-output/checkpoint-14500
+10/29/2024 04:08:30 - INFO: Saving current state to /workspace/data/AE-output/checkpoint-15000
+10/29/2024 04:08:31 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-15000/optimizer.bin
+10/29/2024 04:08:31 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-15000/optimizer_1.bin
+10/29/2024 04:08:31 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-15000/scheduler.bin
+10/29/2024 04:08:31 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-15000/scheduler_1.bin
+10/29/2024 04:08:31 - INFO: Random states saved in /workspace/data/AE-output/checkpoint-15000/random_states_0.pkl
+10/29/2024 04:08:31 - INFO: Saved state to /workspace/data/AE-output/checkpoint-15000
+10/29/2024 04:28:40 - INFO: Saving current state to /workspace/data/AE-output/checkpoint-15500
+10/29/2024 04:28:41 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-15500/optimizer.bin
+10/29/2024 04:28:41 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-15500/optimizer_1.bin
+10/29/2024 04:28:41 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-15500/scheduler.bin
+10/29/2024 04:28:41 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-15500/scheduler_1.bin
+10/29/2024 04:28:41 - INFO: Random states saved in /workspace/data/AE-output/checkpoint-15500/random_states_0.pkl
+10/29/2024 04:28:41 - INFO: Saved state to /workspace/data/AE-output/checkpoint-15500
+10/29/2024 04:48:51 - INFO: Saving current state to /workspace/data/AE-output/checkpoint-16000
+10/29/2024 04:48:52 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-16000/optimizer.bin
+10/29/2024 04:48:52 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-16000/optimizer_1.bin
+10/29/2024 04:48:52 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-16000/scheduler.bin
+10/29/2024 04:48:52 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-16000/scheduler_1.bin
+10/29/2024 04:48:52 - INFO: Random states saved in /workspace/data/AE-output/checkpoint-16000/random_states_0.pkl
+10/29/2024 04:48:52 - INFO: Saved state to /workspace/data/AE-output/checkpoint-16000
+10/29/2024 05:09:01 - INFO: Saving current state to /workspace/data/AE-output/checkpoint-16500
+10/29/2024 05:09:02 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-16500/optimizer.bin
+10/29/2024 05:09:02 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-16500/optimizer_1.bin
+10/29/2024 05:09:02 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-16500/scheduler.bin
+10/29/2024 05:09:02 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-16500/scheduler_1.bin
+10/29/2024 05:09:02 - INFO: Random states saved in /workspace/data/AE-output/checkpoint-16500/random_states_0.pkl
+10/29/2024 05:09:02 - INFO: Saved state to /workspace/data/AE-output/checkpoint-16500
+10/29/2024 05:29:11 - INFO: Saving current state to /workspace/data/AE-output/checkpoint-17000
+10/29/2024 05:29:12 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-17000/optimizer.bin
+10/29/2024 05:29:12 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-17000/optimizer_1.bin
+10/29/2024 05:29:12 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-17000/scheduler.bin
+10/29/2024 05:29:12 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-17000/scheduler_1.bin
+10/29/2024 05:29:12 - INFO: Random states saved in /workspace/data/AE-output/checkpoint-17000/random_states_0.pkl
+10/29/2024 05:29:12 - INFO: Saved state to /workspace/data/AE-output/checkpoint-17000
+10/29/2024 05:49:19 - INFO: Saving current state to /workspace/data/AE-output/checkpoint-17500
+10/29/2024 05:49:20 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-17500/optimizer.bin
+10/29/2024 05:49:20 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-17500/optimizer_1.bin
+10/29/2024 05:49:20 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-17500/scheduler.bin
+10/29/2024 05:49:20 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-17500/scheduler_1.bin
+10/29/2024 05:49:20 - INFO: Random states saved in /workspace/data/AE-output/checkpoint-17500/random_states_0.pkl
+10/29/2024 05:49:20 - INFO: Saved state to /workspace/data/AE-output/checkpoint-17500
+10/29/2024 06:09:27 - INFO: Saving current state to /workspace/data/AE-output/checkpoint-18000
+10/29/2024 06:09:28 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-18000/optimizer.bin
+10/29/2024 06:09:29 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-18000/optimizer_1.bin
+10/29/2024 06:09:29 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-18000/scheduler.bin
+10/29/2024 06:09:29 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-18000/scheduler_1.bin
+10/29/2024 06:09:29 - INFO: Random states saved in /workspace/data/AE-output/checkpoint-18000/random_states_0.pkl
+10/29/2024 06:09:29 - INFO: Saved state to /workspace/data/AE-output/checkpoint-18000
+10/29/2024 06:29:36 - INFO: Saving current state to /workspace/data/AE-output/checkpoint-18500
+10/29/2024 06:29:37 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-18500/optimizer.bin
+10/29/2024 06:29:37 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-18500/optimizer_1.bin
+10/29/2024 06:29:37 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-18500/scheduler.bin
+10/29/2024 06:29:37 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-18500/scheduler_1.bin
+10/29/2024 06:29:37 - INFO: Random states saved in /workspace/data/AE-output/checkpoint-18500/random_states_0.pkl
+10/29/2024 06:29:37 - INFO: Saved state to /workspace/data/AE-output/checkpoint-18500
+10/29/2024 06:49:46 - INFO: Saving current state to /workspace/data/AE-output/checkpoint-19000
+10/29/2024 06:49:47 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-19000/optimizer.bin
+10/29/2024 06:49:47 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-19000/optimizer_1.bin
+10/29/2024 06:49:47 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-19000/scheduler.bin
+10/29/2024 06:49:47 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-19000/scheduler_1.bin
+10/29/2024 06:49:47 - INFO: Random states saved in /workspace/data/AE-output/checkpoint-19000/random_states_0.pkl
+10/29/2024 06:49:47 - INFO: Saved state to /workspace/data/AE-output/checkpoint-19000
+10/29/2024 07:09:57 - INFO: Saving current state to /workspace/data/AE-output/checkpoint-19500
+10/29/2024 07:09:58 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-19500/optimizer.bin
+10/29/2024 07:09:58 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-19500/optimizer_1.bin
+10/29/2024 07:09:58 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-19500/scheduler.bin
+10/29/2024 07:09:58 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-19500/scheduler_1.bin
+10/29/2024 07:09:58 - INFO: Random states saved in /workspace/data/AE-output/checkpoint-19500/random_states_0.pkl
+10/29/2024 07:09:58 - INFO: Saved state to /workspace/data/AE-output/checkpoint-19500
+10/29/2024 07:30:08 - INFO: Saving current state to /workspace/data/AE-output/checkpoint-20000
+10/29/2024 07:30:09 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-20000/optimizer.bin
+10/29/2024 07:30:09 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-20000/optimizer_1.bin
+10/29/2024 07:30:09 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-20000/scheduler.bin
+10/29/2024 07:30:09 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-20000/scheduler_1.bin
+10/29/2024 07:30:09 - INFO: Random states saved in /workspace/data/AE-output/checkpoint-20000/random_states_0.pkl
+10/29/2024 07:30:09 - INFO: Saved state to /workspace/data/AE-output/checkpoint-20000
+10/29/2024 07:50:17 - INFO: Saving current state to /workspace/data/AE-output/checkpoint-20500
+10/29/2024 07:50:18 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-20500/optimizer.bin
+10/29/2024 07:50:18 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-20500/optimizer_1.bin
+10/29/2024 07:50:18 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-20500/scheduler.bin
+10/29/2024 07:50:18 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-20500/scheduler_1.bin
+10/29/2024 07:50:18 - INFO: Random states saved in /workspace/data/AE-output/checkpoint-20500/random_states_0.pkl
+10/29/2024 07:50:18 - INFO: Saved state to /workspace/data/AE-output/checkpoint-20500
+10/29/2024 08:10:27 - INFO: Saving current state to /workspace/data/AE-output/checkpoint-21000
+10/29/2024 08:10:28 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-21000/optimizer.bin
+10/29/2024 08:10:28 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-21000/optimizer_1.bin
+10/29/2024 08:10:28 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-21000/scheduler.bin
+10/29/2024 08:10:28 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-21000/scheduler_1.bin
+10/29/2024 08:10:28 - INFO: Random states saved in /workspace/data/AE-output/checkpoint-21000/random_states_0.pkl
+10/29/2024 08:10:28 - INFO: Saved state to /workspace/data/AE-output/checkpoint-21000
+10/29/2024 08:30:38 - INFO: Saving current state to /workspace/data/AE-output/checkpoint-21500
+10/29/2024 08:30:39 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-21500/optimizer.bin
+10/29/2024 08:30:39 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-21500/optimizer_1.bin
+10/29/2024 08:30:39 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-21500/scheduler.bin
+10/29/2024 08:30:39 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-21500/scheduler_1.bin
+10/29/2024 08:30:39 - INFO: Random states saved in /workspace/data/AE-output/checkpoint-21500/random_states_0.pkl
+10/29/2024 08:30:39 - INFO: Saved state to /workspace/data/AE-output/checkpoint-21500
+10/29/2024 08:50:48 - INFO: Saving current state to /workspace/data/AE-output/checkpoint-22000
+10/29/2024 08:50:49 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-22000/optimizer.bin
+10/29/2024 08:50:49 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-22000/optimizer_1.bin
+10/29/2024 08:50:49 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-22000/scheduler.bin
+10/29/2024 08:50:49 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-22000/scheduler_1.bin
+10/29/2024 08:50:49 - INFO: Random states saved in /workspace/data/AE-output/checkpoint-22000/random_states_0.pkl
+10/29/2024 08:50:49 - INFO: Saved state to /workspace/data/AE-output/checkpoint-22000
+10/29/2024 09:10:59 - INFO: Saving current state to /workspace/data/AE-output/checkpoint-22500
+10/29/2024 09:11:00 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-22500/optimizer.bin
+10/29/2024 09:11:00 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-22500/optimizer_1.bin
+10/29/2024 09:11:00 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-22500/scheduler.bin
+10/29/2024 09:11:00 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-22500/scheduler_1.bin
+10/29/2024 09:11:00 - INFO: Random states saved in /workspace/data/AE-output/checkpoint-22500/random_states_0.pkl
+10/29/2024 09:11:00 - INFO: Saved state to /workspace/data/AE-output/checkpoint-22500
+10/29/2024 09:31:09 - INFO: Saving current state to /workspace/data/AE-output/checkpoint-23000
+10/29/2024 09:31:10 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-23000/optimizer.bin
+10/29/2024 09:31:10 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-23000/optimizer_1.bin
+10/29/2024 09:31:10 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-23000/scheduler.bin
+10/29/2024 09:31:10 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-23000/scheduler_1.bin
+10/29/2024 09:31:10 - INFO: Random states saved in /workspace/data/AE-output/checkpoint-23000/random_states_0.pkl
+10/29/2024 09:31:10 - INFO: Saved state to /workspace/data/AE-output/checkpoint-23000
+10/29/2024 09:51:20 - INFO: Saving current state to /workspace/data/AE-output/checkpoint-23500
+10/29/2024 09:51:21 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-23500/optimizer.bin
+10/29/2024 09:51:21 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-23500/optimizer_1.bin
+10/29/2024 09:51:21 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-23500/scheduler.bin
+10/29/2024 09:51:21 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-23500/scheduler_1.bin
+10/29/2024 09:51:21 - INFO: Random states saved in /workspace/data/AE-output/checkpoint-23500/random_states_0.pkl
+10/29/2024 09:51:21 - INFO: Saved state to /workspace/data/AE-output/checkpoint-23500
+10/29/2024 09:54:34 - WARNING: CUDA is not available. Running on CPU will be slow.
+10/29/2024 09:54:34 - INFO: device = cpu
+10/29/2024 09:55:58 - WARNING: CUDA is not available. Running on CPU will be slow.
+10/29/2024 09:55:58 - INFO: device = cpu
+10/29/2024 09:56:25 - WARNING: CUDA is not available. Running on CPU will be slow.
+10/29/2024 09:56:25 - INFO: device = cpu
+10/29/2024 09:57:13 - WARNING: CUDA is not available. Running on CPU will be slow.
+10/29/2024 09:57:13 - INFO: device = cpu
+10/29/2024 09:59:21 - WARNING: CUDA is not available. Running on CPU will be slow.
+10/29/2024 09:59:21 - INFO: device = cpu
+10/29/2024 10:00:03 - WARNING: CUDA is not available. Running on CPU will be slow.
+10/29/2024 10:00:03 - INFO: device = cpu
+10/29/2024 10:06:25 - WARNING: CUDA is not available. Running on CPU will be slow.
+10/29/2024 10:06:25 - INFO: device = cpu
+10/29/2024 10:07:30 - WARNING: CUDA is not available. Running on CPU will be slow.
+10/29/2024 10:07:30 - INFO: device = cpu
+10/29/2024 10:08:42 - WARNING: CUDA is not available. Running on CPU will be slow.
+10/29/2024 10:08:42 - INFO: device = cpu
+10/29/2024 10:09:52 - WARNING: CUDA is not available. Running on CPU will be slow.
+10/29/2024 10:09:52 - INFO: device = cpu
+10/29/2024 10:11:35 - INFO: Saving current state to /workspace/data/AE-output/checkpoint-24000
+10/29/2024 10:11:36 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-24000/optimizer.bin
+10/29/2024 10:11:36 - INFO: Optimizer state saved in /workspace/data/AE-output/checkpoint-24000/optimizer_1.bin
+10/29/2024 10:11:36 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-24000/scheduler.bin
+10/29/2024 10:11:36 - INFO: Scheduler state saved in /workspace/data/AE-output/checkpoint-24000/scheduler_1.bin
+10/29/2024 10:11:36 - INFO: Random states saved in /workspace/data/AE-output/checkpoint-24000/random_states_0.pkl
+10/29/2024 10:11:36 - INFO: Saved state to /workspace/data/AE-output/checkpoint-24000
+10/29/2024 10:12:02 - WARNING: CUDA is not available. Running on CPU will be slow.
+10/29/2024 10:12:02 - INFO: device = cpu
+10/29/2024 10:12:34 - WARNING: CUDA is not available. Running on CPU will be slow.
+10/29/2024 10:12:34 - INFO: device = cpu
+10/29/2024 10:19:00 - INFO: Added key: store_based_barrier_key:1 to store for rank: 0
+10/29/2024 10:19:00 - INFO: Added key: store_based_barrier_key:1 to store for rank: 2
+10/29/2024 10:19:00 - INFO: Added key: store_based_barrier_key:1 to store for rank: 1
+10/29/2024 10:19:00 - INFO: Added key: store_based_barrier_key:1 to store for rank: 3
+10/29/2024 10:19:00 - INFO: Rank 3: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/29/2024 10:19:00 - INFO: Rank 2: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/29/2024 10:19:00 - INFO: Rank 0: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/29/2024 10:19:00 - INFO: Rank 1: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/29/2024 10:19:00 - WARNING: Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+10/29/2024 10:19:04 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/29/2024 10:19:04 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/29/2024 10:19:04 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/29/2024 10:19:04 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/29/2024 10:19:04 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/29/2024 10:19:04 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/29/2024 10:19:04 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/29/2024 10:19:04 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/29/2024 10:19:04 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/29/2024 10:19:09 - INFO: Loading models and optimizer
+10/29/2024 10:19:13 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/29/2024 10:19:13 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/29/2024 10:19:13 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/29/2024 10:19:15 - INFO: Creating dataloaders and lr_scheduler
+10/29/2024 10:19:15 - INFO: Preparing model, optimizer and dataloaders
+10/29/2024 10:19:16 - INFO: ***** Running training *****
+10/29/2024 10:19:16 - INFO:   Num examples = 199447
+10/29/2024 10:19:16 - INFO:   Num Epochs = 100
+10/29/2024 10:19:16 - INFO:   Instantaneous batch size per device = 1
+10/29/2024 10:19:16 - INFO:   Total train batch size (w. parallel, distributed & accumulation) = 4
+10/29/2024 10:19:16 - INFO:   Gradient Accumulation steps = 1
+10/29/2024 10:19:16 - INFO:   Total optimization steps = 100000
+10/29/2024 10:19:24 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/29/2024 10:19:24 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/29/2024 10:19:24 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/29/2024 10:19:24 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/29/2024 10:19:24 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/29/2024 10:19:24 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/29/2024 10:19:24 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/29/2024 10:19:24 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/29/2024 10:39:32 - INFO: Saving current state to /workspace/data/AE-output-scratch/checkpoint-500
+10/29/2024 10:39:33 - INFO: Optimizer state saved in /workspace/data/AE-output-scratch/checkpoint-500/optimizer.bin
+10/29/2024 10:39:33 - INFO: Optimizer state saved in /workspace/data/AE-output-scratch/checkpoint-500/optimizer_1.bin
+10/29/2024 10:39:33 - INFO: Scheduler state saved in /workspace/data/AE-output-scratch/checkpoint-500/scheduler.bin
+10/29/2024 10:39:33 - INFO: Scheduler state saved in /workspace/data/AE-output-scratch/checkpoint-500/scheduler_1.bin
+10/29/2024 10:39:33 - INFO: Random states saved in /workspace/data/AE-output-scratch/checkpoint-500/random_states_0.pkl
+10/29/2024 10:39:33 - INFO: Saved state to /workspace/data/AE-output-scratch/checkpoint-500
+10/29/2024 10:44:19 - WARNING: Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+10/29/2024 10:44:19 - INFO: Loading models and optimizer
+10/29/2024 10:44:24 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/29/2024 10:44:24 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/29/2024 10:44:24 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/29/2024 10:44:25 - INFO: Creating dataloaders and lr_scheduler
+10/29/2024 10:44:25 - INFO: Preparing model, optimizer and dataloaders
+10/29/2024 10:44:25 - INFO: ***** Running training *****
+10/29/2024 10:44:25 - INFO:   Num examples = 199447
+10/29/2024 10:44:25 - INFO:   Num Epochs = 100
+10/29/2024 10:44:25 - INFO:   Instantaneous batch size per device = 1
+10/29/2024 10:44:25 - INFO:   Total train batch size (w. parallel, distributed & accumulation) = 1
+10/29/2024 10:44:25 - INFO:   Gradient Accumulation steps = 1
+10/29/2024 10:44:25 - INFO:   Total optimization steps = 100
+10/29/2024 10:47:06 - WARNING: Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+10/29/2024 10:47:07 - INFO: Loading models and optimizer
+10/29/2024 10:47:11 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/29/2024 10:47:11 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/29/2024 10:47:11 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/29/2024 10:47:12 - INFO: Creating dataloaders and lr_scheduler
+10/29/2024 10:47:13 - INFO: Preparing model, optimizer and dataloaders
+10/29/2024 10:47:13 - INFO: ***** Running training *****
+10/29/2024 10:47:13 - INFO:   Num examples = 199447
+10/29/2024 10:47:13 - INFO:   Num Epochs = 100
+10/29/2024 10:47:13 - INFO:   Instantaneous batch size per device = 1
+10/29/2024 10:47:13 - INFO:   Total train batch size (w. parallel, distributed & accumulation) = 1
+10/29/2024 10:47:13 - INFO:   Gradient Accumulation steps = 1
+10/29/2024 10:47:13 - INFO:   Total optimization steps = 100
+10/29/2024 10:58:03 - INFO: Added key: store_based_barrier_key:1 to store for rank: 0
+10/29/2024 10:58:03 - INFO: Added key: store_based_barrier_key:1 to store for rank: 2
+10/29/2024 10:58:03 - INFO: Added key: store_based_barrier_key:1 to store for rank: 1
+10/29/2024 10:58:03 - INFO: Added key: store_based_barrier_key:1 to store for rank: 3
+10/29/2024 10:58:03 - INFO: Rank 3: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/29/2024 10:58:03 - INFO: Rank 0: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/29/2024 10:58:03 - INFO: Rank 2: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/29/2024 10:58:03 - INFO: Rank 1: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/29/2024 10:58:04 - WARNING: Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+10/29/2024 10:58:07 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/29/2024 10:58:07 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/29/2024 10:58:07 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/29/2024 10:58:07 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/29/2024 10:58:07 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/29/2024 10:58:07 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/29/2024 10:58:07 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/29/2024 10:58:07 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/29/2024 10:58:07 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/29/2024 10:58:13 - INFO: Loading models and optimizer
+10/29/2024 10:58:16 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/29/2024 10:58:17 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/29/2024 10:58:17 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/29/2024 10:58:18 - INFO: Creating dataloaders and lr_scheduler
+10/29/2024 10:58:18 - INFO: Preparing model, optimizer and dataloaders
+10/29/2024 10:58:20 - INFO: ***** Running training *****
+10/29/2024 10:58:20 - INFO:   Num examples = 199447
+10/29/2024 10:58:20 - INFO:   Num Epochs = 100
+10/29/2024 10:58:20 - INFO:   Instantaneous batch size per device = 1
+10/29/2024 10:58:20 - INFO:   Total train batch size (w. parallel, distributed & accumulation) = 4
+10/29/2024 10:58:20 - INFO:   Gradient Accumulation steps = 1
+10/29/2024 10:58:20 - INFO:   Total optimization steps = 50000
+10/29/2024 10:58:27 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/29/2024 10:58:27 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/29/2024 10:58:27 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/29/2024 10:58:27 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/29/2024 10:58:28 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/29/2024 10:58:28 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/29/2024 10:58:28 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/29/2024 10:58:28 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/29/2024 11:02:23 - INFO: Added key: store_based_barrier_key:1 to store for rank: 2
+10/29/2024 11:02:23 - INFO: Added key: store_based_barrier_key:1 to store for rank: 1
+10/29/2024 11:02:23 - INFO: Added key: store_based_barrier_key:1 to store for rank: 3
+10/29/2024 11:02:23 - INFO: Added key: store_based_barrier_key:1 to store for rank: 0
+10/29/2024 11:02:23 - INFO: Rank 0: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/29/2024 11:02:23 - INFO: Rank 2: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/29/2024 11:02:23 - INFO: Rank 1: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/29/2024 11:02:23 - INFO: Rank 3: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/29/2024 11:02:23 - WARNING: Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+10/29/2024 11:02:26 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/29/2024 11:02:26 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/29/2024 11:02:26 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/29/2024 11:02:27 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/29/2024 11:02:27 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/29/2024 11:02:27 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/29/2024 11:02:27 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/29/2024 11:02:27 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/29/2024 11:02:27 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/29/2024 11:02:35 - INFO: Loading models and optimizer
+10/29/2024 11:02:39 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/29/2024 11:02:39 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/29/2024 11:02:39 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/29/2024 11:02:41 - INFO: Creating dataloaders and lr_scheduler
+10/29/2024 11:02:41 - INFO: Preparing model, optimizer and dataloaders
+10/29/2024 11:02:42 - INFO: ***** Running training *****
+10/29/2024 11:02:42 - INFO:   Num examples = 199447
+10/29/2024 11:02:42 - INFO:   Num Epochs = 100
+10/29/2024 11:02:42 - INFO:   Instantaneous batch size per device = 1
+10/29/2024 11:02:42 - INFO:   Total train batch size (w. parallel, distributed & accumulation) = 4
+10/29/2024 11:02:42 - INFO:   Gradient Accumulation steps = 1
+10/29/2024 11:02:42 - INFO:   Total optimization steps = 50000
+10/29/2024 11:02:50 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/29/2024 11:02:50 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/29/2024 11:02:50 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/29/2024 11:02:50 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/29/2024 11:02:50 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/29/2024 11:02:50 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/29/2024 11:02:50 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/29/2024 11:02:50 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/29/2024 11:22:59 - INFO: Saving current state to /workspace/data/AE-output-KL-pretrained/checkpoint-500
+10/29/2024 11:23:00 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-500/optimizer.bin
+10/29/2024 11:23:00 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-500/optimizer_1.bin
+10/29/2024 11:23:00 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-500/scheduler.bin
+10/29/2024 11:23:00 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-500/scheduler_1.bin
+10/29/2024 11:23:00 - INFO: Random states saved in /workspace/data/AE-output-KL-pretrained/checkpoint-500/random_states_0.pkl
+10/29/2024 11:23:00 - INFO: Saved state to /workspace/data/AE-output-KL-pretrained/checkpoint-500
+10/29/2024 11:39:11 - INFO: Added key: store_based_barrier_key:1 to store for rank: 2
+10/29/2024 11:39:11 - INFO: Added key: store_based_barrier_key:1 to store for rank: 1
+10/29/2024 11:39:11 - INFO: Added key: store_based_barrier_key:1 to store for rank: 3
+10/29/2024 11:39:11 - INFO: Added key: store_based_barrier_key:1 to store for rank: 0
+10/29/2024 11:39:11 - INFO: Rank 0: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/29/2024 11:39:11 - INFO: Rank 2: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/29/2024 11:39:11 - INFO: Rank 1: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/29/2024 11:39:11 - INFO: Rank 3: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/29/2024 11:39:11 - WARNING: Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+10/29/2024 11:39:14 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/29/2024 11:39:14 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/29/2024 11:39:14 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/29/2024 11:39:14 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/29/2024 11:39:14 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/29/2024 11:39:14 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/29/2024 11:39:15 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/29/2024 11:39:15 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/29/2024 11:39:15 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/29/2024 11:39:20 - INFO: Loading models and optimizer
+10/29/2024 11:39:45 - INFO: Added key: store_based_barrier_key:1 to store for rank: 0
+10/29/2024 11:39:45 - INFO: Added key: store_based_barrier_key:1 to store for rank: 3
+10/29/2024 11:39:45 - INFO: Added key: store_based_barrier_key:1 to store for rank: 1
+10/29/2024 11:39:45 - INFO: Added key: store_based_barrier_key:1 to store for rank: 2
+10/29/2024 11:39:45 - INFO: Rank 2: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/29/2024 11:39:45 - INFO: Rank 0: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/29/2024 11:39:45 - INFO: Rank 3: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/29/2024 11:39:45 - INFO: Rank 1: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/29/2024 11:39:45 - WARNING: Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+10/29/2024 11:39:49 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/29/2024 11:39:49 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/29/2024 11:39:49 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/29/2024 11:39:49 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/29/2024 11:39:49 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/29/2024 11:39:49 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/29/2024 11:39:49 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/29/2024 11:39:49 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/29/2024 11:39:49 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/29/2024 11:39:54 - INFO: Loading models and optimizer
+10/29/2024 11:39:58 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/29/2024 11:39:58 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/29/2024 11:39:58 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/29/2024 11:39:59 - INFO: Creating dataloaders and lr_scheduler
+10/29/2024 11:40:00 - INFO: Preparing model, optimizer and dataloaders
+10/29/2024 11:40:01 - INFO: ***** Running training *****
+10/29/2024 11:40:01 - INFO:   Num examples = 199447
+10/29/2024 11:40:01 - INFO:   Num Epochs = 100
+10/29/2024 11:40:01 - INFO:   Instantaneous batch size per device = 2
+10/29/2024 11:40:01 - INFO:   Total train batch size (w. parallel, distributed & accumulation) = 8
+10/29/2024 11:40:01 - INFO:   Gradient Accumulation steps = 1
+10/29/2024 11:40:01 - INFO:   Total optimization steps = 50000
+10/29/2024 11:40:29 - INFO: Added key: store_based_barrier_key:1 to store for rank: 2
+10/29/2024 11:40:29 - INFO: Added key: store_based_barrier_key:1 to store for rank: 3
+10/29/2024 11:40:29 - INFO: Added key: store_based_barrier_key:1 to store for rank: 0
+10/29/2024 11:40:29 - INFO: Added key: store_based_barrier_key:1 to store for rank: 1
+10/29/2024 11:40:29 - INFO: Rank 1: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/29/2024 11:40:29 - INFO: Rank 3: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/29/2024 11:40:29 - INFO: Rank 2: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/29/2024 11:40:29 - INFO: Rank 0: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/29/2024 11:40:29 - WARNING: Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+10/29/2024 11:40:33 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/29/2024 11:40:33 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/29/2024 11:40:33 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/29/2024 11:40:33 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/29/2024 11:40:33 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/29/2024 11:40:33 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/29/2024 11:40:33 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/29/2024 11:40:33 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/29/2024 11:40:33 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/29/2024 11:40:39 - INFO: Loading models and optimizer
+10/29/2024 11:40:42 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/29/2024 11:40:43 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/29/2024 11:40:43 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/29/2024 11:40:44 - INFO: Creating dataloaders and lr_scheduler
+10/29/2024 11:40:44 - INFO: Preparing model, optimizer and dataloaders
+10/29/2024 11:40:46 - INFO: ***** Running training *****
+10/29/2024 11:40:46 - INFO:   Num examples = 199447
+10/29/2024 11:40:46 - INFO:   Num Epochs = 100
+10/29/2024 11:40:46 - INFO:   Instantaneous batch size per device = 1
+10/29/2024 11:40:46 - INFO:   Total train batch size (w. parallel, distributed & accumulation) = 4
+10/29/2024 11:40:46 - INFO:   Gradient Accumulation steps = 1
+10/29/2024 11:40:46 - INFO:   Total optimization steps = 50000
+10/29/2024 11:40:53 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/29/2024 11:40:53 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/29/2024 11:40:53 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/29/2024 11:40:53 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/29/2024 11:40:53 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/29/2024 11:40:53 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/29/2024 11:40:53 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/29/2024 11:40:53 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/29/2024 11:54:32 - INFO: Added key: store_based_barrier_key:1 to store for rank: 2
+10/29/2024 11:54:32 - INFO: Added key: store_based_barrier_key:1 to store for rank: 0
+10/29/2024 11:54:32 - INFO: Added key: store_based_barrier_key:1 to store for rank: 3
+10/29/2024 11:54:32 - INFO: Added key: store_based_barrier_key:1 to store for rank: 1
+10/29/2024 11:54:32 - INFO: Rank 1: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/29/2024 11:54:32 - INFO: Rank 2: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/29/2024 11:54:32 - INFO: Rank 0: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/29/2024 11:54:32 - INFO: Rank 3: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+10/29/2024 11:54:32 - WARNING: Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+10/29/2024 11:54:36 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/29/2024 11:54:36 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/29/2024 11:54:36 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/29/2024 11:54:36 - WARNING: CUDA is not available. Running on CPU will be slow.
+10/29/2024 11:54:36 - INFO: device = cpu
+10/29/2024 11:54:36 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/29/2024 11:54:36 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/29/2024 11:54:36 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/29/2024 11:54:36 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/29/2024 11:54:36 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/29/2024 11:54:36 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/29/2024 11:54:42 - INFO: Loading models and optimizer
+10/29/2024 11:54:45 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+10/29/2024 11:54:46 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+10/29/2024 11:54:46 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+10/29/2024 11:54:47 - INFO: Creating dataloaders and lr_scheduler
+10/29/2024 11:54:47 - INFO: Preparing model, optimizer and dataloaders
+10/29/2024 11:54:49 - INFO: ***** Running training *****
+10/29/2024 11:54:49 - INFO:   Num examples = 199447
+10/29/2024 11:54:49 - INFO:   Num Epochs = 100
+10/29/2024 11:54:49 - INFO:   Instantaneous batch size per device = 1
+10/29/2024 11:54:49 - INFO:   Total train batch size (w. parallel, distributed & accumulation) = 4
+10/29/2024 11:54:49 - INFO:   Gradient Accumulation steps = 1
+10/29/2024 11:54:49 - INFO:   Total optimization steps = 50000
+10/29/2024 11:54:57 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/29/2024 11:54:57 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/29/2024 11:54:57 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/29/2024 11:54:57 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/29/2024 11:54:57 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/29/2024 11:54:57 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/29/2024 11:54:57 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/29/2024 11:54:57 - INFO: Reducer buckets have been rebuilt in this iteration.
+10/29/2024 11:55:08 - WARNING: CUDA is not available. Running on CPU will be slow.
+10/29/2024 11:55:08 - INFO: device = cpu
+10/29/2024 11:56:07 - WARNING: CUDA is not available. Running on CPU will be slow.
+10/29/2024 11:56:07 - INFO: device = cpu
+10/29/2024 11:57:07 - WARNING: CUDA is not available. Running on CPU will be slow.
+10/29/2024 11:57:07 - INFO: device = cpu
+10/29/2024 11:57:52 - WARNING: CUDA is not available. Running on CPU will be slow.
+10/29/2024 11:57:52 - INFO: device = cpu
+10/29/2024 11:58:22 - WARNING: CUDA is not available. Running on CPU will be slow.
+10/29/2024 11:58:22 - INFO: device = cpu
+10/29/2024 11:58:59 - WARNING: CUDA is not available. Running on CPU will be slow.
+10/29/2024 11:58:59 - INFO: device = cpu
+10/29/2024 12:15:10 - INFO: Saving current state to /workspace/data/AE-output-KL-pretrained/checkpoint-500
+10/29/2024 12:15:12 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-500/optimizer.bin
+10/29/2024 12:15:12 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-500/optimizer_1.bin
+10/29/2024 12:15:12 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-500/scheduler.bin
+10/29/2024 12:15:12 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-500/scheduler_1.bin
+10/29/2024 12:15:12 - INFO: Random states saved in /workspace/data/AE-output-KL-pretrained/checkpoint-500/random_states_0.pkl
+10/29/2024 12:15:12 - INFO: Saved state to /workspace/data/AE-output-KL-pretrained/checkpoint-500

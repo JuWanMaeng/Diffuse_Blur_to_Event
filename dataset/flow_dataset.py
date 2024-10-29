@@ -151,10 +151,7 @@ class Flow_dataset(data.Dataset):
         # Normalize u and v components to get unit vectors for x and y
         x = u / magnitude
         y = v / magnitude
-
-        # Set M to the largest blur magnitude in the set (maximum of the magnitude array)
-        M = magnitude.max()
-        
+                
         # Normalize the magnitude to [0, 1] range for the z component
         z = magnitude / self.max_magnitude
         z = np.clip(z, 0, 1) 

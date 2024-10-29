@@ -191,7 +191,7 @@ def parse_args():
     parser.add_argument(
         "--pretrained_model_name_or_path",
         type=str,
-        default='checkpoint/stable-diffusion-2/vae',
+        default='/workspace/Marigold/checkpoint/stable-diffusion-2/vae',
         help="Path to pretrained model or model identifier from huggingface.co/models.",
     )
     parser.add_argument(
@@ -217,7 +217,7 @@ def parse_args():
     parser.add_argument(
         "--output_dir",
         type=str,
-        default="/workspace/data/AE-output",
+        default="/workspace/data/AE-output-KL-pretrained",
         help="The output directory where the model predictions and checkpoints will be written.",
     )
     parser.add_argument(
@@ -260,13 +260,13 @@ def parse_args():
     parser.add_argument(
         "--discr_learning_rate",
         type=float,
-        default=5e-5,
+        default=1e-5,
         help="Initial learning rate (after the potential warmup period) to use.",
     )
     parser.add_argument(
         "--learning_rate",
         type=float,
-        default=5e-5,
+        default=1e-5,
         help="Initial learning rate (after the potential warmup period) to use.",
     )
     parser.add_argument(
@@ -278,7 +278,7 @@ def parse_args():
     parser.add_argument(
         "--lr_scheduler",
         type=str,
-        default="cosine",
+        default="constant",
         help=(
             'The scheduler type to use. Choose between ["linear", "cosine", "cosine_with_restarts", "polynomial",'
             ' "constant", "constant_with_warmup"]'
@@ -705,9 +705,9 @@ def main():
                 optimizer.zero_grad(set_to_none=True)
             else:
                 discr_optimizer.zero_grad(set_to_none=True)
-            # encode images to the latent space and get the commit loss from vq tokenization
-            # Return commit loss
-            fmap = model(flow, return_dict=False)[0]
+            # encode images to the latent space 
+            # Return posterior
+            fmap, posteriors = model(flow, return_dict=False)
 
             if generator_step:
                 with accelerator.accumulate(model):
@@ -725,6 +725,10 @@ def main():
                         timm_model_normalization=timm_model_normalization,
                     )
                     # generator loss
+                    kl_loss = posteriors.kl()       
+                    kl_loss = torch.sum(kl_loss) / kl_loss.shape[0]
+                    kl_loss = kl_loss * 0.000001
+
                     gen_loss = -discriminator(fmap).mean()
                     last_dec_layer = accelerator.unwrap_model(model).decoder.conv_out.weight
                     norm_grad_wrt_perceptual_loss = grad_layer_wrt_loss(perceptual_loss, last_dec_layer).norm(p=2)
@@ -735,6 +739,7 @@ def main():
 
                     loss += perceptual_loss
                     loss += adaptive_weight * gen_loss
+                    loss += kl_loss
                     # Gather the losses across all processes for logging (if we use distributed training).
                     avg_gen_loss = accelerator.gather(loss.repeat(args.train_batch_size)).float().mean()
                     accelerator.backward(loss)
