@@ -53,7 +53,7 @@ from src.util.seeding import generate_seed_sequence
 import wandb
 
 
-class B2FTrainer:
+class B2FTrainer_C:
     def __init__(
         self,
         cfg: OmegaConf,
@@ -95,7 +95,7 @@ class B2FTrainer:
         # Trainability
         self.model.vae.requires_grad_(False)
         self.model.text_encoder.requires_grad_(False)
-        self.model.img_vae.reguires_grad(False)
+        # self.model.img_vae.reguires_grad(False)
         self.model.unet.requires_grad_(True)
 
         # Optimizer !should be defined after input layer is adapted
@@ -231,7 +231,7 @@ class B2FTrainer:
                 with torch.no_grad():
                     # Encode image
                     flow_latent = self.model.encode_flow(flow_gt_for_latent)  # [B, 4, h, w]
-                    rgb_latent = self.model.encode_rgb(rgb)
+                    rgb_latent = self.model.encode_flow(rgb)
                 
 
                 # Sample a random timestep for each image

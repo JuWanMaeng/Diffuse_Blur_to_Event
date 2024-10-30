@@ -74,7 +74,7 @@ if "__main__" == __name__:
         help="Path of checkpoint to be resumed. If given, will ignore --config, and checkpoint in the config",
     )
     parser.add_argument(
-        "--output_dir", type=str, default='output/test', help="directory to save checkpoints"
+        "--output_dir", type=str, default='output/Monkaa+Vimeo_C', help="directory to save checkpoints"
     )
     parser.add_argument("--no_cuda", action="store_true", help="Do not use cuda.")
     parser.add_argument(
@@ -84,14 +84,7 @@ if "__main__" == __name__:
         help="Save checkpoint and exit after X minutes.",
     )
     parser.add_argument("--no_wandb", action="store_true", help="run without wandb")
-    parser.add_argument(
-        "--do_not_copy_data",
-        action="store_true",
-        help="On Slurm cluster, do not copy data to local scratch",
-    )
-    parser.add_argument(
-        "--base_data_dir", type=str, default='/workspace/data/Depth/', help="directory of training data"
-    )
+
     parser.add_argument(
         "--base_ckpt_dir",
         type=str,
@@ -107,11 +100,6 @@ if "__main__" == __name__:
     args = parser.parse_args()
     resume_run = args.resume_run
     output_dir = args.output_dir
-    base_data_dir = (
-        args.base_data_dir
-        if args.base_data_dir is not None
-        else os.environ["BASE_DATA_DIR"]
-    )
     base_ckpt_dir = (
         args.base_ckpt_dir
         if args.base_ckpt_dir is not None
@@ -215,26 +203,6 @@ if "__main__" == __name__:
         os.system(f"rm -rf {_temp_code_dir}")
         logging.info(f"Code snapshot saved to: {_code_snapshot_path}")
 
-    # -------------------- Copy data to local scratch (Slurm) --------------------
-    if is_on_slurm() and (not args.do_not_copy_data):
-        # local scratch dir
-        original_data_dir = base_data_dir
-        base_data_dir = os.path.join(get_local_scratch_dir(), "Marigold_data")
-        # copy data
-        required_data_list = find_value_in_omegaconf("dir", cfg_data)
-        # if cfg_train.visualize.init_latent_path is not None:
-        #     required_data_list.append(cfg_train.visualize.init_latent_path)
-        required_data_list = list(set(required_data_list))
-        logging.info(f"Required_data_list: {required_data_list}")
-        for d in tqdm(required_data_list, desc="Copy data to local scratch"):
-            ori_dir = os.path.join(original_data_dir, d)
-            dst_dir = os.path.join(base_data_dir, d)
-            os.makedirs(os.path.dirname(dst_dir), exist_ok=True)
-            if os.path.isfile(ori_dir):
-                shutil.copyfile(ori_dir, dst_dir)
-            elif os.path.isdir(ori_dir):
-                shutil.copytree(ori_dir, dst_dir)
-        logging.info(f"Data copied to: {base_data_dir}")
 
     # -------------------- Gradient accumulation steps --------------------
     eff_bs = cfg.dataloader.effective_batch_size
@@ -255,7 +223,7 @@ if "__main__" == __name__:
 
     # Training dataset
     train_dataset = Flow_Blur_dataset_C(
-        blur_txt_path='/workspace/data/Gopro_my/train.txt',
+        blur_txt_path='dataset/train/train_vimeo+monkaa_B.txt',
         seed=loader_seed  # Seed를 설정하여 무작위성 고정
     )
 

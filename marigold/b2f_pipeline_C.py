@@ -90,7 +90,7 @@ class B2FPipeline_C(DiffusionPipeline):
         self.default_processing_resolution = default_processing_resolution
 
         self.empty_text_embed = None
-        self.img_vae = AutoencoderKL.from_pretrained('/workspace/Marigold/checkpoint/stable-diffusion-2/vae')
+        # self.img_vae = AutoencoderKL.from_pretrained('/workspace/Marigold/checkpoint/stable-diffusion-2/vae')
 
     @torch.no_grad()
     def __call__(
@@ -275,7 +275,8 @@ class B2FPipeline_C(DiffusionPipeline):
         timesteps = self.scheduler.timesteps  # [T]
 
         # Encode image
-        rgb_latent = self.encode_rgb(rgb_in)
+        rgb_latent = self.encode_flow(rgb_in)
+        # rgb_latent = self.encode_rgb(rgb_in) if useing custom vae
 
         # Initial depth map (noise)
         depth_latent = torch.randn(

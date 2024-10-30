@@ -2202,3 +2202,467 @@
 10/29/2024 12:15:12 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-500/scheduler_1.bin
 10/29/2024 12:15:12 - INFO: Random states saved in /workspace/data/AE-output-KL-pretrained/checkpoint-500/random_states_0.pkl
 10/29/2024 12:15:12 - INFO: Saved state to /workspace/data/AE-output-KL-pretrained/checkpoint-500
+10/29/2024 12:35:30 - INFO: Saving current state to /workspace/data/AE-output-KL-pretrained/checkpoint-1000
+10/29/2024 12:35:32 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-1000/optimizer.bin
+10/29/2024 12:35:32 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-1000/optimizer_1.bin
+10/29/2024 12:35:32 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-1000/scheduler.bin
+10/29/2024 12:35:32 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-1000/scheduler_1.bin
+10/29/2024 12:35:32 - INFO: Random states saved in /workspace/data/AE-output-KL-pretrained/checkpoint-1000/random_states_0.pkl
+10/29/2024 12:35:32 - INFO: Saved state to /workspace/data/AE-output-KL-pretrained/checkpoint-1000
+10/29/2024 12:55:50 - INFO: Saving current state to /workspace/data/AE-output-KL-pretrained/checkpoint-1500
+10/29/2024 12:55:52 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-1500/optimizer.bin
+10/29/2024 12:55:52 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-1500/optimizer_1.bin
+10/29/2024 12:55:52 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-1500/scheduler.bin
+10/29/2024 12:55:52 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-1500/scheduler_1.bin
+10/29/2024 12:55:52 - INFO: Random states saved in /workspace/data/AE-output-KL-pretrained/checkpoint-1500/random_states_0.pkl
+10/29/2024 12:55:52 - INFO: Saved state to /workspace/data/AE-output-KL-pretrained/checkpoint-1500
+10/29/2024 13:16:10 - INFO: Saving current state to /workspace/data/AE-output-KL-pretrained/checkpoint-2000
+10/29/2024 13:16:12 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-2000/optimizer.bin
+10/29/2024 13:16:12 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-2000/optimizer_1.bin
+10/29/2024 13:16:12 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-2000/scheduler.bin
+10/29/2024 13:16:12 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-2000/scheduler_1.bin
+10/29/2024 13:16:12 - INFO: Random states saved in /workspace/data/AE-output-KL-pretrained/checkpoint-2000/random_states_0.pkl
+10/29/2024 13:16:12 - INFO: Saved state to /workspace/data/AE-output-KL-pretrained/checkpoint-2000
+10/29/2024 13:36:30 - INFO: Saving current state to /workspace/data/AE-output-KL-pretrained/checkpoint-2500
+10/29/2024 13:36:31 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-2500/optimizer.bin
+10/29/2024 13:36:32 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-2500/optimizer_1.bin
+10/29/2024 13:36:32 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-2500/scheduler.bin
+10/29/2024 13:36:32 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-2500/scheduler_1.bin
+10/29/2024 13:36:32 - INFO: Random states saved in /workspace/data/AE-output-KL-pretrained/checkpoint-2500/random_states_0.pkl
+10/29/2024 13:36:32 - INFO: Saved state to /workspace/data/AE-output-KL-pretrained/checkpoint-2500
+10/29/2024 13:56:50 - INFO: Saving current state to /workspace/data/AE-output-KL-pretrained/checkpoint-3000
+10/29/2024 13:56:52 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-3000/optimizer.bin
+10/29/2024 13:56:52 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-3000/optimizer_1.bin
+10/29/2024 13:56:52 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-3000/scheduler.bin
+10/29/2024 13:56:52 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-3000/scheduler_1.bin
+10/29/2024 13:56:52 - INFO: Random states saved in /workspace/data/AE-output-KL-pretrained/checkpoint-3000/random_states_0.pkl
+10/29/2024 13:56:52 - INFO: Saved state to /workspace/data/AE-output-KL-pretrained/checkpoint-3000
+10/29/2024 14:17:10 - INFO: Saving current state to /workspace/data/AE-output-KL-pretrained/checkpoint-3500
+10/29/2024 14:17:11 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-3500/optimizer.bin
+10/29/2024 14:17:11 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-3500/optimizer_1.bin
+10/29/2024 14:17:11 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-3500/scheduler.bin
+10/29/2024 14:17:11 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-3500/scheduler_1.bin
+10/29/2024 14:17:11 - INFO: Random states saved in /workspace/data/AE-output-KL-pretrained/checkpoint-3500/random_states_0.pkl
+10/29/2024 14:17:11 - INFO: Saved state to /workspace/data/AE-output-KL-pretrained/checkpoint-3500
+10/29/2024 14:37:29 - INFO: Saving current state to /workspace/data/AE-output-KL-pretrained/checkpoint-4000
+10/29/2024 14:37:30 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-4000/optimizer.bin
+10/29/2024 14:37:30 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-4000/optimizer_1.bin
+10/29/2024 14:37:30 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-4000/scheduler.bin
+10/29/2024 14:37:30 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-4000/scheduler_1.bin
+10/29/2024 14:37:30 - INFO: Random states saved in /workspace/data/AE-output-KL-pretrained/checkpoint-4000/random_states_0.pkl
+10/29/2024 14:37:30 - INFO: Saved state to /workspace/data/AE-output-KL-pretrained/checkpoint-4000
+10/29/2024 14:57:48 - INFO: Saving current state to /workspace/data/AE-output-KL-pretrained/checkpoint-4500
+10/29/2024 14:57:49 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-4500/optimizer.bin
+10/29/2024 14:57:49 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-4500/optimizer_1.bin
+10/29/2024 14:57:49 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-4500/scheduler.bin
+10/29/2024 14:57:49 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-4500/scheduler_1.bin
+10/29/2024 14:57:49 - INFO: Random states saved in /workspace/data/AE-output-KL-pretrained/checkpoint-4500/random_states_0.pkl
+10/29/2024 14:57:49 - INFO: Saved state to /workspace/data/AE-output-KL-pretrained/checkpoint-4500
+10/29/2024 15:18:06 - INFO: Saving current state to /workspace/data/AE-output-KL-pretrained/checkpoint-5000
+10/29/2024 15:18:08 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-5000/optimizer.bin
+10/29/2024 15:18:08 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-5000/optimizer_1.bin
+10/29/2024 15:18:08 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-5000/scheduler.bin
+10/29/2024 15:18:08 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-5000/scheduler_1.bin
+10/29/2024 15:18:08 - INFO: Random states saved in /workspace/data/AE-output-KL-pretrained/checkpoint-5000/random_states_0.pkl
+10/29/2024 15:18:08 - INFO: Saved state to /workspace/data/AE-output-KL-pretrained/checkpoint-5000
+10/29/2024 15:38:23 - INFO: Saving current state to /workspace/data/AE-output-KL-pretrained/checkpoint-5500
+10/29/2024 15:38:24 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-5500/optimizer.bin
+10/29/2024 15:38:24 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-5500/optimizer_1.bin
+10/29/2024 15:38:24 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-5500/scheduler.bin
+10/29/2024 15:38:24 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-5500/scheduler_1.bin
+10/29/2024 15:38:24 - INFO: Random states saved in /workspace/data/AE-output-KL-pretrained/checkpoint-5500/random_states_0.pkl
+10/29/2024 15:38:24 - INFO: Saved state to /workspace/data/AE-output-KL-pretrained/checkpoint-5500
+10/29/2024 15:58:39 - INFO: Saving current state to /workspace/data/AE-output-KL-pretrained/checkpoint-6000
+10/29/2024 15:58:41 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-6000/optimizer.bin
+10/29/2024 15:58:41 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-6000/optimizer_1.bin
+10/29/2024 15:58:41 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-6000/scheduler.bin
+10/29/2024 15:58:41 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-6000/scheduler_1.bin
+10/29/2024 15:58:41 - INFO: Random states saved in /workspace/data/AE-output-KL-pretrained/checkpoint-6000/random_states_0.pkl
+10/29/2024 15:58:41 - INFO: Saved state to /workspace/data/AE-output-KL-pretrained/checkpoint-6000
+10/29/2024 16:18:51 - INFO: Saving current state to /workspace/data/AE-output-KL-pretrained/checkpoint-6500
+10/29/2024 16:18:52 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-6500/optimizer.bin
+10/29/2024 16:18:52 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-6500/optimizer_1.bin
+10/29/2024 16:18:52 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-6500/scheduler.bin
+10/29/2024 16:18:52 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-6500/scheduler_1.bin
+10/29/2024 16:18:52 - INFO: Random states saved in /workspace/data/AE-output-KL-pretrained/checkpoint-6500/random_states_0.pkl
+10/29/2024 16:18:52 - INFO: Saved state to /workspace/data/AE-output-KL-pretrained/checkpoint-6500
+10/29/2024 16:19:41 - WARNING: CUDA is not available. Running on CPU will be slow.
+10/29/2024 16:19:41 - INFO: device = cpu
+10/29/2024 16:39:01 - INFO: Saving current state to /workspace/data/AE-output-KL-pretrained/checkpoint-7000
+10/29/2024 16:39:02 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-7000/optimizer.bin
+10/29/2024 16:39:02 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-7000/optimizer_1.bin
+10/29/2024 16:39:02 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-7000/scheduler.bin
+10/29/2024 16:39:02 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-7000/scheduler_1.bin
+10/29/2024 16:39:02 - INFO: Random states saved in /workspace/data/AE-output-KL-pretrained/checkpoint-7000/random_states_0.pkl
+10/29/2024 16:39:02 - INFO: Saved state to /workspace/data/AE-output-KL-pretrained/checkpoint-7000
+10/29/2024 16:59:12 - INFO: Saving current state to /workspace/data/AE-output-KL-pretrained/checkpoint-7500
+10/29/2024 16:59:13 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-7500/optimizer.bin
+10/29/2024 16:59:13 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-7500/optimizer_1.bin
+10/29/2024 16:59:13 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-7500/scheduler.bin
+10/29/2024 16:59:13 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-7500/scheduler_1.bin
+10/29/2024 16:59:13 - INFO: Random states saved in /workspace/data/AE-output-KL-pretrained/checkpoint-7500/random_states_0.pkl
+10/29/2024 16:59:13 - INFO: Saved state to /workspace/data/AE-output-KL-pretrained/checkpoint-7500
+10/29/2024 17:19:22 - INFO: Saving current state to /workspace/data/AE-output-KL-pretrained/checkpoint-8000
+10/29/2024 17:19:23 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-8000/optimizer.bin
+10/29/2024 17:19:23 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-8000/optimizer_1.bin
+10/29/2024 17:19:23 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-8000/scheduler.bin
+10/29/2024 17:19:23 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-8000/scheduler_1.bin
+10/29/2024 17:19:23 - INFO: Random states saved in /workspace/data/AE-output-KL-pretrained/checkpoint-8000/random_states_0.pkl
+10/29/2024 17:19:23 - INFO: Saved state to /workspace/data/AE-output-KL-pretrained/checkpoint-8000
+10/29/2024 17:39:32 - INFO: Saving current state to /workspace/data/AE-output-KL-pretrained/checkpoint-8500
+10/29/2024 17:39:33 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-8500/optimizer.bin
+10/29/2024 17:39:33 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-8500/optimizer_1.bin
+10/29/2024 17:39:33 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-8500/scheduler.bin
+10/29/2024 17:39:33 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-8500/scheduler_1.bin
+10/29/2024 17:39:33 - INFO: Random states saved in /workspace/data/AE-output-KL-pretrained/checkpoint-8500/random_states_0.pkl
+10/29/2024 17:39:33 - INFO: Saved state to /workspace/data/AE-output-KL-pretrained/checkpoint-8500
+10/29/2024 17:59:43 - INFO: Saving current state to /workspace/data/AE-output-KL-pretrained/checkpoint-9000
+10/29/2024 17:59:44 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-9000/optimizer.bin
+10/29/2024 17:59:44 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-9000/optimizer_1.bin
+10/29/2024 17:59:44 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-9000/scheduler.bin
+10/29/2024 17:59:44 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-9000/scheduler_1.bin
+10/29/2024 17:59:44 - INFO: Random states saved in /workspace/data/AE-output-KL-pretrained/checkpoint-9000/random_states_0.pkl
+10/29/2024 17:59:44 - INFO: Saved state to /workspace/data/AE-output-KL-pretrained/checkpoint-9000
+10/29/2024 18:19:53 - INFO: Saving current state to /workspace/data/AE-output-KL-pretrained/checkpoint-9500
+10/29/2024 18:19:54 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-9500/optimizer.bin
+10/29/2024 18:19:54 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-9500/optimizer_1.bin
+10/29/2024 18:19:54 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-9500/scheduler.bin
+10/29/2024 18:19:54 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-9500/scheduler_1.bin
+10/29/2024 18:19:54 - INFO: Random states saved in /workspace/data/AE-output-KL-pretrained/checkpoint-9500/random_states_0.pkl
+10/29/2024 18:19:54 - INFO: Saved state to /workspace/data/AE-output-KL-pretrained/checkpoint-9500
+10/29/2024 18:40:03 - INFO: Saving current state to /workspace/data/AE-output-KL-pretrained/checkpoint-10000
+10/29/2024 18:40:04 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-10000/optimizer.bin
+10/29/2024 18:40:04 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-10000/optimizer_1.bin
+10/29/2024 18:40:04 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-10000/scheduler.bin
+10/29/2024 18:40:04 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-10000/scheduler_1.bin
+10/29/2024 18:40:04 - INFO: Random states saved in /workspace/data/AE-output-KL-pretrained/checkpoint-10000/random_states_0.pkl
+10/29/2024 18:40:04 - INFO: Saved state to /workspace/data/AE-output-KL-pretrained/checkpoint-10000
+10/29/2024 19:00:13 - INFO: Saving current state to /workspace/data/AE-output-KL-pretrained/checkpoint-10500
+10/29/2024 19:00:14 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-10500/optimizer.bin
+10/29/2024 19:00:14 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-10500/optimizer_1.bin
+10/29/2024 19:00:14 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-10500/scheduler.bin
+10/29/2024 19:00:14 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-10500/scheduler_1.bin
+10/29/2024 19:00:14 - INFO: Random states saved in /workspace/data/AE-output-KL-pretrained/checkpoint-10500/random_states_0.pkl
+10/29/2024 19:00:14 - INFO: Saved state to /workspace/data/AE-output-KL-pretrained/checkpoint-10500
+10/29/2024 19:10:18 - WARNING: CUDA is not available. Running on CPU will be slow.
+10/29/2024 19:10:18 - INFO: device = cpu
+10/29/2024 19:20:23 - INFO: Saving current state to /workspace/data/AE-output-KL-pretrained/checkpoint-11000
+10/29/2024 19:20:24 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-11000/optimizer.bin
+10/29/2024 19:20:24 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-11000/optimizer_1.bin
+10/29/2024 19:20:24 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-11000/scheduler.bin
+10/29/2024 19:20:24 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-11000/scheduler_1.bin
+10/29/2024 19:20:24 - INFO: Random states saved in /workspace/data/AE-output-KL-pretrained/checkpoint-11000/random_states_0.pkl
+10/29/2024 19:20:24 - INFO: Saved state to /workspace/data/AE-output-KL-pretrained/checkpoint-11000
+10/29/2024 19:40:33 - INFO: Saving current state to /workspace/data/AE-output-KL-pretrained/checkpoint-11500
+10/29/2024 19:40:34 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-11500/optimizer.bin
+10/29/2024 19:40:34 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-11500/optimizer_1.bin
+10/29/2024 19:40:34 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-11500/scheduler.bin
+10/29/2024 19:40:34 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-11500/scheduler_1.bin
+10/29/2024 19:40:34 - INFO: Random states saved in /workspace/data/AE-output-KL-pretrained/checkpoint-11500/random_states_0.pkl
+10/29/2024 19:40:34 - INFO: Saved state to /workspace/data/AE-output-KL-pretrained/checkpoint-11500
+10/29/2024 20:00:42 - INFO: Saving current state to /workspace/data/AE-output-KL-pretrained/checkpoint-12000
+10/29/2024 20:00:43 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-12000/optimizer.bin
+10/29/2024 20:00:43 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-12000/optimizer_1.bin
+10/29/2024 20:00:43 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-12000/scheduler.bin
+10/29/2024 20:00:43 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-12000/scheduler_1.bin
+10/29/2024 20:00:43 - INFO: Random states saved in /workspace/data/AE-output-KL-pretrained/checkpoint-12000/random_states_0.pkl
+10/29/2024 20:00:43 - INFO: Saved state to /workspace/data/AE-output-KL-pretrained/checkpoint-12000
+10/29/2024 20:20:51 - INFO: Saving current state to /workspace/data/AE-output-KL-pretrained/checkpoint-12500
+10/29/2024 20:20:52 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-12500/optimizer.bin
+10/29/2024 20:20:52 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-12500/optimizer_1.bin
+10/29/2024 20:20:52 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-12500/scheduler.bin
+10/29/2024 20:20:52 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-12500/scheduler_1.bin
+10/29/2024 20:20:52 - INFO: Random states saved in /workspace/data/AE-output-KL-pretrained/checkpoint-12500/random_states_0.pkl
+10/29/2024 20:20:52 - INFO: Saved state to /workspace/data/AE-output-KL-pretrained/checkpoint-12500
+10/29/2024 20:41:00 - INFO: Saving current state to /workspace/data/AE-output-KL-pretrained/checkpoint-13000
+10/29/2024 20:41:01 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-13000/optimizer.bin
+10/29/2024 20:41:01 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-13000/optimizer_1.bin
+10/29/2024 20:41:01 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-13000/scheduler.bin
+10/29/2024 20:41:01 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-13000/scheduler_1.bin
+10/29/2024 20:41:01 - INFO: Random states saved in /workspace/data/AE-output-KL-pretrained/checkpoint-13000/random_states_0.pkl
+10/29/2024 20:41:01 - INFO: Saved state to /workspace/data/AE-output-KL-pretrained/checkpoint-13000
+10/29/2024 21:01:09 - INFO: Saving current state to /workspace/data/AE-output-KL-pretrained/checkpoint-13500
+10/29/2024 21:01:10 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-13500/optimizer.bin
+10/29/2024 21:01:10 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-13500/optimizer_1.bin
+10/29/2024 21:01:10 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-13500/scheduler.bin
+10/29/2024 21:01:10 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-13500/scheduler_1.bin
+10/29/2024 21:01:10 - INFO: Random states saved in /workspace/data/AE-output-KL-pretrained/checkpoint-13500/random_states_0.pkl
+10/29/2024 21:01:10 - INFO: Saved state to /workspace/data/AE-output-KL-pretrained/checkpoint-13500
+10/29/2024 21:21:18 - INFO: Saving current state to /workspace/data/AE-output-KL-pretrained/checkpoint-14000
+10/29/2024 21:21:19 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-14000/optimizer.bin
+10/29/2024 21:21:19 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-14000/optimizer_1.bin
+10/29/2024 21:21:19 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-14000/scheduler.bin
+10/29/2024 21:21:19 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-14000/scheduler_1.bin
+10/29/2024 21:21:19 - INFO: Random states saved in /workspace/data/AE-output-KL-pretrained/checkpoint-14000/random_states_0.pkl
+10/29/2024 21:21:19 - INFO: Saved state to /workspace/data/AE-output-KL-pretrained/checkpoint-14000
+10/29/2024 21:41:27 - INFO: Saving current state to /workspace/data/AE-output-KL-pretrained/checkpoint-14500
+10/29/2024 21:41:28 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-14500/optimizer.bin
+10/29/2024 21:41:28 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-14500/optimizer_1.bin
+10/29/2024 21:41:28 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-14500/scheduler.bin
+10/29/2024 21:41:28 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-14500/scheduler_1.bin
+10/29/2024 21:41:28 - INFO: Random states saved in /workspace/data/AE-output-KL-pretrained/checkpoint-14500/random_states_0.pkl
+10/29/2024 21:41:28 - INFO: Saved state to /workspace/data/AE-output-KL-pretrained/checkpoint-14500
+10/29/2024 22:01:37 - INFO: Saving current state to /workspace/data/AE-output-KL-pretrained/checkpoint-15000
+10/29/2024 22:01:38 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-15000/optimizer.bin
+10/29/2024 22:01:38 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-15000/optimizer_1.bin
+10/29/2024 22:01:38 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-15000/scheduler.bin
+10/29/2024 22:01:38 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-15000/scheduler_1.bin
+10/29/2024 22:01:38 - INFO: Random states saved in /workspace/data/AE-output-KL-pretrained/checkpoint-15000/random_states_0.pkl
+10/29/2024 22:01:38 - INFO: Saved state to /workspace/data/AE-output-KL-pretrained/checkpoint-15000
+10/29/2024 22:21:47 - INFO: Saving current state to /workspace/data/AE-output-KL-pretrained/checkpoint-15500
+10/29/2024 22:21:48 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-15500/optimizer.bin
+10/29/2024 22:21:48 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-15500/optimizer_1.bin
+10/29/2024 22:21:48 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-15500/scheduler.bin
+10/29/2024 22:21:48 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-15500/scheduler_1.bin
+10/29/2024 22:21:48 - INFO: Random states saved in /workspace/data/AE-output-KL-pretrained/checkpoint-15500/random_states_0.pkl
+10/29/2024 22:21:48 - INFO: Saved state to /workspace/data/AE-output-KL-pretrained/checkpoint-15500
+10/29/2024 22:41:57 - INFO: Saving current state to /workspace/data/AE-output-KL-pretrained/checkpoint-16000
+10/29/2024 22:41:58 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-16000/optimizer.bin
+10/29/2024 22:41:58 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-16000/optimizer_1.bin
+10/29/2024 22:41:58 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-16000/scheduler.bin
+10/29/2024 22:41:58 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-16000/scheduler_1.bin
+10/29/2024 22:41:58 - INFO: Random states saved in /workspace/data/AE-output-KL-pretrained/checkpoint-16000/random_states_0.pkl
+10/29/2024 22:41:58 - INFO: Saved state to /workspace/data/AE-output-KL-pretrained/checkpoint-16000
+10/29/2024 23:02:06 - INFO: Saving current state to /workspace/data/AE-output-KL-pretrained/checkpoint-16500
+10/29/2024 23:02:07 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-16500/optimizer.bin
+10/29/2024 23:02:07 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-16500/optimizer_1.bin
+10/29/2024 23:02:07 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-16500/scheduler.bin
+10/29/2024 23:02:07 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-16500/scheduler_1.bin
+10/29/2024 23:02:07 - INFO: Random states saved in /workspace/data/AE-output-KL-pretrained/checkpoint-16500/random_states_0.pkl
+10/29/2024 23:02:07 - INFO: Saved state to /workspace/data/AE-output-KL-pretrained/checkpoint-16500
+10/29/2024 23:22:16 - INFO: Saving current state to /workspace/data/AE-output-KL-pretrained/checkpoint-17000
+10/29/2024 23:22:17 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-17000/optimizer.bin
+10/29/2024 23:22:17 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-17000/optimizer_1.bin
+10/29/2024 23:22:17 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-17000/scheduler.bin
+10/29/2024 23:22:17 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-17000/scheduler_1.bin
+10/29/2024 23:22:17 - INFO: Random states saved in /workspace/data/AE-output-KL-pretrained/checkpoint-17000/random_states_0.pkl
+10/29/2024 23:22:17 - INFO: Saved state to /workspace/data/AE-output-KL-pretrained/checkpoint-17000
+10/29/2024 23:42:26 - INFO: Saving current state to /workspace/data/AE-output-KL-pretrained/checkpoint-17500
+10/29/2024 23:42:27 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-17500/optimizer.bin
+10/29/2024 23:42:27 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-17500/optimizer_1.bin
+10/29/2024 23:42:27 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-17500/scheduler.bin
+10/29/2024 23:42:27 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-17500/scheduler_1.bin
+10/29/2024 23:42:27 - INFO: Random states saved in /workspace/data/AE-output-KL-pretrained/checkpoint-17500/random_states_0.pkl
+10/29/2024 23:42:27 - INFO: Saved state to /workspace/data/AE-output-KL-pretrained/checkpoint-17500
+10/30/2024 00:02:35 - INFO: Saving current state to /workspace/data/AE-output-KL-pretrained/checkpoint-18000
+10/30/2024 00:02:36 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-18000/optimizer.bin
+10/30/2024 00:02:36 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-18000/optimizer_1.bin
+10/30/2024 00:02:36 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-18000/scheduler.bin
+10/30/2024 00:02:36 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-18000/scheduler_1.bin
+10/30/2024 00:02:36 - INFO: Random states saved in /workspace/data/AE-output-KL-pretrained/checkpoint-18000/random_states_0.pkl
+10/30/2024 00:02:36 - INFO: Saved state to /workspace/data/AE-output-KL-pretrained/checkpoint-18000
+10/30/2024 00:22:44 - INFO: Saving current state to /workspace/data/AE-output-KL-pretrained/checkpoint-18500
+10/30/2024 00:22:45 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-18500/optimizer.bin
+10/30/2024 00:22:45 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-18500/optimizer_1.bin
+10/30/2024 00:22:45 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-18500/scheduler.bin
+10/30/2024 00:22:45 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-18500/scheduler_1.bin
+10/30/2024 00:22:45 - INFO: Random states saved in /workspace/data/AE-output-KL-pretrained/checkpoint-18500/random_states_0.pkl
+10/30/2024 00:22:45 - INFO: Saved state to /workspace/data/AE-output-KL-pretrained/checkpoint-18500
+10/30/2024 00:42:53 - INFO: Saving current state to /workspace/data/AE-output-KL-pretrained/checkpoint-19000
+10/30/2024 00:42:54 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-19000/optimizer.bin
+10/30/2024 00:42:54 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-19000/optimizer_1.bin
+10/30/2024 00:42:54 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-19000/scheduler.bin
+10/30/2024 00:42:54 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-19000/scheduler_1.bin
+10/30/2024 00:42:55 - INFO: Random states saved in /workspace/data/AE-output-KL-pretrained/checkpoint-19000/random_states_0.pkl
+10/30/2024 00:42:55 - INFO: Saved state to /workspace/data/AE-output-KL-pretrained/checkpoint-19000
+10/30/2024 01:03:03 - INFO: Saving current state to /workspace/data/AE-output-KL-pretrained/checkpoint-19500
+10/30/2024 01:03:04 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-19500/optimizer.bin
+10/30/2024 01:03:04 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-19500/optimizer_1.bin
+10/30/2024 01:03:04 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-19500/scheduler.bin
+10/30/2024 01:03:04 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-19500/scheduler_1.bin
+10/30/2024 01:03:04 - INFO: Random states saved in /workspace/data/AE-output-KL-pretrained/checkpoint-19500/random_states_0.pkl
+10/30/2024 01:03:04 - INFO: Saved state to /workspace/data/AE-output-KL-pretrained/checkpoint-19500
+10/30/2024 01:23:13 - INFO: Saving current state to /workspace/data/AE-output-KL-pretrained/checkpoint-20000
+10/30/2024 01:23:14 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-20000/optimizer.bin
+10/30/2024 01:23:14 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-20000/optimizer_1.bin
+10/30/2024 01:23:14 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-20000/scheduler.bin
+10/30/2024 01:23:14 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-20000/scheduler_1.bin
+10/30/2024 01:23:14 - INFO: Random states saved in /workspace/data/AE-output-KL-pretrained/checkpoint-20000/random_states_0.pkl
+10/30/2024 01:23:14 - INFO: Saved state to /workspace/data/AE-output-KL-pretrained/checkpoint-20000
+10/30/2024 01:43:22 - INFO: Saving current state to /workspace/data/AE-output-KL-pretrained/checkpoint-20500
+10/30/2024 01:43:23 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-20500/optimizer.bin
+10/30/2024 01:43:24 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-20500/optimizer_1.bin
+10/30/2024 01:43:24 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-20500/scheduler.bin
+10/30/2024 01:43:24 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-20500/scheduler_1.bin
+10/30/2024 01:43:24 - INFO: Random states saved in /workspace/data/AE-output-KL-pretrained/checkpoint-20500/random_states_0.pkl
+10/30/2024 01:43:24 - INFO: Saved state to /workspace/data/AE-output-KL-pretrained/checkpoint-20500
+10/30/2024 02:03:32 - INFO: Saving current state to /workspace/data/AE-output-KL-pretrained/checkpoint-21000
+10/30/2024 02:03:33 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-21000/optimizer.bin
+10/30/2024 02:03:33 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-21000/optimizer_1.bin
+10/30/2024 02:03:33 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-21000/scheduler.bin
+10/30/2024 02:03:33 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-21000/scheduler_1.bin
+10/30/2024 02:03:33 - INFO: Random states saved in /workspace/data/AE-output-KL-pretrained/checkpoint-21000/random_states_0.pkl
+10/30/2024 02:03:33 - INFO: Saved state to /workspace/data/AE-output-KL-pretrained/checkpoint-21000
+10/30/2024 02:23:42 - INFO: Saving current state to /workspace/data/AE-output-KL-pretrained/checkpoint-21500
+10/30/2024 02:23:43 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-21500/optimizer.bin
+10/30/2024 02:23:43 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-21500/optimizer_1.bin
+10/30/2024 02:23:43 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-21500/scheduler.bin
+10/30/2024 02:23:43 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-21500/scheduler_1.bin
+10/30/2024 02:23:43 - INFO: Random states saved in /workspace/data/AE-output-KL-pretrained/checkpoint-21500/random_states_0.pkl
+10/30/2024 02:23:43 - INFO: Saved state to /workspace/data/AE-output-KL-pretrained/checkpoint-21500
+10/30/2024 02:43:51 - INFO: Saving current state to /workspace/data/AE-output-KL-pretrained/checkpoint-22000
+10/30/2024 02:43:52 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-22000/optimizer.bin
+10/30/2024 02:43:52 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-22000/optimizer_1.bin
+10/30/2024 02:43:52 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-22000/scheduler.bin
+10/30/2024 02:43:52 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-22000/scheduler_1.bin
+10/30/2024 02:43:52 - INFO: Random states saved in /workspace/data/AE-output-KL-pretrained/checkpoint-22000/random_states_0.pkl
+10/30/2024 02:43:52 - INFO: Saved state to /workspace/data/AE-output-KL-pretrained/checkpoint-22000
+10/30/2024 03:04:01 - INFO: Saving current state to /workspace/data/AE-output-KL-pretrained/checkpoint-22500
+10/30/2024 03:04:02 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-22500/optimizer.bin
+10/30/2024 03:04:02 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-22500/optimizer_1.bin
+10/30/2024 03:04:02 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-22500/scheduler.bin
+10/30/2024 03:04:02 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-22500/scheduler_1.bin
+10/30/2024 03:04:02 - INFO: Random states saved in /workspace/data/AE-output-KL-pretrained/checkpoint-22500/random_states_0.pkl
+10/30/2024 03:04:02 - INFO: Saved state to /workspace/data/AE-output-KL-pretrained/checkpoint-22500
+10/30/2024 03:24:11 - INFO: Saving current state to /workspace/data/AE-output-KL-pretrained/checkpoint-23000
+10/30/2024 03:24:12 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-23000/optimizer.bin
+10/30/2024 03:24:13 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-23000/optimizer_1.bin
+10/30/2024 03:24:13 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-23000/scheduler.bin
+10/30/2024 03:24:13 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-23000/scheduler_1.bin
+10/30/2024 03:24:13 - INFO: Random states saved in /workspace/data/AE-output-KL-pretrained/checkpoint-23000/random_states_0.pkl
+10/30/2024 03:24:13 - INFO: Saved state to /workspace/data/AE-output-KL-pretrained/checkpoint-23000
+10/30/2024 03:44:21 - INFO: Saving current state to /workspace/data/AE-output-KL-pretrained/checkpoint-23500
+10/30/2024 03:44:22 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-23500/optimizer.bin
+10/30/2024 03:44:22 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-23500/optimizer_1.bin
+10/30/2024 03:44:22 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-23500/scheduler.bin
+10/30/2024 03:44:22 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-23500/scheduler_1.bin
+10/30/2024 03:44:22 - INFO: Random states saved in /workspace/data/AE-output-KL-pretrained/checkpoint-23500/random_states_0.pkl
+10/30/2024 03:44:22 - INFO: Saved state to /workspace/data/AE-output-KL-pretrained/checkpoint-23500
+10/30/2024 04:04:31 - INFO: Saving current state to /workspace/data/AE-output-KL-pretrained/checkpoint-24000
+10/30/2024 04:04:32 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-24000/optimizer.bin
+10/30/2024 04:04:32 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-24000/optimizer_1.bin
+10/30/2024 04:04:32 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-24000/scheduler.bin
+10/30/2024 04:04:32 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-24000/scheduler_1.bin
+10/30/2024 04:04:32 - INFO: Random states saved in /workspace/data/AE-output-KL-pretrained/checkpoint-24000/random_states_0.pkl
+10/30/2024 04:04:32 - INFO: Saved state to /workspace/data/AE-output-KL-pretrained/checkpoint-24000
+10/30/2024 04:24:40 - INFO: Saving current state to /workspace/data/AE-output-KL-pretrained/checkpoint-24500
+10/30/2024 04:24:41 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-24500/optimizer.bin
+10/30/2024 04:24:41 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-24500/optimizer_1.bin
+10/30/2024 04:24:41 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-24500/scheduler.bin
+10/30/2024 04:24:41 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-24500/scheduler_1.bin
+10/30/2024 04:24:41 - INFO: Random states saved in /workspace/data/AE-output-KL-pretrained/checkpoint-24500/random_states_0.pkl
+10/30/2024 04:24:41 - INFO: Saved state to /workspace/data/AE-output-KL-pretrained/checkpoint-24500
+10/30/2024 04:44:50 - INFO: Saving current state to /workspace/data/AE-output-KL-pretrained/checkpoint-25000
+10/30/2024 04:44:51 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-25000/optimizer.bin
+10/30/2024 04:44:51 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-25000/optimizer_1.bin
+10/30/2024 04:44:51 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-25000/scheduler.bin
+10/30/2024 04:44:51 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-25000/scheduler_1.bin
+10/30/2024 04:44:51 - INFO: Random states saved in /workspace/data/AE-output-KL-pretrained/checkpoint-25000/random_states_0.pkl
+10/30/2024 04:44:51 - INFO: Saved state to /workspace/data/AE-output-KL-pretrained/checkpoint-25000
+10/30/2024 05:05:00 - INFO: Saving current state to /workspace/data/AE-output-KL-pretrained/checkpoint-25500
+10/30/2024 05:05:01 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-25500/optimizer.bin
+10/30/2024 05:05:01 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-25500/optimizer_1.bin
+10/30/2024 05:05:01 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-25500/scheduler.bin
+10/30/2024 05:05:01 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-25500/scheduler_1.bin
+10/30/2024 05:05:01 - INFO: Random states saved in /workspace/data/AE-output-KL-pretrained/checkpoint-25500/random_states_0.pkl
+10/30/2024 05:05:01 - INFO: Saved state to /workspace/data/AE-output-KL-pretrained/checkpoint-25500
+10/30/2024 05:25:10 - INFO: Saving current state to /workspace/data/AE-output-KL-pretrained/checkpoint-26000
+10/30/2024 05:25:11 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-26000/optimizer.bin
+10/30/2024 05:25:11 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-26000/optimizer_1.bin
+10/30/2024 05:25:11 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-26000/scheduler.bin
+10/30/2024 05:25:11 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-26000/scheduler_1.bin
+10/30/2024 05:25:11 - INFO: Random states saved in /workspace/data/AE-output-KL-pretrained/checkpoint-26000/random_states_0.pkl
+10/30/2024 05:25:11 - INFO: Saved state to /workspace/data/AE-output-KL-pretrained/checkpoint-26000
+10/30/2024 05:45:20 - INFO: Saving current state to /workspace/data/AE-output-KL-pretrained/checkpoint-26500
+10/30/2024 05:45:21 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-26500/optimizer.bin
+10/30/2024 05:45:21 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-26500/optimizer_1.bin
+10/30/2024 05:45:21 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-26500/scheduler.bin
+10/30/2024 05:45:21 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-26500/scheduler_1.bin
+10/30/2024 05:45:21 - INFO: Random states saved in /workspace/data/AE-output-KL-pretrained/checkpoint-26500/random_states_0.pkl
+10/30/2024 05:45:21 - INFO: Saved state to /workspace/data/AE-output-KL-pretrained/checkpoint-26500
+10/30/2024 06:05:29 - INFO: Saving current state to /workspace/data/AE-output-KL-pretrained/checkpoint-27000
+10/30/2024 06:05:30 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-27000/optimizer.bin
+10/30/2024 06:05:31 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-27000/optimizer_1.bin
+10/30/2024 06:05:31 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-27000/scheduler.bin
+10/30/2024 06:05:31 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-27000/scheduler_1.bin
+10/30/2024 06:05:31 - INFO: Random states saved in /workspace/data/AE-output-KL-pretrained/checkpoint-27000/random_states_0.pkl
+10/30/2024 06:05:31 - INFO: Saved state to /workspace/data/AE-output-KL-pretrained/checkpoint-27000
+10/30/2024 06:25:39 - INFO: Saving current state to /workspace/data/AE-output-KL-pretrained/checkpoint-27500
+10/30/2024 06:25:40 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-27500/optimizer.bin
+10/30/2024 06:25:40 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-27500/optimizer_1.bin
+10/30/2024 06:25:40 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-27500/scheduler.bin
+10/30/2024 06:25:40 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-27500/scheduler_1.bin
+10/30/2024 06:25:40 - INFO: Random states saved in /workspace/data/AE-output-KL-pretrained/checkpoint-27500/random_states_0.pkl
+10/30/2024 06:25:40 - INFO: Saved state to /workspace/data/AE-output-KL-pretrained/checkpoint-27500
+10/30/2024 06:45:48 - INFO: Saving current state to /workspace/data/AE-output-KL-pretrained/checkpoint-28000
+10/30/2024 06:45:49 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-28000/optimizer.bin
+10/30/2024 06:45:49 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-28000/optimizer_1.bin
+10/30/2024 06:45:49 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-28000/scheduler.bin
+10/30/2024 06:45:49 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-28000/scheduler_1.bin
+10/30/2024 06:45:49 - INFO: Random states saved in /workspace/data/AE-output-KL-pretrained/checkpoint-28000/random_states_0.pkl
+10/30/2024 06:45:49 - INFO: Saved state to /workspace/data/AE-output-KL-pretrained/checkpoint-28000
+10/30/2024 07:05:58 - INFO: Saving current state to /workspace/data/AE-output-KL-pretrained/checkpoint-28500
+10/30/2024 07:05:59 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-28500/optimizer.bin
+10/30/2024 07:05:59 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-28500/optimizer_1.bin
+10/30/2024 07:05:59 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-28500/scheduler.bin
+10/30/2024 07:05:59 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-28500/scheduler_1.bin
+10/30/2024 07:05:59 - INFO: Random states saved in /workspace/data/AE-output-KL-pretrained/checkpoint-28500/random_states_0.pkl
+10/30/2024 07:05:59 - INFO: Saved state to /workspace/data/AE-output-KL-pretrained/checkpoint-28500
+10/30/2024 07:26:08 - INFO: Saving current state to /workspace/data/AE-output-KL-pretrained/checkpoint-29000
+10/30/2024 07:26:09 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-29000/optimizer.bin
+10/30/2024 07:26:09 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-29000/optimizer_1.bin
+10/30/2024 07:26:09 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-29000/scheduler.bin
+10/30/2024 07:26:09 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-29000/scheduler_1.bin
+10/30/2024 07:26:09 - INFO: Random states saved in /workspace/data/AE-output-KL-pretrained/checkpoint-29000/random_states_0.pkl
+10/30/2024 07:26:09 - INFO: Saved state to /workspace/data/AE-output-KL-pretrained/checkpoint-29000
+10/30/2024 07:46:18 - INFO: Saving current state to /workspace/data/AE-output-KL-pretrained/checkpoint-29500
+10/30/2024 07:46:19 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-29500/optimizer.bin
+10/30/2024 07:46:19 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-29500/optimizer_1.bin
+10/30/2024 07:46:19 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-29500/scheduler.bin
+10/30/2024 07:46:19 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-29500/scheduler_1.bin
+10/30/2024 07:46:19 - INFO: Random states saved in /workspace/data/AE-output-KL-pretrained/checkpoint-29500/random_states_0.pkl
+10/30/2024 07:46:19 - INFO: Saved state to /workspace/data/AE-output-KL-pretrained/checkpoint-29500
+10/30/2024 08:06:28 - INFO: Saving current state to /workspace/data/AE-output-KL-pretrained/checkpoint-30000
+10/30/2024 08:06:29 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-30000/optimizer.bin
+10/30/2024 08:06:29 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-30000/optimizer_1.bin
+10/30/2024 08:06:29 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-30000/scheduler.bin
+10/30/2024 08:06:29 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-30000/scheduler_1.bin
+10/30/2024 08:06:29 - INFO: Random states saved in /workspace/data/AE-output-KL-pretrained/checkpoint-30000/random_states_0.pkl
+10/30/2024 08:06:29 - INFO: Saved state to /workspace/data/AE-output-KL-pretrained/checkpoint-30000
+10/30/2024 08:26:38 - INFO: Saving current state to /workspace/data/AE-output-KL-pretrained/checkpoint-30500
+10/30/2024 08:26:39 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-30500/optimizer.bin
+10/30/2024 08:26:39 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-30500/optimizer_1.bin
+10/30/2024 08:26:39 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-30500/scheduler.bin
+10/30/2024 08:26:39 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-30500/scheduler_1.bin
+10/30/2024 08:26:39 - INFO: Random states saved in /workspace/data/AE-output-KL-pretrained/checkpoint-30500/random_states_0.pkl
+10/30/2024 08:26:39 - INFO: Saved state to /workspace/data/AE-output-KL-pretrained/checkpoint-30500
+10/30/2024 08:46:48 - INFO: Saving current state to /workspace/data/AE-output-KL-pretrained/checkpoint-31000
+10/30/2024 08:46:49 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-31000/optimizer.bin
+10/30/2024 08:46:49 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-31000/optimizer_1.bin
+10/30/2024 08:46:49 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-31000/scheduler.bin
+10/30/2024 08:46:49 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-31000/scheduler_1.bin
+10/30/2024 08:46:49 - INFO: Random states saved in /workspace/data/AE-output-KL-pretrained/checkpoint-31000/random_states_0.pkl
+10/30/2024 08:46:49 - INFO: Saved state to /workspace/data/AE-output-KL-pretrained/checkpoint-31000
+10/30/2024 09:06:58 - INFO: Saving current state to /workspace/data/AE-output-KL-pretrained/checkpoint-31500
+10/30/2024 09:06:59 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-31500/optimizer.bin
+10/30/2024 09:06:59 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-31500/optimizer_1.bin
+10/30/2024 09:06:59 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-31500/scheduler.bin
+10/30/2024 09:06:59 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-31500/scheduler_1.bin
+10/30/2024 09:06:59 - INFO: Random states saved in /workspace/data/AE-output-KL-pretrained/checkpoint-31500/random_states_0.pkl
+10/30/2024 09:06:59 - INFO: Saved state to /workspace/data/AE-output-KL-pretrained/checkpoint-31500
+10/30/2024 09:27:07 - INFO: Saving current state to /workspace/data/AE-output-KL-pretrained/checkpoint-32000
+10/30/2024 09:27:08 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-32000/optimizer.bin
+10/30/2024 09:27:09 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-32000/optimizer_1.bin
+10/30/2024 09:27:09 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-32000/scheduler.bin
+10/30/2024 09:27:09 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-32000/scheduler_1.bin
+10/30/2024 09:27:09 - INFO: Random states saved in /workspace/data/AE-output-KL-pretrained/checkpoint-32000/random_states_0.pkl
+10/30/2024 09:27:09 - INFO: Saved state to /workspace/data/AE-output-KL-pretrained/checkpoint-32000
+10/30/2024 09:47:17 - INFO: Saving current state to /workspace/data/AE-output-KL-pretrained/checkpoint-32500
+10/30/2024 09:47:18 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-32500/optimizer.bin
+10/30/2024 09:47:18 - INFO: Optimizer state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-32500/optimizer_1.bin
+10/30/2024 09:47:18 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-32500/scheduler.bin
+10/30/2024 09:47:18 - INFO: Scheduler state saved in /workspace/data/AE-output-KL-pretrained/checkpoint-32500/scheduler_1.bin
+10/30/2024 09:47:18 - INFO: Random states saved in /workspace/data/AE-output-KL-pretrained/checkpoint-32500/random_states_0.pkl
+10/30/2024 09:47:18 - INFO: Saved state to /workspace/data/AE-output-KL-pretrained/checkpoint-32500
+10/30/2024 09:50:49 - WARNING: CUDA is not available. Running on CPU will be slow.
+10/30/2024 09:50:49 - INFO: device = cuda
+10/30/2024 09:51:16 - WARNING: CUDA is not available. Running on CPU will be slow.
+10/30/2024 09:51:16 - INFO: device = cuda
+10/30/2024 09:51:54 - WARNING: CUDA is not available. Running on CPU will be slow.
+10/30/2024 09:51:54 - INFO: device = cuda
+10/30/2024 09:52:14 - WARNING: CUDA is not available. Running on CPU will be slow.
+10/30/2024 09:52:14 - INFO: device = cuda
+10/30/2024 09:52:31 - WARNING: CUDA is not available. Running on CPU will be slow.
+10/30/2024 09:52:31 - INFO: device = cuda
+10/30/2024 09:52:52 - WARNING: CUDA is not available. Running on CPU will be slow.
+10/30/2024 09:52:52 - INFO: device = cuda

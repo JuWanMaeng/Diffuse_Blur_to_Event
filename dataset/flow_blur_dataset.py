@@ -14,7 +14,7 @@ class Flow_Blur_dataset_C(data.Dataset):
    
         self.blur_txt_path = blur_txt_path
         self.paths = []
-        self.max_magnitude = 147  # M
+        self.max_magnitude = 100  # M
         
         # Seed 설정
         if seed is not None:
@@ -32,12 +32,12 @@ class Flow_Blur_dataset_C(data.Dataset):
     def __getitem__(self, index):
 
         index = index % len(self.paths)
-        dataset_name = blur_path.split('/')[3]  # vimeo . Monkaa, Gopro
 
         blur_path = self.paths[index]        
         blur_img = cv2.imread(blur_path)
         blur_img = cv2.cvtColor(blur_img, cv2.COLOR_BGR2RGB)
         blur_img = (blur_img - 127.5) / 127.5
+        dataset_name = blur_path.split('/')[3]  # vimeo . Monkaa, Gopro
 
         # Optical flow array
         flow_path = blur_path.replace('blur', 'flow/flows')
@@ -58,6 +58,7 @@ class Flow_Blur_dataset_C(data.Dataset):
         # crop vimeo dataset
         if dataset_name == 'vimeo':
             flow = flow[50:-50,:,:]
+            blur_img = blur_img[50:-50,:,:]
 
 
         blur_img_h, blur_img_w = blur_img.shape[0],blur_img.shape[1]
@@ -177,7 +178,9 @@ class Flow_Blur_dataset_C(data.Dataset):
         y = v / magnitude
 
         # Normalize the magnitude to [0, 1] range for the z component
-        z = magnitude / self.max_magnitude
+        z = magnitude / self.max_magnitude  # 100
+        z = np.clip(z, 0, 1)
+
 
         # Stack x, y, and z to create the 3D tensor C with shape (H, W, 3)
         C = np.stack((x, y, z), axis=-1)

@@ -57,15 +57,15 @@ def normalize_flow_to_tensor(flow):
 
     return C
 
-# if torch.cuda.is_available():
-#     device = torch.device("cuda")
-# else:
-device = torch.device("cpu")
+if torch.cuda.is_available():
+    device = torch.device("cuda")
+else:
+    device = torch.device("cpu")
 logging.warning("CUDA is not available. Running on CPU will be slow.")
 logging.info(f"device = {device}")
 
 model_path = '/workspace/Marigold/checkpoint/stable-diffusion-2/vae'
-# model_path = '/workspace/data/AE-output/checkpoint-23500/aemodel'
+# model_path = '/workspace/data/AE-output-KL-pretrained/checkpoint-6000/aemodel'
 
 model = AutoencoderKL.from_pretrained(model_path)
 model = model.to(device)
@@ -76,7 +76,7 @@ original_images = []
 
 with open ('dataset/test_into_future.txt', 'r') as f:
     paths = f.readlines()
-    for path in paths:
+    for path in paths[:2]:
         ### flow ###
         blur_path = path.strip()
         flow_path = blur_path.replace('blur', 'flow/flows')
@@ -94,7 +94,8 @@ with open ('dataset/test_into_future.txt', 'r') as f:
         flow[nan_mask] = 0
         flow = np.clip(flow, -max_flow, max_flow)
         n_flow = normalize_flow_to_tensor(flow)  # H,W,3
-        original_images.append(torch.from_numpy(n_flow.transpose(2,0,1)[None]))
+        n_flow = torch.from_numpy(n_flow.transpose(2,0,1)[None]).to(device)
+        original_images.append(n_flow)
 
 
 total_MSE = 0
