@@ -241,6 +241,15 @@ if "__main__" == __name__:
         os.path.join(base_ckpt_dir, cfg.model.pretrained_path), **_pipeline_kwargs
     )
 
+    ### If you want to train Unet from scratch ###
+    # def reset_unet_weights(unet):
+    #     for layer in unet.parameters():
+    #         if layer.requires_grad:
+    #             torch.nn.init.normal_(layer, mean=0.0, std=0.02)
+
+    # reset_unet_weights(model.unet)
+
+
     # -------------------- Trainer --------------------
     # Exit time
     if args.exit_after > 0:

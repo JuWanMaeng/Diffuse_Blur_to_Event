@@ -180,6 +180,7 @@ class Flow_Blur_dataset_C(data.Dataset):
         # Normalize the magnitude to [0, 1] range for the z component
         z = magnitude / self.max_magnitude  # 100
         z = np.clip(z, 0, 1)
+        z = z * 2 - 1
 
 
         # Stack x, y, and z to create the 3D tensor C with shape (H, W, 3)
