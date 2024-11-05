@@ -213,10 +213,7 @@ class B2FPipeline_C(DiffusionPipeline):
                 pred_uncert = pred_uncert.squeeze().cpu().numpy()
 
             # Clip output range
-            depth_pred = depth_pred.clip(0, 1)
             depth_pred = depth_pred.transpose(1,2,0)
-            depth_pred = (depth_pred * 255).astype(np.uint8)
-            depth_pred = depth_pred[:,:,::-1]
             res.append(depth_pred)
             
 
@@ -324,8 +321,6 @@ class B2FPipeline_C(DiffusionPipeline):
 
         # clip prediction
         depth = torch.clip(depth, -1.0, 1.0)
-        # shift to [0, 1]
-        depth = (depth + 1.0) / 2.0
 
         return depth
 
@@ -339,15 +334,15 @@ class B2FPipeline_C(DiffusionPipeline):
         flow_latent = mean * self.rgb_latent_scale_factor
         return flow_latent
     
-    def encode_rgb(self, rgb_in: torch.Tensor) -> torch.Tensor:
+    # def encode_rgb(self, rgb_in: torch.Tensor) -> torch.Tensor:
 
-        # encode
-        h = self.img_vae.encoder(rgb_in)
-        moments = self.img_vae.quant_conv(h)
-        mean, logvar = torch.chunk(moments, 2, dim=1)
-        # scale latent
-        rgb_latent = mean * self.rgb_latent_scale_factor
-        return rgb_latent
+    #     # encode
+    #     h = self.img_vae.encoder(rgb_in)
+    #     moments = self.img_vae.quant_conv(h)
+    #     mean, logvar = torch.chunk(moments, 2, dim=1)
+    #     # scale latent
+    #     rgb_latent = mean * self.rgb_latent_scale_factor
+    #     return rgb_latent
 
     def decode_depth(self, depth_latent: torch.Tensor) -> torch.Tensor:
 

@@ -195,11 +195,11 @@ class B2FTrainer_C:
         device = self.device
         self.model.to(device)
 
-        if self.in_evaluation:
-            logging.info(
-                "Last evaluation was not finished, will do evaluation before continue training."
-            )
-            self.validate()
+        # if self.in_evaluation:
+        #     logging.info(
+        #         "Last evaluation was not finished, will do evaluation before continue training."
+        #     )
+        #     self.validate()
 
         self.train_metrics.reset()
         accumulated_step = 0
