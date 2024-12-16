@@ -30,7 +30,7 @@ from tqdm.auto import tqdm
 
 from marigold.b2f_pipeline import B2FPipeline
 import cv2
-from ptlflow.utils import flow_utils
+from ptlflow.utils import flow_utilsls
 from ptlflow.utils.flow_utils import flow_to_rgb
 
 EXTENSION_LIST = [".jpg", ".jpeg", ".png"]
