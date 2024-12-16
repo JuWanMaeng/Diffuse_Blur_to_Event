@@ -2666,3 +2666,47 @@
 10/30/2024 09:52:31 - INFO: device = cuda
 10/30/2024 09:52:52 - WARNING: CUDA is not available. Running on CPU will be slow.
 10/30/2024 09:52:52 - INFO: device = cuda
+11/05/2024 14:40:57 - INFO: device = cuda
+11/05/2024 14:40:57 - INFO: Found 530 images
+11/05/2024 14:41:02 - INFO: scale_invariant: True, shift_invariant: True
+11/05/2024 14:41:02 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 10, processing resolution = 768, seed = None; color_map = Spectral.
+11/05/2024 14:41:28 - INFO: device = cuda
+11/05/2024 14:41:28 - INFO: Found 530 images
+11/05/2024 14:41:31 - INFO: scale_invariant: True, shift_invariant: True
+11/05/2024 14:41:31 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 10, processing resolution = 768, seed = None; color_map = Spectral.
+11/05/2024 14:42:56 - INFO: device = cuda
+11/05/2024 14:42:56 - INFO: Found 530 images
+11/05/2024 14:42:59 - INFO: scale_invariant: True, shift_invariant: True
+11/05/2024 14:42:59 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 10, processing resolution = 768, seed = None; color_map = Spectral.
+11/05/2024 14:50:23 - INFO: device = cuda
+11/05/2024 14:50:23 - INFO: Found 530 images
+11/05/2024 14:50:26 - INFO: scale_invariant: True, shift_invariant: True
+11/05/2024 14:50:26 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 10, processing resolution = 768, seed = None; color_map = Spectral.
+11/05/2024 14:51:17 - INFO: device = cuda
+11/05/2024 14:51:17 - INFO: Found 530 images
+11/05/2024 14:51:20 - INFO: scale_invariant: True, shift_invariant: True
+11/05/2024 14:51:20 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 10, processing resolution = 768, seed = None; color_map = Spectral.
+11/05/2024 14:51:56 - INFO: device = cuda
+11/05/2024 14:51:56 - INFO: Found 530 images
+11/05/2024 14:51:59 - INFO: scale_invariant: True, shift_invariant: True
+11/05/2024 14:51:59 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 10, processing resolution = 768, seed = None; color_map = Spectral.
+11/05/2024 14:52:35 - INFO: device = cuda
+11/05/2024 14:52:35 - INFO: Found 513 images
+11/05/2024 14:52:38 - INFO: scale_invariant: True, shift_invariant: True
+11/05/2024 14:52:38 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 10, processing resolution = 768, seed = None; color_map = Spectral.
+11/05/2024 15:02:14 - INFO: device = cuda
+11/05/2024 15:02:14 - INFO: Found 530 images
+11/05/2024 15:02:17 - INFO: scale_invariant: True, shift_invariant: True
+11/05/2024 15:02:17 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 10, processing resolution = 768, seed = None; color_map = Spectral.
+11/05/2024 15:02:30 - INFO: device = cuda
+11/05/2024 15:02:30 - INFO: Found 530 images
+11/05/2024 15:02:33 - INFO: scale_invariant: True, shift_invariant: True
+11/05/2024 15:02:33 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 10, processing resolution = 768, seed = None; color_map = Spectral.
+11/05/2024 15:02:40 - INFO: device = cuda
+11/05/2024 15:02:40 - INFO: Found 530 images
+11/05/2024 15:02:44 - INFO: scale_invariant: True, shift_invariant: True
+11/05/2024 15:02:44 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 10, processing resolution = 768, seed = None; color_map = Spectral.
+11/05/2024 15:02:52 - INFO: device = cuda
+11/05/2024 15:02:52 - INFO: Found 513 images
+11/05/2024 15:02:55 - INFO: scale_invariant: True, shift_invariant: True
+11/05/2024 15:02:55 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 10, processing resolution = 768, seed = None; color_map = Spectral.

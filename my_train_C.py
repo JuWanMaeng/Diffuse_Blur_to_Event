@@ -54,7 +54,7 @@ from src.util.logging_util import (
 from src.util.slurm_util import get_local_scratch_dir, is_on_slurm
 
 if "__main__" == __name__:
-    os.environ['CUDA_VISIBLE_DEVICES'] = '3'
+    os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 
     t_start = datetime.now()
     print(f"start at {t_start}")
@@ -74,7 +74,7 @@ if "__main__" == __name__:
         help="Path of checkpoint to be resumed. If given, will ignore --config, and checkpoint in the config",
     )
     parser.add_argument(
-        "--output_dir", type=str, default='output/M+V->G_C', help="directory to save checkpoints"
+        "--output_dir", type=str, default='output/M+V_C2', help="directory to save checkpoints"
     )
     parser.add_argument("--no_cuda", action="store_true", help="Do not use cuda.")
     parser.add_argument(
@@ -223,7 +223,7 @@ if "__main__" == __name__:
 
     # Training dataset
     train_dataset = Flow_Blur_dataset_C(
-        blur_txt_path='/workspace/data/Gopro_my/C_train.txt',
+        blur_txt_path='/workspace/Marigold/dataset/train/train_vimeo+monkaa.txt',
         seed=loader_seed  # Seed를 설정하여 무작위성 고정
     )
 

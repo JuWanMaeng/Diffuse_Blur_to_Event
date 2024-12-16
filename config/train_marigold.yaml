@@ -35,7 +35,7 @@ trainer:
   # name: MarigoldTrainer
   name: B2FTrainer_C
   training_noise_scheduler:
-    pretrained_path: my
+    pretrained_path: stable-diffusion-2
   init_seed: 2024  # use null to train w/o seeding
   save_period: 100
   backup_period: 999999
@@ -50,8 +50,8 @@ multi_res_noise:
 gt_depth_type: depth_raw_norm
 gt_mask_type: valid_mask_raw
 
-max_epoch: 20000  # a large enough number
-max_iter: 20000  # usually converges at around 20k
+max_epoch: 30000  # a large enough number
+max_iter: 30000  # usually converges at around 20k
 
 optimizer:
   name: Adam
@@ -65,7 +65,7 @@ lr: 3.0e-05
 lr_scheduler:
   name: IterExponential
   kwargs:
-    total_iter: 20000
+    total_iter: 30000
     final_ratio: 0.01
     warmup_steps: 100
 

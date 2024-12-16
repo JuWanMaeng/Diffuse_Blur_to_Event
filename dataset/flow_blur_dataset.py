@@ -144,11 +144,9 @@ class Flow_Blur_dataset_C(data.Dataset):
     def augment_flow(self, flow, command):
 
         if command == 'hflip':  # horizontal
-            cv2.flip(flow, 1, flow)
             flow[:, :, 0] *= -1
 
         elif command ==  'vflip':  # vertical
-            cv2.flip(flow, 0, flow)
             flow[:, :, 1] *= -1
 
         else:
