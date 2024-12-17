@@ -210,10 +210,13 @@ class H5ImageDataset(data.Dataset):
         """
         if self.return_format == "torch":
             if transpose_to_CHW:
-                frame = torch.from_numpy(frame.transpose(2, 0, 1)).float() / 255  # H,W,C -> C,H,W
+                frame = torch.from_numpy(frame.transpose(2, 0, 1)).float()  # H,W,C -> C,H,W
+                frame = (frame - 127.5) / 127.5
 
             else:
-                frame = torch.from_numpy(frame).float() / 255 # 0-1
+                frame = torch.from_numpy(frame).float() # 0-1
+                frame = (frame - 127.5) / 127.5
+                
             if self.transform:
                 random.seed(seed)
                 frame = self.transform(frame)

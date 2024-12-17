@@ -8,11 +8,13 @@
 /wandb
 /venv
 /cache
+/my
 
 **/.ipynb_checkpoints/
 .vscode/
 .idea
 .vscode/
+
 
 # ignore these types
 *.pyc
