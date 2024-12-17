@@ -11,7 +11,7 @@ from torch.utils.data import DataLoader
 from tqdm import tqdm
 
 
-from marigold.b2f_pipeline_C import B2FPipeline_C
+from marigold.b2e_pipeline import B2EPipeline
 from src.trainer import get_trainer_cls
 from src.util.config_util import (
     find_value_in_omegaconf,
@@ -205,7 +205,7 @@ if "__main__" == __name__:
     #     seed=loader_seed  # Seed를 설정하여 무작위성 고정
     # )
     opt = {'crop_size':(540,960),
-           'use_flip':True,
+           'use_flip': True,
            'folder_path' : '/workspace/data/GOPRO/train'
            }
     
@@ -223,7 +223,7 @@ if "__main__" == __name__:
 
     # -------------------- Model --------------------
     _pipeline_kwargs = cfg.pipeline.kwargs if cfg.pipeline.kwargs is not None else {}
-    model = B2FPipeline_C.from_pretrained(
+    model = B2EPipeline.from_pretrained(
         os.path.join(base_ckpt_dir, cfg.model.pretrained_path), **_pipeline_kwargs
     )
 

@@ -12,6 +12,7 @@ import h5py
 # local modules
 from dataset.h5_augment import *
 from torch.utils.data import ConcatDataset
+import cv2
 
 
 """
@@ -161,8 +162,14 @@ class H5ImageDataset(data.Dataset):
         seed = random.randint(0, 2 ** 32) if seed is None else seed
         item={}
         frame = self.get_frame(index)
+        frame = frame.transpose(1,2,0)
+        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        frame = frame.transpose(2,0,1)
         if self.return_gt_frame:
             frame_gt = self.get_gt_frame(index)
+            frame_gt = frame_gt.transpose(1,2,0)
+            frame_gt = cv2.cvtColor(frame_gt, cv2.COLOR_BGR2RGB)
+            frame_gt = frame_gt.transpose(2,0,1)
             frame_gt = self.transform_frame(frame_gt, seed, transpose_to_CHW=False)
 
         voxel = self.get_voxel(index)
