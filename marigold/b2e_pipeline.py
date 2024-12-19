@@ -34,7 +34,7 @@ import cv2
 class B2EPipeline(DiffusionPipeline):
 
     rgb_latent_scale_factor = 0.18215
-    depth_latent_scale_factor = 0.18215
+    event_latent_scale_factor = 0.18215
 
     def __init__(
         self,
@@ -126,7 +126,11 @@ class B2EPipeline(DiffusionPipeline):
             )
 
         # Normalize rgb values
-        rgb_norm: torch.Tensor = rgb / 255.0 * 2.0 - 1.0  #  [0, 255] -> [-1, 1]
+        if torch.min(rgb) < 0:
+            rgb_norm = rgb
+        else:
+            rgb_norm: torch.Tensor = rgb / 255.0 * 2.0 - 1.0  #  [0, 255] -> [-1, 1]
+
         rgb_norm = rgb_norm.to(self.dtype)
         assert rgb_norm.min() >= -1.0 and rgb_norm.max() <= 1.0
 
@@ -251,12 +255,12 @@ class B2EPipeline(DiffusionPipeline):
         timesteps = self.scheduler.timesteps  # [T]
 
         # Encode image
-        rgb_latent = self.encode_flow(rgb_in)
-        # rgb_latent = self.encode_rgb(rgb_in) if useing custom vae
+        rgb_latent = self.encode(rgb_in)
+        B,C,H,W = rgb_latent.shape
 
         # Initial depth map (noise)
-        depth_latent = torch.randn(
-            rgb_latent.shape,
+        event_latent = torch.randn(
+            (B, 8, H, W),  # 8 channels for event latent
             device=device,
             dtype=self.dtype,
             generator=generator,
@@ -283,7 +287,7 @@ class B2EPipeline(DiffusionPipeline):
 
         for i, t in iterable:
             unet_input = torch.cat(
-                [rgb_latent, depth_latent], dim=1
+                [rgb_latent, event_latent], dim=1
             )  # this order is important
 
             # predict the noise residual
@@ -292,16 +296,16 @@ class B2EPipeline(DiffusionPipeline):
             ).sample  # [B, 4, h, w]
 
             # compute the previous noisy sample x_t -> x_t-1
-            depth_latent = self.scheduler.step(
-                noise_pred, t, depth_latent, generator=generator
+            event_latent = self.scheduler.step(
+                noise_pred, t, event_latent, generator=generator
             ).prev_sample
 
-        depth = self.decode_depth(depth_latent)
+        event = self.decode_event(event_latent)
 
         # clip prediction
-        depth = torch.clip(depth, -1.0, 1.0)
+        event = torch.clip(event, -1.0, 1.0)
 
-        return depth
+        return event
 
     def encode(self, flow_in: torch.Tensor) -> torch.Tensor:
 
@@ -314,13 +318,20 @@ class B2EPipeline(DiffusionPipeline):
         return flow_latent
     
 
-    def decode_depth(self, depth_latent: torch.Tensor) -> torch.Tensor:
+    def decode_event(self, event_latent: torch.Tensor) -> torch.Tensor:
 
         # scale latent
-        depth_latent = depth_latent / self.depth_latent_scale_factor
+        event_latent = event_latent / self.event_latent_scale_factor
+
+        # split event_latent 
+        event_latent_1, event_latent_2 = torch.chunk(event_latent, 2, dim=1)
         # decode
-        z = self.vae.post_quant_conv(depth_latent)
-        stacked = self.vae.decoder(z)
-        # mean of output channels
-        # depth_mean = stacked.mean(dim=1, keepdim=True)
+        z_1 = self.vae.post_quant_conv(event_latent_1)
+        z_2 = self.vae.post_quant_conv(event_latent_2)
+
+        z_1 = self.vae.decoder(z_1)
+        z_2 = self.vae.decoder(z_2)
+
+        stacked = torch.cat([z_1, z_2], dim=1)
+
         return stacked

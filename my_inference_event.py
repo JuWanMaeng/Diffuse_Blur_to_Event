@@ -27,17 +27,20 @@ import numpy as np
 import torch
 from PIL import Image
 from tqdm.auto import tqdm
+from dataset.h5_image_dataset import H5ImageDataset, concatenate_h5_datasets
 
-from marigold.b2f_pipeline import B2FPipeline
+from marigold.b2e_pipeline import B2EPipeline
 import cv2
 from ptlflow.utils import flow_utils
 from ptlflow.utils.flow_utils import flow_to_rgb
+from torch.utils.data import DataLoader
+from event_metric import metric_and_output
 
 EXTENSION_LIST = [".jpg", ".jpeg", ".png"]
 
 
 if "__main__" == __name__:
-    os.environ['CUDA_VISIBLE_DEVICES'] = '0'
+    os.environ['CUDA_VISIBLE_DEVICES'] = '1'
     logging.basicConfig(level=logging.INFO)
 
     # -------------------- Arguments --------------------
@@ -61,7 +64,7 @@ if "__main__" == __name__:
     parser.add_argument(
         "--dataset_name",
         type=str,
-        default='Gopro_part_Raw_30000',
+        default='Gopro_Event',
         help="Path to the input image folder.",
     )
 
@@ -172,34 +175,26 @@ if "__main__" == __name__:
     logging.info(f"device = {device}")
 
     # -------------------- Data --------------------
-    # rgb_filename_list = glob(os.path.join(input_rgb_dir, "*"))
-    input_path_txt = input_rgb_dir
-    rgb_filename_list = []
-    with open(input_path_txt, 'r') as file:
-        for line in file:
-            rgb_filename_list.append(line.strip())
 
-    # rgb_filename_list = sorted(rgb_filename_list)
-    n_images = len(rgb_filename_list)
-    if n_images > 0:
-        logging.info(f"Found {n_images} images")
-    else:
-        logging.error(f"No image found in '{input_rgb_dir}'")
-        exit(1)
+    opt = {'crop_size': None,
+           'use_flip' : False,
+           'folder_path' : '/workspace/data/GOPRO/test',
+           }
+    
+    dataset = concatenate_h5_datasets(H5ImageDataset, opt)
 
+    dataloader = DataLoader(
+        dataset=dataset,
+        batch_size=1,
+        num_workers=1,
+        shuffle=False,
+    )
 
     # -------------------- Model --------------------
-    if half_precision:
-        dtype = torch.float16
-        variant = "fp16"
-        logging.info(
-            f"Running with half precision ({dtype}), might lead to suboptimal result."
-        )
-    else:
-        dtype = torch.float32
-        variant = None
+    dtype = torch.float32
+    variant = None
 
-    pipe: B2FPipeline = B2FPipeline.from_pretrained(
+    pipe: B2EPipeline = B2EPipeline.from_pretrained(
         checkpoint_path, variant=variant, torch_dtype=dtype
     )
 
@@ -225,14 +220,14 @@ if "__main__" == __name__:
 
     # -------------------- Inference and saving --------------------
     max_flow = 10000
+    total_rmse = 0
     with torch.no_grad():
         os.makedirs(output_dir, exist_ok=True)
 
-        for idx,rgb_path in enumerate(tqdm(rgb_filename_list, desc="Estimating depth", leave=True)):
+        for idx,data in enumerate(tqdm(dataloader, desc="Estimating depth", leave=True)):
             # Read input image
-            input_image = Image.open(rgb_path)
-            img_name = rgb_path.split('/')[-1]
-            img_num = img_name[:-4]
+            input_image = data['frame']
+            img_path = data['path']
 
             # Random number generator
             if seed is None:
@@ -255,17 +250,23 @@ if "__main__" == __name__:
                 generator=generator,
             )
 
-            os.makedirs(os.path.join(output_dir,img_num),exist_ok=True)
-            out_path = os.path.join(output_dir, img_num, 'out.png')
-            input_path = os.path.join(output_dir,img_num,'input.png')
-            ensemble_candidate_path = os.path.join(output_dir,img_num)
+            # save output folder
+            os.makedirs(os.path.join(output_dir, img_path[0]),exist_ok=True)
 
 
-            for idx,out_img in enumerate(pipe_out):
-                out_img = out_img[:,:,:2]
-                out_img = flow_to_rgb(out_img)
-                cv2.imwrite(os.path.join(ensemble_candidate_path,f'{idx}.png'),out_img)
-                # cv2.imwrite(out_path, out_img)
-                input_image.save(input_path)
+            gt_event = data['voxel'][0]  # [6,H,W]
+            gt_event = np.array(gt_event)
+
+      
+
+            metrics, best_pred = metric_and_output(pipe_out,gt_event)
+            best_rmse = min(metrics)
+            total_rmse += best_rmse
+
+
+        print(total_rmse/len(dataloader))
+
+
+
                 
 

@@ -2733,3 +2733,94 @@
 12/17/2024 14:40:01 - INFO: device = cuda
 12/17/2024 14:40:03 - INFO: scale_invariant: True, shift_invariant: True
 12/17/2024 14:40:03 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 1, processing resolution = 768, seed = None; color_map = Spectral.
+12/19/2024 10:57:59 - INFO: output dir = results/Gopro_Event
+12/19/2024 10:57:59 - INFO: device = cuda
+12/19/2024 10:59:17 - INFO: output dir = results/Gopro_Event
+12/19/2024 10:59:17 - INFO: device = cuda
+12/19/2024 11:16:49 - INFO: output dir = results/Gopro_Event
+12/19/2024 11:16:49 - INFO: device = cuda
+12/19/2024 11:18:48 - INFO: output dir = results/Gopro_Event
+12/19/2024 11:18:48 - INFO: device = cuda
+12/19/2024 11:20:54 - INFO: scale_invariant: True, shift_invariant: True
+12/19/2024 13:15:32 - INFO: output dir = results/Gopro_Event
+12/19/2024 13:15:32 - INFO: device = cuda
+12/19/2024 13:16:00 - INFO: scale_invariant: True, shift_invariant: True
+12/19/2024 13:16:01 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 10, processing resolution = 768, seed = None; color_map = Spectral.
+12/19/2024 13:22:51 - INFO: output dir = results/Gopro_Event
+12/19/2024 13:22:51 - INFO: device = cuda
+12/19/2024 13:22:59 - INFO: scale_invariant: True, shift_invariant: True
+12/19/2024 13:22:59 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 10, processing resolution = 768, seed = None; color_map = Spectral.
+12/19/2024 13:23:45 - INFO: output dir = results/Gopro_Event
+12/19/2024 13:23:45 - INFO: device = cuda
+12/19/2024 13:23:49 - INFO: scale_invariant: True, shift_invariant: True
+12/19/2024 13:23:49 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 10, processing resolution = 768, seed = None; color_map = Spectral.
+12/19/2024 13:24:48 - INFO: output dir = results/Gopro_Event
+12/19/2024 13:24:48 - INFO: device = cuda
+12/19/2024 13:24:52 - INFO: scale_invariant: True, shift_invariant: True
+12/19/2024 13:24:52 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 10, processing resolution = 768, seed = None; color_map = Spectral.
+12/19/2024 13:37:06 - INFO: output dir = results/Gopro_Event
+12/19/2024 13:37:06 - INFO: device = cuda
+12/19/2024 13:37:11 - INFO: scale_invariant: True, shift_invariant: True
+12/19/2024 13:37:11 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 10, processing resolution = 768, seed = None; color_map = Spectral.
+12/19/2024 13:38:01 - INFO: output dir = results/Gopro_Event
+12/19/2024 13:38:01 - INFO: device = cuda
+12/19/2024 13:38:05 - INFO: scale_invariant: True, shift_invariant: True
+12/19/2024 13:38:05 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 10, processing resolution = 768, seed = None; color_map = Spectral.
+12/19/2024 13:43:17 - INFO: output dir = results/Gopro_Event
+12/19/2024 13:43:17 - INFO: device = cuda
+12/19/2024 13:43:21 - INFO: scale_invariant: True, shift_invariant: True
+12/19/2024 13:43:21 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 10, processing resolution = 768, seed = None; color_map = Spectral.
+12/19/2024 14:05:38 - INFO: output dir = results/Gopro_Event
+12/19/2024 14:05:38 - INFO: device = cuda
+12/19/2024 14:05:43 - INFO: scale_invariant: True, shift_invariant: True
+12/19/2024 14:05:43 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 10, processing resolution = 768, seed = None; color_map = Spectral.
+12/19/2024 14:08:16 - INFO: output dir = results/Gopro_Event
+12/19/2024 14:08:16 - INFO: device = cuda
+12/19/2024 14:09:06 - INFO: output dir = results/Gopro_Event
+12/19/2024 14:09:06 - INFO: device = cuda
+12/19/2024 14:09:10 - INFO: scale_invariant: True, shift_invariant: True
+12/19/2024 14:09:10 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 10, processing resolution = 768, seed = None; color_map = Spectral.
+12/19/2024 14:11:43 - INFO: output dir = results/Gopro_Event
+12/19/2024 14:11:43 - INFO: device = cuda
+12/19/2024 14:11:47 - INFO: scale_invariant: True, shift_invariant: True
+12/19/2024 14:11:47 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 10, processing resolution = 768, seed = None; color_map = Spectral.
+12/19/2024 14:13:03 - INFO: output dir = results/Gopro_Event
+12/19/2024 14:13:03 - INFO: device = cuda
+12/19/2024 14:13:07 - INFO: scale_invariant: True, shift_invariant: True
+12/19/2024 14:13:07 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 10, processing resolution = 768, seed = None; color_map = Spectral.
+12/19/2024 14:16:39 - INFO: output dir = results/Gopro_Event
+12/19/2024 14:16:39 - INFO: device = cuda
+12/19/2024 14:16:43 - INFO: scale_invariant: True, shift_invariant: True
+12/19/2024 14:16:43 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 10, processing resolution = 768, seed = None; color_map = Spectral.
+12/19/2024 14:18:48 - INFO: output dir = results/Gopro_Event
+12/19/2024 14:18:48 - INFO: device = cuda
+12/19/2024 14:18:52 - INFO: scale_invariant: True, shift_invariant: True
+12/19/2024 14:18:52 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 10, processing resolution = 768, seed = None; color_map = Spectral.
+12/19/2024 14:21:15 - INFO: output dir = results/Gopro_Event
+12/19/2024 14:21:15 - INFO: device = cuda
+12/19/2024 14:21:19 - INFO: scale_invariant: True, shift_invariant: True
+12/19/2024 14:21:19 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 10, processing resolution = 768, seed = None; color_map = Spectral.
+12/19/2024 14:54:08 - INFO: output dir = results/Gopro_Event
+12/19/2024 14:54:08 - INFO: device = cuda
+12/19/2024 14:54:13 - INFO: scale_invariant: True, shift_invariant: True
+12/19/2024 14:54:13 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 10, processing resolution = 768, seed = None; color_map = Spectral.
+12/19/2024 15:38:56 - INFO: output dir = results/Gopro_Event
+12/19/2024 15:38:56 - INFO: device = cuda
+12/19/2024 15:39:01 - INFO: scale_invariant: True, shift_invariant: True
+12/19/2024 15:39:01 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 10, processing resolution = 768, seed = None; color_map = Spectral.
+12/19/2024 15:39:43 - INFO: output dir = results/Gopro_Event
+12/19/2024 15:39:43 - INFO: device = cuda
+12/19/2024 15:39:47 - INFO: scale_invariant: True, shift_invariant: True
+12/19/2024 15:39:47 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 10, processing resolution = 768, seed = None; color_map = Spectral.
+12/19/2024 15:41:28 - INFO: output dir = results/Gopro_Event
+12/19/2024 15:41:28 - INFO: device = cuda
+12/19/2024 15:41:32 - INFO: scale_invariant: True, shift_invariant: True
+12/19/2024 15:41:32 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 10, processing resolution = 768, seed = None; color_map = Spectral.
+12/19/2024 15:50:41 - INFO: output dir = results/Gopro_Event
+12/19/2024 15:50:41 - INFO: device = cuda
+12/19/2024 15:50:46 - INFO: scale_invariant: True, shift_invariant: True
+12/19/2024 15:50:46 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 10, processing resolution = 768, seed = None; color_map = Spectral.
+12/19/2024 15:59:19 - INFO: output dir = results/Gopro_Event
+12/19/2024 15:59:19 - INFO: device = cuda
+12/19/2024 15:59:22 - INFO: scale_invariant: True, shift_invariant: True
+12/19/2024 15:59:22 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 10, processing resolution = 768, seed = None; color_map = Spectral.
