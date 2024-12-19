@@ -54,7 +54,7 @@ from src.util.logging_util import (
 from src.util.slurm_util import get_local_scratch_dir, is_on_slurm
 
 if "__main__" == __name__:
-    os.environ['CUDA_VISIBLE_DEVICES'] = '0'
+    os.environ['CUDA_VISIBLE_DEVICES'] = '1'
 
     t_start = datetime.now()
     print(f"start at {t_start}")
