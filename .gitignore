@@ -25,6 +25,6 @@
 *.tar
 *.bin
 *.png
-
+*.npy
 
 jj_inference.py

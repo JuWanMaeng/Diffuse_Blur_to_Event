@@ -40,7 +40,7 @@ EXTENSION_LIST = [".jpg", ".jpeg", ".png"]
 
 
 if "__main__" == __name__:
-    os.environ['CUDA_VISIBLE_DEVICES'] = '1'
+    os.environ['CUDA_VISIBLE_DEVICES'] = '0'
     logging.basicConfig(level=logging.INFO)
 
     # -------------------- Arguments --------------------
@@ -64,7 +64,7 @@ if "__main__" == __name__:
     parser.add_argument(
         "--dataset_name",
         type=str,
-        default='Gopro_Event',
+        default='Gopro_Event_Test',
         help="Path to the input image folder.",
     )
 
@@ -82,7 +82,7 @@ if "__main__" == __name__:
     parser.add_argument(
         "--ensemble_size",
         type=int,
-        default=10,
+        default=5,
         help="Number of predictions to be ensembled, more inference gives better results but runs slower.",
     )
     parser.add_argument(
@@ -178,7 +178,7 @@ if "__main__" == __name__:
 
     opt = {'crop_size': None,
            'use_flip' : False,
-           'folder_path' : '/workspace/data/GOPRO/test',
+           'folder_path' : '/workspace/data/GOPRO/train',
            }
     
     dataset = concatenate_h5_datasets(H5ImageDataset, opt)
@@ -221,50 +221,55 @@ if "__main__" == __name__:
     # -------------------- Inference and saving --------------------
     max_flow = 10000
     total_rmse = 0
-    with torch.no_grad():
-        os.makedirs(output_dir, exist_ok=True)
 
-        for idx,data in enumerate(tqdm(dataloader, desc="Estimating depth", leave=True)):
-            # Read input image
-            input_image = data['frame']
-            img_path = data['path']
+    with open('Gopro_event_train_results.txt','a', buffering=1) as f:
+        with torch.no_grad():
+            # os.makedirs(output_dir, exist_ok=True)
 
-            # Random number generator
-            if seed is None:
-                generator = None
-            else:
-                generator = torch.Generator(device=device)
-                generator.manual_seed(seed)
+            for idx,data in enumerate(tqdm(dataloader, desc="Estimating depth", leave=True)):
+                # Read input image
+                input_image = data['frame']
+                img_path = data['path']
 
-            # Predict depth
-            pipe_out = pipe(
-                input_image,
-                denoising_steps=denoise_steps,
-                ensemble_size=ensemble_size,
-                processing_res=processing_res,
-                match_input_res=match_input_res,
-                batch_size=batch_size,
-                color_map=color_map,
-                show_progress_bar=True,
-                resample_method=resample_method,
-                generator=generator,
-            )
+                # Random number generator
+                if seed is None:
+                    generator = None
+                else:
+                    generator = torch.Generator(device=device)
+                    generator.manual_seed(seed)
 
-            # save output folder
-            os.makedirs(os.path.join(output_dir, img_path[0]),exist_ok=True)
+                # Predict depth
+                pipe_out = pipe(
+                    input_image,
+                    denoising_steps=denoise_steps,
+                    ensemble_size=ensemble_size,
+                    processing_res=processing_res,
+                    match_input_res=match_input_res,
+                    batch_size=batch_size,
+                    color_map=color_map,
+                    show_progress_bar=True,
+                    resample_method=resample_method,
+                    generator=generator,
+                )
 
-
-            gt_event = data['voxel'][0]  # [6,H,W]
-            gt_event = np.array(gt_event)
-
-      
-
-            metrics, best_pred = metric_and_output(pipe_out,gt_event)
-            best_rmse = min(metrics)
-            total_rmse += best_rmse
+                # save output folder
+                os.makedirs(os.path.join(output_dir, img_path[0]),exist_ok=True)
 
 
-        print(total_rmse/len(dataloader))
+                gt_event = data['voxel'][0]  # [6,H,W]
+                gt_event = np.array(gt_event)
+
+        
+
+                min_navie_rmse, min_reversed_rmse, once_rmse, avg_rmse, best_pred = metric_and_output(pipe_out,gt_event)
+                best_rmse = min(min_navie_rmse, min_reversed_rmse)
+                total_rmse += best_rmse
+
+                f.write(f'{img_path[0]}: {min_navie_rmse:.3f} {min_reversed_rmse:.3f} {once_rmse:.3f} {avg_rmse:.3f}\n')
+                np.save(os.path.join(output_dir, img_path[0], 'out'), best_pred)
+
+
+            print(total_rmse/len(dataloader))
 
 
 
