@@ -40,7 +40,7 @@ EXTENSION_LIST = [".jpg", ".jpeg", ".png"]
 
 
 if "__main__" == __name__:
-    os.environ['CUDA_VISIBLE_DEVICES'] = '0'
+    os.environ['CUDA_VISIBLE_DEVICES'] = '2'
     logging.basicConfig(level=logging.INFO)
 
     # -------------------- Arguments --------------------
@@ -178,7 +178,7 @@ if "__main__" == __name__:
 
     opt = {'crop_size': None,
            'use_flip' : False,
-           'folder_path' : '/workspace/data/GOPRO/test',
+           'folder_path' : '/workspace/data/GOPRO/train',
            }
     
     dataset = concatenate_h5_datasets(H5ImageDataset, opt)
@@ -219,7 +219,6 @@ if "__main__" == __name__:
     )
 
     # -------------------- Inference and saving --------------------
-    max_flow = 10000
     total_rmse = 0
 
     with open('Gopro_event_train_results.txt','a', buffering=1) as f:

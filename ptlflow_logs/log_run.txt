@@ -2932,3 +2932,9 @@
 12/20/2024 14:13:35 - INFO: device = cuda
 12/20/2024 14:13:39 - INFO: scale_invariant: True, shift_invariant: True
 12/20/2024 14:13:39 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 5, processing resolution = 768, seed = None; color_map = Spectral.
+12/20/2024 15:56:39 - INFO: output dir = results/Gopro_Event_Train
+12/20/2024 15:56:39 - INFO: device = cuda
+12/20/2024 15:57:00 - INFO: output dir = results/Gopro_Event_Train
+12/20/2024 15:57:00 - INFO: device = cuda
+12/20/2024 15:57:07 - INFO: scale_invariant: True, shift_invariant: True
+12/20/2024 15:57:07 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 5, processing resolution = 768, seed = None; color_map = Spectral.
