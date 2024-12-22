@@ -1,1 +1,5 @@
 /workspace/data/HIDE_dataset/test/test-close-ups/277fromGOPR1089.MP4.png
+/workspace/data/HIDE_dataset/test/test-close-ups/284fromGOPR1087.MP4.png
+/workspace/data/HIDE_dataset/test/test-close-ups/100fromGOPR0955.png
+/workspace/data/HIDE_dataset/test/test-close-ups/158fromGOPR1087.MP4.png
+/workspace/data/HIDE_dataset/test/test-long-shot/58fromGOPR0969.png

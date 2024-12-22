@@ -261,16 +261,22 @@ if "__main__" == __name__:
             os.makedirs(os.path.join(output_dir,img_num),exist_ok=True)
             out_path = os.path.join(output_dir, img_num)
             input_path = os.path.join(output_dir,img_num,'input.png')
-            ensemble_candidate_path = os.path.join(output_dir,img_num)
 
 
             for idx,out_img in enumerate(pipe_out):
                 # normalize [-n,n] to [-1,1]
+                max_val = np.max(np.abs(out_img))
+                out_img = out_img / max_val
+                out_img = (out_img + 1) / 2
+                out_img = out_img * 255
+                out_img = out_img.astype(np.uint8)
 
+    
                 for i in range(6):
                     save_path = os.path.join(out_path,f'{i}.png')
-                    out_img[:,:,i]
-                cv2.imwrite(out_path, out_img)
+                    out = out_img[:,:,i]
+                    cv2.imwrite(save_path, out)
                 input_image.save(input_path)
-                
+                    
+
 
