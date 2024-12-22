@@ -27,14 +27,10 @@ import numpy as np
 import torch
 from PIL import Image
 from tqdm.auto import tqdm
-from dataset.h5_image_dataset import H5ImageDataset, concatenate_h5_datasets
 
 from marigold.b2e_pipeline import B2EPipeline
 import cv2
-from ptlflow.utils import flow_utils
-from ptlflow.utils.flow_utils import flow_to_rgb
-from torch.utils.data import DataLoader
-from event_metric import metric_and_output
+
 
 EXTENSION_LIST = [".jpg", ".jpeg", ".png"]
 
@@ -57,14 +53,14 @@ if "__main__" == __name__:
     parser.add_argument(
         "--input_rgb_dir",
         type=str,
-        default='dataset/gopro_t_part.txt',
+        default='dataset/paths/HIDE_test_select.txt',
         help="Path to the input image folder.",
     )
 
     parser.add_argument(
         "--dataset_name",
         type=str,
-        default='Gopro_Event_Test',
+        default='HIDE',
         help="Path to the input image folder.",
     )
 
@@ -82,7 +78,7 @@ if "__main__" == __name__:
     parser.add_argument(
         "--ensemble_size",
         type=int,
-        default=5,
+        default=1,
         help="Number of predictions to be ensembled, more inference gives better results but runs slower.",
     )
     parser.add_argument(
@@ -175,24 +171,32 @@ if "__main__" == __name__:
     logging.info(f"device = {device}")
 
     # -------------------- Data --------------------
+    # rgb_filename_list = glob(os.path.join(input_rgb_dir, "*"))
+    input_path_txt = input_rgb_dir
+    rgb_filename_list = []
+    with open(input_path_txt, 'r') as file:
+        for line in file:
+            rgb_filename_list.append(line.strip())
 
-    opt = {'crop_size': None,
-           'use_flip' : False,
-           'folder_path' : '/workspace/data/GOPRO/train',
-           }
-    
-    dataset = concatenate_h5_datasets(H5ImageDataset, opt)
+    # rgb_filename_list = sorted(rgb_filename_list)
+    n_images = len(rgb_filename_list)
+    if n_images > 0:
+        logging.info(f"Found {n_images} images")
+    else:
+        logging.error(f"No image found in '{input_rgb_dir}'")
+        exit(1)
 
-    dataloader = DataLoader(
-        dataset=dataset,
-        batch_size=1,
-        num_workers=1,
-        shuffle=False,
-    )
 
     # -------------------- Model --------------------
-    dtype = torch.float32
-    variant = None
+    if half_precision:
+        dtype = torch.float16
+        variant = "fp16"
+        logging.info(
+            f"Running with half precision ({dtype}), might lead to suboptimal result."
+        )
+    else:
+        dtype = torch.float32
+        variant = None
 
     pipe: B2EPipeline = B2EPipeline.from_pretrained(
         checkpoint_path, variant=variant, torch_dtype=dtype
@@ -220,58 +224,49 @@ if "__main__" == __name__:
 
     # -------------------- Inference and saving --------------------
     max_flow = 10000
-    total_rmse = 0
+    with torch.no_grad():
+        os.makedirs(output_dir, exist_ok=True)
 
-    with open('Gopro_event_train_results.txt','a', buffering=1) as f:
-        with torch.no_grad():
-            # os.makedirs(output_dir, exist_ok=True)
+        for idx,rgb_path in enumerate(tqdm(rgb_filename_list, desc="Estimating depth", leave=True)):
+            # Read input image
+            input_image = Image.open(rgb_path)
 
-            for idx,data in enumerate(tqdm(dataloader, desc="Estimating depth", leave=True)):
-                # Read input image
-                input_image = data['frame']
-                img_path = data['path']
-
-                # Random number generator
-                if seed is None:
-                    generator = None
-                else:
-                    generator = torch.Generator(device=device)
-                    generator.manual_seed(seed)
-
-                # Predict depth
-                pipe_out = pipe(
-                    input_image,
-                    denoising_steps=denoise_steps,
-                    ensemble_size=ensemble_size,
-                    processing_res=processing_res,
-                    match_input_res=match_input_res,
-                    batch_size=batch_size,
-                    color_map=color_map,
-                    show_progress_bar=True,
-                    resample_method=resample_method,
-                    generator=generator,
-                )
-
-                # save output folder
-                os.makedirs(os.path.join(output_dir, img_path[0]),exist_ok=True)
+            scene = rgb_path.split('/')[-3]
+            img_name = scene +'_'+ rgb_path.split('/')[-1]
+            img_num = img_name
+            
 
 
-                gt_event = data['voxel'][0]  # [6,H,W]
-                gt_event = np.array(gt_event)
+            # Random number generator
+            if seed is None:
+                generator = None
+            else:
+                generator = torch.Generator(device=device)
+                generator.manual_seed(seed)
 
-        
+            # Predict depth
+            pipe_out = pipe(
+                input_image,
+                denoising_steps=denoise_steps,
+                ensemble_size=ensemble_size,
+                processing_res=processing_res,
+                match_input_res=match_input_res,
+                batch_size=batch_size,
+                color_map=color_map,
+                show_progress_bar=True,
+                resample_method=resample_method,
+                generator=generator,
+            )
 
-                min_navie_rmse, min_reversed_rmse, once_rmse, avg_rmse, best_pred = metric_and_output(pipe_out,gt_event)
-                best_rmse = min(min_navie_rmse, min_reversed_rmse)
-                total_rmse += best_rmse
-
-                f.write(f'{img_path[0]}: {min_navie_rmse:.3f} {min_reversed_rmse:.3f} {once_rmse:.3f} {avg_rmse:.3f}\n')
-                np.save(os.path.join(output_dir, img_path[0], 'out'), best_pred)
+            os.makedirs(os.path.join(output_dir,img_num),exist_ok=True)
+            out_path = os.path.join(output_dir, img_num, 'out.png')
+            input_path = os.path.join(output_dir,img_num,'input.png')
+            ensemble_candidate_path = os.path.join(output_dir,img_num)
 
 
-            print(total_rmse/len(dataloader))
-
-
-
+            for idx,out_img in enumerate(pipe_out):
+                # cv2.imwrite(os.path.join(ensemble_candidate_path,f'{idx}.png'),out_img)
+                cv2.imwrite(out_path, out_img)
+                input_image.save(input_path)
                 
 
