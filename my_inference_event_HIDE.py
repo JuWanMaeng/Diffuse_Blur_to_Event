@@ -53,7 +53,7 @@ if "__main__" == __name__:
     parser.add_argument(
         "--input_rgb_dir",
         type=str,
-        default='dataset/paths/HIDE_test_select.txt',
+        default='/workspace/Marigold/dataset/paths/HIDE_test.txt',
         help="Path to the input image folder.",
     )
 
@@ -264,18 +264,22 @@ if "__main__" == __name__:
 
 
             for idx,out_img in enumerate(pipe_out):
+
+                # visualize                
                 # normalize [-n,n] to [-1,1]
-                max_val = np.max(np.abs(out_img))
-                out_img = out_img / max_val
-                out_img = (out_img + 1) / 2
-                out_img = out_img * 255
-                out_img = out_img.astype(np.uint8)
+                # max_val = np.max(np.abs(out_img))
+                # out_img = out_img / max_val
+                # out_img = (out_img + 1) / 2
+                # out_img = out_img * 255
+                # out_img = out_img.astype(np.uint8)
 
     
-                for i in range(6):
-                    save_path = os.path.join(out_path,f'{i}.png')
-                    out = out_img[:,:,i]
-                    cv2.imwrite(save_path, out)
+                # for i in range(6):
+                #     save_path = os.path.join(out_path,f'{i}.png')
+                #     out = out_img[:,:,i]
+                #     cv2.imwrite(save_path, out)
+
+                np.save(os.path.join(out_path,'event.npy'),out_img)   # H,W,6
                 input_image.save(input_path)
                     
 
