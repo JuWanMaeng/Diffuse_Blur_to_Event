@@ -262,20 +262,29 @@ if "__main__" == __name__:
             out_path = os.path.join(output_dir, img_num)
             input_path = os.path.join(output_dir,img_num,'input.png')
 
+            root_path = rgb_path.split('/')[:-2]
+            tmp_path = os.path.join(*root_path) # 'workspace/data/RealBlur/RealBlur-J_ECC_IMCORR_centroid_itensity_ref/scene120'
+            event_folder_path = '/'+  os.path.join(tmp_path,'event')
+            event_name = rgb_path.split('/')[-1]
+            event_name = event_name.replace('blur','event')
+            os.makedirs(event_folder_path,exist_ok=True)
+
+            event_save_path = os.path.join(event_folder_path,event_name)
+
+
 
             for idx,out_img in enumerate(pipe_out):
                 # normalize [-n,n] to [-1,1]
-                # max_val = np.max(np.abs(out_img))
-                # out_img = out_img / max_val
-                # out_img = (out_img + 1) / 2
-                # out_img = out_img * 255
-                # out_img = out_img.astype(np.uint8)
+                max_val = np.max(np.abs(out_img))
+                out_img = out_img / max_val
+                out_img = (out_img + 1) / 2
+                out_img = out_img * 255
+                out_img = out_img.astype(np.uint8)
 
     
-                # for i in range(6):
-                #     save_path = os.path.join(out_path,f'{i}.png')
-                #     out = out_img[:,:,i]
-                #     cv2.imwrite(save_path, out)
-                np.save(os.path.join(out_path,'event.npy'),out_img)   # H,W,6
+                for i in range(6):
+                    save_path = os.path.join(out_path,f'{i}.png')
+                    out = out_img[:,:,i]
+                    cv2.imwrite(save_path, out)
+                np.save(event_save_path[:-4],out_img)   # H,W,6
                 input_image.save(input_path)
-

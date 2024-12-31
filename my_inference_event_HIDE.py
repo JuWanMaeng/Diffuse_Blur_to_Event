@@ -36,7 +36,7 @@ EXTENSION_LIST = [".jpg", ".jpeg", ".png"]
 
 
 if "__main__" == __name__:
-    os.environ['CUDA_VISIBLE_DEVICES'] = '0'
+    os.environ['CUDA_VISIBLE_DEVICES'] = '2'
     logging.basicConfig(level=logging.INFO)
 
     # -------------------- Arguments --------------------
@@ -53,14 +53,14 @@ if "__main__" == __name__:
     parser.add_argument(
         "--input_rgb_dir",
         type=str,
-        default='/workspace/Marigold/dataset/paths/HIDE_test.txt',
+        default='/workspace/Marigold/dataset/paths/REDS.txt',
         help="Path to the input image folder.",
     )
 
     parser.add_argument(
         "--dataset_name",
         type=str,
-        default='HIDE',
+        default='REDS',
         help="Path to the input image folder.",
     )
 
@@ -231,9 +231,9 @@ if "__main__" == __name__:
             # Read input image
             input_image = Image.open(rgb_path)
 
-            scene = rgb_path.split('/')[-3]
+            scene = rgb_path.split('/')[-2]
             img_name = scene +'_'+ rgb_path.split('/')[-1]
-            img_num = img_name
+            img_num = img_name[:-4]
             
 
 
@@ -264,22 +264,23 @@ if "__main__" == __name__:
 
 
             for idx,out_img in enumerate(pipe_out):
-
+                save_event = out_img
                 # visualize                
                 # normalize [-n,n] to [-1,1]
-                # max_val = np.max(np.abs(out_img))
-                # out_img = out_img / max_val
-                # out_img = (out_img + 1) / 2
-                # out_img = out_img * 255
-                # out_img = out_img.astype(np.uint8)
+                max_val = np.max(np.abs(out_img))
+                out_img = out_img / max_val
+                out_img = (out_img + 1) / 2
+                out_img = out_img * 255
+                out_img = out_img.astype(np.uint8)
 
     
-                # for i in range(6):
-                #     save_path = os.path.join(out_path,f'{i}.png')
-                #     out = out_img[:,:,i]
-                #     cv2.imwrite(save_path, out)
+                for i in range(6):
+                    save_path = os.path.join(out_path,f'{i}.png')
+                    out = out_img[:,:,i]
+                    cv2.imwrite(save_path, out)
 
-                np.save(os.path.join(out_path,'event.npy'),out_img)   # H,W,6
+                event_save_path = rgb_path.replace('.png', '.npy')
+                np.save(event_save_path,save_event)   # H,W,6
                 input_image.save(input_path)
                     
 
