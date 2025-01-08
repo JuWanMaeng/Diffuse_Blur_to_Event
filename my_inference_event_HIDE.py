@@ -53,14 +53,14 @@ if "__main__" == __name__:
     parser.add_argument(
         "--input_rgb_dir",
         type=str,
-        default='/workspace/Marigold/dataset/paths/REDS.txt',
+        default='/workspace/Marigold/dataset/paths/Rsblur_blur.txt',
         help="Path to the input image folder.",
     )
 
     parser.add_argument(
         "--dataset_name",
         type=str,
-        default='REDS',
+        default='RSblur',
         help="Path to the input image folder.",
     )
 
@@ -231,9 +231,12 @@ if "__main__" == __name__:
             # Read input image
             input_image = Image.open(rgb_path)
 
-            scene = rgb_path.split('/')[-2]
-            img_name = scene +'_'+ rgb_path.split('/')[-1]
-            img_num = img_name[:-4]
+            scene = rgb_path.split('/')[-4]
+            img_id = rgb_path.split('/')[-3]
+            save_folder = f'{scene}_{img_id}'
+
+            # img_name = scene +'_'+ rgb_path.split('/')[-1]
+            # img_num = img_name[:-4]
             
 
 
@@ -258,9 +261,9 @@ if "__main__" == __name__:
                 generator=generator,
             )
 
-            os.makedirs(os.path.join(output_dir,img_num),exist_ok=True)
-            out_path = os.path.join(output_dir, img_num)
-            input_path = os.path.join(output_dir,img_num,'input.png')
+            os.makedirs(os.path.join(output_dir,save_folder),exist_ok=True)
+            out_path = os.path.join(output_dir, save_folder)
+            input_path = os.path.join(output_dir,save_folder,'input.png')
 
 
             for idx,out_img in enumerate(pipe_out):
@@ -278,8 +281,12 @@ if "__main__" == __name__:
                     save_path = os.path.join(out_path,f'{i}.png')
                     out = out_img[:,:,i]
                     cv2.imwrite(save_path, out)
+                
+                event_folder = '/' + os.path.join(*rgb_path.split('/')[:-1])
+                event_folder = event_folder.replace('real_blur', 'event')
+                os.makedirs(event_folder,exist_ok=True)
 
-                event_save_path = rgb_path.replace('.png', '.npy')
+                event_save_path = os.path.join(event_folder,'event.npy')
                 np.save(event_save_path,save_event)   # H,W,6
                 input_image.save(input_path)
                     
