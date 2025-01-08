@@ -57,7 +57,7 @@ optimizer:
   name: Adam
 
 loss:
-  name: mse_loss
+  name: l1_loss
   kwargs:
     reduction: mean
 
