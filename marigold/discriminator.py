@@ -7,7 +7,7 @@ class SCERDiscriminator(nn.Module):
     입력: [B, 6, H, W] 형태 (SCER)
     출력: [B, 1] (진짜/가짜 판별 로짓)
     """
-    def __init__(self, in_channels=8, base_channels=64):
+    def __init__(self, in_channels=6, base_channels=64):
         super().__init__()
         self.net = nn.Sequential(
             # Conv1

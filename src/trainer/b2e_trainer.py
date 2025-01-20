@@ -103,6 +103,11 @@ class B2ETrainer:
         )
         self.lr_scheduler = LambdaLR(optimizer=self.optimizer, lr_lambda=lr_func)
 
+        if self.use_gan:
+            self.discriminator_scheduler = LambdaLR(
+                optimizer=self.discriminator_optimizer,
+                lr_lambda=lr_func
+    )
         # Loss
         self.loss = get_loss(loss_name=self.cfg.loss.name, **self.cfg.loss.kwargs)
 
@@ -124,7 +129,7 @@ class B2ETrainer:
 
         # Eval metrics
         self.metric_funcs = [getattr(metric, _met) for _met in cfg.eval.eval_metrics]
-        self.train_metrics = MetricTracker(*["loss"])
+        self.train_metrics = MetricTracker(*["loss","diff_loss", "g_loss","d_loss"])
         self.val_metrics = MetricTracker(*[m.__name__ for m in self.metric_funcs])
         # main metric for best checkpoint saving
         self.main_val_metric = cfg.validation.main_val_metric
@@ -251,6 +256,10 @@ class B2ETrainer:
         #    x0 = sqrt(alpha_bar_t)*x_t - sqrt(1 - alpha_bar_t)*v_pred
         x0_fake = sqrt_alpha_bar_t * x_t - sqrt_one_minus_alpha_bar_t * v_pred
 
+        #### latent -> pixel ####
+        with torch.no_grad():
+            x0_fake = self.model.decode_event(x0_fake)
+
         # 3) 가짜 vs. 진짜
         #    여기서 fake_data = x0_fake, real_data = x0_gt
         pred_fake = discriminator(x0_fake)  # [B]
@@ -292,6 +301,8 @@ class B2ETrainer:
 
         self.train_metrics.reset()
         accumulated_step = 0  # Gradient Accumulation 카운트
+        
+        warm_up_steps = self.cfg.lr_scheduler.kwargs.warmup_steps # warm up 끝나면 gan 학습 시작
 
         for epoch in range(self.epoch, self.max_epoch + 1):
             self.epoch = epoch
@@ -303,7 +314,7 @@ class B2ETrainer:
                 # 1) 준비 작업 (모델 train 모드, rng 등)
                 ########################################
                 self.model.unet.train()
-                if self.use_gan:
+                if self.use_gan and accumulated_step > warm_up_steps:
                     self.discriminator.train()
 
                 if self.seed is not None:
@@ -320,6 +331,7 @@ class B2ETrainer:
                 event_gt_for_latent = batch['voxel'].to(device)  # [B, 6, H, W], 
                 event_1 = event_gt_for_latent[:, 0:3, :, :]
                 event_2 = event_gt_for_latent[:, 3:, :, :]
+                gt_event = torch.cat([event_1, event_2], dim=1)
 
                 batch_size = rgb.shape[0]
 
@@ -392,11 +404,11 @@ class B2ETrainer:
                 ########################################
                 # 5) Generator(U-Net) & Discriminator 업데이트
                 ########################################
-                if self.use_gan:
+                if self.use_gan and accumulated_step > warm_up_steps :
                     # ========== Generator(U-Net) Loss ==========
                     # 5a) GAN Loss(Generator 측)
                     if self.prediction_type == "v_prediction":
-                        # 예: x0_fake, gan_loss_g = self.compute_generator_gan_loss_v_prediction(...)
+                        # VAE output을 discriminator에 넣을까? latent를 넣을까?
                         x0_fake, gan_loss_g = self.compute_generator_gan_loss_v_prediction(
                             discriminator=self.discriminator,
                             x_t=noisy_latents,
@@ -414,13 +426,10 @@ class B2ETrainer:
 
                     # 역전파 (Generator)
                     g_loss_for_bp = g_loss / self.gradient_accumulation_steps
-                    g_loss_for_bp.backward(retain_graph=True) 
-                    # retain_graph=True: D도 같은 그래프에서 backprop을 쓸 경우 필요할 수 있으나,
-                    #                   실제 상황에 맞게 설정
+                    g_loss_for_bp.backward() 
 
                     # ========== Discriminator Loss ==========
-                    self.discriminator_optimizer.zero_grad()
-                    real_data = event_latent
+                    real_data = gt_event
                     fake_data = x0_fake.detach()  # gradient 분리
                     d_loss = self.compute_discriminator_loss_hinge(
                         self.discriminator, real_data=real_data, fake_data=fake_data
@@ -429,9 +438,9 @@ class B2ETrainer:
                     d_loss_for_bp.backward()
 
                     # 로깅
-                    # self.train_metrics.update("diff_loss", diff_loss.item())
-                    # self.train_metrics.update("gan_loss_g", gan_loss_g.item())
-                    # self.train_metrics.update("d_loss", d_loss.item())
+                    self.train_metrics.update("diff_loss", diff_loss.item())
+                    self.train_metrics.update("g_loss", gan_loss_g.item())
+                    self.train_metrics.update("d_loss", d_loss.item())
 
                 else:
                     # GAN 미사용 시 → Diffusion Loss만 역전파
@@ -443,7 +452,7 @@ class B2ETrainer:
                     self.train_metrics.update("diff_loss", diff_loss.item())
                     d_loss = None  # GAN 미사용
 
-                # (공통으로) "loss" 항목도 업데이트(원하면)
+
                 self.train_metrics.update("loss", g_loss.item())
 
                 # Gradient Accumulation 카운트
@@ -454,42 +463,36 @@ class B2ETrainer:
                 # 6) Accumulation 완료 시 Optimizer step
                 ########################################
                 if accumulated_step >= self.gradient_accumulation_steps:
-                    # (A) Generator(U-Net) Optimizer update
                     self.optimizer.step()
                     self.optimizer.zero_grad()
 
-                    # (B) Discriminator Optimizer update (GAN일 때만)
-                    if self.use_gan:
+                    if self.use_gan and accumulated_step > warm_up_steps:
                         self.discriminator_optimizer.step()
-                        # 보통 Discriminator의 zero_grad()는 이미 backward 전 zero_grad()로 처리됨
+                        self.discriminator.zero_grad()
 
-                    # (C) LR Scheduler
                     self.lr_scheduler.step()
+                    if self.use_gan and accumulated_step > warm_up_steps:
+                        self.discriminator_scheduler.step()
 
-                    # (D) Reset accumulation
                     accumulated_step = 0
                     self.effective_iter += 1
 
-                    # (E) 로깅 to TensorBoard or wandb
+                    # 로깅
                     accumulated_loss = self.train_metrics.result()["loss"]
-                    tb_logger.log_dic(
-                        {f"train/{k}": v for k, v in self.train_metrics.result().items()},
-                        global_step=self.effective_iter,
-                    )
-                    tb_logger.writer.add_scalar(
-                        "lr",
-                        self.lr_scheduler.get_last_lr()[0],
-                        global_step=self.effective_iter,
-                    )
-                    tb_logger.writer.add_scalar(
-                        "n_batch_in_epoch",
-                        self.n_batch_in_epoch,
-                        global_step=self.effective_iter,
-                    )
                     logging.info(
                         f"iter {self.effective_iter:5d} (epoch {epoch:2d}): loss={accumulated_loss:.5f}"
                     )
                     wandb.log({'iter': self.effective_iter, 'loss': float(f"{accumulated_loss:.5f}")})
+
+                    if self.use_gan and accumulated_step > warm_up_steps:
+                        diffusion_loss = self.train_metrics.result()["diff_loss"]
+                        discriminator_loss = self.train_metrics.result()["d_loss"]
+                        generator_loss = self.train_metrics.result()["g_loss"]
+     
+    
+                        wandb.log({'iter': self.effective_iter, 'diffusion_loss': float(f"{diffusion_loss:.5f}")})
+                        wandb.log({'iter': self.effective_iter, 'd_loss': float(f"{discriminator_loss:.5f}")})
+                        wandb.log({'iter': self.effective_iter, 'g_loss': float(f"{generator_loss:.5f}")})
 
                     self.train_metrics.reset()
 
@@ -727,6 +730,13 @@ class B2ETrainer:
         unet_path = os.path.join(ckpt_dir, "unet")
         self.model.unet.save_pretrained(unet_path, safe_serialization=False)
         logging.info(f"UNet is saved to: {unet_path}")
+
+        # 추가: Discriminator 가중치 저장
+        if self.use_gan and accumulated_step > warm_up_steps:
+            disc_path = os.path.join(ckpt_dir, "discriminator.ckpt")
+            torch.save(self.discriminator.state_dict(), disc_path)
+            logging.info(f"Discriminator weights are saved to: {disc_path}")
+
 
         if save_train_state:
             state = {
