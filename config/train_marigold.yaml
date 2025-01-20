@@ -35,7 +35,7 @@ trainer:
   # name: MarigoldTrainer
   name: B2ETrainer
   training_noise_scheduler:
-    pretrained_path: stable-diffusion-2
+    pretrained_path: my
   init_seed: 2024  # use null to train w/o seeding
   save_period: 100
   backup_period: 999999
@@ -57,7 +57,7 @@ optimizer:
   name: Adam
 
 loss:
-  name: l1_loss
+  name: mse_loss
   kwargs:
     reduction: mean
 
@@ -94,3 +94,7 @@ eval:
   - delta3_acc
   - i_rmse
   - silog_rmse
+
+gan:
+  use_gan: True
+  weight: 0.01

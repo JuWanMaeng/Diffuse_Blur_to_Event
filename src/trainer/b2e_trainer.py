@@ -6,6 +6,8 @@ from typing import List, Union
 
 import numpy as np
 import torch
+import torch.nn.functional as F
+
 from diffusers import DDPMScheduler
 from omegaconf import OmegaConf
 from torch.nn import Conv2d
@@ -18,6 +20,8 @@ from PIL import Image
 
 
 from marigold.b2e_pipeline import B2EPipeline
+from marigold.discriminator import SCERDiscriminator
+
 from src.util import metric
 from src.util.data_loader import skip_first_batches
 from src.util.logging_util import tb_logger, eval_dic_to_text
@@ -27,6 +31,7 @@ from src.util.metric import MetricTracker
 from src.util.multi_res_noise import multi_res_noise_like
 from src.util.alignment import align_depth_least_square
 from src.util.seeding import generate_seed_sequence
+
 import wandb
 
 
@@ -59,6 +64,13 @@ class B2ETrainer:
         self.vis_loaders: List[DataLoader] = vis_dataloaders
         self.accumulation_steps: int = accumulation_steps
 
+        # discriminator
+        if self.cfg.gan.use_gan:
+            self.discriminator = SCERDiscriminator()
+            self.use_gan = True
+            self.gan_weight = self.cfg.gan.weight
+            self.discriminator_optimizer = Adam(self.discriminator.parameters(), lr = self.cfg.lr)
+
         # Adapt input layers
         if 12 != self.model.unet.config["in_channels"]:
             self._replace_unet_conv_in()
@@ -81,6 +93,7 @@ class B2ETrainer:
         # Optimizer !should be defined after input layer is adapted
         lr = self.cfg.lr
         self.optimizer = Adam(self.model.unet.parameters(), lr=lr)
+        
 
         # LR scheduler
         lr_func = IterExponential(
@@ -200,21 +213,85 @@ class B2ETrainer:
         self.model.unet.config["out_channels"] = 8
         logging.info("Unet config is updated")
         return
+    
+
+
+    def compute_generator_gan_loss_v_prediction(
+        self,
+        discriminator,
+        x_t,  # [B, C, H, W] noisy latent at time t
+        v_pred,  # [B, C, H, W] model output (v)
+        x0_gt,   # [B, C, H, W] ground-truth x0 (encoded event latent)
+        timesteps,  # [B] each sample's t
+        alphas_cumprod,  # tensor of shape [num_timesteps], holds \bar{alpha}_t
+    ):
+        """
+        - discriminator: 판별자 모듈 (Ex: SimpleDiscriminator 등)
+        - x_t: 현재 시점 t의 noisy latent
+        - v_pred: UNet이 예측한 v (v-prediction)
+        - x0_gt: ground-truth x0 (VAE 인코딩된 event 이미지)
+        - timesteps: [B], 배치별로 서로 다른 t값 가능
+        - alphas_cumprod: [scheduler_timesteps], 각 t에 대응하는 \bar{\alpha}_t (누적 스케줄)
+
+        반환: generator 측 gan loss (scalar)
+        """
+
+        device = x_t.device
+
+        # 1) alpha_bar_t 가져오기
+        #    timesteps는 long형 [B]이므로 gather 사용
+        alpha_bar_t = alphas_cumprod[timesteps]  # shape [B]
+        alpha_bar_t = alpha_bar_t.reshape(-1, 1, 1, 1)  # [B,1,1,1]
+
+        # sqrt, 1 - alpha_bar
+        sqrt_alpha_bar_t = torch.sqrt(alpha_bar_t)  # [B,1,1,1]
+        sqrt_one_minus_alpha_bar_t = torch.sqrt(1.0 - alpha_bar_t)  # [B,1,1,1]
+
+        # 2) 식 (3) 적용하여 x0 추정
+        #    x0 = sqrt(alpha_bar_t)*x_t - sqrt(1 - alpha_bar_t)*v_pred
+        x0_fake = sqrt_alpha_bar_t * x_t - sqrt_one_minus_alpha_bar_t * v_pred
+
+        # 3) 가짜 vs. 진짜
+        #    여기서 fake_data = x0_fake, real_data = x0_gt
+        pred_fake = discriminator(x0_fake)  # [B]
+        # Hinge Loss (Generator 입장) 예시
+        gan_loss_g = - pred_fake.mean()
+
+        return x0_fake, gan_loss_g
+    
+    def compute_discriminator_loss_hinge(self, discriminator, real_data, fake_data):
+        """
+        Hinge Loss 기반 Discriminator 손실을 계산합니다.
+        
+        Args:
+            discriminator (nn.Module): Discriminator 네트워크
+            real_data (torch.Tensor): [B, C, H, W], 실제 데이터 입력
+            fake_data (torch.Tensor): [B, C, H, W], 가짜(생성된) 데이터 입력
+        
+        Returns:
+            torch.Tensor: Discriminator hinge loss (스칼라)
+        """
+        # 1) Discriminator로부터 예측 점수 받기
+        pred_real = discriminator(real_data)  # [B]
+        pred_fake = discriminator(fake_data)  # [B]
+        
+        # 2) Hinge Loss 구성
+        # real_data는 1 이상으로, fake_data는 -1 이하로 분류되도록 유도
+        real_loss = torch.mean(F.relu(1.0 - pred_real))  # D(real) >= 1
+        fake_loss = torch.mean(F.relu(1.0 + pred_fake))  # D(fake) <= -1
+        
+        d_loss = real_loss + fake_loss
+        return d_loss
 
     def train(self, t_end=None):
         logging.info("Start training")
 
         device = self.device
         self.model.to(device)
-
-        # if self.in_evaluation:
-        #     logging.info(
-        #         "Last evaluation was not finished, will do evaluation before continue training."
-        #     )
-        #     self.validate()
+        self.discriminator.to(device)
 
         self.train_metrics.reset()
-        accumulated_step = 0
+        accumulated_step = 0  # Gradient Accumulation 카운트
 
         for epoch in range(self.epoch, self.max_epoch + 1):
             self.epoch = epoch
@@ -222,9 +299,13 @@ class B2ETrainer:
 
             # Skip previous batches when resume
             for batch in skip_first_batches(self.train_loader, self.n_batch_in_epoch):
+                ########################################
+                # 1) 준비 작업 (모델 train 모드, rng 등)
+                ########################################
                 self.model.unet.train()
+                if self.use_gan:
+                    self.discriminator.train()
 
-                # globally consistent random generators
                 if self.seed is not None:
                     local_seed = self._get_next_seed()
                     rand_num_generator = torch.Generator(device=device)
@@ -232,39 +313,38 @@ class B2ETrainer:
                 else:
                     rand_num_generator = None
 
-                # >>> With gradient accumulation >>>
-
-                # Get data
-                rgb = batch['frame'].to(device)
-                event_gt_for_latent = batch['voxel'].to(device)
-                event_1 = event_gt_for_latent[:,0:3,:,:]
-                event_2 = event_gt_for_latent[:,3:,:,:]
+                ########################################
+                # 2) 배치 데이터 준비 및 인코딩
+                ########################################
+                rgb = batch['frame'].to(device)                  # [B, 3, H, W]
+                event_gt_for_latent = batch['voxel'].to(device)  # [B, 6, H, W], 
+                event_1 = event_gt_for_latent[:, 0:3, :, :]
+                event_2 = event_gt_for_latent[:, 3:, :, :]
 
                 batch_size = rgb.shape[0]
 
                 with torch.no_grad():
-                    # Encode image
-                    event_latent_1 = self.model.encode(event_1)  # [B, 4, h, w]
+                    # Encode
+                    event_latent_1 = self.model.encode(event_1)  # [B, 4, h, w] 
                     event_latent_2 = self.model.encode(event_2)
                     rgb_latent = self.model.encode(rgb)
 
-                    event_latent = torch.cat([event_latent_1,event_latent_2], axis=1)
-                
+                    # Ground Truth x0 in latent space
+                    event_latent = torch.cat([event_latent_1, event_latent_2], dim=1)
+                    # shape 예: [B, 8, h, w]
 
-                # Sample a random timestep for each image
+                ########################################
+                # 3) Diffusion Forward Process (노이즈 추가)
+                ########################################
                 timesteps = torch.randint(
-                    0,
-                    self.scheduler_timesteps,
-                    (batch_size,),
-                    device=device,
-                    generator=rand_num_generator,
+                    0, self.scheduler_timesteps, (batch_size,),
+                    device=device, generator=rand_num_generator
                 ).long()  # [B]
 
-                # Sample noise
+                # noise (multi_res_noise_like or randn)
                 if self.apply_multi_res_noise:
                     strength = self.mr_noise_strength
                     if self.annealed_mr_noise:
-                        # calculate strength depending on t
                         strength = strength * (timesteps / self.scheduler_timesteps)
                     noise = multi_res_noise_like(
                         event_latent,
@@ -278,72 +358,122 @@ class B2ETrainer:
                         event_latent.shape,
                         device=device,
                         generator=rand_num_generator,
-                    )  # [B, 4, h, w]
+                    )  # [B, C, h, w]
 
-                # Add noise to the latents (diffusion forward process)
                 noisy_latents = self.training_noise_scheduler.add_noise(
                     event_latent, noise, timesteps
-                )  # [B, 4, h, w]
+                )  # [B, C, h, w]
 
-                # Text embedding
-                text_embed = self.empty_text_embed.to(device).repeat(
-                    (batch_size, 1, 1)
-                )  # [B, 77, 1024]
+                ########################################
+                # 4) U-Net 전방연산 (노이즈 or v 예측)
+                ########################################
+                text_embed = self.empty_text_embed.to(device).repeat((batch_size, 1, 1))
+                cat_latents = torch.cat([rgb_latent, noisy_latents], dim=1).float()
 
-                # Concat rgb and depth latents
-                cat_latents = torch.cat(
-                    [rgb_latent, noisy_latents], dim=1
-                )  # [B, 8, h, w]
-                cat_latents = cat_latents.float()
-
-                # Predict the noise residual
-                model_pred = self.model.unet(
-                    cat_latents, timesteps, text_embed
-                ).sample  # [B, 4, h, w]
+                model_pred = self.model.unet(cat_latents, timesteps, text_embed).sample
                 if torch.isnan(model_pred).any():
                     logging.warning("model_pred contains NaN.")
 
-                # Get the target for loss depending on the prediction type
-                if "sample" == self.prediction_type:
+                # Diffusion 기본 로스 계산
+                if self.prediction_type == "sample":
                     target = event_latent
-                elif "epsilon" == self.prediction_type:
+                elif self.prediction_type == "epsilon":
                     target = noise
-                elif "v_prediction" == self.prediction_type:
+                elif self.prediction_type == "v_prediction":
                     target = self.training_noise_scheduler.get_velocity(
                         event_latent, noise, timesteps
-                    )  # [B, 4, h, w]
+                    )
                 else:
                     raise ValueError(f"Unknown prediction type {self.prediction_type}")
 
                 latent_loss = self.loss(model_pred.float(), target.float())
+                diff_loss = latent_loss.mean()
 
-                loss = latent_loss.mean()
+                ########################################
+                # 5) Generator(U-Net) & Discriminator 업데이트
+                ########################################
+                if self.use_gan:
+                    # ========== Generator(U-Net) Loss ==========
+                    # 5a) GAN Loss(Generator 측)
+                    if self.prediction_type == "v_prediction":
+                        # 예: x0_fake, gan_loss_g = self.compute_generator_gan_loss_v_prediction(...)
+                        x0_fake, gan_loss_g = self.compute_generator_gan_loss_v_prediction(
+                            discriminator=self.discriminator,
+                            x_t=noisy_latents,
+                            v_pred=model_pred,
+                            x0_gt=event_latent,
+                            timesteps=timesteps,
+                            alphas_cumprod=self.training_noise_scheduler.alphas_cumprod,
+                        )
+                    elif self.prediction_type == "epsilon":
+                        raise NotImplementedError("GAN loss for epsilon mode is not implemented yet.")
+                    else:
+                        raise ValueError(f"Unknown prediction type {self.prediction_type}")
 
-                self.train_metrics.update("loss", loss.item())
+                    g_loss = diff_loss + self.gan_weight * gan_loss_g
 
-                loss = loss / self.gradient_accumulation_steps
-                loss.backward()
+                    # 역전파 (Generator)
+                    g_loss_for_bp = g_loss / self.gradient_accumulation_steps
+                    g_loss_for_bp.backward(retain_graph=True) 
+                    # retain_graph=True: D도 같은 그래프에서 backprop을 쓸 경우 필요할 수 있으나,
+                    #                   실제 상황에 맞게 설정
+
+                    # ========== Discriminator Loss ==========
+                    self.discriminator_optimizer.zero_grad()
+                    real_data = event_latent
+                    fake_data = x0_fake.detach()  # gradient 분리
+                    d_loss = self.compute_discriminator_loss_hinge(
+                        self.discriminator, real_data=real_data, fake_data=fake_data
+                    )
+                    d_loss_for_bp = d_loss / self.gradient_accumulation_steps
+                    d_loss_for_bp.backward()
+
+                    # 로깅
+                    # self.train_metrics.update("diff_loss", diff_loss.item())
+                    # self.train_metrics.update("gan_loss_g", gan_loss_g.item())
+                    # self.train_metrics.update("d_loss", d_loss.item())
+
+                else:
+                    # GAN 미사용 시 → Diffusion Loss만 역전파
+                    g_loss = diff_loss
+                    g_loss_for_bp = g_loss / self.gradient_accumulation_steps
+                    g_loss_for_bp.backward()
+
+                    # 로깅
+                    self.train_metrics.update("diff_loss", diff_loss.item())
+                    d_loss = None  # GAN 미사용
+
+                # (공통으로) "loss" 항목도 업데이트(원하면)
+                self.train_metrics.update("loss", g_loss.item())
+
+                # Gradient Accumulation 카운트
                 accumulated_step += 1
-
                 self.n_batch_in_epoch += 1
-                # Practical batch end
 
-                # Perform optimization step
+                ########################################
+                # 6) Accumulation 완료 시 Optimizer step
+                ########################################
                 if accumulated_step >= self.gradient_accumulation_steps:
+                    # (A) Generator(U-Net) Optimizer update
                     self.optimizer.step()
-                    self.lr_scheduler.step()
                     self.optimizer.zero_grad()
-                    accumulated_step = 0
 
+                    # (B) Discriminator Optimizer update (GAN일 때만)
+                    if self.use_gan:
+                        self.discriminator_optimizer.step()
+                        # 보통 Discriminator의 zero_grad()는 이미 backward 전 zero_grad()로 처리됨
+
+                    # (C) LR Scheduler
+                    self.lr_scheduler.step()
+
+                    # (D) Reset accumulation
+                    accumulated_step = 0
                     self.effective_iter += 1
 
-                    # Log to tensorboard
+                    # (E) 로깅 to TensorBoard or wandb
                     accumulated_loss = self.train_metrics.result()["loss"]
                     tb_logger.log_dic(
-                        {
-                            f"train/{k}": v
-                            for k, v in self.train_metrics.result().items()
-                        },
+                        {f"train/{k}": v for k, v in self.train_metrics.result().items()},
                         global_step=self.effective_iter,
                     )
                     tb_logger.writer.add_scalar(
@@ -359,7 +489,6 @@ class B2ETrainer:
                     logging.info(
                         f"iter {self.effective_iter:5d} (epoch {epoch:2d}): loss={accumulated_loss:.5f}"
                     )
-
                     wandb.log({'iter': self.effective_iter, 'loss': float(f"{accumulated_loss:.5f}")})
 
                     self.train_metrics.reset()

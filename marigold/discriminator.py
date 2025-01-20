@@ -1,44 +1,41 @@
-import torch
-from torch import nn
+import torch.nn as nn
+import torch.nn.functional as F
 
-from diffusers.configuration_utils import ConfigMixin, register_to_config
-from diffusers.models.modeling_utils import ModelMixin
-
-
-# Discriminator model ported from Paella https://github.com/dome272/Paella/blob/main/src_distributed/vqgan.py
-class Discriminator(ModelMixin, ConfigMixin):
-    @register_to_config
-    def __init__(self, in_channels=3, cond_channels=0, hidden_channels=512, depth=6):
+class SCERDiscriminator(nn.Module):
+    """
+    간단한 2D Conv 기반 Discriminator 예시.
+    입력: [B, 6, H, W] 형태 (SCER)
+    출력: [B, 1] (진짜/가짜 판별 로짓)
+    """
+    def __init__(self, in_channels=8, base_channels=64):
         super().__init__()
-        d = max(depth - 3, 3)
-        layers = [
-            nn.utils.spectral_norm(
-                nn.Conv2d(in_channels, hidden_channels // (2**d), kernel_size=3, stride=2, padding=1)
-            ),
-            nn.LeakyReLU(0.2),
-        ]
-        for i in range(depth - 1):
-            c_in = hidden_channels // (2 ** max((d - i), 0))
-            c_out = hidden_channels // (2 ** max((d - 1 - i), 0))
-            layers.append(nn.utils.spectral_norm(nn.Conv2d(c_in, c_out, kernel_size=3, stride=2, padding=1)))
-            layers.append(nn.InstanceNorm2d(c_out))
-            layers.append(nn.LeakyReLU(0.2))
-        self.encoder = nn.Sequential(*layers)
-        self.shuffle = nn.Conv2d(
-            (hidden_channels + cond_channels) if cond_channels > 0 else hidden_channels, 1, kernel_size=1
-        )
-        self.logits = nn.Sigmoid()
+        self.net = nn.Sequential(
+            # Conv1
+            nn.Conv2d(in_channels, base_channels, kernel_size=4, stride=2, padding=1),
+            nn.LeakyReLU(0.2, inplace=True),
 
-    def forward(self, x, cond=None):
-        x = self.encoder(x)
-        if cond is not None:
-            cond = cond.view(
-                cond.size(0),
-                cond.size(1),
-                1,
-                1,
-            ).expand(-1, -1, x.size(-2), x.size(-1))
-            x = torch.cat([x, cond], dim=1)
-        x = self.shuffle(x)
-        x = self.logits(x)
-        return x
+            # Conv2
+            nn.Conv2d(base_channels, base_channels * 2, kernel_size=4, stride=2, padding=1),
+            nn.BatchNorm2d(base_channels * 2),
+            nn.LeakyReLU(0.2, inplace=True),
+
+            # Conv3
+            nn.Conv2d(base_channels * 2, base_channels * 4, kernel_size=4, stride=2, padding=1),
+            nn.BatchNorm2d(base_channels * 4),
+            nn.LeakyReLU(0.2, inplace=True),
+
+            # Conv4
+            nn.Conv2d(base_channels * 4, base_channels * 8, kernel_size=4, stride=2, padding=1),
+            nn.BatchNorm2d(base_channels * 8),
+            nn.LeakyReLU(0.2, inplace=True),
+
+            # 출력 채널 1개
+            nn.Conv2d(base_channels * 8, 1, kernel_size=4, stride=1, padding=0)
+        )
+
+    def forward(self, x):
+        """
+        x: [B, 6, H, W] (SCER)
+        """
+        out = self.net(x)  # [B, 1, H', W'] (보통 H',W'는 대략 1x1에 근접)
+        return out.view(-1)  # [B], 진짜/가짜 점수(로짓)
