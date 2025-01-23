@@ -40,7 +40,7 @@ EXTENSION_LIST = [".jpg", ".jpeg", ".png"]
 
 
 if "__main__" == __name__:
-    os.environ['CUDA_VISIBLE_DEVICES'] = '0'
+    os.environ['CUDA_VISIBLE_DEVICES'] = '1'
     logging.basicConfig(level=logging.INFO)
 
     # -------------------- Arguments --------------------
@@ -64,12 +64,12 @@ if "__main__" == __name__:
     parser.add_argument(
         "--dataset_name",
         type=str,
-        default='Gopro_Event_Test',
+        default='Gopro_Event_Train',
         help="Path to the input image folder.",
     )
 
     parser.add_argument(
-        "--output_dir", type=str, default='results/', help="Output directory."
+        "--output_dir", type=str, default='results_gan(0.05)_cons(0.01)/', help="Output directory."
     )
 
     # inference setting
@@ -178,7 +178,7 @@ if "__main__" == __name__:
 
     opt = {'crop_size': None,
            'use_flip' : False,
-           'folder_path' : '/workspace/data/GOPRO/test',
+           'folder_path' : '/workspace/data/GOPRO/train',
            }
     
     dataset = concatenate_h5_datasets(H5ImageDataset, opt)
@@ -221,7 +221,7 @@ if "__main__" == __name__:
     # -------------------- Inference and saving --------------------
     total_rmse = 0
 
-    with open('Gopro_event_test_results.txt','a', buffering=1) as f:
+    with open('results_gan(0.05)_cons(0.01)/Gopro_event_train_results.txt','a', buffering=1) as f:
         with torch.no_grad():
             # os.makedirs(output_dir, exist_ok=True)
 

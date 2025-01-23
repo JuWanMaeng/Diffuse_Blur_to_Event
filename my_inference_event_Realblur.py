@@ -36,7 +36,7 @@ EXTENSION_LIST = [".jpg", ".jpeg", ".png"]
 
 
 if "__main__" == __name__:
-    os.environ['CUDA_VISIBLE_DEVICES'] = '1'
+    os.environ['CUDA_VISIBLE_DEVICES'] = '0'
     logging.basicConfig(level=logging.INFO)
 
     # -------------------- Arguments --------------------
@@ -53,14 +53,14 @@ if "__main__" == __name__:
     parser.add_argument(
         "--input_rgb_dir",
         type=str,
-        default='dataset/paths/realblur_j.txt',
+        default='dataset/paths/LOLBlur_test.txt',
         help="Path to the input image folder.",
     )
 
     parser.add_argument(
         "--dataset_name",
         type=str,
-        default='RealBlur-J',
+        default='LOLBlur',
         help="Path to the input image folder.",
     )
 
@@ -231,7 +231,8 @@ if "__main__" == __name__:
             # Read input image
             input_image = Image.open(rgb_path)
 
-            scene = rgb_path.split('/')[-3]
+            scene = rgb_path.split('/')[-2]
+            img_id = rgb_path.split('/')[-1]
             img_name = scene +'_'+ rgb_path.split('/')[-1]
             img_num = img_name
             
@@ -257,34 +258,34 @@ if "__main__" == __name__:
                 resample_method=resample_method,
                 generator=generator,
             )
-
-            os.makedirs(os.path.join(output_dir,img_num),exist_ok=True)
+            
+            # img save folder
+            # os.makedirs(os.path.join(output_dir,img_num),exist_ok=True)
             out_path = os.path.join(output_dir, img_num)
             input_path = os.path.join(output_dir,img_num,'input.png')
 
-            root_path = rgb_path.split('/')[:-2]
+            root_path = rgb_path.split('/')[:-3]
             tmp_path = os.path.join(*root_path) # 'workspace/data/RealBlur/RealBlur-J_ECC_IMCORR_centroid_itensity_ref/scene120'
             event_folder_path = '/'+  os.path.join(tmp_path,'event')
-            event_name = rgb_path.split('/')[-1]
-            event_name = event_name.replace('blur','event')
+            event_folder_path = os.path.join(event_folder_path, scene)
             os.makedirs(event_folder_path,exist_ok=True)
 
-            event_save_path = os.path.join(event_folder_path,event_name)
-
-
-
             for idx,out_img in enumerate(pipe_out):
+                save_event = out_img
                 # normalize [-n,n] to [-1,1]
-                max_val = np.max(np.abs(out_img))
-                out_img = out_img / max_val
-                out_img = (out_img + 1) / 2
-                out_img = out_img * 255
-                out_img = out_img.astype(np.uint8)
+                # max_val = np.max(np.abs(out_img))
+                # out_img = out_img / max_val
+                # out_img = (out_img + 1) / 2
+                # out_img = out_img * 255
+                # out_img = out_img.astype(np.uint8)
 
     
-                for i in range(6):
-                    save_path = os.path.join(out_path,f'{i}.png')
-                    out = out_img[:,:,i]
-                    cv2.imwrite(save_path, out)
-                np.save(event_save_path[:-4],out_img)   # H,W,6
-                input_image.save(input_path)
+                # for i in range(6):
+                #     save_path = os.path.join(out_path,f'{i}.png')
+                #     out = out_img[:,:,i]
+                #     cv2.imwrite(save_path, out)
+
+
+                event_save_path = os.path.join(event_folder_path, f'{img_id[:-4]}.npy')
+                np.save(event_save_path,save_event)   # H,W,6
+                # input_image.save(input_path)
