@@ -2974,3 +2974,23 @@
 01/23/2025 11:06:03 - INFO: device = cuda
 01/23/2025 11:06:07 - INFO: scale_invariant: True, shift_invariant: True
 01/23/2025 11:06:07 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 5, processing resolution = 768, seed = None; color_map = Spectral.
+01/23/2025 14:52:05 - INFO: output dir = results_gan(0.05)_cons(0.01)/Gopro_Event_Train
+01/23/2025 14:52:05 - INFO: device = cuda
+01/23/2025 14:52:15 - INFO: scale_invariant: True, shift_invariant: True
+01/23/2025 14:52:15 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 5, processing resolution = 768, seed = None; color_map = Spectral.
+01/23/2025 14:55:15 - INFO: output dir = results_gan(0.05)_cons(0.01)/Gopro_Event_Train
+01/23/2025 14:55:15 - INFO: device = cuda
+01/23/2025 14:55:22 - INFO: scale_invariant: True, shift_invariant: True
+01/23/2025 14:55:22 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 5, processing resolution = 768, seed = None; color_map = Spectral.
+01/23/2025 18:39:56 - INFO: output dir = results_gan(0.05)_cons(0.01)/Gopro_Event_Test
+01/23/2025 18:39:56 - INFO: device = cuda
+01/23/2025 18:40:01 - INFO: scale_invariant: True, shift_invariant: True
+01/23/2025 18:40:01 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 5, processing resolution = 768, seed = None; color_map = Spectral.
+01/23/2025 18:41:35 - INFO: output dir = results_gan(0.05)/Gopro_Event_Test
+01/23/2025 18:41:35 - INFO: device = cuda
+01/23/2025 18:41:40 - INFO: scale_invariant: True, shift_invariant: True
+01/23/2025 18:41:40 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 5, processing resolution = 768, seed = None; color_map = Spectral.
+01/23/2025 23:05:50 - INFO: output dir = results_gan(0.05)_cons(0.01)/Gopro_Event_Test
+01/23/2025 23:05:50 - INFO: device = cuda
+01/23/2025 23:05:54 - INFO: scale_invariant: True, shift_invariant: True
+01/23/2025 23:05:54 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 5, processing resolution = 768, seed = None; color_map = Spectral.
