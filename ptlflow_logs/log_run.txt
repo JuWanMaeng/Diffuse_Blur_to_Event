@@ -2994,3 +2994,15 @@
 01/23/2025 23:05:50 - INFO: device = cuda
 01/23/2025 23:05:54 - INFO: scale_invariant: True, shift_invariant: True
 01/23/2025 23:05:54 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 5, processing resolution = 768, seed = None; color_map = Spectral.
+01/27/2025 17:18:16 - INFO: output dir = results_gan(0.05)_cons(0.01)/Gopro_Event_Test
+01/27/2025 17:18:16 - INFO: device = cuda
+01/27/2025 17:18:21 - INFO: scale_invariant: True, shift_invariant: True
+01/27/2025 17:18:24 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 5, processing resolution = 768, seed = None; color_map = Spectral.
+01/27/2025 17:21:45 - INFO: output dir = results_gan(0.05)_cons(0.01)/Gopro_Event_Test
+01/27/2025 17:21:45 - INFO: device = cuda
+01/27/2025 17:21:51 - INFO: scale_invariant: True, shift_invariant: True
+01/27/2025 17:21:54 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 5, processing resolution = 768, seed = None; color_map = Spectral.
+01/27/2025 17:33:20 - INFO: output dir = results_gan(0.05)_cons(0.01)/Gopro_Event_Test
+01/27/2025 17:33:20 - INFO: device = cuda
+01/27/2025 17:33:25 - INFO: scale_invariant: True, shift_invariant: True
+01/27/2025 17:33:29 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 5, processing resolution = 768, seed = None; color_map = Spectral.

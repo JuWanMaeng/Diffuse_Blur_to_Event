@@ -221,7 +221,7 @@ if "__main__" == __name__:
     # -------------------- Inference and saving --------------------
     total_rmse = 0
 
-    with open('results_gan(0.05)_cons(0.01)/Gopro_event_test_results.txt','a', buffering=1) as f:
+    with open('debug.txt','a', buffering=1) as f:
         with torch.no_grad():
             # os.makedirs(output_dir, exist_ok=True)
 
