@@ -9,6 +9,7 @@
 /venv
 /cache
 /my
+/results
 
 **/.ipynb_checkpoints/
 .vscode/
