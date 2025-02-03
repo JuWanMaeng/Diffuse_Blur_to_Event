@@ -1,5 +1,5 @@
 import logging
-from typing import Dict, Optional, Union
+from typing import Dict, Optional, Union, List
 
 import numpy as np
 import torch
@@ -26,7 +26,11 @@ from .util.image_util import (
     colorize_depth_maps,
     get_tv_resample_method,
     resize_max_res,
+    resize_max_res_with_padding
 )
+
+from torch.nn import Conv2d
+from torch.nn.parameter import Parameter
 
 class B2EPipeline_DIT(DiTPipeline):
 
@@ -38,10 +42,11 @@ class B2EPipeline_DIT(DiTPipeline):
         transformer: DiTTransformer2DModel,
         vae: AutoencoderKL,
         scheduler: Union[DDIMScheduler, LCMScheduler],
+        default_processing_resolution = 960,
         scale_invariant: Optional[bool] = True,
         shift_invariant: Optional[bool] = True,
         default_denoising_steps: Optional[int] = None,
-        default_processing_resolution: Optional[int] = None,
+
     ):
         super().__init__(
             vae = vae,
@@ -92,7 +97,7 @@ class B2EPipeline_DIT(DiTPipeline):
         if processing_res is None:
             processing_res = self.default_processing_resolution
 
-        assert processing_res >= 0
+        # assert processing_res >= 0
         assert ensemble_size >= 1
 
         # Check if denoising step is reasonable
@@ -117,12 +122,11 @@ class B2EPipeline_DIT(DiTPipeline):
         ), f"Wrong input shape {input_size}, expected [1, rgb, H, W]"
 
         # Resize image
-        if processing_res > 0:
-            rgb = resize_max_res(
-                rgb,
-                max_edge_resolution=processing_res,
-                resample_method=resample_method,
-            )
+        rgb, p_top, p_bottom, p_left, p_right = resize_max_res_with_padding(
+            rgb,
+            max_edge_resolution=processing_res,
+            resample_method=resample_method,
+        )
 
         # Normalize rgb values
         if torch.min(rgb) < 0:
@@ -178,6 +182,10 @@ class B2EPipeline_DIT(DiTPipeline):
         res = []
         for i in range(num_samples):
             depth_pred = depth_preds[i:i+1,:,:,:]
+            pred_h, pred_w = depth_pred.shape[2], depth_pred.shape[3]
+
+            depth_pred = depth_pred[:,:,p_top:pred_h - p_bottom, p_left:pred_w -p_right]
+            
 
             # Resize back to original resolution
             if match_input_res:
@@ -187,7 +195,7 @@ class B2EPipeline_DIT(DiTPipeline):
                     interpolation=resample_method,
                     antialias=True,
                 )
-
+        
             # Convert to numpy
             depth_pred = depth_pred.squeeze()
             depth_pred = depth_pred.cpu().numpy()
@@ -222,20 +230,6 @@ class B2EPipeline_DIT(DiTPipeline):
         else:
             raise RuntimeError(f"Unsupported scheduler type: {type(self.scheduler)}")
 
-    def encode_empty_text(self):
-        """
-        Encode text embedding for empty prompt
-        """
-        prompt = ""
-        text_inputs = self.tokenizer(
-            prompt,
-            padding="do_not_pad",
-            max_length=self.tokenizer.model_max_length,
-            truncation=True,
-            return_tensors="pt",
-        )
-        text_input_ids = text_inputs.input_ids.to(self.text_encoder.device)
-        self.empty_text_embed = self.text_encoder(text_input_ids)[0].to(self.dtype)
 
     @torch.no_grad()
     def single_infer(
@@ -265,12 +259,8 @@ class B2EPipeline_DIT(DiTPipeline):
             generator=generator,
         )  # [B, 4, h, w]
 
-        # Batched empty text embedding
-        if self.empty_text_embed is None:
-            self.encode_empty_text()
-        batch_empty_text_embed = self.empty_text_embed.repeat(
-            (rgb_latent.shape[0], 1, 1)
-        ).to(device)  # [B, 2, 1024]
+        batch_size = rgb_in.shape[0]
+        class_labels = torch.zeros(batch_size, dtype=torch.long, device=device)
 
         # Denoising loop
         if show_pbar:
@@ -284,17 +274,20 @@ class B2EPipeline_DIT(DiTPipeline):
         else:
             iterable = enumerate(timesteps)
 
+
         for i, t in iterable:
-            unet_input = torch.cat(
+            transformer_input = torch.cat(
                 [rgb_latent, event_latent], dim=1
             )  # this order is important
 
+            time_step = torch.tensor([t], device=device)
             # predict the noise residual
-            noise_pred = self.unet(
-                unet_input, t, encoder_hidden_states=batch_empty_text_embed
+            noise_pred = self.transformer(
+                transformer_input, time_step, class_labels
             ).sample  # [B, 4, h, w]
 
             # compute the previous noisy sample x_t -> x_t-1
+            
             event_latent = self.scheduler.step(
                 noise_pred, t, event_latent, generator=generator
             ).prev_sample
@@ -334,3 +327,36 @@ class B2EPipeline_DIT(DiTPipeline):
         stacked = torch.cat([z_1, z_2], dim=1)
 
         return stacked
+
+
+    def replace_transformer_proj(self):  # setting when inference
+        # 기존 프로젝션 레이어를 가져옴
+        _weight = self.transformer.pos_embed.proj.weight.clone()  # [embed_dim, 4, patch_size, patch_size]
+        _bias = self.transformer.pos_embed.proj.bias.clone()  # [embed_dim]
+
+        # 기존 가중치를 repeat하여 12개의 채널로 확장
+        _weight = _weight.repeat(1, 3, 1, 1)  # 4채널에서 12채널로 확장
+        _weight *= 1 / 3.0  # 확장된 채널 크기를 보정
+
+        # 기존 출력 채널(embed_dim)을 유지한 새로운 Conv2d 레이어 생성
+        _n_proj_out_channels = self.transformer.pos_embed.proj.out_channels  # embed_dim
+        _patch_size = self.transformer.pos_embed.proj.kernel_size[0]  # 패치 크기 가져오기
+
+        _new_proj = Conv2d(
+            in_channels=12,  # 새 입력 채널 크기
+            out_channels=_n_proj_out_channels,  # 기존 출력 채널 크기
+            kernel_size=(_patch_size, _patch_size),  # 기존 패치 크기 유지
+            stride=_patch_size,  # 기존 stride 유지
+            bias=True,
+        )
+
+        # 새로운 레이어에 가중치와 바이어스를 할당
+        _new_proj.weight = Parameter(_weight)
+        _new_proj.bias = Parameter(_bias)
+
+        # 모델의 프로젝션 레이어 교체
+        self.transformer.pos_embed.proj = _new_proj
+        logging.info("transformer proj layer is replaced with 12 channels")
+        logging.info("transformer config is updated")
+
+        return

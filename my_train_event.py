@@ -32,7 +32,7 @@ from src.util.logging_util import (
 from src.util.slurm_util import get_local_scratch_dir, is_on_slurm
 
 if "__main__" == __name__:
-    os.environ['CUDA_VISIBLE_DEVICES'] = '3'
+    os.environ['CUDA_VISIBLE_DEVICES'] = '1'
 
     t_start = datetime.now()
     print(f"start at {t_start}")
@@ -47,12 +47,11 @@ if "__main__" == __name__:
     )
     parser.add_argument(
         "--resume_run",
-        action="store",
         default=None,
         help="Path of checkpoint to be resumed. If given, will ignore --config, and checkpoint in the config",
     )
     parser.add_argument(
-        "--output_dir", type=str, default='output/pretrained_gan(0.05)', help="directory to save checkpoints"
+        "--output_dir", type=str, default='output/L2_resume', help="directory to save checkpoints"
     )
     parser.add_argument("--no_cuda", action="store_true", help="Do not use cuda.")
     parser.add_argument(
@@ -226,14 +225,6 @@ if "__main__" == __name__:
     model = B2EPipeline.from_pretrained(
         os.path.join(base_ckpt_dir, cfg.model.pretrained_path), **_pipeline_kwargs
     )
-
-    ### If you want to train Unet from scratch ###
-    # def reset_unet_weights(unet):
-    #     for layer in unet.parameters():
-    #         if layer.requires_grad:
-    #             torch.nn.init.normal_(layer, mean=0.0, std=0.02)
-
-    # reset_unet_weights(model.unet)
 
 
     # -------------------- Trainer --------------------

@@ -24,6 +24,7 @@ import numpy as np
 import torch
 from torchvision.transforms import InterpolationMode
 from torchvision.transforms.functional import resize
+from PIL import Image
 
 
 def colorize_depth_maps(
@@ -112,6 +113,55 @@ def resize_max_res(
     resized_img = resize(img, (new_height, new_width), resample_method, antialias=True)
     return resized_img
 
+def resize_max_res_with_padding(
+    img: torch.Tensor,
+    max_edge_resolution: int,
+    resample_method: Image.Resampling = Image.Resampling.BILINEAR,
+) -> torch.Tensor:
+    """
+    Resize image to limit maximum edge length while keeping aspect ratio,
+    and apply zero-padding if necessary to match the target resolution.
+
+    Args:
+        img (`torch.Tensor`):
+            Image tensor to be resized. Expected shape: [B, C, H, W]
+        max_edge_resolution (`int`):
+            Maximum edge length (pixel).
+        resample_method (`PIL.Image.Resampling`):
+            Resampling method used to resize images.
+
+    Returns:
+        `torch.Tensor`: Resized image with padding.
+    """
+    assert 4 == img.dim(), f"Invalid input shape {img.shape}"
+
+    original_height, original_width = img.shape[-2:]
+
+    # Calculate downscale factor to maintain aspect ratio
+    downscale_factor = min(
+        max_edge_resolution / original_width, max_edge_resolution / original_height
+    )
+
+    # Calculate new dimensions
+    new_width = int(original_width * downscale_factor)
+    new_height = int(original_height * downscale_factor)
+
+    # Resize the image while maintaining aspect ratio
+    resized_img = resize(img, (new_height, new_width), resample_method, antialias=True)
+
+    # Now handle padding to match the target resolution
+    target_height, target_width = 544, max_edge_resolution
+
+    # Calculate padding values
+    top = (target_height - new_height) // 2
+    bottom = target_height - new_height - top
+    left = (target_width - new_width) // 2
+    right = target_width - new_width - left
+
+    # Apply zero-padding
+    padded_img = torch.nn.functional.pad(resized_img, (left, right, top, bottom), value=0)
+
+    return padded_img, top,bottom, left, right
 
 def get_tv_resample_method(method_str: str) -> InterpolationMode:
     resample_method_dict = {

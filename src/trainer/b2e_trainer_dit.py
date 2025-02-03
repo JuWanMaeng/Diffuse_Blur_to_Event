@@ -628,13 +628,13 @@ class B2ETrainer_DIT:
         self, ckpt_path, load_trainer_state=True, resume_lr_scheduler=True
     ):
         logging.info(f"Loading checkpoint from: {ckpt_path}")
-        # Load UNet
-        _model_path = os.path.join(ckpt_path, "unet", "diffusion_pytorch_model.bin")
-        self.model.unet.load_state_dict(
+        # Load transformer
+        _model_path = os.path.join(ckpt_path, "transformer", "diffusion_pytorch_model.bin")
+        self.model.transformer.load_state_dict(
             torch.load(_model_path, map_location=self.device)
         )
-        self.model.unet.to(self.device)
-        logging.info(f"UNet parameters are loaded from {_model_path}")
+        self.model.transformer.to(self.device)
+        logging.info(f"transformer parameters are loaded from {_model_path}")
 
         # Load training states
         if load_trainer_state:
