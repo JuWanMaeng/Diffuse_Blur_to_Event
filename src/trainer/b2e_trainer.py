@@ -71,6 +71,8 @@ class B2ETrainer:
             self.gan_weight = self.cfg.gan.weight
             self.discriminator_optimizer = Adam(self.discriminator.parameters(), lr = self.cfg.lr)
             self.gan_start_iter = self.cfg.gan.gan_start
+        else:
+            self.use_gan = False
 
         if self.cfg.consistency.use_consistency_loss:
             self.use_consistency_loss = True
@@ -339,7 +341,9 @@ class B2ETrainer:
 
         device = self.device
         self.model.to(device)
-        self.discriminator.to(device)
+        
+        if self.use_gan:
+            self.discriminator.to(device)
 
         self.train_metrics.reset()
         accumulated_step = 0  # Gradient Accumulation 카운트

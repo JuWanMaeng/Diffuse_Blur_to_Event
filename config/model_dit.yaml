@@ -1,0 +1,4 @@
+model:
+  name: B2FPipeline_DIT
+  pretrained_path: DiT-XL-2-512
+  latent_scale_factor: 0.18215
