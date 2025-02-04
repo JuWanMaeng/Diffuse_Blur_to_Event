@@ -171,7 +171,7 @@ if "__main__" == __name__:
     logging.info(f"device = {device}")
 
     # -------------------- Data --------------------
-    rgb_filename_list = glob(os.path.join(input_rgb_dir, "*"))
+    rgb_filename_list = glob(os.path.join(input_rgb_dir, "*.png"))
 
 
     # rgb_filename_list = sorted(rgb_filename_list)
