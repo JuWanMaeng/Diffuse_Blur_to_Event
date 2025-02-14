@@ -53,7 +53,7 @@ if "__main__" == __name__:
     parser.add_argument(
         "--input_rgb_dir",
         type=str,
-        default='dataset/paths/realblur_r.txt',
+        default='dataset/paths/realblur_j.txt',
         help="Path to the input image folder.",
     )
 
@@ -271,20 +271,6 @@ if "__main__" == __name__:
 
             for idx,out_img in enumerate(pipe_out):
                 save_event = out_img
-                # normalize [-n,n] to [-1,1]
-                # max_val = np.max(np.abs(out_img))
-                # out_img = out_img / max_val
-                # out_img = (out_img + 1) / 2
-                # out_img = out_img * 255
-                # out_img = out_img.astype(np.uint8)
-
-    
-                # for i in range(6):
-                #     save_path = os.path.join(out_path,f'{i}.png')
-                #     out = out_img[:,:,i]
-                #     cv2.imwrite(save_path, out)
-
-
                 event_save_path = os.path.join(event_folder_path, f'{event_id[:-4]}.npy')
                 np.save(event_save_path,save_event)   # H,W,6
                 # input_image.save(input_path)

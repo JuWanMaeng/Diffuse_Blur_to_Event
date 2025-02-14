@@ -1,48 +1,30 @@
-# Copyright 2023 Bingxin Ke, ETH Zurich. All rights reserved.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-# --------------------------------------------------------------------------
-# If you find this code useful, we kindly ask you to cite our paper in your work.
-# Please find bibtex at: https://github.com/prs-eth/Marigold#-citation
-# More information about the method can be found at https://marigoldmonodepth.github.io
-# --------------------------------------------------------------------------
-
-
 import argparse
 import logging
 import os
 from glob import glob
 
 import numpy as np
-import torch
+import torch, cv2
+import torchvision as v
 from PIL import Image
 from tqdm.auto import tqdm
 
+
 from marigold.b2e_pipeline import B2EPipeline
-import cv2
 
 
 EXTENSION_LIST = [".jpg", ".jpeg", ".png"]
 
 
 if "__main__" == __name__:
-    os.environ['CUDA_VISIBLE_DEVICES'] = '2'
+    os.environ['CUDA_VISIBLE_DEVICES'] = '0'
     logging.basicConfig(level=logging.INFO)
 
     # -------------------- Arguments --------------------
     parser = argparse.ArgumentParser(
         description="Run single-image depth estimation using Marigold."
     )
+
     parser.add_argument(
         "--checkpoint",
         type=str,
@@ -53,14 +35,13 @@ if "__main__" == __name__:
     parser.add_argument(
         "--input_rgb_dir",
         type=str,
-        default='/workspace/Marigold/dataset/paths/Rsblur_blur.txt',
+        default='/workspace/Marigold/dataset/paths/HIDE_test.txt',
         help="Path to the input image folder.",
     )
-
     parser.add_argument(
         "--dataset_name",
         type=str,
-        default='RSblur',
+        default='HIDE',
         help="Path to the input image folder.",
     )
 
@@ -87,7 +68,6 @@ if "__main__" == __name__:
         action="store_true",
         help="Run with half-precision (16-bit float), might lead to suboptimal result.",
     )
-
     # resolution setting
     parser.add_argument(
         "--processing_res",
@@ -171,7 +151,7 @@ if "__main__" == __name__:
     logging.info(f"device = {device}")
 
     # -------------------- Data --------------------
-    # rgb_filename_list = glob(os.path.join(input_rgb_dir, "*"))
+    rgb_filename_list = glob(os.path.join(input_rgb_dir, "*"))
     input_path_txt = input_rgb_dir
     rgb_filename_list = []
     with open(input_path_txt, 'r') as file:
@@ -188,15 +168,8 @@ if "__main__" == __name__:
 
 
     # -------------------- Model --------------------
-    if half_precision:
-        dtype = torch.float16
-        variant = "fp16"
-        logging.info(
-            f"Running with half precision ({dtype}), might lead to suboptimal result."
-        )
-    else:
-        dtype = torch.float32
-        variant = None
+    dtype = torch.float32
+    variant = None
 
     pipe: B2EPipeline = B2EPipeline.from_pretrained(
         checkpoint_path, variant=variant, torch_dtype=dtype
@@ -223,22 +196,13 @@ if "__main__" == __name__:
     )
 
     # -------------------- Inference and saving --------------------
-    max_flow = 10000
     with torch.no_grad():
         os.makedirs(output_dir, exist_ok=True)
 
         for idx,rgb_path in enumerate(tqdm(rgb_filename_list, desc="Estimating depth", leave=True)):
             # Read input image
             input_image = Image.open(rgb_path)
-
-            scene = rgb_path.split('/')[-4]
-            img_id = rgb_path.split('/')[-3]
-            save_folder = f'{scene}_{img_id}'
-
-            # img_name = scene +'_'+ rgb_path.split('/')[-1]
-            # img_num = img_name[:-4]
-            
-
+            event_path = rgb_path.replace('.png', '.npy')
 
             # Random number generator
             if seed is None:
@@ -261,34 +225,5 @@ if "__main__" == __name__:
                 generator=generator,
             )
 
-            os.makedirs(os.path.join(output_dir,save_folder),exist_ok=True)
-            out_path = os.path.join(output_dir, save_folder)
-            input_path = os.path.join(output_dir,save_folder,'input.png')
-
-
             for idx,out_img in enumerate(pipe_out):
-                save_event = out_img
-                # visualize                
-                # normalize [-n,n] to [-1,1]
-                max_val = np.max(np.abs(out_img))
-                out_img = out_img / max_val
-                out_img = (out_img + 1) / 2
-                out_img = out_img * 255
-                out_img = out_img.astype(np.uint8)
-
-    
-                for i in range(6):
-                    save_path = os.path.join(out_path,f'{i}.png')
-                    out = out_img[:,:,i]
-                    cv2.imwrite(save_path, out)
-                
-                event_folder = '/' + os.path.join(*rgb_path.split('/')[:-1])
-                event_folder = event_folder.replace('real_blur', 'event')
-                os.makedirs(event_folder,exist_ok=True)
-
-                event_save_path = os.path.join(event_folder,'event.npy')
-                np.save(event_save_path,save_event)   # H,W,6
-                input_image.save(input_path)
-                    
-
-
+                np.save(event_path,out_img)   # H,W,6

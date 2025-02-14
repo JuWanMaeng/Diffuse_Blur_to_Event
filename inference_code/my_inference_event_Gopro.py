@@ -69,7 +69,7 @@ if "__main__" == __name__:
     )
 
     parser.add_argument(
-        "--output_dir", type=str, default='results_gan(0.05)_cons(0.01)/', help="Output directory."
+        "--output_dir", type=str, default='results/', help="Output directory."
     )
 
     # inference setting
