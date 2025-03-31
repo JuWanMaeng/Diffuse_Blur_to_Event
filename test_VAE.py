@@ -6,6 +6,7 @@ import torch.nn.functional as F
 from diffusers import AutoencoderKL
 from accelerate import Accelerator
 from dataset.h5_image_dataset import H5ImageDataset, concatenate_h5_datasets
+import matplotlib.pyplot as plt
 
 def main():
     # Accelerate 초기화
@@ -14,7 +15,7 @@ def main():
 
     # 사전 학습된 VAE 모델 로드 및 평가 모드 전환
     # model = AutoencoderKL.from_pretrained('/workspace/Marigold/checkpoint/stable-diffusion-2/vae')
-    model = AutoencoderKL.from_pretrained('/workspace/data/AE-output-KL-pretrained/checkpoint-8000/aemodel')
+    model = AutoencoderKL.from_pretrained('/workspace/data/AE-output-KL-pretrained/checkpoint-5000/aemodel')
     model.to(device)
     model.eval()
 
@@ -37,20 +38,36 @@ def main():
     for step, batch in enumerate(test_dataloader):
         # "voxel" 키에 해당하는 데이터를 가져옵니다.
         event = batch["voxel"].to(device, non_blocking=True)
-
+        
         # 모델 추론: fmap은 재구성된 결과
         with torch.no_grad():
             fmap, _ = model(event, return_dict=False)
 
         # RMSE 계산: sqrt(mean((원본 - 재구성)**2))
-        fmap = (fmap+1) / 2
-        event = (event+1) / 2
+        fmap_01 = (fmap+1) / 2
+        event_01 = (event+1) / 2
 
-        mse = F.mse_loss(fmap, event, reduction="mean")
+        mse = F.mse_loss(fmap_01, event_01, reduction="mean")
         rmse = torch.sqrt(mse)
         rmse_list.append(rmse.item())
 
+########################
+        # fmap_np = event.detach().cpu().numpy()[0]  # shape: (3, H, W)
+
+
+        # # 채널별로 플롯
+        # fig, axs = plt.subplots(1, 3, figsize=(12, 4))
+        # for i in range(3):
+        #     axs[i].imshow(fmap_np[i], cmap='seismic', vmin=-1, vmax=1)
+        #     axs[i].set_title(f"Channel {i}")
+        #     axs[i].axis('off')
+
+        # plt.tight_layout()
+        # plt.savefig("fmap_3channels.png", bbox_inches='tight')
+        # plt.close(fig)
+###########################
         print(f"Step: {step} | RMSE: {rmse.item():.6f}")
+        # break
 
     # 전체 테스트 데이터에 대한 평균 RMSE 출력
     avg_rmse = sum(rmse_list) / len(rmse_list) if rmse_list else float('nan')

@@ -100,9 +100,6 @@ class H5ImageDataset(data.Dataset):
 
         self.return_voxel = return_voxel
         self.return_frame = return_frame
-        # self.return_gt_frame = opt.get('return_gt_frame', return_gt_frame)
-        # self.return_voxel = opt.get('return_voxel', return_voxel)
-        # self.return_mask = opt.get('return_mask', return_mask)
         self.return_gt_frame = True
         self.return_voxel = True
         self.return_mask = False
@@ -166,8 +163,8 @@ class H5ImageDataset(data.Dataset):
             frame_gt = self.transform_frame(frame_gt, seed, transpose_to_CHW=False)
 
         voxel = self.get_voxel(index)
-        voxel = voxel[:3,:,:] # former
-        # voxel = voxel[3:,:,:] # latter
+        # voxel = voxel[:3,:,:] # former
+        voxel = voxel[3:,:,:] # latter
 
         frame = self.transform_frame(frame, seed, transpose_to_CHW=False)  # to tensor
 
@@ -230,8 +227,7 @@ class H5ImageDataset(data.Dataset):
 
             else:
                 if self.norm_voxel:
-                    # voxel = torch.from_numpy(voxel).float() / abs(max(voxel.min(), voxel.max(), key=abs))  # -1 ~ 1
-                    voxel = torch.from_numpy(voxel).float() / 1800  # -1 ~ 1
+                    voxel = torch.from_numpy(voxel).float() / abs(max(voxel.min(), voxel.max(), key=abs))  # -1 ~ 1
                 else:
                     voxel = torch.from_numpy(voxel).float()
 

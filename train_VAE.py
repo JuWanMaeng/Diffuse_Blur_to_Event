@@ -193,7 +193,7 @@ def parse_args():
     parser.add_argument(
         "--output_dir",
         type=str,
-        default="/workspace/data/AE-output-KL-pretrained",
+        default="/workspace/data/AE-output-KL-latter",
         help="The output directory where the model predictions and checkpoints will be written.",
     )
     parser.add_argument(
@@ -278,7 +278,7 @@ def parse_args():
     parser.add_argument(
         "--dataloader_num_workers",
         type=int,
-        default=8,
+        default=2,
         help="Number of subprocesses to use for data loading. 0 means data is loaded in the main process.",
     )
     parser.add_argument("--adam_beta1", type=float, default=0.9, help="Beta1 parameter for the Adam optimizer.")
