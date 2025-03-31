@@ -40,6 +40,7 @@ class B2EPipeline(DiffusionPipeline):
         self,
         unet: UNet2DConditionModel,
         vae: AutoencoderKL,
+        event_vae: AutoencoderKL,
         scheduler: Union[DDIMScheduler, LCMScheduler],
         text_encoder: CLIPTextModel,
         tokenizer: CLIPTokenizer,
@@ -55,6 +56,7 @@ class B2EPipeline(DiffusionPipeline):
             scheduler=scheduler,
             text_encoder=text_encoder,
             tokenizer=tokenizer,
+            event_vae = event_vae,
         )
         self.register_to_config(
             scale_invariant=scale_invariant,
@@ -307,16 +309,25 @@ class B2EPipeline(DiffusionPipeline):
 
         return event
 
-    def encode(self, flow_in: torch.Tensor) -> torch.Tensor:
+    def encode_image(self, image_in: torch.Tensor) -> torch.Tensor:
 
         # encode
-        h = self.vae.encoder(flow_in)
+        h = self.vae.encoder(image_in)
         moments = self.vae.quant_conv(h)
         mean, logvar = torch.chunk(moments, 2, dim=1)
         # scale latent
-        flow_latent = mean * self.rgb_latent_scale_factor
-        return flow_latent
+        image_latent = mean * self.rgb_latent_scale_factor
+        return image_latent
     
+    def encode_event(self, event_in: torch.Tensor) -> torch.Tensor:
+
+        # encode
+        h = self.vae.encoder(event_in)
+        moments = self.vae.quant_conv(h)
+        mean, logvar = torch.chunk(moments, 2, dim=1)
+        # scale latent
+        event_latent = mean * self.rgb_latent_scale_factor
+        return event_latent
 
     def decode_event(self, event_latent: torch.Tensor) -> torch.Tensor:
 

@@ -20,7 +20,7 @@ from PIL import Image
 
 
 from marigold.b2e_pipeline import B2EPipeline
-from marigold.discriminator import SCERDiscriminator
+
 
 from src.util import metric
 from src.util.data_loader import skip_first_batches
@@ -64,22 +64,6 @@ class B2ETrainer:
         self.vis_loaders: List[DataLoader] = vis_dataloaders
         self.accumulation_steps: int = accumulation_steps
 
-        # discriminator
-        if self.cfg.gan.use_gan:
-            self.discriminator = SCERDiscriminator()
-            self.use_gan = True
-            self.gan_weight = self.cfg.gan.weight
-            self.discriminator_optimizer = Adam(self.discriminator.parameters(), lr = self.cfg.lr)
-            self.gan_start_iter = self.cfg.gan.gan_start
-        else:
-            self.use_gan = False
-
-        if self.cfg.consistency.use_consistency_loss:
-            self.use_consistency_loss = True
-            self.consistency_weight = self.cfg.consistency.weight
-        else:
-            self.use_consistency_loss = False
-
         # Adapt input layers
         if 12 != self.model.unet.config["in_channels"]:
             self._replace_unet_conv_in()
@@ -112,11 +96,6 @@ class B2ETrainer:
         )
         self.lr_scheduler = LambdaLR(optimizer=self.optimizer, lr_lambda=lr_func)
 
-        if self.use_gan:
-            self.discriminator_scheduler = LambdaLR(
-                optimizer=self.discriminator_optimizer,
-                lr_lambda=lr_func
-    )
         # Loss
         self.loss = get_loss(loss_name=self.cfg.loss.name, **self.cfg.loss.kwargs)
 
@@ -228,113 +207,7 @@ class B2ETrainer:
         logging.info("Unet config is updated")
         return
     
-
-    def compute_generator_gan_loss_v_prediction(
-        self,
-        discriminator,
-        x_t,  # [B, C, H, W] noisy latent at time t
-        v_pred,  # [B, C, H, W] model output (v)
-        x0_gt,   # [B, C, H, W] ground-truth x0 (encoded event latent)
-        timesteps,  # [B] each sample's t
-        alphas_cumprod,  # tensor of shape [num_timesteps], holds \bar{alpha}_t
-    ):
-        """
-        - discriminator: 판별자
-        - x_t: 현재 시점 t의 noisy latent
-        - v_pred: UNet이 예측한 v (v-prediction)
-        - x0_gt: ground-truth x0 (VAE 인코딩된 event 이미지)
-        - timesteps: [B], 배치별로 서로 다른 t값 가능
-        - alphas_cumprod: scheduler_timesteps
-
-        반환: generator 측 gan loss (scalar) -> 목표값 : pred_fake -> -1 그러므로 gan_loss -> 1
-        """
-
-        device = x_t.device
-
-        # 1) alpha_bar_t 가져오기
-        alpha_bar_t = alphas_cumprod[timesteps]  # shape [B]
-        alpha_bar_t = alpha_bar_t.reshape(-1, 1, 1, 1)  # [B,1,1,1]
-
-        # sqrt, 1 - alpha_bar
-        sqrt_alpha_bar_t = torch.sqrt(alpha_bar_t)  # [B,1,1,1]
-        sqrt_one_minus_alpha_bar_t = torch.sqrt(1.0 - alpha_bar_t)  # [B,1,1,1]
-
-        #  x0 추정
-        #    x0 = sqrt(alpha_bar_t)*x_t - sqrt(1 - alpha_bar_t)*v_pred
-        x0_fake = sqrt_alpha_bar_t * x_t - sqrt_one_minus_alpha_bar_t * v_pred
-
-        #### latent -> pixel ####
-        with torch.no_grad():
-            x0_fake = self.model.decode_event(x0_fake)
-
-        # 3) 가짜 vs. 진짜
-        #    여기서 fake_data = x0_fake, real_data = x0_gt
-        # pred_fake = discriminator(x0_fake)  # [B]
-        # # Hinge Loss (Generator 입장) 예시
-        # gan_loss_g = - pred_fake.mean()
-
-        pred_fake = torch.tanh(discriminator(x0_fake))  # [-1, 1]
-        gan_loss_g = torch.mean((pred_fake + 1.0) ** 2)  # 목표: pred_fake -> -1
-
-        return x0_fake, gan_loss_g
     
-    def compute_discriminator_loss_hinge(self, discriminator, real_data, fake_data):
-        """
-        Hinge Loss 기반 Discriminator 손실을 계산합니다.
-        
-        Args:
-            discriminator (nn.Module): Discriminator 네트워크
-            real_data (torch.Tensor): [B, C, H, W], 실제 데이터 입력
-            fake_data (torch.Tensor): [B, C, H, W], 가짜(생성된) 데이터 입력
-        
-        Returns:
-            torch.Tensor: Discriminator hinge loss (스칼라)
-        """
-        # 1) Discriminator로부터 예측 점수 받기
-        # pred_real = discriminator(real_data)  # [B]
-        # pred_fake = discriminator(fake_data)  # [B]
-        
-        # # 2) Hinge Loss 구성
-        # # real_data는 1 이상으로, fake_data는 -1 이하로 분류되도록 유도
-        # real_loss = torch.mean(F.relu(1.0 - pred_real))  # D(real) >= 1
-        # fake_loss = torch.mean(F.relu(1.0 + pred_fake))  # D(fake) <= -1
-
-        pred_real = torch.tanh(discriminator(real_data))  # [-1, 1]
-        pred_fake = torch.tanh(discriminator(fake_data))  # [-1, 1]
-
-        real_loss = torch.mean(F.relu(0.5 - pred_real))  # Real data: pred >= 0.5
-        fake_loss = torch.mean(F.relu(0.5 + pred_fake))  # Fake data: pred <= -0.5
-
-        d_loss = real_loss + fake_loss
-        return d_loss, real_loss, fake_loss
-
-    def compute_channel_consistency_regularization(self, x0):
-        """
-        SCER 형식 데이터의 채널 간 연속성을 강제하는 Consistency Regularization.
-
-        Args:
-            x0 (torch.Tensor): [B, 6, H, W] 형태의 VAE Decoder 출력 (pixel space)
-
-        Returns:
-            torch.Tensor: Consistency Regularization Loss (scalar)
-        """
-        # 6채널 데이터를 3채널씩 분리
-        event_1 = x0[:, 0:3, :, :]  # [B, 3, H, W]
-        event_2 = x0[:, 3:6, :, :]  # [B, 3, H, W]
-        event_2 = torch.flip(event_2, dims=[1])
-
-        # event_1 내 채널 간 consistency (2번 채널 값은 1번 채널에 포함, 1번 채널은 0번 채널에 포함)
-        loss_event_1_01 = torch.mean(torch.relu(event_1[:, 1, :, :] - event_1[:, 0, :, :]))  # event_1[:, 1] <= event_1[:, 0]
-        loss_event_1_12 = torch.mean(torch.relu(event_1[:, 2, :, :] - event_1[:, 1, :, :]))  # event_1[:, 2] <= event_1[:, 1]
-
-        # event_2 내 채널 간 consistency
-        loss_event_2_01 = torch.mean(torch.relu(event_2[:, 1, :, :] - event_2[:, 0, :, :]))  # event_2[:, 1] <= event_2[:, 0]
-        loss_event_2_12 = torch.mean(torch.relu(event_2[:, 2, :, :] - event_2[:, 1, :, :]))  # event_2[:, 2] <= event_2[:, 1]
-
-        # 최종 Consistency Loss (두 더미의 모든 관계 강제)
-        consistency_loss = loss_event_1_01 + loss_event_1_12 + loss_event_2_01 + loss_event_2_12
-
-        return consistency_loss
 
     def train(self, t_end=None):
         logging.info("Start training")
@@ -342,9 +215,6 @@ class B2ETrainer:
         device = self.device
         self.model.to(device)
         
-        if self.use_gan:
-            self.discriminator.to(device)
-
         self.train_metrics.reset()
         accumulated_step = 0  # Gradient Accumulation 카운트
     
@@ -359,8 +229,6 @@ class B2ETrainer:
                 # 1) 준비 작업 (모델 train 모드, rng 등)
                 ########################################
                 self.model.unet.train()
-                if self.use_gan and self.effective_iter > self.gan_start_iter:
-                    self.discriminator.train()
 
                 if self.seed is not None:
                     local_seed = self._get_next_seed()
@@ -382,9 +250,9 @@ class B2ETrainer:
 
                 with torch.no_grad():
                     # Encode
-                    event_latent_1 = self.model.encode(event_1)  # [B, 4, h, w] 
-                    event_latent_2 = self.model.encode(event_2)
-                    rgb_latent = self.model.encode(rgb)
+                    event_latent_1 = self.model.encode_event(event_1)  # [B, 4, h, w] 
+                    event_latent_2 = self.model.encode_event(event_2)
+                    rgb_latent = self.model.encode_image(rgb)
 
                     # Ground Truth x0 in latent space
                     event_latent = torch.cat([event_latent_1, event_latent_2], dim=1)
@@ -445,70 +313,11 @@ class B2ETrainer:
 
                 latent_loss = self.loss(model_pred.float(), target.float())
                 diff_loss = latent_loss.mean()
+                self.train_metrics.update("loss", diff_loss.item())
 
-                ########################################
-                # 5) Generator(U-Net) & Discriminator 업데이트
-                ########################################
-                if self.use_gan and self.effective_iter > self.gan_start_iter :
-                    # ========== Generator(U-Net) Loss ==========
-                    # 5a) GAN Loss(Generator 측)
-                    if self.prediction_type == "v_prediction":
-                        # VAE output을 discriminator에 넣을까? latent를 넣을까?
-                        x0_fake, gan_loss_g = self.compute_generator_gan_loss_v_prediction(
-                            discriminator=self.discriminator,
-                            x_t=noisy_latents,
-                            v_pred=model_pred,
-                            x0_gt=event_latent,
-                            timesteps=timesteps,
-                            alphas_cumprod=self.training_noise_scheduler.alphas_cumprod,
-                        )
-                    elif self.prediction_type == "epsilon":
-                        raise NotImplementedError("GAN loss for epsilon mode is not implemented yet.")
-                    else:
-                        raise ValueError(f"Unknown prediction type {self.prediction_type}")
+                diff_loss = diff_loss / self.gradient_accumulation_steps
+                diff_loss.backward()
 
-                    # ========== Consistency Regularization 추가 ==========
-                    # x0_fake에 대해 채널 간 Consistency Loss 계산
-                    if self.use_consistency_loss:
-                        consistency_loss = self.compute_channel_consistency_regularization(x0_fake)
-                        g_loss = diff_loss + self.gan_weight * gan_loss_g + self.consistency_weight * consistency_loss
-                        self.train_metrics.update("cons_loss", consistency_loss.item())
-
-                    else:
-                        g_loss = diff_loss + self.gan_weight * gan_loss_g
-
-                    # 역전파 (Generator)
-                    g_loss_for_bp = g_loss / self.gradient_accumulation_steps
-                    g_loss_for_bp.backward() 
-
-                    # ========== Discriminator Loss ==========
-                    real_data = gt_event
-                    fake_data = x0_fake.detach()  # gradient 분리
-                    d_loss, real_loss, fake_loss = self.compute_discriminator_loss_hinge(   # d_loss = real_loss + fake_loss
-                        self.discriminator, real_data=real_data, fake_data=fake_data
-                    )
-                    d_loss_for_bp = d_loss / self.gradient_accumulation_steps
-                    d_loss_for_bp.backward()
-
-                    # 로깅
-                    self.train_metrics.update("diff_loss", diff_loss.item())
-                    self.train_metrics.update("g_loss", gan_loss_g.item())
-                    self.train_metrics.update("d_loss", d_loss.item())
-                    self.train_metrics.update("real_loss", real_loss.item())
-                    self.train_metrics.update("fake_loss", fake_loss.item())
-
-                else:
-                    # GAN 미사용 시 → Diffusion Loss만 역전파
-                    g_loss = diff_loss
-                    g_loss_for_bp = g_loss / self.gradient_accumulation_steps
-                    g_loss_for_bp.backward()
-
-                    # 로깅
-                    self.train_metrics.update("diff_loss", diff_loss.item())
-                    d_loss = None  # GAN 미사용
-
-
-                self.train_metrics.update("loss", g_loss.item())
 
                 # Gradient Accumulation 카운트
                 accumulated_step += 1
@@ -521,13 +330,7 @@ class B2ETrainer:
                     self.optimizer.step()
                     self.optimizer.zero_grad()
 
-                    if self.use_gan and self.effective_iter > self.gan_start_iter:
-                        self.discriminator_optimizer.step()
-                        self.discriminator.zero_grad()
-
                     self.lr_scheduler.step()
-                    if self.use_gan and self.effective_iter > self.gan_start_iter:
-                        self.discriminator_scheduler.step()
 
                     accumulated_step = 0
                     self.effective_iter += 1
@@ -538,23 +341,6 @@ class B2ETrainer:
                         f"iter {self.effective_iter:5d} (epoch {epoch:2d}): loss={accumulated_loss:.5f}"
                     )
                     wandb.log({'iter': self.effective_iter, 'loss': float(f"{accumulated_loss:.5f}")})
-
-                    if self.use_gan and self.effective_iter > self.gan_start_iter:
-                        diffusion_loss = self.train_metrics.result()["diff_loss"]
-                        discriminator_loss = self.train_metrics.result()["d_loss"]
-                        d_real_loss = self.train_metrics.result()['real_loss']
-                        d_fake_loss = self.train_metrics.result()['fake_loss']
-                        generator_loss = self.train_metrics.result()["g_loss"]
-     
-                        wandb.log({'iter': self.effective_iter, 'diffusion_loss': float(f"{diffusion_loss:.5f}")})
-                        wandb.log({'iter': self.effective_iter, 'd_loss': float(f"{discriminator_loss:.5f}")})
-                        wandb.log({'iter': self.effective_iter, 'g_loss': float(f"{generator_loss:.5f}")})
-                        wandb.log({'iter': self.effective_iter, 'd_real_loss': float(f"{d_real_loss:.5f}")})
-                        wandb.log({'iter': self.effective_iter, 'd_fake_loss': float(f"{d_fake_loss:.5f}")})
-
-                        if self.use_consistency_loss:
-                            cons_loss = self.train_metrics.result()["cons_loss"]
-                            wandb.log({'iter': self.effective_iter, 'cons_loss': float(f"{cons_loss:.5f}")})
 
                     self.train_metrics.reset()
 
