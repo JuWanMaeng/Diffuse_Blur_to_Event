@@ -641,7 +641,6 @@ def main():
                         "batch_time": batch_time_m.val,
                     }
                     accelerator.log(logs, step=global_step)
-                    # wandb.log({'train_loss':avg_loss.item(), 'iter':global_step})
                     batch_time_m.reset()
                     data_time_m.reset()
 
@@ -681,4 +680,5 @@ def main():
 
 
 if __name__ == "__main__":
+    os.environ['CUDA_VISIBLE_DEVICES'] = '2,3'
     main()
