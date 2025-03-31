@@ -40,12 +40,11 @@ from timm.data.transforms_factory import create_transform
 from torchvision import transforms
 from tqdm import tqdm
 
-from diffusers import VQModel, AutoencoderKL
+from diffusers import  AutoencoderKL
 from diffusers.optimization import get_scheduler
 from diffusers.training_utils import EMAModel
 from diffusers.utils import check_min_version, is_wandb_available
-from dataset.flow_dataset import Flow_dataset
-
+from dataset.h5_image_dataset import H5ImageDataset, concatenate_h5_datasets
 
 if is_wandb_available():
     import wandb
@@ -167,7 +166,7 @@ def parse_args():
     parser.add_argument(
         "--vae_loss",
         type=str,
-        default="l2",
+        default="l1",
         help="The loss function for vae reconstruction loss.",
     )
     parser.add_argument(
@@ -600,8 +599,13 @@ def main():
     total_batch_size = args.train_batch_size * accelerator.num_processes * args.gradient_accumulation_steps
 
 
-    train_data = "/workspace/Marigold/dataset/train/train_vae.txt"
-    train_dataset = Flow_dataset(train_data, seed = 42)
+    # Training dataset
+    opt = {'crop_size':(512,512),
+           'use_flip': False,
+           'folder_path' : '/workspace/data/GOPRO/train'
+           }
+    
+    train_dataset = concatenate_h5_datasets(H5ImageDataset, opt)
 
     # DataLoaders creation:
     train_dataloader = torch.utils.data.DataLoader(
@@ -693,8 +697,8 @@ def main():
         model.train()
         discriminator.train()
         for i, batch in enumerate(train_dataloader):
-            flow = batch["flow"]
-            flow = flow.to(accelerator.device, non_blocking=True)
+            event = batch["voxel"]
+            event = event.to(accelerator.device, non_blocking=True)
             data_time_m.update(time.time() - end)
             generator_step = ((i // args.gradient_accumulation_steps) % 2) == 0
             # Train Step
@@ -707,18 +711,18 @@ def main():
                 discr_optimizer.zero_grad(set_to_none=True)
             # encode images to the latent space 
             # Return posterior
-            fmap, posteriors = model(flow, return_dict=False)
+            fmap, posteriors = model(event, return_dict=False)
 
             if generator_step:
                 with accelerator.accumulate(model):
                     # reconstruction loss. Pixel level differences between input vs output
                     if args.vae_loss == "l2":
-                        loss = F.mse_loss(flow, fmap)
+                        loss = F.mse_loss(event, fmap)
                     else:
-                        loss = F.l1_loss(flow, fmap)
+                        loss = F.l1_loss(event, fmap)
                     # perceptual loss. The high level feature mean squared error loss
                     perceptual_loss = get_perceptual_loss(
-                        flow,
+                        event,
                         fmap,
                         timm_model,
                         timm_model_resolution=timm_model_resolution,
@@ -760,11 +764,11 @@ def main():
                 # Return discriminator loss
                 with accelerator.accumulate(discriminator):
                     fmap.detach_()
-                    flow.requires_grad_()
-                    real = discriminator(flow)
+                    event.requires_grad_()
+                    real = discriminator(event)
                     fake = discriminator(fmap)
                     loss = (F.relu(1 + fake) + F.relu(1 - real)).mean()
-                    gp = gradient_penalty(flow, real)
+                    gp = gradient_penalty(event, real)
                     loss += gp
                     avg_discr_loss = accelerator.gather(loss.repeat(args.train_batch_size)).mean()
                     accelerator.backward(loss)

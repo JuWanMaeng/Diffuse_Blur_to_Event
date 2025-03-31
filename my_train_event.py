@@ -17,10 +17,7 @@ from src.util.config_util import (
     find_value_in_omegaconf,
     recursive_load_config,
 )
-from src.util.depth_transform import (
-    DepthNormalizerBase,
-    get_depth_normalizer,
-)
+
 from src.util.logging_util import (
     config_logging,
     init_wandb,
@@ -29,10 +26,10 @@ from src.util.logging_util import (
     save_wandb_job_id,
     tb_logger,
 )
-from src.util.slurm_util import get_local_scratch_dir, is_on_slurm
+
 
 if "__main__" == __name__:
-    os.environ['CUDA_VISIBLE_DEVICES'] = '1'
+    os.environ['CUDA_VISIBLE_DEVICES'] = '2'
 
     t_start = datetime.now()
     print(f"start at {t_start}")
@@ -51,7 +48,7 @@ if "__main__" == __name__:
         help="Path of checkpoint to be resumed. If given, will ignore --config, and checkpoint in the config",
     )
     parser.add_argument(
-        "--output_dir", type=str, default='output/L2_resume', help="directory to save checkpoints"
+        "--output_dir", type=str, default='output/B2V', help="directory to save checkpoints"
     )
     parser.add_argument("--no_cuda", action="store_true", help="Do not use cuda.")
     parser.add_argument(
@@ -199,13 +196,9 @@ if "__main__" == __name__:
         loader_generator = torch.Generator().manual_seed(loader_seed)
 
     # Training dataset
-    # train_dataset = Flow_Blur_dataset_C(
-    #     blur_txt_path='/workspace/Marigold/dataset/train/train_vimeo+monkaa.txt',
-    #     seed=loader_seed  # Seed를 설정하여 무작위성 고정
-    # )
     opt = {'crop_size':(540,960),
-           'use_flip': True,
-           'folder_path' : '/workspace/data/GOPRO/train'
+           'use_flip': False,
+           'folder_path' : '/workspace/data/GOPRO_original_voxel/train'
            }
     
     train_dataset = concatenate_h5_datasets(H5ImageDataset, opt)

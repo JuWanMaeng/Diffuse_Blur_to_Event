@@ -3006,3 +3006,39 @@
 01/27/2025 17:33:20 - INFO: device = cuda
 01/27/2025 17:33:25 - INFO: scale_invariant: True, shift_invariant: True
 01/27/2025 17:33:29 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 5, processing resolution = 768, seed = None; color_map = Spectral.
+03/27/2025 10:15:42 - INFO: output dir = results/Gopro_Event_Test
+03/27/2025 10:15:42 - INFO: device = cuda
+03/27/2025 10:16:28 - INFO: output dir = results/Gopro_Event_Test
+03/27/2025 10:16:28 - INFO: device = cuda
+03/27/2025 10:16:36 - INFO: scale_invariant: True, shift_invariant: True
+03/27/2025 10:16:36 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 5, processing resolution = 768, seed = None; color_map = Spectral.
+03/27/2025 10:18:21 - INFO: output dir = results/Gopro_Event_Train
+03/27/2025 10:18:21 - INFO: device = cuda
+03/27/2025 10:18:26 - INFO: scale_invariant: True, shift_invariant: True
+03/27/2025 10:18:26 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 1, processing resolution = 768, seed = None; color_map = Spectral.
+03/27/2025 10:25:39 - INFO: output dir = results/Gopro_Event_Test
+03/27/2025 10:25:39 - INFO: device = cuda
+03/27/2025 10:25:43 - INFO: scale_invariant: True, shift_invariant: True
+03/27/2025 10:25:43 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 1, processing resolution = 768, seed = None; color_map = Spectral.
+03/29/2025 22:47:04 - INFO: output dir = results/Gopro_Event_Train
+03/29/2025 22:47:04 - INFO: device = cuda
+03/29/2025 22:47:12 - INFO: scale_invariant: True, shift_invariant: True
+03/29/2025 22:47:12 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 1, processing resolution = 768, seed = None; color_map = Spectral.
+03/29/2025 22:47:30 - INFO: output dir = results/Gopro_Event_Test
+03/29/2025 22:47:30 - INFO: device = cuda
+03/29/2025 22:47:34 - INFO: scale_invariant: True, shift_invariant: True
+03/29/2025 22:47:34 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 1, processing resolution = 768, seed = None; color_map = Spectral.
+03/31/2025 13:19:34 - WARNING: Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+03/31/2025 13:20:27 - INFO: Loading models and optimizer
+03/31/2025 13:21:09 - INFO: Loading pretrained weights from Hugging Face hub (timm/vgg19.tv_in1k)
+03/31/2025 13:21:09 - INFO: [timm/vgg19.tv_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+03/31/2025 13:21:10 - INFO: Missing keys (head.fc.weight, head.fc.bias) discovered while loading pretrained weights. This is expected if model is being adapted.
+03/31/2025 13:21:57 - INFO: Creating dataloaders and lr_scheduler
+03/31/2025 13:22:41 - INFO: Preparing model, optimizer and dataloaders
+03/31/2025 13:22:42 - INFO: ***** Running training *****
+03/31/2025 13:22:42 - INFO:   Num examples = 199447
+03/31/2025 13:22:42 - INFO:   Num Epochs = 100
+03/31/2025 13:22:42 - INFO:   Instantaneous batch size per device = 1
+03/31/2025 13:22:42 - INFO:   Total train batch size (w. parallel, distributed & accumulation) = 1
+03/31/2025 13:22:42 - INFO:   Gradient Accumulation steps = 1
+03/31/2025 13:22:42 - INFO:   Total optimization steps = 100

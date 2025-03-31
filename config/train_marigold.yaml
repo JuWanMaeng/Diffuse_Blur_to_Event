@@ -51,7 +51,7 @@ gt_depth_type: depth_raw_norm
 gt_mask_type: valid_mask_raw
 
 max_epoch: 30000  # a large enough number
-max_iter: 15000  # usually converges at around 20k
+max_iter: 20000  # usually converges at around 20k
 
 optimizer:
   name: Adam
@@ -61,12 +61,12 @@ loss:
   kwargs:
     reduction: mean
 
-#lr: 3.0e-05
-lr: 1.0e-05
+lr: 3.0e-05
+# lr: 1.0e-05
 lr_scheduler:
   name: IterExponential
   kwargs:
-    total_iter: 15000
+    total_iter: 20000
     final_ratio: 0.01
     warmup_steps: 0
 
