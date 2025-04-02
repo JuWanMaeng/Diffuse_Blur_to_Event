@@ -113,7 +113,7 @@ class H5ImageDataset(data.Dataset):
 
 
         # if self.opt['norm_voxel'] is not None:
-        self.norm_voxel = True   # -MAX~MAX -> -1 ~ 1 
+        self.norm_voxel = False   # -MAX~MAX -> -1 ~ 1 
         
         # if self.opt['return_voxel'] is not None:
         self.return_voxel = True

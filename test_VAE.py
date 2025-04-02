@@ -15,7 +15,7 @@ def main():
 
     # 사전 학습된 VAE 모델 로드 및 평가 모드 전환
     # model = AutoencoderKL.from_pretrained('/workspace/Marigold/checkpoint/stable-diffusion-2/vae')
-    model = AutoencoderKL.from_pretrained('/workspace/data/AE-output-KL-pretrained/checkpoint-5000/aemodel')
+    model = AutoencoderKL.from_pretrained('/workspace/data/AE-output-KL-pretrained/checkpoint-3000/aemodel')
     model.to(device)
     model.eval()
 
@@ -23,7 +23,7 @@ def main():
     opt = {
         'crop_size': None,
         'use_flip': False,
-        'folder_path': '/workspace/data/GOPRO/train'
+        'folder_path': '/workspace/data/GOPRO/test'
     }
     test_dataset = concatenate_h5_datasets(H5ImageDataset, opt)
     test_dataloader = torch.utils.data.DataLoader(
@@ -43,9 +43,17 @@ def main():
         with torch.no_grad():
             fmap, _ = model(event, return_dict=False)
 
+
+        if torch.max(event) > 1:
+            max_val = torch.max(torch.abs(event))
+            event_01 = event/max_val
+
+            max_val = torch.max(torch.abs(fmap))
+            fmap_01 = fmap / max_val
         # RMSE 계산: sqrt(mean((원본 - 재구성)**2))
-        fmap_01 = (fmap+1) / 2
-        event_01 = (event+1) / 2
+        else:
+            fmap_01 = (fmap+1) / 2
+            event_01 = (event+1) / 2
 
         mse = F.mse_loss(fmap_01, event_01, reduction="mean")
         rmse = torch.sqrt(mse)
@@ -74,5 +82,5 @@ def main():
     print(f"Average RMSE over test dataset: {avg_rmse:.6f}")
 
 if __name__ == "__main__":
-    os.environ['CUDA_VISIBLE_DEVICES'] = '3'
+    os.environ['CUDA_VISIBLE_DEVICES'] = '1'
     main()
