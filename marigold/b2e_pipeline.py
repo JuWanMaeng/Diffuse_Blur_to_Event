@@ -40,7 +40,8 @@ class B2EPipeline(DiffusionPipeline):
         self,
         unet: UNet2DConditionModel,
         vae: AutoencoderKL,
-        event_vae: AutoencoderKL,
+        event_vae_former: AutoencoderKL,
+        event_vae_latter: AutoencoderKL,
         scheduler: Union[DDIMScheduler, LCMScheduler],
         text_encoder: CLIPTextModel,
         tokenizer: CLIPTokenizer,
@@ -56,7 +57,9 @@ class B2EPipeline(DiffusionPipeline):
             scheduler=scheduler,
             text_encoder=text_encoder,
             tokenizer=tokenizer,
-            event_vae = event_vae,
+            event_vae_former = event_vae_former,
+            event_vae_latter=event_vae_latter,
+
         )
         self.register_to_config(
             scale_invariant=scale_invariant,
@@ -319,10 +322,16 @@ class B2EPipeline(DiffusionPipeline):
         image_latent = mean * self.rgb_latent_scale_factor
         return image_latent
     
-    def encode_event(self, event_in: torch.Tensor) -> torch.Tensor:
+    def encode_event(self, event_in: torch.Tensor, key=None) -> torch.Tensor:
 
         # encode
-        h = self.vae.encoder(event_in)
+        if key == 'former':
+            h = self.event_vae_former.encoder(event_in)
+        elif key == 'latter':
+            h = self.event_vae_latter.encoder(event_in)
+        else:
+            raise KeyError
+        
         moments = self.vae.quant_conv(h)
         mean, logvar = torch.chunk(moments, 2, dim=1)
         # scale latent
@@ -337,11 +346,11 @@ class B2EPipeline(DiffusionPipeline):
         # split event_latent 
         event_latent_1, event_latent_2 = torch.chunk(event_latent, 2, dim=1)
         # decode
-        z_1 = self.vae.post_quant_conv(event_latent_1)
-        z_2 = self.vae.post_quant_conv(event_latent_2)
+        z_1 = self.event_vae_former.post_quant_conv(event_latent_1)
+        z_2 = self.event_vae_latter.post_quant_conv(event_latent_2)
 
-        z_1 = self.vae.decoder(z_1)
-        z_2 = self.vae.decoder(z_2)
+        z_1 = self.event_vae_former.decoder(z_1)
+        z_2 = self.event_vae_latter.decoder(z_2)
 
         stacked = torch.cat([z_1, z_2], dim=1)
 

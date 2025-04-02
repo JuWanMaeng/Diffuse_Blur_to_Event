@@ -250,8 +250,8 @@ class B2ETrainer:
 
                 with torch.no_grad():
                     # Encode
-                    event_latent_1 = self.model.encode_event(event_1)  # [B, 4, h, w] 
-                    event_latent_2 = self.model.encode_event(event_2)
+                    event_latent_1 = self.model.encode_event(event_1, key='former')  # [B, 4, h, w] 
+                    event_latent_2 = self.model.encode_event(event_2, key='latter')
                     rgb_latent = self.model.encode_image(rgb)
 
                     # Ground Truth x0 in latent space
@@ -579,11 +579,6 @@ class B2ETrainer:
         self.model.unet.save_pretrained(unet_path, safe_serialization=False)
         logging.info(f"UNet is saved to: {unet_path}")
 
-        # 추가: Discriminator 가중치 저장
-        if self.use_gan and self.effective_iter > self.gan_start_iter:
-            disc_path = os.path.join(ckpt_dir, "discriminator.ckpt")
-            torch.save(self.discriminator.state_dict(), disc_path)
-            logging.info(f"Discriminator weights are saved to: {disc_path}")
 
 
         if save_train_state:

@@ -14,7 +14,7 @@ def main():
 
     # 사전 학습된 VAE 모델 로드 및 평가 모드 전환
     # model = AutoencoderKL.from_pretrained('/workspace/Marigold/checkpoint/stable-diffusion-2/vae')
-    model = AutoencoderKL.from_pretrained('/workspace/data/AE-output-KL-pretrained/checkpoint-8000/aemodel')
+    model = AutoencoderKL.from_pretrained('/workspace/data/AE-output-KL-pretrained/checkpoint-3000/aemodel')
     model.to(device)
     model.eval()
 
@@ -22,7 +22,7 @@ def main():
     opt = {
         'crop_size': None,
         'use_flip': False,
-        'folder_path': '/workspace/data/GOPRO/train'
+        'folder_path': '/workspace/data/GOPRO/test'
     }
     test_dataset = concatenate_h5_datasets(H5ImageDataset, opt)
     test_dataloader = torch.utils.data.DataLoader(
@@ -36,7 +36,7 @@ def main():
     rmse_list = []
     for step, batch in enumerate(test_dataloader):
         # "voxel" 키에 해당하는 데이터를 가져옵니다.
-        event = batch["voxel"].to(device, non_blocking=True)
+        event = batch["frame"].to(device, non_blocking=True)
 
         # 모델 추론: fmap은 재구성된 결과
         with torch.no_grad():
