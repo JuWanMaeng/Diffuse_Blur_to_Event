@@ -40,7 +40,7 @@ EXTENSION_LIST = [".jpg", ".jpeg", ".png"]
 
 
 if "__main__" == __name__:
-    os.environ['CUDA_VISIBLE_DEVICES'] = '1'
+    os.environ['CUDA_VISIBLE_DEVICES'] = '2'
     logging.basicConfig(level=logging.INFO)
 
     # -------------------- Arguments --------------------
@@ -64,7 +64,7 @@ if "__main__" == __name__:
     parser.add_argument(
         "--dataset_name",
         type=str,
-        default='Gopro_Event_Test',
+        default='Gopro_Event_Train',
         help="Path to the input image folder.",
     )
 
@@ -96,7 +96,7 @@ if "__main__" == __name__:
     parser.add_argument(
         "--processing_res",
         type=int,
-        default=None,
+        default=768,
         help="Maximum resolution of processing. 0 for using input image resolution. Default: 768.",
     )
     parser.add_argument(
@@ -178,7 +178,7 @@ if "__main__" == __name__:
 
     opt = {'crop_size': None,
            'use_flip' : False,
-           'folder_path' : '/workspace/data/GOPRO/test',
+           'folder_path' : '/workspace/data/GOPRO/train',
            }
     
     dataset = concatenate_h5_datasets(H5ImageDataset, opt)

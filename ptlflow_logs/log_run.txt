@@ -3050,3 +3050,23 @@
 04/02/2025 10:52:38 - INFO: device = cuda
 04/02/2025 10:52:59 - INFO: scale_invariant: True, shift_invariant: True
 04/02/2025 10:52:59 - INFO: Inference settings: checkpoint = `checkpoint/my_FT`, with denoise_steps = 50, ensemble_size = 1, processing resolution = None, seed = None; color_map = Spectral.
+04/02/2025 11:01:05 - INFO: output dir = results/Gopro_Event_Test
+04/02/2025 11:01:05 - INFO: device = cuda
+04/02/2025 11:01:10 - INFO: scale_invariant: True, shift_invariant: True
+04/02/2025 11:01:10 - INFO: Inference settings: checkpoint = `checkpoint/my_FT`, with denoise_steps = 50, ensemble_size = 1, processing resolution = 768, seed = None; color_map = Spectral.
+04/02/2025 11:02:29 - INFO: output dir = results/Gopro_Event_Test
+04/02/2025 11:02:29 - INFO: device = cuda
+04/02/2025 11:02:34 - INFO: scale_invariant: True, shift_invariant: True
+04/02/2025 11:02:34 - INFO: Inference settings: checkpoint = `checkpoint/my_FT`, with denoise_steps = 50, ensemble_size = 1, processing resolution = 768, seed = None; color_map = Spectral.
+04/02/2025 11:04:56 - INFO: output dir = results/Gopro_Event_Test
+04/02/2025 11:04:56 - INFO: device = cuda
+04/02/2025 11:05:00 - INFO: scale_invariant: True, shift_invariant: True
+04/02/2025 11:05:00 - INFO: Inference settings: checkpoint = `checkpoint/my_FT`, with denoise_steps = 50, ensemble_size = 1, processing resolution = 768, seed = None; color_map = Spectral.
+04/02/2025 11:05:27 - INFO: output dir = results/Gopro_Event_Train
+04/02/2025 11:05:27 - INFO: device = cuda
+04/02/2025 11:05:31 - INFO: scale_invariant: True, shift_invariant: True
+04/02/2025 11:05:31 - INFO: Inference settings: checkpoint = `checkpoint/my_FT`, with denoise_steps = 50, ensemble_size = 1, processing resolution = 768, seed = None; color_map = Spectral.
+04/02/2025 11:05:51 - INFO: output dir = results/Gopro_Event_Train
+04/02/2025 11:05:51 - INFO: device = cuda
+04/02/2025 11:05:55 - INFO: scale_invariant: True, shift_invariant: True
+04/02/2025 11:05:55 - INFO: Inference settings: checkpoint = `checkpoint/my_FT`, with denoise_steps = 50, ensemble_size = 1, processing resolution = 768, seed = None; color_map = Spectral.

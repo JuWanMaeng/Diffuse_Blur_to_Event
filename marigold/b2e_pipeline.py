@@ -260,7 +260,7 @@ class B2EPipeline(DiffusionPipeline):
         timesteps = self.scheduler.timesteps  # [T]
 
         # Encode image
-        rgb_latent = self.encode(rgb_in)
+        rgb_latent = self.encode_image(rgb_in)
         B,C,H,W = rgb_latent.shape
 
         # Initial depth map (noise)
