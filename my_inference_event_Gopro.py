@@ -50,7 +50,7 @@ if "__main__" == __name__:
     parser.add_argument(
         "--checkpoint",
         type=str,
-        default="checkpoint/my",
+        default="checkpoint/my_FT",
         help="Checkpoint path or hub name.",
     )
 
@@ -178,7 +178,7 @@ if "__main__" == __name__:
 
     opt = {'crop_size': None,
            'use_flip' : False,
-           'folder_path' : '/workspace/data/GOPRO_original_voxel/test',
+           'folder_path' : '/workspace/data/GOPRO/test',
            }
     
     dataset = concatenate_h5_datasets(H5ImageDataset, opt)

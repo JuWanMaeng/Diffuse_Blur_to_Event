@@ -3042,3 +3042,11 @@
 03/31/2025 13:22:42 - INFO:   Total train batch size (w. parallel, distributed & accumulation) = 1
 03/31/2025 13:22:42 - INFO:   Gradient Accumulation steps = 1
 03/31/2025 13:22:42 - INFO:   Total optimization steps = 100
+04/02/2025 10:40:32 - INFO: output dir = results/Gopro_Event_Test
+04/02/2025 10:40:32 - INFO: device = cuda
+04/02/2025 10:41:30 - INFO: output dir = results/Gopro_Event_Test
+04/02/2025 10:41:30 - INFO: device = cuda
+04/02/2025 10:52:38 - INFO: output dir = results/Gopro_Event_Test
+04/02/2025 10:52:38 - INFO: device = cuda
+04/02/2025 10:52:59 - INFO: scale_invariant: True, shift_invariant: True
+04/02/2025 10:52:59 - INFO: Inference settings: checkpoint = `checkpoint/my_FT`, with denoise_steps = 50, ensemble_size = 1, processing resolution = None, seed = None; color_map = Spectral.
