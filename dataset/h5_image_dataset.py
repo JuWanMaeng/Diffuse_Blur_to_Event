@@ -163,8 +163,6 @@ class H5ImageDataset(data.Dataset):
             frame_gt = self.transform_frame(frame_gt, seed, transpose_to_CHW=False)
 
         voxel = self.get_voxel(index)
-        # voxel = voxel[:3,:,:] # former
-        voxel = voxel[3:,:,:] # latter
 
         frame = self.transform_frame(frame, seed, transpose_to_CHW=False)  # to tensor
 

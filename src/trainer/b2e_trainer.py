@@ -20,7 +20,6 @@ from PIL import Image
 
 
 from marigold.b2e_pipeline import B2EPipeline
-from marigold.discriminator import SCERDiscriminator
 
 from src.util import metric
 from src.util.data_loader import skip_first_batches

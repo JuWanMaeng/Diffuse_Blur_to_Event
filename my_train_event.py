@@ -197,7 +197,7 @@ if "__main__" == __name__:
 
     # Training dataset
     opt = {'crop_size':(540,960),
-           'use_flip': False,
+           'use_flip': True,
            'folder_path' : '/workspace/data/GOPRO_original_voxel/train'
            }
     
