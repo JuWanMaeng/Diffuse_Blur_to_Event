@@ -42,6 +42,7 @@ class B2EPipeline(DiffusionPipeline):
         unet: UNet2DConditionModel,
         scheduler: Union[DDIMScheduler, LCMScheduler],
         text_encoder: CLIPTextModel,
+        vae : AutoencoderKL,
         tokenizer: CLIPTokenizer,
         scale_invariant: Optional[bool] = True,
         shift_invariant: Optional[bool] = True,
@@ -51,7 +52,7 @@ class B2EPipeline(DiffusionPipeline):
         super().__init__()
         self.register_modules(
             unet=unet,
-            # vae=vae,
+            vae=vae,
             scheduler=scheduler,
             text_encoder=text_encoder,
             tokenizer=tokenizer,
@@ -70,7 +71,7 @@ class B2EPipeline(DiffusionPipeline):
         self.default_processing_resolution = default_processing_resolution
 
         self.empty_text_embed = None
-        self.vae =  NAFNetRecon(img_channel=6, width=64, middle_blk_num=28, enc_blk_nums=[1,1,1], dec_blk_nums=[1,1,1])
+        self.event_vae =  NAFNetRecon(img_channel=6, width=64, middle_blk_num=28, enc_blk_nums=[1,1,1], dec_blk_nums=[1,1,1])
 
 
     @torch.no_grad()
@@ -321,34 +322,18 @@ class B2EPipeline(DiffusionPipeline):
     
     def encode_event(self, event_in: torch.Tensor, key=None) -> torch.Tensor:
 
-        # encode
-        if key == 'former':
-            h = self.event_vae_former.encoder(event_in)
-        elif key == 'latter':
-            h = self.event_vae_latter.encoder(event_in)
-        else:
-            raise KeyError
-        
-        moments = self.vae.quant_conv(h)
-        mean, logvar = torch.chunk(moments, 2, dim=1)
+      
+
+        h, encs, inp, orig_size = self.event_vae(event_in)
         # scale latent
-        event_latent = mean * self.rgb_latent_scale_factor
+        event_latent = h * self.rgb_latent_scale_factor
         return event_latent
 
-    def decode_event(self, event_latent: torch.Tensor) -> torch.Tensor:
+    def decode_event(self, event_latent: torch.Tensor, encs, inp, orig_size) -> torch.Tensor:
 
         # scale latent
         event_latent = event_latent / self.event_latent_scale_factor
 
-        # split event_latent 
-        event_latent_1, event_latent_2 = torch.chunk(event_latent, 2, dim=1)
-        # decode
-        z_1 = self.event_vae_former.post_quant_conv(event_latent_1)
-        z_2 = self.event_vae_latter.post_quant_conv(event_latent_2)
+        z = self.event_vae.decode(event_latent, encs, inp, orig_size)
 
-        z_1 = self.event_vae_former.decoder(z_1)
-        z_2 = self.event_vae_latter.decoder(z_2)
-
-        stacked = torch.cat([z_1, z_2], dim=1)
-
-        return stacked
+        return z

@@ -155,24 +155,28 @@ class B2ETrainer:
         self.global_seed_sequence: List = []  # consistent global seed sequence, used to seed random generator, to ensure consistency when resuming
 
     def _replace_unet_conv_in(self):
-        # replace the first layer to accept 8 in_channels
+        # 기존 UNet의 첫 번째 conv layer weight와 bias 복사 (원래 shape: [320, 4, 3, 3])
         _weight = self.model.unet.conv_in.weight.clone()  # [320, 4, 3, 3]
-        _bias = self.model.unet.conv_in.bias.clone()  # [320]
-        _weight = _weight.repeat((1, 3, 1, 1))  # Keep selected channel(s)
-
-        # half the activation magnitude
-        _weight *= 1 / 3.0  # 3배 확장된 것을 보정
-        # new conv_in channel
-        _n_convin_out_channel = self.model.unet.conv_in.out_channels
+        _bias = self.model.unet.conv_in.bias.clone()        # [320]
+        
+        # 4채널을 68채널로 확장 (4 * 17 = 68)
+        _weight = _weight.repeat((1, 17, 1, 1))  # 새로운 weight shape: [320, 68, 3, 3]
+        
+        # 복제된 채널에 따른 활성화 값 보정
+        _weight *= 1 / 17.0  # 17배 확장된 것을 보정
+        
+        # 새 conv_in layer 생성: in_channels를 68로 설정
+        _n_conv_in_out_channel = self.model.unet.conv_in.out_channels
         _new_conv_in = Conv2d(
-            12, _n_convin_out_channel, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)
+            68, _n_conv_in_out_channel, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)
         )
         _new_conv_in.weight = Parameter(_weight)
         _new_conv_in.bias = Parameter(_bias)
         self.model.unet.conv_in = _new_conv_in
-        logging.info("Unet conv_in layer is replaced with 12 channels")
-        # replace config
-        self.model.unet.config["in_channels"] = 12
+        
+        logging.info("Unet conv_in layer is replaced with 68 channels")
+        # config 업데이트
+        self.model.unet.config["in_channels"] = 68
         logging.info("Unet config is updated")
         return
 
@@ -241,17 +245,13 @@ class B2ETrainer:
                 # 2) 배치 데이터 준비 및 인코딩
                 ########################################
                 rgb = batch['frame'].to(device)                  # [B, 3, H, W]
-                event_gt_for_latent = batch['voxel'].to(device)  # [B, 6, H, W], 
-                event_1 = event_gt_for_latent[:, 0:3, :, :]
-                event_2 = event_gt_for_latent[:, 3:, :, :]
-                gt_event = torch.cat([event_1, event_2], dim=1)
+                event = batch['voxel'].to(device)  # [B, 6, H, W], 
 
                 batch_size = rgb.shape[0]
 
                 with torch.no_grad():
                     # Encode
-                    event_latent_1 = self.model.encode_event(event_1, key='former')  # [B, 4, h, w] 
-                    event_latent_2 = self.model.encode_event(event_2, key='latter')
+                    event_latent = self.model.encode_event(event)  # [B, 4, h, w] 
                     rgb_latent = self.model.encode_image(rgb)
 
                     # Ground Truth x0 in latent space

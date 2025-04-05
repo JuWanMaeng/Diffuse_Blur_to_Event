@@ -14,7 +14,7 @@ def main():
 
     # 사전 학습된 VAE 모델 로드 및 평가 모드 전환
     # model = AutoencoderKL.from_pretrained('/workspace/Marigold/checkpoint/stable-diffusion-2/vae')
-    model = AutoencoderKL.from_pretrained('/workspace/data/AE-output-KL-pretrained/checkpoint-3000/aemodel')
+    model = AutoencoderKL.from_pretrained('checkpoint/my_FT/event_vae_former')
     model.to(device)
     model.eval()
 
