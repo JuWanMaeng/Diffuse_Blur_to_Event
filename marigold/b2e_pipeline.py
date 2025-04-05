@@ -10,6 +10,7 @@ from diffusers import (
     LCMScheduler,
     UNet2DConditionModel,
 )
+from src.model.NAFNet_Recon import NAFNetRecon
 from diffusers.utils import BaseOutput
 from PIL import Image
 from torch.utils.data import DataLoader, TensorDataset
@@ -39,9 +40,6 @@ class B2EPipeline(DiffusionPipeline):
     def __init__(
         self,
         unet: UNet2DConditionModel,
-        vae: AutoencoderKL,
-        event_vae_former: AutoencoderKL,
-        event_vae_latter: AutoencoderKL,
         scheduler: Union[DDIMScheduler, LCMScheduler],
         text_encoder: CLIPTextModel,
         tokenizer: CLIPTokenizer,
@@ -53,12 +51,10 @@ class B2EPipeline(DiffusionPipeline):
         super().__init__()
         self.register_modules(
             unet=unet,
-            vae=vae,
+            # vae=vae,
             scheduler=scheduler,
             text_encoder=text_encoder,
             tokenizer=tokenizer,
-            event_vae_former = event_vae_former,
-            event_vae_latter=event_vae_latter,
 
         )
         self.register_to_config(
@@ -74,6 +70,7 @@ class B2EPipeline(DiffusionPipeline):
         self.default_processing_resolution = default_processing_resolution
 
         self.empty_text_embed = None
+        self.vae =  NAFNetRecon(img_channel=6, width=64, middle_blk_num=28, enc_blk_nums=[1,1,1], dec_blk_nums=[1,1,1])
 
 
     @torch.no_grad()
