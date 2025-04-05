@@ -1,4 +1,4 @@
 model:
   name: B2FPipeline
-  pretrained_path: stable-diffusion-2
+  pretrained_path: stable-diffusion-2-nonorm
   latent_scale_factor: 0.18215

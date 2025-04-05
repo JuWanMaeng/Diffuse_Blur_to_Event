@@ -308,7 +308,7 @@ class B2EPipeline(DiffusionPipeline):
         event = self.decode_event(event_latent)
 
         # clip prediction
-        event = torch.clip(event, -1.0, 1.0)
+        # event = torch.clip(event, -1.0, 1.0)
 
         return event
 

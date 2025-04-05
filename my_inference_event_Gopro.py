@@ -40,7 +40,7 @@ EXTENSION_LIST = [".jpg", ".jpeg", ".png"]
 
 
 if "__main__" == __name__:
-    os.environ['CUDA_VISIBLE_DEVICES'] = '2'
+    os.environ['CUDA_VISIBLE_DEVICES'] = '3'
     logging.basicConfig(level=logging.INFO)
 
     # -------------------- Arguments --------------------
@@ -50,7 +50,7 @@ if "__main__" == __name__:
     parser.add_argument(
         "--checkpoint",
         type=str,
-        default="checkpoint/my_FT",
+        default="checkpoint/my_FT_nonorm",
         help="Checkpoint path or hub name.",
     )
 
@@ -64,7 +64,7 @@ if "__main__" == __name__:
     parser.add_argument(
         "--dataset_name",
         type=str,
-        default='Gopro_Event_Train',
+        default='Gopro_Event_Train_nonorm',
         help="Path to the input image folder.",
     )
 
@@ -254,16 +254,16 @@ if "__main__" == __name__:
             os.makedirs(os.path.join(output_dir, img_path[0]),exist_ok=True)
 
 
-            gt_event = data['voxel'][0]  # [6,H,W]
-            gt_event = np.array(gt_event)
+            # gt_event = data['voxel'][0]  # [6,H,W]
+            # gt_event = np.array(gt_event)
 
     
 
-            min_navie_rmse, min_reversed_rmse, once_rmse, avg_rmse, best_pred = metric_and_output(pipe_out,gt_event)
-            best_rmse = min(min_navie_rmse, min_reversed_rmse)
-            total_rmse += best_rmse
+            # min_navie_rmse, min_reversed_rmse, once_rmse, avg_rmse, best_pred = metric_and_output(pipe_out,gt_event)
+            # best_rmse = min(min_navie_rmse, min_reversed_rmse)
+            # total_rmse += best_rmse
 
-            np.save(os.path.join(output_dir, img_path[0], 'out'), best_pred)
+            np.save(os.path.join(output_dir, img_path[0], 'out'), pipe_out[0])
 
 
         print(total_rmse/len(dataloader))

@@ -35,7 +35,7 @@ trainer:
   # name: MarigoldTrainer
   name: B2ETrainer
   training_noise_scheduler:
-    pretrained_path: stable-diffusion-2
+    pretrained_path: stable-diffusion-2-nonorm
   init_seed: 2024  # use null to train w/o seeding
   save_period: 100
   backup_period: 999999

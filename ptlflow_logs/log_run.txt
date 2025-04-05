@@ -3070,3 +3070,83 @@
 04/02/2025 11:05:51 - INFO: device = cuda
 04/02/2025 11:05:55 - INFO: scale_invariant: True, shift_invariant: True
 04/02/2025 11:05:55 - INFO: Inference settings: checkpoint = `checkpoint/my_FT`, with denoise_steps = 50, ensemble_size = 1, processing resolution = 768, seed = None; color_map = Spectral.
+04/03/2025 19:21:35 - INFO: output dir = results/Gopro_Event_Train
+04/03/2025 19:21:35 - INFO: device = cuda
+04/03/2025 19:21:42 - INFO: scale_invariant: True, shift_invariant: True
+04/03/2025 19:21:42 - INFO: Inference settings: checkpoint = `checkpoint/my_FT`, with denoise_steps = 50, ensemble_size = 1, processing resolution = 768, seed = None; color_map = Spectral.
+04/03/2025 19:22:00 - INFO: output dir = results/Gopro_Event_Test
+04/03/2025 19:22:00 - INFO: device = cuda
+04/03/2025 19:22:04 - INFO: scale_invariant: True, shift_invariant: True
+04/03/2025 19:22:04 - INFO: Inference settings: checkpoint = `checkpoint/my_FT`, with denoise_steps = 50, ensemble_size = 1, processing resolution = 768, seed = None; color_map = Spectral.
+04/03/2025 21:17:54 - INFO: output dir = results/Gopro_Event_Train
+04/03/2025 21:17:54 - INFO: device = cuda
+04/03/2025 21:17:59 - INFO: scale_invariant: True, shift_invariant: True
+04/03/2025 21:17:59 - INFO: Inference settings: checkpoint = `checkpoint/my_FT`, with denoise_steps = 50, ensemble_size = 1, processing resolution = 768, seed = None; color_map = Spectral.
+04/03/2025 21:18:28 - INFO: output dir = results/Gopro_Event_Train
+04/03/2025 21:18:28 - INFO: device = cuda
+04/03/2025 21:18:32 - INFO: scale_invariant: True, shift_invariant: True
+04/03/2025 21:18:32 - INFO: Inference settings: checkpoint = `checkpoint/my_FT`, with denoise_steps = 50, ensemble_size = 1, processing resolution = 768, seed = None; color_map = Spectral.
+04/03/2025 21:18:47 - INFO: output dir = results/Gopro_Event_Test
+04/03/2025 21:18:47 - INFO: device = cuda
+04/03/2025 21:18:52 - INFO: scale_invariant: True, shift_invariant: True
+04/03/2025 21:18:52 - INFO: Inference settings: checkpoint = `checkpoint/my_FT`, with denoise_steps = 50, ensemble_size = 1, processing resolution = 768, seed = None; color_map = Spectral.
+04/03/2025 22:44:05 - INFO: output dir = results/Gopro_Event_Train_nonorm
+04/03/2025 22:44:05 - INFO: device = cuda
+04/03/2025 22:44:09 - INFO: scale_invariant: True, shift_invariant: True
+04/03/2025 22:44:09 - INFO: Inference settings: checkpoint = `checkpoint/my_FT_nonorm`, with denoise_steps = 50, ensemble_size = 1, processing resolution = 768, seed = None; color_map = Spectral.
+04/03/2025 22:44:33 - INFO: output dir = results/Gopro_Event_Test_nonorm
+04/03/2025 22:44:33 - INFO: device = cuda
+04/03/2025 22:44:40 - INFO: scale_invariant: True, shift_invariant: True
+04/03/2025 22:44:40 - INFO: Inference settings: checkpoint = `checkpoint/my_FT_nonorm`, with denoise_steps = 50, ensemble_size = 1, processing resolution = 768, seed = None; color_map = Spectral.
+04/03/2025 23:20:48 - INFO: output dir = results/Gopro_Event_Test_nonorm
+04/03/2025 23:20:48 - INFO: device = cuda
+04/03/2025 23:20:58 - INFO: scale_invariant: True, shift_invariant: True
+04/03/2025 23:20:58 - INFO: Inference settings: checkpoint = `checkpoint/my_FT_nonorm`, with denoise_steps = 50, ensemble_size = 1, processing resolution = 768, seed = None; color_map = Spectral.
+04/03/2025 23:21:10 - INFO: output dir = results/Gopro_Event_Train_nonorm
+04/03/2025 23:21:10 - INFO: device = cuda
+04/03/2025 23:21:14 - INFO: scale_invariant: True, shift_invariant: True
+04/03/2025 23:21:14 - INFO: Inference settings: checkpoint = `checkpoint/my_FT_nonorm`, with denoise_steps = 50, ensemble_size = 1, processing resolution = 768, seed = None; color_map = Spectral.
+04/04/2025 10:18:17 - INFO: output dir = results/Gopro_Event_Train_nonorm
+04/04/2025 10:18:17 - INFO: device = cuda
+04/04/2025 10:18:31 - INFO: scale_invariant: True, shift_invariant: True
+04/04/2025 10:18:31 - INFO: Inference settings: checkpoint = `checkpoint/my_FT_nonorm`, with denoise_steps = 50, ensemble_size = 1, processing resolution = 768, seed = None; color_map = Spectral.
+04/04/2025 10:19:33 - INFO: output dir = results/Gopro_Event_Train_nonorm
+04/04/2025 10:19:33 - INFO: device = cuda
+04/04/2025 10:19:39 - INFO: scale_invariant: True, shift_invariant: True
+04/04/2025 10:19:39 - INFO: Inference settings: checkpoint = `checkpoint/my_FT_nonorm`, with denoise_steps = 50, ensemble_size = 1, processing resolution = 768, seed = None; color_map = Spectral.
+04/04/2025 10:21:04 - INFO: output dir = results/Gopro_Event_Train_nonorm
+04/04/2025 10:21:04 - INFO: device = cuda
+04/04/2025 10:21:10 - INFO: scale_invariant: True, shift_invariant: True
+04/04/2025 10:21:10 - INFO: Inference settings: checkpoint = `checkpoint/my_FT_nonorm`, with denoise_steps = 50, ensemble_size = 1, processing resolution = 768, seed = None; color_map = Spectral.
+04/04/2025 10:22:08 - INFO: output dir = results/Gopro_Event_Train_nonorm
+04/04/2025 10:22:08 - INFO: device = cuda
+04/04/2025 10:22:14 - INFO: scale_invariant: True, shift_invariant: True
+04/04/2025 10:22:14 - INFO: Inference settings: checkpoint = `checkpoint/my_FT_nonorm`, with denoise_steps = 50, ensemble_size = 1, processing resolution = 768, seed = None; color_map = Spectral.
+04/04/2025 10:23:21 - INFO: output dir = results/Gopro_Event_Train_nonorm
+04/04/2025 10:23:21 - INFO: device = cuda
+04/04/2025 10:23:27 - INFO: scale_invariant: True, shift_invariant: True
+04/04/2025 10:23:27 - INFO: Inference settings: checkpoint = `checkpoint/my_FT_nonorm`, with denoise_steps = 50, ensemble_size = 1, processing resolution = 768, seed = None; color_map = Spectral.
+04/04/2025 10:23:56 - INFO: output dir = results/Gopro_Event_Train_nonorm
+04/04/2025 10:23:56 - INFO: device = cuda
+04/04/2025 10:24:01 - INFO: scale_invariant: True, shift_invariant: True
+04/04/2025 10:24:01 - INFO: Inference settings: checkpoint = `checkpoint/my_FT_nonorm`, with denoise_steps = 50, ensemble_size = 1, processing resolution = 768, seed = None; color_map = Spectral.
+04/04/2025 10:24:17 - INFO: output dir = results/Gopro_Event_Test_nonorm
+04/04/2025 10:24:17 - INFO: device = cuda
+04/04/2025 10:24:21 - INFO: scale_invariant: True, shift_invariant: True
+04/04/2025 10:24:21 - INFO: Inference settings: checkpoint = `checkpoint/my_FT_nonorm`, with denoise_steps = 50, ensemble_size = 1, processing resolution = 768, seed = None; color_map = Spectral.
+04/04/2025 11:56:25 - INFO: output dir = results/Gopro_Event_Test_nonorm
+04/04/2025 11:56:25 - INFO: device = cuda
+04/04/2025 11:56:40 - INFO: scale_invariant: True, shift_invariant: True
+04/04/2025 11:56:40 - INFO: Inference settings: checkpoint = `checkpoint/my_FT_nonorm`, with denoise_steps = 50, ensemble_size = 1, processing resolution = 768, seed = None; color_map = Spectral.
+04/04/2025 11:58:03 - INFO: output dir = results/Gopro_Event_Test_nonorm
+04/04/2025 11:58:03 - INFO: device = cuda
+04/04/2025 11:58:09 - INFO: scale_invariant: True, shift_invariant: True
+04/04/2025 11:58:09 - INFO: Inference settings: checkpoint = `checkpoint/my_FT_nonorm`, with denoise_steps = 50, ensemble_size = 1, processing resolution = 768, seed = None; color_map = Spectral.
+04/04/2025 11:59:36 - INFO: output dir = results/Gopro_Event_Test_nonorm
+04/04/2025 11:59:36 - INFO: device = cuda
+04/04/2025 11:59:40 - INFO: scale_invariant: True, shift_invariant: True
+04/04/2025 11:59:40 - INFO: Inference settings: checkpoint = `checkpoint/my_FT_nonorm`, with denoise_steps = 50, ensemble_size = 1, processing resolution = 768, seed = None; color_map = Spectral.
+04/04/2025 11:59:56 - INFO: output dir = results/Gopro_Event_Train_nonorm
+04/04/2025 11:59:56 - INFO: device = cuda
+04/04/2025 12:00:00 - INFO: scale_invariant: True, shift_invariant: True
+04/04/2025 12:00:00 - INFO: Inference settings: checkpoint = `checkpoint/my_FT_nonorm`, with denoise_steps = 50, ensemble_size = 1, processing resolution = 768, seed = None; color_map = Spectral.
