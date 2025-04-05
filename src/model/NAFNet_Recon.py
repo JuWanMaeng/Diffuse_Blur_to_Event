@@ -2,6 +2,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
+
 class LayerNormFunction(torch.autograd.Function):
 
     @staticmethod
@@ -78,8 +79,7 @@ class NAFBlock(nn.Module):
         self.gamma = nn.Parameter(torch.zeros((1, c, 1, 1)), requires_grad=True)
 
     def forward(self, inp):
-        x = inp
-        x = self.norm1(x)
+        x = self.norm1(inp)
         x = self.conv1(x)
         x = self.conv2(x)
         x = self.sg(x)
@@ -109,11 +109,10 @@ class NAFNetRecon(nn.Module):
         self.ending = nn.Conv2d(in_channels=width, out_channels=img_channel, kernel_size=3, padding=1, stride=1, bias=True)
 
         self.encoders = nn.ModuleList()
-        self.decoders = nn.ModuleList()
-        self.ups = nn.ModuleList()
         self.downs = nn.ModuleList()
 
         chan = width
+        # skip connection 없이 encoder 진행
         for num in enc_blk_nums:
             self.encoders.append(
                 nn.Sequential(*[NAFBlock(chan) for _ in range(num)])
@@ -129,10 +128,12 @@ class NAFNetRecon(nn.Module):
         self.middle_encoder = nn.Sequential(*[NAFBlock(chan) for _ in range(half_middle)])
         self.middle_decoder = nn.Sequential(*[NAFBlock(chan) for _ in range(half_middle)])
         
-        # latent 변환 모듈 추가: encoder에서 나온 latent를 8채널로 줄이고, decoder로 넣기 전에 다시 복원
+        # latent 변환 모듈 추가: encoder에서 나온 latent를 64채널로 줄이고, decoder에 넣기 전에 복원
         self.latent_to_8 = nn.Conv2d(chan, 64, kernel_size=1, stride=1, bias=True)
         self.latent_from_8 = nn.Conv2d(64, chan, kernel_size=1, stride=1, bias=True)
 
+        self.ups = nn.ModuleList()
+        self.decoders = nn.ModuleList()
         for num in dec_blk_nums:
             self.ups.append(
                 nn.Sequential(
@@ -148,39 +149,38 @@ class NAFNetRecon(nn.Module):
         self.padder_size = 2 ** len(self.encoders)
 
     def encode(self, inp):
-        """Encoder 부분: intro, encoder stages, downsampling, 그리고 middle_encoder 이후 latent 변환"""
+        """Encoder 부분: intro, encoder stages, downsampling, 그리고 middle_encoder 이후 latent 변환.
+           Skip connection은 사용하지 않습니다."""
         B, C, H, W = inp.shape
 
         x = self.intro(inp)
-        encs = []  # skip connection 저장
-
+        # encoder + downsampling 진행 (skip connection 없이)
         for encoder, down in zip(self.encoders, self.downs):
             x = encoder(x)
-            encs.append(x)
             x = down(x)
 
         latent = self.middle_encoder(x)
-        # latent를 8채널로 변환
+        # latent을 64채널로 변환
         latent = self.latent_to_8(latent)
-        return latent, encs, inp, (H, W)
+        return latent
 
-    def decode(self, latent, encs, inp, orig_size):
-        """Decoder 부분: latent 복원, middle_decoder, upsampling, skip connection 및 최종 복원"""
+    def decode(self, latent):
+        """Decoder 부분: latent 복원, middle_decoder, upsampling 및 최종 복원.
+           입력 이미지(inp)는 사용하지 않습니다."""
         # latent를 다시 원래 채널 수로 복원하여 middle_decoder에 넣음
         latent = self.latent_from_8(latent)
         x = self.middle_decoder(latent)
-        for decoder, up, enc_skip in zip(self.decoders, self.ups, encs[::-1]):
+        # upsampling과 decoder 진행 (skip connection 없이)
+        for decoder, up in zip(self.decoders, self.ups):
             x = up(x)
-            x = x + enc_skip
             x = decoder(x)
         x = self.ending(x)
-        x = x + inp
-        H, W = orig_size
-        return x[:, :, :H, :W]
+
+        return x
 
     def forward(self, y):
-        latent, encs, inp, orig_size = self.encode(y)
-        return self.decode(latent, encs, inp, orig_size)
+        latent = self.encode(y)
+        return self.decode(latent)
 
     def check_image_size(self, x):
         _, _, h, w = x.size()
@@ -202,7 +202,7 @@ if __name__ == '__main__':
     print("Output shape:", output.shape)
 
     # encode와 decode를 별도로 테스트
-    latent, encs, inp_img, orig_size = model.encode(dummy_input)
-    print("Latent shape after conversion to 8 channels:", latent.shape)
-    recon = model.decode(latent, encs, inp_img, orig_size)
+    latent, orig_size = model.encode(dummy_input)
+    print("Latent shape after conversion to 64 channels:", latent.shape)
+    recon = model.decode(latent, orig_size)
     print("Reconstructed output shape:", recon.shape)

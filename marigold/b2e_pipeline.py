@@ -72,6 +72,15 @@ class B2EPipeline(DiffusionPipeline):
 
         self.empty_text_embed = None
         self.event_vae =  NAFNetRecon(img_channel=6, width=64, middle_blk_num=28, enc_blk_nums=[1,1,1], dec_blk_nums=[1,1,1])
+        weight = 'checkpoint/NAFNet_VAE.pth'
+        checkpoint = torch.load(weight)
+        if "state_dict" in checkpoint:
+            state_dict = checkpoint["state_dict"]
+        else:
+            state_dict = checkpoint
+
+        self.event_vae.load_state_dict(state_dict)
+        self.event_vae = self.event_vae.cuda()
 
 
     @torch.no_grad()
@@ -322,9 +331,7 @@ class B2EPipeline(DiffusionPipeline):
     
     def encode_event(self, event_in: torch.Tensor, key=None) -> torch.Tensor:
 
-      
-
-        h, encs, inp, orig_size = self.event_vae(event_in)
+        h = self.event_vae.encode(event_in)
         # scale latent
         event_latent = h * self.rgb_latent_scale_factor
         return event_latent
@@ -334,6 +341,6 @@ class B2EPipeline(DiffusionPipeline):
         # scale latent
         event_latent = event_latent / self.event_latent_scale_factor
 
-        z = self.event_vae.decode(event_latent, encs, inp, orig_size)
+        z = self.event_vae.decode(event_latent)
 
         return z

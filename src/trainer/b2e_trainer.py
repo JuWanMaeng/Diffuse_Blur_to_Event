@@ -65,10 +65,10 @@ class B2ETrainer:
         self.accumulation_steps: int = accumulation_steps
 
         # Adapt input layers
-        if 12 != self.model.unet.config["in_channels"]:
+        if 68 != self.model.unet.config["in_channels"]:
             self._replace_unet_conv_in()
 
-        if 8 != self.model.unet.config["out_channels"]:
+        if 64 != self.model.unet.config["out_channels"]:
             self._replace_unet_conv_out()
 
         # Encode empty text prompt
@@ -182,34 +182,37 @@ class B2ETrainer:
 
     def _replace_unet_conv_out(self):
         """
-        Replace the last conv_out layer of U-Net to output 12 channels.
+        Replace the last conv_out layer of U-Net to output 64 channels.
         """
         # Clone existing weight and bias
-        _weight = self.model.unet.conv_out.weight.clone()  # 기존 가중치
-        _bias = self.model.unet.conv_out.bias.clone()      # 기존 bias
+        _weight = self.model.unet.conv_out.weight.clone()  # 기존 가중치, shape: [4, in_channels, 3, 3] (예시)
+        _bias = self.model.unet.conv_out.bias.clone()        # 기존 bias, shape: [4]
 
         # 기존 가중치 채널 확장 (output 채널을 늘리기 위해)
-        _weight = _weight.repeat((2, 1, 1, 1))  #
+        # 예를 들어, 기존 채널이 4개라면 64개로 만들기 위해 16배 반복합니다.
+        _weight = _weight.repeat((16, 1, 1, 1))  # 새로운 weight shape: [4*16=64, in_channels, 3, 3]
 
         # 출력 값의 스케일 유지 (가중치 값 조정)
-        _weight *= 0.5
+        _weight *= 1 / 16.0  # 16배 확장된 것을 보정
 
-        # 새로운 conv_out 레이어 생성
+        # 새로운 conv_out 레이어 생성 (out_channels를 64로 설정)
         _n_convin_in_channel = self.model.unet.conv_out.in_channels
-        _new_conv_out = Conv2d(in_channels=_n_convin_in_channel, out_channels=8, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
-
+        _new_conv_out = Conv2d(
+            in_channels=_n_convin_in_channel, out_channels=64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)
+        )
 
         _new_conv_out.weight = Parameter(_weight)
-        _new_conv_out.bias = Parameter(_bias.repeat(2))  # bias도 3배로 복제
+        _new_conv_out.bias = Parameter(_bias.repeat(16))  # bias도 동일하게 16배로 복제
 
         # U-Net의 마지막 conv_out 레이어 교체
         self.model.unet.conv_out = _new_conv_out
-        logging.info("Unet conv_out layer is replaced with 8 channels")
+        logging.info("Unet conv_out layer is replaced with 64 channels")
 
         # U-Net config 업데이트
-        self.model.unet.config["out_channels"] = 8
+        self.model.unet.config["out_channels"] = 64
         logging.info("Unet config is updated")
         return
+
     
     
 
@@ -253,10 +256,6 @@ class B2ETrainer:
                     # Encode
                     event_latent = self.model.encode_event(event)  # [B, 4, h, w] 
                     rgb_latent = self.model.encode_image(rgb)
-
-                    # Ground Truth x0 in latent space
-                    event_latent = torch.cat([event_latent_1, event_latent_2], dim=1)
-                    # shape 예: [B, 8, h, w]
 
                 ########################################
                 # 3) Diffusion Forward Process (노이즈 추가)
