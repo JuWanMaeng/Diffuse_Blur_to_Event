@@ -40,7 +40,7 @@ EXTENSION_LIST = [".jpg", ".jpeg", ".png"]
 
 
 if "__main__" == __name__:
-    os.environ['CUDA_VISIBLE_DEVICES'] = '1'
+    os.environ['CUDA_VISIBLE_DEVICES'] = '0'
     logging.basicConfig(level=logging.INFO)
 
     # -------------------- Arguments --------------------
@@ -64,7 +64,7 @@ if "__main__" == __name__:
     parser.add_argument(
         "--dataset_name",
         type=str,
-        default='Gopro_Event_Test',
+        default='Gopro_Event_Train',
         help="Path to the input image folder.",
     )
 
@@ -178,7 +178,7 @@ if "__main__" == __name__:
 
     opt = {'crop_size': None,
            'use_flip' : False,
-           'folder_path' : '/workspace/data/GOPRO_original_voxel/test',
+           'folder_path' : '/workspace/data/GOPRO/train',
            }
     
     dataset = concatenate_h5_datasets(H5ImageDataset, opt)
@@ -256,14 +256,27 @@ if "__main__" == __name__:
 
             gt_event = data['voxel'][0]  # [6,H,W]
             gt_event = np.array(gt_event)
+            max_val = np.max(np.abs(gt_event))
+            gt_event = gt_event / max_val
 
+            output = pipe_out[0].transpose(2,0,1)
+      
+            # max_val = np.max(np.abs(output))
+            # output = output/max_val
+
+            # rmse 
+            output = (output+1) / 2
+            gt_event = (gt_event+1) / 2
+            mse = np.mean((output-gt_event) ** 2)
+            rmse = np.sqrt(mse)
+            total_rmse += rmse
     
 
-            min_navie_rmse, min_reversed_rmse, once_rmse, avg_rmse, best_pred = metric_and_output(pipe_out,gt_event)
-            best_rmse = min(min_navie_rmse, min_reversed_rmse)
-            total_rmse += best_rmse
+            # min_navie_rmse, min_reversed_rmse, once_rmse, avg_rmse, best_pred = metric_and_output(pipe_out,gt_event)
+            # best_rmse = min(min_navie_rmse, min_reversed_rmse)
+            # total_rmse += best_rmse
 
-            np.save(os.path.join(output_dir, img_path[0], 'out'), best_pred)
+            np.save(os.path.join(output_dir, img_path[0], 'out'), pipe_out[0])
 
 
         print(total_rmse/len(dataloader))
