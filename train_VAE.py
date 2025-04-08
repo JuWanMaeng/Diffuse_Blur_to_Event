@@ -21,16 +21,12 @@ import time
 from pathlib import Path
 
 import accelerate
-import numpy as np
-import PIL
-import PIL.Image
 import timm
 import torch
 import torch.nn.functional as F
 from accelerate import Accelerator
 from accelerate.logging import get_logger
 from accelerate.utils import DistributedType, ProjectConfiguration, set_seed
-from datasets import load_dataset
 from huggingface_hub import create_repo
 from packaging import version
 from PIL import Image
@@ -42,13 +38,8 @@ from tqdm import tqdm
 from diffusers import AutoencoderKL
 from diffusers.optimization import get_scheduler
 from diffusers.training_utils import EMAModel
-from diffusers.utils import check_min_version, is_wandb_available
 from dataset.h5_image_dataset import H5ImageDataset, concatenate_h5_datasets
 
-
-import wandb
-# wandb.init(project='AE-training')
-# wandb.run.name = 'VAE'
 
 
 logger = get_logger(__name__, log_level="INFO")

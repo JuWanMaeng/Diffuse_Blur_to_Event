@@ -3150,3 +3150,87 @@
 04/04/2025 11:59:56 - INFO: device = cuda
 04/04/2025 12:00:00 - INFO: scale_invariant: True, shift_invariant: True
 04/04/2025 12:00:00 - INFO: Inference settings: checkpoint = `checkpoint/my_FT_nonorm`, with denoise_steps = 50, ensemble_size = 1, processing resolution = 768, seed = None; color_map = Spectral.
+04/08/2025 10:14:51 - INFO: output dir = results/Gopro_Event_Train_nonorm
+04/08/2025 10:14:51 - INFO: device = cuda
+04/08/2025 10:18:30 - INFO: output dir = results/Gopro_Event_Train_NAFVAE
+04/08/2025 10:18:30 - INFO: device = cuda
+04/08/2025 10:18:36 - INFO: scale_invariant: True, shift_invariant: True
+04/08/2025 10:18:36 - INFO: Inference settings: checkpoint = `checkpoint/my_NAFVAE`, with denoise_steps = 50, ensemble_size = 1, processing resolution = 768, seed = None; color_map = Spectral.
+04/08/2025 10:20:18 - INFO: output dir = results/Gopro_Event_Train_NAFVAE
+04/08/2025 10:20:18 - INFO: device = cuda
+04/08/2025 10:20:24 - INFO: scale_invariant: True, shift_invariant: True
+04/08/2025 10:20:24 - INFO: Inference settings: checkpoint = `checkpoint/my_NAFVAE`, with denoise_steps = 50, ensemble_size = 1, processing resolution = 768, seed = None; color_map = Spectral.
+04/08/2025 10:23:10 - INFO: output dir = results/Gopro_Event_Train_NAFVAE
+04/08/2025 10:23:10 - INFO: device = cuda
+04/08/2025 10:23:16 - INFO: scale_invariant: True, shift_invariant: True
+04/08/2025 10:23:16 - INFO: Inference settings: checkpoint = `checkpoint/my_NAFVAE`, with denoise_steps = 50, ensemble_size = 1, processing resolution = 768, seed = None; color_map = Spectral.
+04/08/2025 10:28:45 - INFO: output dir = results/Gopro_Event_Train_NAFVAE
+04/08/2025 10:28:45 - INFO: device = cuda
+04/08/2025 10:28:51 - INFO: scale_invariant: True, shift_invariant: True
+04/08/2025 10:28:51 - INFO: Inference settings: checkpoint = `checkpoint/my_NAFVAE`, with denoise_steps = 50, ensemble_size = 1, processing resolution = 768, seed = None; color_map = Spectral.
+04/08/2025 10:38:34 - INFO: output dir = results/Gopro_Event_Train_NAFVAE
+04/08/2025 10:38:34 - INFO: device = cuda
+04/08/2025 10:38:40 - INFO: scale_invariant: True, shift_invariant: True
+04/08/2025 10:38:40 - INFO: Inference settings: checkpoint = `checkpoint/my_NAFVAE`, with denoise_steps = 50, ensemble_size = 1, processing resolution = 960, seed = None; color_map = Spectral.
+04/08/2025 10:44:52 - INFO: output dir = results/Gopro_Event_Train_NAFVAE
+04/08/2025 10:44:52 - INFO: device = cuda
+04/08/2025 10:44:58 - INFO: scale_invariant: True, shift_invariant: True
+04/08/2025 10:44:58 - INFO: Inference settings: checkpoint = `checkpoint/my_NAFVAE`, with denoise_steps = 50, ensemble_size = 1, processing resolution = 960, seed = None; color_map = Spectral.
+04/08/2025 10:45:50 - INFO: output dir = results/Gopro_Event_Train_NAFVAE
+04/08/2025 10:45:50 - INFO: device = cuda
+04/08/2025 10:45:56 - INFO: scale_invariant: True, shift_invariant: True
+04/08/2025 10:45:56 - INFO: Inference settings: checkpoint = `checkpoint/my_NAFVAE`, with denoise_steps = 50, ensemble_size = 1, processing resolution = 960, seed = None; color_map = Spectral.
+04/08/2025 10:47:24 - INFO: output dir = results/Gopro_Event_Train_NAFVAE
+04/08/2025 10:47:24 - INFO: device = cuda
+04/08/2025 10:47:30 - INFO: scale_invariant: True, shift_invariant: True
+04/08/2025 10:47:30 - INFO: Inference settings: checkpoint = `checkpoint/my_NAFVAE`, with denoise_steps = 50, ensemble_size = 1, processing resolution = 960, seed = None; color_map = Spectral.
+04/08/2025 10:54:13 - INFO: output dir = results/Gopro_Event_Train_NAFVAE
+04/08/2025 10:54:13 - INFO: device = cuda
+04/08/2025 10:54:19 - INFO: scale_invariant: True, shift_invariant: True
+04/08/2025 10:54:19 - INFO: Inference settings: checkpoint = `checkpoint/my_NAFVAE`, with denoise_steps = 50, ensemble_size = 1, processing resolution = 960, seed = None; color_map = Spectral.
+04/08/2025 10:56:14 - INFO: output dir = results/Gopro_Event_Train_NAFVAE
+04/08/2025 10:56:14 - INFO: device = cuda
+04/08/2025 10:56:20 - INFO: scale_invariant: True, shift_invariant: True
+04/08/2025 10:56:20 - INFO: Inference settings: checkpoint = `checkpoint/my_NAFVAE`, with denoise_steps = 50, ensemble_size = 1, processing resolution = 960, seed = None; color_map = Spectral.
+04/08/2025 10:57:08 - INFO: output dir = results/Gopro_Event_Train_NAFVAE
+04/08/2025 10:57:08 - INFO: device = cuda
+04/08/2025 10:57:13 - INFO: scale_invariant: True, shift_invariant: True
+04/08/2025 10:57:13 - INFO: Inference settings: checkpoint = `checkpoint/my_NAFVAE`, with denoise_steps = 50, ensemble_size = 1, processing resolution = 960, seed = None; color_map = Spectral.
+04/08/2025 10:57:31 - INFO: output dir = results/Gopro_Event_Train_NAFVAE
+04/08/2025 10:57:31 - INFO: device = cuda
+04/08/2025 10:57:35 - INFO: scale_invariant: True, shift_invariant: True
+04/08/2025 10:57:35 - INFO: Inference settings: checkpoint = `checkpoint/my_NAFVAE`, with denoise_steps = 50, ensemble_size = 1, processing resolution = 960, seed = None; color_map = Spectral.
+04/08/2025 10:58:08 - INFO: output dir = results/Gopro_Event_Train_NAFVAE
+04/08/2025 10:58:08 - INFO: device = cuda
+04/08/2025 10:58:13 - INFO: scale_invariant: True, shift_invariant: True
+04/08/2025 10:58:13 - INFO: Inference settings: checkpoint = `checkpoint/my_NAFVAE`, with denoise_steps = 50, ensemble_size = 1, processing resolution = 960, seed = None; color_map = Spectral.
+04/08/2025 10:59:04 - INFO: output dir = results/Gopro_Event_Test_NAFVAE
+04/08/2025 10:59:04 - INFO: device = cuda
+04/08/2025 10:59:08 - INFO: scale_invariant: True, shift_invariant: True
+04/08/2025 10:59:08 - INFO: Inference settings: checkpoint = `checkpoint/my_NAFVAE`, with denoise_steps = 50, ensemble_size = 1, processing resolution = 960, seed = None; color_map = Spectral.
+04/08/2025 11:12:40 - INFO: output dir = results/Gopro_Event_Test_NAFVAE
+04/08/2025 11:12:40 - INFO: device = cuda
+04/08/2025 11:12:46 - INFO: scale_invariant: True, shift_invariant: True
+04/08/2025 11:12:46 - INFO: Inference settings: checkpoint = `checkpoint/my_NAFVAE`, with denoise_steps = 50, ensemble_size = 1, processing resolution = 960, seed = None; color_map = Spectral.
+04/08/2025 11:15:45 - INFO: output dir = results/Gopro_Event_Test_NAFVAE
+04/08/2025 11:15:45 - INFO: device = cuda
+04/08/2025 11:15:51 - INFO: scale_invariant: True, shift_invariant: True
+04/08/2025 11:15:51 - INFO: Inference settings: checkpoint = `checkpoint/my_NAFVAE`, with denoise_steps = 50, ensemble_size = 1, processing resolution = 960, seed = None; color_map = Spectral.
+04/08/2025 12:47:47 - INFO: output dir = results/Gopro_Event_Train_NAFVAE
+04/08/2025 12:47:48 - INFO: device = cuda
+04/08/2025 12:49:46 - INFO: scale_invariant: True, shift_invariant: True
+04/08/2025 12:49:49 - INFO: Inference settings: checkpoint = `checkpoint/my_NAFVAE`, with denoise_steps = 50, ensemble_size = 1, processing resolution = 960, seed = None; color_map = Spectral.
+04/08/2025 13:35:14 - INFO: output dir = results/Gopro_Event_Train_NAFVAE
+04/08/2025 13:35:14 - INFO: device = cuda
+04/08/2025 14:23:47 - INFO: output dir = results/Gopro_Event_Train_NAFVAE
+04/08/2025 14:23:47 - INFO: device = cuda
+04/08/2025 14:23:53 - INFO: scale_invariant: True, shift_invariant: True
+04/08/2025 14:23:53 - INFO: Inference settings: checkpoint = `checkpoint/my_NAFVAE`, with denoise_steps = 50, ensemble_size = 1, processing resolution = 512, seed = None; color_map = Spectral.
+04/08/2025 14:39:22 - INFO: output dir = results/Gopro_Event_Train_NAFVAE
+04/08/2025 14:39:22 - INFO: device = cuda
+04/08/2025 14:39:27 - INFO: scale_invariant: True, shift_invariant: True
+04/08/2025 14:39:27 - INFO: Inference settings: checkpoint = `checkpoint/my_NAFVAE`, with denoise_steps = 50, ensemble_size = 1, processing resolution = 512, seed = None; color_map = Spectral.
+04/08/2025 16:09:14 - INFO: output dir = results/Gopro_Event_Train_NAFVAE
+04/08/2025 16:09:14 - INFO: device = cuda
+04/08/2025 16:09:20 - INFO: scale_invariant: True, shift_invariant: True
+04/08/2025 16:09:20 - INFO: Inference settings: checkpoint = `checkpoint/my_NAFVAE`, with denoise_steps = 50, ensemble_size = 1, processing resolution = 512, seed = None; color_map = Spectral.

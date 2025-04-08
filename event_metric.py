@@ -10,9 +10,9 @@ def metric_and_output(preds, gt):
     # metrics = []
 
     # [-1,1] -> [0,1]
-    max_val = np.max(np.abs(gt))
-    gt = gt / max_val
-    # gt = gt / 2 + 0.5         # [6,H,W]
+    # max_val = np.max(np.abs(gt))
+    # gt = gt / max_val
+    gt = gt / 2 + 0.5         # [6,H,W]
     gt = gt.transpose(1,2,0)  # [H,W,6]
 
     # record the best pred by min rmse

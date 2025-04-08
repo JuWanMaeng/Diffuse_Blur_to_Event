@@ -29,7 +29,7 @@ from src.util.logging_util import (
 
 
 if "__main__" == __name__:
-    os.environ['CUDA_VISIBLE_DEVICES'] = '0'
+    os.environ['CUDA_VISIBLE_DEVICES'] = '3'
 
     t_start = datetime.now()
     print(f"start at {t_start}")
@@ -197,7 +197,7 @@ if "__main__" == __name__:
 
     # Training dataset
     opt = {'crop_size':(540,960),
-           'use_flip': False,
+           'use_flip': True,
            'folder_path' : '/workspace/data/GOPRO/train'
            }
     

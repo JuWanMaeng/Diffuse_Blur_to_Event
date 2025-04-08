@@ -94,7 +94,7 @@ class NAFBlock(nn.Module):
         return y + x * self.gamma
 
 class NAFNetRecon(nn.Module):
-    def __init__(self, img_channel=6, width=16, middle_blk_num=1, enc_blk_nums=[], dec_blk_nums=[]):
+    def __init__(self, img_channel=6, width=16, middle_blk_num=1, enc_blk_nums=[], dec_blk_nums=[],latent_dim=128):
         """
         Args:
             img_channel: 입력 이미지 채널 수
@@ -129,8 +129,8 @@ class NAFNetRecon(nn.Module):
         self.middle_decoder = nn.Sequential(*[NAFBlock(chan) for _ in range(half_middle)])
         
         # latent 변환 모듈 추가: encoder에서 나온 latent를 64채널로 줄이고, decoder에 넣기 전에 복원
-        self.latent_to_8 = nn.Conv2d(chan, 64, kernel_size=1, stride=1, bias=True)
-        self.latent_from_8 = nn.Conv2d(64, chan, kernel_size=1, stride=1, bias=True)
+        self.latent_to_8 = nn.Conv2d(chan, latent_dim, kernel_size=1, stride=1, bias=True)
+        self.latent_from_8 = nn.Conv2d(latent_dim, chan, kernel_size=1, stride=1, bias=True)
 
         self.ups = nn.ModuleList()
         self.decoders = nn.ModuleList()

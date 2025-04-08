@@ -6,6 +6,7 @@ import torch.nn.functional as F
 from diffusers import AutoencoderKL
 from accelerate import Accelerator
 from dataset.h5_image_dataset import H5ImageDataset, concatenate_h5_datasets
+from src.model.NAFNet_Recon import NAFNetRecon
 
 def main():
     # Accelerate 초기화
@@ -13,8 +14,15 @@ def main():
     device = accelerator.device
 
     # 사전 학습된 VAE 모델 로드 및 평가 모드 전환
-    model = AutoencoderKL.from_pretrained('/workspace/Marigold/checkpoint/stable-diffusion-2/vae')
-    # model = AutoencoderKL.from_pretrained('/workspace/data/AE-former/checkpoint-3000/aemodel')
+    model =  NAFNetRecon(img_channel=6, width=64, middle_blk_num=28, enc_blk_nums=[1,1,1], dec_blk_nums=[1,1,1],latent_dim=128)
+    weight = '/workspace/Marigold/checkpoint/NAF_VAE_128.pth'
+    checkpoint = torch.load(weight)
+    # if "state_dict" in checkpoint:
+    #     state_dict = checkpoint["state_dict"]
+    # else:
+    #     state_dict = checkpoint
+
+    model.load_state_dict(checkpoint['params'])
     model.to(device)
     model.eval()
 
@@ -40,7 +48,7 @@ def main():
 
         # 모델 추론: fmap은 재구성된 결과
         with torch.no_grad():
-            fmap, _ = model(event, return_dict=False)
+            fmap = model(event)
 
         # RMSE 계산: sqrt(mean((원본 - 재구성)**2))
         fmap = (fmap+1) / 2
@@ -57,5 +65,5 @@ def main():
     print(f"Average RMSE over test dataset: {avg_rmse:.6f}")
 
 if __name__ == "__main__":
-    os.environ['CUDA_VISIBLE_DEVICES'] = '3'
+    os.environ['CUDA_VISIBLE_DEVICES'] = '2'
     main()

@@ -40,7 +40,7 @@ EXTENSION_LIST = [".jpg", ".jpeg", ".png"]
 
 
 if "__main__" == __name__:
-    os.environ['CUDA_VISIBLE_DEVICES'] = '3'
+    os.environ['CUDA_VISIBLE_DEVICES'] = '1'
     logging.basicConfig(level=logging.INFO)
 
     # -------------------- Arguments --------------------
@@ -50,7 +50,7 @@ if "__main__" == __name__:
     parser.add_argument(
         "--checkpoint",
         type=str,
-        default="checkpoint/my_FT_nonorm",
+        default="checkpoint/my_NAFVAE",
         help="Checkpoint path or hub name.",
     )
 
@@ -64,7 +64,7 @@ if "__main__" == __name__:
     parser.add_argument(
         "--dataset_name",
         type=str,
-        default='Gopro_Event_Train_nonorm',
+        default='Gopro_Event_Train_NAFVAE',
         help="Path to the input image folder.",
     )
 
@@ -96,7 +96,7 @@ if "__main__" == __name__:
     parser.add_argument(
         "--processing_res",
         type=int,
-        default=768,
+        default=512,
         help="Maximum resolution of processing. 0 for using input image resolution. Default: 768.",
     )
     parser.add_argument(
@@ -250,18 +250,22 @@ if "__main__" == __name__:
                 generator=generator,
             )
 
+            output = pipe_out[0].transpose(2,0,1)
             # save output folder
             os.makedirs(os.path.join(output_dir, img_path[0]),exist_ok=True)
 
 
-            # gt_event = data['voxel'][0]  # [6,H,W]
-            # gt_event = np.array(gt_event)
+            gt_event = data['voxel'][0]  # [6,H,W]
+            gt_event = np.array(gt_event)
 
-    
-
-            # min_navie_rmse, min_reversed_rmse, once_rmse, avg_rmse, best_pred = metric_and_output(pipe_out,gt_event)
-            # best_rmse = min(min_navie_rmse, min_reversed_rmse)
-            # total_rmse += best_rmse
+            # rmse
+            max_val = np.max(np.abs(output))
+            output = output/max_val
+            output = (output+1) / 2
+            gt_event = (gt_event+1) / 2
+            mse = np.mean((output-gt_event) ** 2)
+            rmse = np.sqrt(mse)
+            total_rmse += rmse
 
             np.save(os.path.join(output_dir, img_path[0], 'out'), pipe_out[0])
 
