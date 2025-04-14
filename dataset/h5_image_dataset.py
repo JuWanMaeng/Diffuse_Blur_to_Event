@@ -105,7 +105,7 @@ class H5ImageDataset(data.Dataset):
         self.return_mask = False
 
 
-        self.norm_voxel = norm_voxel # -MAX~MAX -> -1 ~ 1 
+        self.norm_voxel = True # -MAX~MAX -> -1 ~ 1 
         self.h5_file = None
         self.transforms={}
         self.mean = opt['mean'] if 'mean' in opt else None
@@ -113,10 +113,9 @@ class H5ImageDataset(data.Dataset):
 
 
         # if self.opt['norm_voxel'] is not None:
-        self.norm_voxel = False   # -MAX~MAX -> -1 ~ 1 
         
         # if self.opt['return_voxel'] is not None:
-        self.return_voxel = True
+
 
         if self.opt['crop_size'] is not None:
             self.transforms["RandomCrop"] = {"size": self.opt['crop_size']}
