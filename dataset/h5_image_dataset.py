@@ -107,8 +107,6 @@ class H5ImageDataset(data.Dataset):
         self.return_voxel = True
         self.return_mask = False
 
-
-        self.norm_voxel = True # -MAX~MAX -> -1 ~ 1 
         self.h5_file = None
         self.transforms={}
         self.mean = opt['mean'] if 'mean' in opt else None

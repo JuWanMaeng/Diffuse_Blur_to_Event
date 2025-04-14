@@ -40,8 +40,9 @@ def main():
 
         # 모델 추론: fmap은 재구성된 결과
         with torch.no_grad():
-            fmap, _ = model(event, return_dict=False)
+            fmap, p = model(event, return_dict=False)
 
+        print(p.kl())
         # RMSE 계산: sqrt(mean((원본 - 재구성)**2))
         fmap = (fmap+1) / 2
         event = (event+1) / 2

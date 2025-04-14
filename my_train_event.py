@@ -29,7 +29,7 @@ from src.util.logging_util import (
 
 
 if "__main__" == __name__:
-    os.environ['CUDA_VISIBLE_DEVICES'] = '3'
+    os.environ['CUDA_VISIBLE_DEVICES'] = '2'
 
     t_start = datetime.now()
     print(f"start at {t_start}")
@@ -44,11 +44,11 @@ if "__main__" == __name__:
     )
     parser.add_argument(
         "--resume_run",
-        default=None,
+        default='/workspace/Marigold/output/NAFNet_VAE_KL/checkpoint/iter_020000',
         help="Path of checkpoint to be resumed. If given, will ignore --config, and checkpoint in the config",
     )
     parser.add_argument(
-        "--output_dir", type=str, default='output/NAFNet_VAE', help="directory to save checkpoints"
+        "--output_dir", type=str, default='output/NAFNet_VAE_KL_debug', help="directory to save checkpoints"
     )
     parser.add_argument("--no_cuda", action="store_true", help="Do not use cuda.")
     parser.add_argument(
@@ -247,7 +247,7 @@ if "__main__" == __name__:
     # -------------------- Checkpoint --------------------
     if resume_run is not None:
         trainer.load_checkpoint(
-            resume_run, load_trainer_state=True, resume_lr_scheduler=True
+            resume_run, load_trainer_state=False, resume_lr_scheduler=False
         )
 
     # -------------------- Training & Evaluation Loop --------------------

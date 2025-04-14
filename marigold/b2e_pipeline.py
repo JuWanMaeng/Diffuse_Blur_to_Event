@@ -10,6 +10,7 @@ from diffusers import (
     LCMScheduler,
     UNet2DConditionModel,
 )
+from src.model.NAFNet_recon_KL import NAFNetRecon_VAE
 from src.model.NAFNet_Recon import NAFNetRecon
 from diffusers.utils import BaseOutput
 from PIL import Image
@@ -71,9 +72,9 @@ class B2EPipeline(DiffusionPipeline):
         self.default_processing_resolution = default_processing_resolution
         self.empty_text_embed = None
 
-        self.event_vae =  NAFNetRecon(img_channel=6, width=64, middle_blk_num=28, 
+        self.event_vae =  NAFNetRecon_VAE(img_channel=6, width=64, middle_blk_num=28, 
                                       enc_blk_nums=[1,1,1], dec_blk_nums=[1,1,1],latent_dim=128)
-        weight = 'checkpoint/NAF_VAE_128.pth'
+        weight = 'checkpoint/NAF_VAE_1e-4.pth'
         checkpoint = torch.load(weight)
         self.event_vae.load_state_dict(checkpoint['params'])
         self.event_vae = self.event_vae.cuda()
@@ -324,12 +325,13 @@ class B2EPipeline(DiffusionPipeline):
         mean, logvar = torch.chunk(moments, 2, dim=1)
         # scale latent
         image_latent = mean * self.rgb_latent_scale_factor
+        
         return image_latent
     
     def encode_event(self, event_in: torch.Tensor, key=None) -> torch.Tensor:
         
         with torch.no_grad():
-            h = self.event_vae.encode(event_in)
+            h,_ = self.event_vae.encode(event_in)
         # scale latent
         event_latent = h * self.rgb_latent_scale_factor
         return event_latent
@@ -343,3 +345,26 @@ class B2EPipeline(DiffusionPipeline):
             z = self.event_vae.decode(event_latent)
 
         return z
+
+
+
+############
+# KL 안쓴 버전임
+    # def encode_event(self, event_in: torch.Tensor, key=None) -> torch.Tensor:
+        
+    #     with torch.no_grad():
+    #         mean  = self.event_vae.encode(event_in)
+
+    #     # scale latent
+    #     event_latent = mean * self.event_latent_scale_factor
+    #     return event_latent
+
+    # def decode_event(self, event_latent: torch.Tensor) -> torch.Tensor:
+
+    #     # scale latent
+    #     event_latent = event_latent / self.event_latent_scale_factor
+
+    #     with torch.no_grad():
+    #         z = self.event_vae.decode(event_latent)
+
+    #     return z
