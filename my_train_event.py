@@ -44,11 +44,11 @@ if "__main__" == __name__:
     )
     parser.add_argument(
         "--resume_run",
-        default=None,
+        default='output/L2/checkpoint/iter_001500',
         help="Path of checkpoint to be resumed. If given, will ignore --config, and checkpoint in the config",
     )
     parser.add_argument(
-        "--output_dir", type=str, default='output/B2V', help="directory to save checkpoints"
+        "--output_dir", type=str, default='output/debug', help="directory to save checkpoints"
     )
     parser.add_argument("--no_cuda", action="store_true", help="Do not use cuda.")
     parser.add_argument(
@@ -198,7 +198,7 @@ if "__main__" == __name__:
     # Training dataset
     opt = {'crop_size':(540,960),
            'use_flip': True,
-           'folder_path' : '/workspace/data/GOPRO_original_voxel/train'
+           'folder_path' : '/workspace/data/GOPRO/train'
            }
     
     train_dataset = concatenate_h5_datasets(H5ImageDataset, opt)
@@ -247,7 +247,7 @@ if "__main__" == __name__:
     # -------------------- Checkpoint --------------------
     if resume_run is not None:
         trainer.load_checkpoint(
-            resume_run, load_trainer_state=True, resume_lr_scheduler=True
+            resume_run, load_trainer_state=False, resume_lr_scheduler=False
         )
 
     # -------------------- Training & Evaluation Loop --------------------

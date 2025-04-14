@@ -63,21 +63,11 @@ class B2ETrainer:
         self.vis_loaders: List[DataLoader] = vis_dataloaders
         self.accumulation_steps: int = accumulation_steps
 
-        # discriminator
-        if self.cfg.gan.use_gan:
-            self.discriminator = SCERDiscriminator()
-            self.use_gan = True
-            self.gan_weight = self.cfg.gan.weight
-            self.discriminator_optimizer = Adam(self.discriminator.parameters(), lr = self.cfg.lr)
-            self.gan_start_iter = self.cfg.gan.gan_start
-        else:
-            self.use_gan = False
 
-        if self.cfg.consistency.use_consistency_loss:
-            self.use_consistency_loss = True
-            self.consistency_weight = self.cfg.consistency.weight
-        else:
-            self.use_consistency_loss = False
+        self.use_gan = False
+
+
+        self.use_consistency_loss = False
 
         # Adapt input layers
         if 12 != self.model.unet.config["in_channels"]:
@@ -441,6 +431,15 @@ class B2ETrainer:
                     )
                 else:
                     raise ValueError(f"Unknown prediction type {self.prediction_type}")
+
+                ########## Debug ###########
+                # x0 = self.predict_x0_from_v(x_t=noisy_latents, v=model_pred, timesteps=timesteps, alphas_cumprod=self.training_noise_scheduler.alphas_cumprod, verbose=True)  #
+                # with torch.no_grad():
+                #     debug_out = self.model.decode_event(x0)
+                # for i in range(debug_out.shape[0]):
+                #     tmp_out = debug_out[i]
+                #     tmp_out = tmp_out.detach().cpu().numpy()
+                #     np.save(f'{i}.npy', tmp_out)
 
                 latent_loss = self.loss(model_pred.float(), target.float())
                 diff_loss = latent_loss.mean()
@@ -861,3 +860,32 @@ class B2ETrainer:
 
     def _get_backup_ckpt_name(self):
         return f"iter_{self.effective_iter:06d}"
+
+
+    def predict_x0_from_v(self, x_t, v, timesteps, alphas_cumprod, verbose=False):
+        """
+        x_t: [B, C, H, W] noisy input at time t
+        v: [B, C, H, W] predicted velocity
+        timesteps: [B] tensor, 각 배치의 timestep 값
+        alphas_cumprod: [T] tensor, scheduler의 누적 알파값
+        verbose: True일 경우 디버깅 정보 출력
+        """
+        device = x_t.device
+        B = x_t.shape[0]
+
+        if not torch.is_tensor(timesteps):
+            timesteps = torch.tensor([timesteps], dtype=torch.long, device=device)
+        elif timesteps.ndim == 0:
+            timesteps = timesteps.unsqueeze(0)
+
+        # alpha_bar: [B] → [B, 1, 1, 1]
+        alpha_bar = alphas_cumprod[timesteps].to(device)  # [B]
+        alpha_bar = alpha_bar.view(B, 1, 1, 1)             # reshape for broadcasting
+
+        sqrt_alpha_bar = torch.sqrt(alpha_bar)
+        sqrt_one_minus_alpha_bar = torch.sqrt(1.0 - alpha_bar)
+
+        # 복원 공식
+        x0 = (x_t - sqrt_one_minus_alpha_bar * v) / sqrt_alpha_bar
+
+        return x0

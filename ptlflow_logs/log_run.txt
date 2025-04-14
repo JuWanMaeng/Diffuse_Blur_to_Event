@@ -3066,3 +3066,7 @@
 04/08/2025 16:17:33 - INFO: device = cuda
 04/08/2025 16:17:38 - INFO: scale_invariant: True, shift_invariant: True
 04/08/2025 16:17:38 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 1, processing resolution = 768, seed = None; color_map = Spectral.
+04/14/2025 20:16:54 - INFO: output dir = results/Gopro_Event_Train
+04/14/2025 20:16:54 - INFO: device = cuda
+04/14/2025 20:17:01 - INFO: scale_invariant: True, shift_invariant: True
+04/14/2025 20:17:01 - INFO: Inference settings: checkpoint = `checkpoint/my`, with denoise_steps = 50, ensemble_size = 1, processing resolution = 768, seed = None; color_map = Spectral.
