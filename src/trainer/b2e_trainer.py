@@ -32,6 +32,7 @@ from src.util.alignment import align_depth_least_square
 from src.util.seeding import generate_seed_sequence
 
 import wandb
+import matplotlib.pyplot as plt
 
 
 class B2ETrainer:
@@ -668,98 +669,6 @@ class B2ETrainer:
                 save_to_dir=vis_out_dir,
             )
 
-    @torch.no_grad()
-    def validate_single_dataset(
-        self,
-        data_loader: DataLoader,
-        metric_tracker: MetricTracker,
-        save_to_dir: str = None,
-    ):
-        self.model.to(self.device)
-        metric_tracker.reset()
-
-        # Generate seed sequence for consistent evaluation
-        val_init_seed = self.cfg.validation.init_seed
-        val_seed_ls = generate_seed_sequence(val_init_seed, len(data_loader))
-
-        for i, batch in enumerate(
-            tqdm(data_loader, desc=f"evaluating on {data_loader.dataset.disp_name}"),
-            start=1,
-        ):
-            assert 1 == data_loader.batch_size
-            # Read input image
-            rgb_int = batch["rgb_int"].squeeze()  # [3, H, W]
-            # GT depth
-            depth_raw_ts = batch["depth_raw_linear"].squeeze()
-            depth_raw = depth_raw_ts.numpy()
-            depth_raw_ts = depth_raw_ts.to(self.device)
-            valid_mask_ts = batch["valid_mask_raw"].squeeze()
-            valid_mask = valid_mask_ts.numpy()
-            valid_mask_ts = valid_mask_ts.to(self.device)
-
-            # Random number generator
-            seed = val_seed_ls.pop()
-            if seed is None:
-                generator = None
-            else:
-                generator = torch.Generator(device=self.device)
-                generator.manual_seed(seed)
-
-            # Predict depth
-            pipe_out: B2FOutput = self.model(
-                rgb_int,
-                denoising_steps=self.cfg.validation.denoising_steps,
-                ensemble_size=self.cfg.validation.ensemble_size,
-                processing_res=self.cfg.validation.processing_res,
-                match_input_res=self.cfg.validation.match_input_res,
-                generator=generator,
-                batch_size=1,  # use batch size 1 to increase reproducibility
-                color_map=None,
-                show_progress_bar=False,
-                resample_method=self.cfg.validation.resample_method,
-            )
-
-            depth_pred: np.ndarray = pipe_out.depth_np
-
-            if "least_square" == self.cfg.eval.alignment:
-                depth_pred, scale, shift = align_depth_least_square(
-                    gt_arr=depth_raw,
-                    pred_arr=depth_pred,
-                    valid_mask_arr=valid_mask,
-                    return_scale_shift=True,
-                    max_resolution=self.cfg.eval.align_max_res,
-                )
-            else:
-                raise RuntimeError(f"Unknown alignment type: {self.cfg.eval.alignment}")
-
-            # Clip to dataset min max
-            depth_pred = np.clip(
-                depth_pred,
-                a_min=data_loader.dataset.min_depth,
-                a_max=data_loader.dataset.max_depth,
-            )
-
-            # clip to d > 0 for evaluation
-            depth_pred = np.clip(depth_pred, a_min=1e-6, a_max=None)
-
-            # Evaluate
-            sample_metric = []
-            depth_pred_ts = torch.from_numpy(depth_pred).to(self.device)
-
-            for met_func in self.metric_funcs:
-                _metric_name = met_func.__name__
-                _metric = met_func(depth_pred_ts, depth_raw_ts, valid_mask_ts).item()
-                sample_metric.append(_metric.__str__())
-                metric_tracker.update(_metric_name, _metric)
-
-            # Save as 16-bit uint png
-            if save_to_dir is not None:
-                img_name = batch["rgb_relative_path"][0].replace("/", "_")
-                png_save_path = os.path.join(save_to_dir, f"{img_name}.png")
-                depth_to_save = (pipe_out.depth_np * 65535.0).astype(np.uint16)
-                Image.fromarray(depth_to_save).save(png_save_path, mode="I;16")
-
-        return metric_tracker.result()
 
     def _get_next_seed(self):
         if 0 == len(self.global_seed_sequence):
@@ -882,3 +791,89 @@ class B2ETrainer:
             print(f"[t={timestep.item()}] alpha_bar: {alpha_bar.item():.6f}, sqrt_alpha_bar: {sqrt_alpha_bar.item():.6f}, sqrt_1m_alpha_bar: {sqrt_one_minus_alpha_bar.item():.6f}")
 
         return x0
+    
+
+    @torch.no_grad()
+    def debug_reconstruction_error_vs_timestep(
+        self,
+        save_dir="./debug",
+        timesteps_list=None,
+        max_batches=1000
+    ):
+        """
+        각 timestep에 대해 RMSE(x0_pred, z0) 측정 → 그래프 저장
+        """
+        os.makedirs(save_dir, exist_ok=True)
+        device = self.device
+        self.model.to(device)
+        self.model.unet.eval()
+
+        if timesteps_list is None:
+            timesteps_list = list(range(900, -1, -100))
+
+        rmse_by_timestep = []
+
+        for t_val in tqdm(timesteps_list, desc="Evaluating RMSE vs Timestep"):
+            rmse_list = []
+
+            for i, batch in enumerate(self.train_loader):
+                if i >= max_batches:
+                    break
+
+                rgb = batch['frame'].to(device)
+                event_gt_for_latent = batch['voxel'].to(device)  # [B, 6, H, W], 
+                event_1 = event_gt_for_latent[:, 0:3, :, :]
+                event_2 = event_gt_for_latent[:, 3:, :, :]
+                event_latent_1 = self.model.encode(event_1)  # [B, 4, h, w] 
+                event_latent_2 = self.model.encode(event_2)
+
+                B = event_gt_for_latent.shape[0]
+
+                # latent 생성
+                z0 = torch.cat([event_latent_1, event_latent_2], dim=1)
+                rgb_latent = self.model.encode(rgb)
+                t = torch.tensor([t_val] * B, dtype=torch.long, device=device)
+
+                # noise 주입
+                noise = torch.randn_like(z0)
+                z_t = self.training_noise_scheduler.add_noise(z0, noise, t)
+
+                # U-Net 예측
+                text_embed = self.empty_text_embed.to(device).repeat((B, 1, 1))
+                x_in = torch.cat([rgb_latent, z_t], dim=1).float()
+                v_pred = self.model.unet(x_in, t, text_embed).sample
+
+                # 복원
+                x0_pred = torch.stack([
+                    self.predict_x0_from_v_single(
+                        x_t=z_t[j],
+                        v=v_pred[j],
+                        timestep=t[j],
+                        alphas_cumprod=self.training_noise_scheduler.alphas_cumprod
+                    )
+                    for j in range(B)
+                ], dim=0)
+
+                # [-1,1] → [0,1] 스케일
+                x0_pred = (x0_pred + 1) / 2
+                z0_scaled = (z0 + 1) / 2
+
+                # RMSE
+                rmse = torch.sqrt(F.mse_loss(x0_pred, z0_scaled, reduction="mean"))
+                rmse_list.append(rmse.item())
+
+            avg_rmse = sum(rmse_list) / len(rmse_list)
+            print(f"[t={t_val}] avg RMSE: {avg_rmse:.6f}")
+            rmse_by_timestep.append(avg_rmse)
+
+        # 그래프 저장
+        plt.figure(figsize=(8, 5))
+        plt.plot(timesteps_list, rmse_by_timestep, marker='o')
+        plt.xlabel("Timestep (t)")
+        plt.ylabel("Avg RMSE between z0 and x0_pred")
+        plt.title("gt latent vs output latent rmse by Timestep")
+        plt.grid(True)
+        plt.tight_layout()
+        out_path = os.path.join(save_dir, "rmse_vs_timestep.png")
+        plt.savefig(out_path)
+        print(f">>> RMSE plot saved to: {out_path}")
