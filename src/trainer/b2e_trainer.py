@@ -798,7 +798,7 @@ class B2ETrainer:
         self,
         save_dir="./debug",
         timesteps_list=None,
-        max_batches=1000
+        max_batches=5
     ):
         """
         각 timestep에 대해 RMSE(x0_pred, z0) 측정 → 그래프 저장
@@ -809,7 +809,7 @@ class B2ETrainer:
         self.model.unet.eval()
 
         if timesteps_list is None:
-            timesteps_list = list(range(900, -1, -100))
+            timesteps_list = list(range(990, -1, -10))
 
         rmse_by_timestep = []
 
@@ -874,6 +874,6 @@ class B2ETrainer:
         plt.title("gt latent vs output latent rmse by Timestep")
         plt.grid(True)
         plt.tight_layout()
-        out_path = os.path.join(save_dir, "rmse_vs_timestep.png")
+        out_path = os.path.join(save_dir, "rmse_vs_timestep_original.png")
         plt.savefig(out_path)
         print(f">>> RMSE plot saved to: {out_path}")
