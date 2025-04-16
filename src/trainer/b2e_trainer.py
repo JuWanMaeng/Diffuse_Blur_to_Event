@@ -7,6 +7,7 @@ from typing import List, Union
 import numpy as np
 import torch
 import torch.nn.functional as F
+import torchvision as v
 
 from diffusers import DDPMScheduler
 from omegaconf import OmegaConf
@@ -312,12 +313,18 @@ class B2ETrainer:
 
 
                 ########## Debug ###########
-                x0 = self.predict_x0_from_v(x_t=noisy_latents, v=model_pred, timesteps=timesteps, alphas_cumprod=self.training_noise_scheduler.alphas_cumprod, verbose=True)  #
-                debug_out = self.model.decode_event(x0)
-                for i in range(debug_out.shape[0]):
-                    tmp_out = debug_out[i]
-                    tmp_out = tmp_out.detach().cpu().numpy()
-                    np.save(f'{i}.npy', tmp_out)
+                # x0 = self.predict_x0_from_v_single(x_t=noisy_latents[0], v=model_pred[0], timestep=timesteps[0], alphas_cumprod=self.training_noise_scheduler.alphas_cumprod)  #
+                # x0 = x0.unsqueeze(0)
+                # with torch.no_grad():
+                #     debug_out = self.model.decode_event(x0)
+                # tmp_out = debug_out[0]
+                # tmp_out = tmp_out.detach().cpu().numpy()
+                # print(timesteps[0])
+                # event_np = event.detach().cpu().numpy()[0]
+                # rgb_np = (rgb + 1) / 2
+                # np.save(f'out.npy', tmp_out)
+                # np.save('gt.npy', event_np)
+                # v.utils.save_image(rgb_np[0],'rgb.png')
 
                 latent_loss = self.loss(model_pred.float(), target.float())
                 diff_loss = latent_loss.mean()
@@ -464,98 +471,6 @@ class B2ETrainer:
                 save_to_dir=vis_out_dir,
             )
 
-    @torch.no_grad()
-    def validate_single_dataset(
-        self,
-        data_loader: DataLoader,
-        metric_tracker: MetricTracker,
-        save_to_dir: str = None,
-    ):
-        self.model.to(self.device)
-        metric_tracker.reset()
-
-        # Generate seed sequence for consistent evaluation
-        val_init_seed = self.cfg.validation.init_seed
-        val_seed_ls = generate_seed_sequence(val_init_seed, len(data_loader))
-
-        for i, batch in enumerate(
-            tqdm(data_loader, desc=f"evaluating on {data_loader.dataset.disp_name}"),
-            start=1,
-        ):
-            assert 1 == data_loader.batch_size
-            # Read input image
-            rgb_int = batch["rgb_int"].squeeze()  # [3, H, W]
-            # GT depth
-            depth_raw_ts = batch["depth_raw_linear"].squeeze()
-            depth_raw = depth_raw_ts.numpy()
-            depth_raw_ts = depth_raw_ts.to(self.device)
-            valid_mask_ts = batch["valid_mask_raw"].squeeze()
-            valid_mask = valid_mask_ts.numpy()
-            valid_mask_ts = valid_mask_ts.to(self.device)
-
-            # Random number generator
-            seed = val_seed_ls.pop()
-            if seed is None:
-                generator = None
-            else:
-                generator = torch.Generator(device=self.device)
-                generator.manual_seed(seed)
-
-            # Predict depth
-            pipe_out: B2FOutput = self.model(
-                rgb_int,
-                denoising_steps=self.cfg.validation.denoising_steps,
-                ensemble_size=self.cfg.validation.ensemble_size,
-                processing_res=self.cfg.validation.processing_res,
-                match_input_res=self.cfg.validation.match_input_res,
-                generator=generator,
-                batch_size=1,  # use batch size 1 to increase reproducibility
-                color_map=None,
-                show_progress_bar=False,
-                resample_method=self.cfg.validation.resample_method,
-            )
-
-            depth_pred: np.ndarray = pipe_out.depth_np
-
-            if "least_square" == self.cfg.eval.alignment:
-                depth_pred, scale, shift = align_depth_least_square(
-                    gt_arr=depth_raw,
-                    pred_arr=depth_pred,
-                    valid_mask_arr=valid_mask,
-                    return_scale_shift=True,
-                    max_resolution=self.cfg.eval.align_max_res,
-                )
-            else:
-                raise RuntimeError(f"Unknown alignment type: {self.cfg.eval.alignment}")
-
-            # Clip to dataset min max
-            depth_pred = np.clip(
-                depth_pred,
-                a_min=data_loader.dataset.min_depth,
-                a_max=data_loader.dataset.max_depth,
-            )
-
-            # clip to d > 0 for evaluation
-            depth_pred = np.clip(depth_pred, a_min=1e-6, a_max=None)
-
-            # Evaluate
-            sample_metric = []
-            depth_pred_ts = torch.from_numpy(depth_pred).to(self.device)
-
-            for met_func in self.metric_funcs:
-                _metric_name = met_func.__name__
-                _metric = met_func(depth_pred_ts, depth_raw_ts, valid_mask_ts).item()
-                sample_metric.append(_metric.__str__())
-                metric_tracker.update(_metric_name, _metric)
-
-            # Save as 16-bit uint png
-            if save_to_dir is not None:
-                img_name = batch["rgb_relative_path"][0].replace("/", "_")
-                png_save_path = os.path.join(save_to_dir, f"{img_name}.png")
-                depth_to_save = (pipe_out.depth_np * 65535.0).astype(np.uint16)
-                Image.fromarray(depth_to_save).save(png_save_path, mode="I;16")
-
-        return metric_tracker.result()
 
     def _get_next_seed(self):
         if 0 == len(self.global_seed_sequence):
@@ -653,30 +568,76 @@ class B2ETrainer:
         return f"iter_{self.effective_iter:06d}"
 
 
-    def predict_x0_from_v(self, x_t, v, timesteps, alphas_cumprod, verbose=False):
+
+    def predict_x0_from_v_single(self,x_t, v, timestep, alphas_cumprod, verbose=False):
         """
-        x_t: [B, C, H, W] noisy input at time t
-        v: [B, C, H, W] predicted velocity
-        timesteps: [B] tensor, 각 배치의 timestep 값
-        alphas_cumprod: [T] tensor, scheduler의 누적 알파값
-        verbose: True일 경우 디버깅 정보 출력
+        v-pred 기반의 x0 복원 수식 사용
         """
         device = x_t.device
-        B = x_t.shape[0]
 
-        if not torch.is_tensor(timesteps):
-            timesteps = torch.tensor([timesteps], dtype=torch.long, device=device)
-        elif timesteps.ndim == 0:
-            timesteps = timesteps.unsqueeze(0)
+        if not torch.is_tensor(timestep):
+            timestep = torch.tensor(timestep, dtype=torch.long, device=device)
 
-        # alpha_bar: [B] → [B, 1, 1, 1]
-        alpha_bar = alphas_cumprod[timesteps].to(device)  # [B]
-        alpha_bar = alpha_bar.view(B, 1, 1, 1)             # reshape for broadcasting
-
+        alpha_bar = alphas_cumprod[timestep].to(device)
         sqrt_alpha_bar = torch.sqrt(alpha_bar)
         sqrt_one_minus_alpha_bar = torch.sqrt(1.0 - alpha_bar)
 
-        # 복원 공식
-        x0 = (x_t - sqrt_one_minus_alpha_bar * v) / sqrt_alpha_bar
+        # 🔄 v-pred 공식 사용
+        x0 = sqrt_alpha_bar * x_t - sqrt_one_minus_alpha_bar * v
+
+        if verbose:
+            print(f"[t={timestep.item()}] alpha_bar: {alpha_bar.item():.6f}, sqrt_alpha_bar: {sqrt_alpha_bar.item():.6f}, sqrt_1m_alpha_bar: {sqrt_one_minus_alpha_bar.item():.6f}")
 
         return x0
+    
+
+    @torch.no_grad()
+    def debug_reconstruction_error(self, save_dir="./debug", sample_idx=0, timestep_val=300):
+        """
+        Diffusion Forward → UNet → Reverse → Compare x0_pred vs z0
+        """
+        os.makedirs(save_dir, exist_ok=True)
+        device = self.device
+
+        # 모델 evaluation mode
+        self.model.unet.eval()
+
+        # 배치 하나 로드
+        batch = next(iter(self.train_loader))
+        rgb = batch['frame'].to(device)
+        event = batch['voxel'].to(device)
+
+        z0 = self.model.encode_event(event)  # [B, 4, h, w]
+        rgb_latent = self.model.encode_image(rgb)
+        B = z0.shape[0]
+
+        # 특정 timestep
+        t = torch.tensor([timestep_val] * B, dtype=torch.long, device=device)
+
+        # 노이즈 주입
+        noise = torch.randn_like(z0)
+        z_t = self.training_noise_scheduler.add_noise(z0, noise, t)
+
+        # UNet → v_pred
+        text_embed = self.empty_text_embed.to(device).repeat((B, 1, 1))
+        x_in = torch.cat([rgb_latent, z_t], dim=1).float()
+        v_pred = self.model.unet(x_in, t, text_embed).sample
+
+        # 복원 x0_pred
+        x0_pred = self.predict_x0_from_v_single(
+            x_t=z_t[0], v=v_pred[0], timestep=t[0], alphas_cumprod=self.training_noise_scheduler.alphas_cumprod, verbose=True
+        ).unsqueeze(0)
+
+        # GT latent
+        gt_latent = z0[0].unsqueeze(0)
+
+        # RMSE 계산
+        rmse = torch.sqrt(F.mse_loss(x0_pred, gt_latent))
+        print(f"[Debug] RMSE between x0_pred and GT z0 at t={timestep_val}: {rmse.item():.6f}")
+
+        # 원하면 저장
+        np.save(os.path.join(save_dir, "x0_pred.npy"), x0_pred.cpu().numpy())
+        np.save(os.path.join(save_dir, "z0_gt.npy"), gt_latent.cpu().numpy())
+        np.save(os.path.join(save_dir, "z_t.npy"), z_t[0].cpu().numpy())
+        np.save(os.path.join(save_dir, "v_pred.npy"), v_pred[0].cpu().numpy())
+        print(f"[Debug] Latents saved to: {save_dir}")

@@ -3276,3 +3276,15 @@
 04/14/2025 20:31:09 - INFO: device = cuda
 04/14/2025 20:31:15 - INFO: scale_invariant: True, shift_invariant: True
 04/14/2025 20:31:15 - INFO: Inference settings: checkpoint = `checkpoint/my_NAFVAE_KL`, with denoise_steps = 50, ensemble_size = 1, processing resolution = 512, seed = None; color_map = Spectral.
+04/14/2025 21:51:11 - INFO: output dir = results/Gopro_Event_Train_NAFVAE_KL
+04/14/2025 21:51:11 - INFO: device = cuda
+04/14/2025 21:51:15 - INFO: scale_invariant: True, shift_invariant: True
+04/14/2025 21:51:15 - INFO: Inference settings: checkpoint = `checkpoint/my_NAFVAE_KL`, with denoise_steps = 50, ensemble_size = 1, processing resolution = 512, seed = None; color_map = Spectral.
+04/14/2025 21:52:18 - INFO: output dir = results/Gopro_Event_Train_NAFVAE_KL
+04/14/2025 21:52:18 - INFO: device = cuda
+04/14/2025 21:52:24 - INFO: scale_invariant: True, shift_invariant: True
+04/14/2025 21:52:24 - INFO: Inference settings: checkpoint = `checkpoint/my_NAFVAE_KL`, with denoise_steps = 50, ensemble_size = 1, processing resolution = 512, seed = None; color_map = Spectral.
+04/14/2025 22:00:29 - INFO: output dir = results/Gopro_Event_Train_NAFVAE_KL
+04/14/2025 22:00:29 - INFO: device = cuda
+04/14/2025 22:00:34 - INFO: scale_invariant: True, shift_invariant: True
+04/14/2025 22:00:34 - INFO: Inference settings: checkpoint = `checkpoint/my_NAFVAE_KL`, with denoise_steps = 50, ensemble_size = 1, processing resolution = 512, seed = None; color_map = Spectral.
