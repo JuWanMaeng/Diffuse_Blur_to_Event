@@ -313,20 +313,6 @@ class B2ETrainer:
                     raise ValueError(f"Unknown prediction type {self.prediction_type}")
 
 
-                ########## Debug ###########
-                # x0 = self.predict_x0_from_v_single(x_t=noisy_latents[0], v=model_pred[0], timestep=timesteps[0], alphas_cumprod=self.training_noise_scheduler.alphas_cumprod)  #
-                # x0 = x0.unsqueeze(0)
-                # with torch.no_grad():
-                #     debug_out = self.model.decode_event(x0)
-                # tmp_out = debug_out[0]
-                # tmp_out = tmp_out.detach().cpu().numpy()
-                # print(timesteps[0])
-                # event_np = event.detach().cpu().numpy()[0]
-                # rgb_np = (rgb + 1) / 2
-                # np.save(f'out.npy', tmp_out)
-                # np.save('gt.npy', event_np)
-                # v.utils.save_image(rgb_np[0],'rgb.png')
-
                 latent_loss = self.loss(model_pred.float(), target.float())
                 diff_loss = latent_loss.mean()
                 self.train_metrics.update("loss", diff_loss.item())
@@ -597,10 +583,11 @@ class B2ETrainer:
         self,
         save_dir="./debug",
         timesteps_list=None,
-        max_batches=5
+        max_batches=1
     ):
         """
-        각 timestep에 대해 RMSE(x0_pred, z0) 측정 → 그래프 저장
+        각 timestep에 대해 RMSE(x0_pred, z0) 측정 및 디코딩된 event 결과를 6채널 이미지로 저장하고,
+        전체 RMSE vs timestep 그래프를 저장하는 함수.
         """
         os.makedirs(save_dir, exist_ok=True)
         device = self.device
@@ -608,7 +595,7 @@ class B2ETrainer:
         self.model.unet.eval()
 
         if timesteps_list is None:
-            timesteps_list = list(range(200, -1, -10))
+            timesteps_list = list(range(990, -1, -10))
 
         rmse_by_timestep = []
 
@@ -616,7 +603,7 @@ class B2ETrainer:
             rmse_list = []
 
             for i, batch in enumerate(self.train_loader):
-                if i >= max_batches:
+                if i > max_batches:
                     break
 
                 rgb = batch['frame'].to(device)
@@ -628,7 +615,7 @@ class B2ETrainer:
                 rgb_latent = self.model.encode_image(rgb)
                 t = torch.tensor([t_val] * B, dtype=torch.long, device=device)
 
-                # noise 주입
+                # 노이즈 주입: VAE latent에 디퓨전 noise 추가
                 noise = torch.randn_like(z0)
                 z_t = self.training_noise_scheduler.add_noise(z0, noise, t)
 
@@ -637,7 +624,7 @@ class B2ETrainer:
                 x_in = torch.cat([rgb_latent, z_t], dim=1).float()
                 v_pred = self.model.unet(x_in, t, text_embed).sample
 
-                # 복원
+                # 복원: 각 배치의 각 샘플에 대해 x0_pred 계산 (리스트 컴프리헨션 사용)
                 x0_pred = torch.stack([
                     self.predict_x0_from_v_single(
                         x_t=z_t[j],
@@ -648,26 +635,51 @@ class B2ETrainer:
                     for j in range(B)
                 ], dim=0)
 
-                # [-1,1] → [0,1] 스케일
-                x0_pred = (x0_pred + 1) / 2
+                # 디코딩: 복원된 latent를 event 이미지로 복원 (여기서 debug_out은 [B, C, H, W] 형태라고 가정)
+                with torch.no_grad():
+                    debug_out = self.model.decode_event(x0_pred)
+                # 여기서는 첫 번째 sample만 선택
+                gen_event = debug_out[0].detach().cpu().numpy()  # shape: (C, H, W)
+
+                # 저장 전에 극성 비교를 위해 값 정규화: 최대 절대값으로 나누어 [-1,1] 유지
+                max_val = np.max(np.abs(gen_event))
+                if max_val != 0:
+                    gen_event = gen_event / max_val
+
+                # 6채널 이미지를 2x3 서브플롯으로 그리기
+                fig, axs = plt.subplots(2, 3, figsize=(20, 10))
+                axs = axs.ravel()
+                for ch in range(6):
+                    channel_data = gen_event[ch]  # (H, W)
+                    im = axs[ch].imshow(channel_data, cmap='seismic', vmin=-1, vmax=1)
+                    axs[ch].axis('off')
+                plt.tight_layout()
+                # 이미지 파일 저장 (예: gen_event_{t_val}.png)
+                save_path = os.path.join(save_dir, f"gen_event_{t_val}.png")
+                plt.savefig(save_path)
+                plt.close(fig)
+                
+                # [-1,1] → [0,1] 스케일 for RMSE 계산
+                x0_pred_scaled = (x0_pred + 1) / 2
                 z0_scaled = (z0 + 1) / 2
 
-                # RMSE
-                rmse = torch.sqrt(F.mse_loss(x0_pred, z0_scaled, reduction="mean"))
+                # RMSE 계산 (전체 배치에 대해)
+                rmse = torch.sqrt(F.mse_loss(x0_pred_scaled, z0_scaled, reduction="mean"))
                 rmse_list.append(rmse.item())
 
             avg_rmse = sum(rmse_list) / len(rmse_list)
             print(f"[t={t_val}] avg RMSE: {avg_rmse:.6f}")
             rmse_by_timestep.append(avg_rmse)
 
-        # 그래프 저장
+        # RMSE vs timestep 그래프 저장
         plt.figure(figsize=(8, 5))
         plt.plot(timesteps_list, rmse_by_timestep, marker='o')
         plt.xlabel("Timestep (t)")
         plt.ylabel("Avg RMSE between z0 and x0_pred")
-        plt.title("gt latent vs output latent rmse by Timestep")
+        plt.title("gt latent vs output latent RMSE by Timestep")
         plt.grid(True)
         plt.tight_layout()
-        out_path = os.path.join(save_dir, "rmse_vs_timestep_NAFVAE_tmp.png")
+        out_path = os.path.join(save_dir, "rmse_vs_timestep_NAFVAE_test.png")
         plt.savefig(out_path)
+        plt.close()
         print(f">>> RMSE plot saved to: {out_path}")
