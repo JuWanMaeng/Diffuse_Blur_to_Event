@@ -252,7 +252,7 @@ if "__main__" == __name__:
 
     # -------------------- Training & Evaluation Loop --------------------
     try:
-        trainer.debug_reconstruction_error_vs_timestep()
+        trainer.debug_recon_vs_timestep()
         # trainer.train(t_end=t_end)
     except Exception as e:
         logging.exception(e)
