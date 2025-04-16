@@ -29,7 +29,7 @@ from src.util.logging_util import (
 
 
 if "__main__" == __name__:
-    os.environ['CUDA_VISIBLE_DEVICES'] = '1'
+    os.environ['CUDA_VISIBLE_DEVICES'] = '2'
 
     t_start = datetime.now()
     print(f"start at {t_start}")
@@ -44,7 +44,7 @@ if "__main__" == __name__:
     )
     parser.add_argument(
         "--resume_run",
-        default='/workspace/Marigold/output/NAFNet_VAE_KL/checkpoint/iter_020000',
+        default='output/NAFNet_VAE/checkpoint/latest',
         help="Path of checkpoint to be resumed. If given, will ignore --config, and checkpoint in the config",
     )
     parser.add_argument(
@@ -253,6 +253,6 @@ if "__main__" == __name__:
     # -------------------- Training & Evaluation Loop --------------------
     try:
         trainer.debug_reconstruction_error_vs_timestep()
-        trainer.train(t_end=t_end)
+        # trainer.train(t_end=t_end)
     except Exception as e:
         logging.exception(e)
