@@ -29,7 +29,7 @@ from src.util.logging_util import (
 
 
 if "__main__" == __name__:
-    os.environ['CUDA_VISIBLE_DEVICES'] = '2'
+    os.environ['CUDA_VISIBLE_DEVICES'] = '1'
 
     t_start = datetime.now()
     print(f"start at {t_start}")
@@ -252,6 +252,7 @@ if "__main__" == __name__:
 
     # -------------------- Training & Evaluation Loop --------------------
     try:
+        trainer.debug_reconstruction_error_vs_timestep()
         trainer.train(t_end=t_end)
     except Exception as e:
         logging.exception(e)
