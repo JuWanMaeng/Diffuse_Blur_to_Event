@@ -683,3 +683,82 @@ class B2ETrainer:
         plt.savefig(out_path)
         plt.close()
         print(f">>> RMSE plot saved to: {out_path}")
+
+
+    @torch.no_grad()
+    def debug_recon_vs_timestep(
+        self,
+        save_dir="./debug/NAFVAE",
+        timesteps_list=None
+    ):
+        """
+        고정된 배치에 대해 각 timestep에서 RMSE(x0_pred, z0) 측정 및 디코딩된 event 결과를 6채널 이미지로 저장하고,
+        전체 RMSE vs timestep 그래프를 저장하는 함수.
+        """
+        os.makedirs(save_dir, exist_ok=True)
+        device = self.device
+        self.model.to(device)
+        self.model.unet.eval()
+
+        # 만약 별도로 지정하지 않으면 990부터 0까지 10씩 감소하는 timesteps 사용
+        if timesteps_list is None:
+            timesteps_list = list(range(990, -1, -10))
+
+        rmse_by_timestep = []
+
+        # dataloader에서 첫 번째 배치를 고정으로 가져오기
+        fixed_batch = next(iter(self.train_loader))
+        rgb = fixed_batch['frame'].to(device)
+        event = fixed_batch['voxel'].to(device)
+        B = event.shape[0]
+
+        # latent 계산 (고정 배치)
+        z0 = self.model.encode_event(event)  # [B, C, H, W]
+        rgb_latent = self.model.encode_image(rgb)
+
+        for t_val in tqdm(timesteps_list, desc="Evaluating RMSE vs Timestep"):
+            # timestep 벡터 생성
+            t = torch.tensor([t_val] * B, dtype=torch.long, device=device)
+
+            # 노이즈 주입: noise 생성 후 디퓨전 스케줄러를 통해 z_t 생성
+            noise = torch.randn_like(z0)
+            z_t = self.training_noise_scheduler.add_noise(z0, noise, t)
+
+            # U-Net 예측
+            text_embed = self.empty_text_embed.to(device).repeat((B, 1, 1))
+            x_in = torch.cat([rgb_latent, z_t], dim=1).float()
+            v_pred = self.model.unet(x_in, t, text_embed).sample
+
+            # 복원: 배치 내 각 샘플에 대해 x0_pred 계산
+            x0_pred = torch.stack([
+                self.predict_x0_from_v_single(
+                    x_t=z_t[j],
+                    v=v_pred[j],
+                    timestep=t[j],
+                    alphas_cumprod=self.training_noise_scheduler.alphas_cumprod
+                )
+                for j in range(B)
+            ], dim=0)
+
+            # 디코딩: 복원된 latent를 event 이미지로 복원 → 첫 번째 샘플 선택
+            debug_out = self.model.decode_event(x0_pred)
+            gen_event = debug_out[0].detach().cpu().numpy()  # shape: (C, H, W)
+
+            # 저장 전에 극성 비교를 위해 최대 절대값으로 정규화하여 [-1, 1] 유지
+            max_val = np.max(np.abs(gen_event))
+            if max_val != 0:
+                gen_event = gen_event / max_val
+
+            # 6채널 이미지를 2x3 subplot으로 그리기
+            fig, axs = plt.subplots(2, 3, figsize=(20, 10))
+            axs = axs.ravel()
+            for ch in range(6):
+                channel_data = gen_event[ch]  # (H, W)
+                axs[ch].imshow(channel_data, cmap='seismic', vmin=-1, vmax=1)
+                axs[ch].axis('off')
+            plt.tight_layout()
+
+            # 각 timestep마다 결과 이미지 저장 (서브 폴더 생성)
+            save_path = os.path.join(save_dir, f"gen_event_{t_val}.png")
+            plt.savefig(save_path)
+            plt.close(fig)
