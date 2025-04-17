@@ -978,9 +978,12 @@ class B2ETrainer:
                 channel_data = gen_event[ch]  # (H, W)
                 axs[ch].imshow(channel_data, cmap='seismic', vmin=-1, vmax=1)
                 axs[ch].axis('off')
+
+            fig.suptitle(f"T = {t_val}", fontsize=18)
             plt.tight_layout()
             # 각 t값 별 이미지 저장
-            save_path = os.path.join(save_dir, f"gen_event_{t_val}.png")
+            filename = f"gen_event_{t_val:04d}.png"
+            save_path = os.path.join(save_dir, filename)
             plt.savefig(save_path)
             plt.close(fig)
 
