@@ -50,7 +50,7 @@ if "__main__" == __name__:
     parser.add_argument(
         "--checkpoint",
         type=str,
-        default="checkpoint/my_NAFVAE_KL",
+        default="checkpoint/my_NAFVAE",
         help="Checkpoint path or hub name.",
     )
 
@@ -64,7 +64,7 @@ if "__main__" == __name__:
     parser.add_argument(
         "--dataset_name",
         type=str,
-        default='Gopro_Event_Train_NAFVAE_KL',
+        default='Gopro_Event_Train_NAFVAE',
         help="Path to the input image folder.",
     )
 

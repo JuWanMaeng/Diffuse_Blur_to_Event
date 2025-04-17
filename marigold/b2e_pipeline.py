@@ -29,7 +29,8 @@ from .util.image_util import (
     resize_max_res,
 )
 
-import cv2
+import cv2, os
+import matplotlib.pyplot as plt
 
 
 
@@ -74,7 +75,7 @@ class B2EPipeline(DiffusionPipeline):
 
         self.event_vae =  NAFNetRecon(img_channel=6, width=64, middle_blk_num=28, 
                                       enc_blk_nums=[1,1,1], dec_blk_nums=[1,1,1],latent_dim=128)
-        weight = 'checkpoint/NAF_VAE_128.pth'
+        weight = 'checkpoint/NAF_VAE_128_noise.pth'
         checkpoint = torch.load(weight)
         self.event_vae.load_state_dict(checkpoint['params'])
         self.event_vae = self.event_vae.cuda()
@@ -178,6 +179,20 @@ class B2EPipeline(DiffusionPipeline):
                 generator=generator,
             )
             depth_pred_ls.append(depth_pred_raw.detach())
+
+            # debug 시각화
+            save_dir = 'debug/infer_debug'
+            gen_event = depth_pred_raw[0].cpu().numpy()
+            maxv = np.max(np.abs(gen_event)); gen_event /= maxv if maxv>0 else 1
+            fig, axs = plt.subplots(2, 3, figsize=(20, 10))
+            for ch in range(6):
+                axs.ravel()[ch].imshow(gen_event[ch],cmap='seismic',vmin=-1,vmax=1)
+                axs.ravel()[ch].axis('off')
+            fig.suptitle(f"Step={denoising_steps}")
+            plt.tight_layout(rect=[0,0,1,0.96])
+            os.makedirs(save_dir,exist_ok=True)
+            plt.savefig(os.path.join(save_dir,f"event_debug_{denoising_steps:04d}.png"))
+            plt.close(fig)
 
         depth_preds = torch.concat(depth_pred_ls, dim=0)
         torch.cuda.empty_cache()  # clear vram cache for ensembling
@@ -368,3 +383,58 @@ class B2EPipeline(DiffusionPipeline):
             z = self.event_vae.decode(event_latent)
 
         return z
+    
+
+    @torch.no_grad()
+    def infer_and_save_debug(
+        self,
+        rgb_in: torch.Tensor,
+        num_inference_steps: int,
+        generator: Union[torch.Generator, None] = None,
+        save_dir: str = "debug/infer_debug"
+    ):
+        """
+        single_infer를 통해 생성된 event를 6채널 subplot 이미지로 저장.
+        Args:
+            rgb_in:       [B,3,H,W] 입력 RGB 텐서 (batch size B>=1)
+            num_steps:    디노이징 단계 수
+            generator:    랜덤 시드용 torch.Generator (선택)
+            save_dir:     결과 이미지를 저장할 폴더
+        """
+        os.makedirs(save_dir, exist_ok=True)
+        self.model.to(self.device)
+
+        # 1) single_infer 호출
+        event = self.single_infer(
+            rgb_in=rgb_in,
+            num_inference_steps=num_inference_steps,
+            generator=generator,
+            show_pbar=False
+        )  # [B, C, H, W]
+        
+        # 2) 첫 번째 배치만 사용
+        gen_event = event[0].cpu().numpy()  # (C, H, W)
+        
+        # 3) 값 정규화 (극성 파악용)
+        maxv = np.max(np.abs(gen_event))
+        if maxv > 0:
+            gen_event = gen_event / maxv
+        
+        # 4) 6채널을 2x3 subplot으로 그려서 저장
+        fig, axs = plt.subplots(2, 3, figsize=(18, 12))
+        axs = axs.ravel()
+        for ch in range(gen_event.shape[0]):
+            axs[ch].imshow(gen_event[ch], cmap="seismic", vmin=-1, vmax=1)
+            axs[ch].set_title(f"channel {ch}", fontsize=12)
+            axs[ch].axis("off")
+        fig.suptitle(f"Inference Debug (steps={num_inference_steps})", fontsize=20)
+        plt.tight_layout(rect=[0, 0, 1, 0.96])
+
+        # 5) 파일명에 4자리 0패딩 적용
+        fname = f"event_debug_{num_inference_steps:04d}.png"
+        save_path = os.path.join(save_dir, fname)
+        plt.savefig(save_path)
+        plt.close(fig)
+
+        print(f">>> Saved debug image: {save_path}")
+        return event

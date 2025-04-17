@@ -707,9 +707,16 @@ class B2ETrainer:
         rmse_by_timestep = []
 
         # dataloader에서 첫 번째 배치를 고정으로 가져오기
+        # dataloader에서 첫 번째 배치를 고정으로 가져오기
         fixed_batch = next(iter(self.train_loader))
-        rgb = fixed_batch['frame'].to(device)
-        event = fixed_batch['voxel'].to(device)
+
+        # 두 번째 샘플 인덱스
+        sample_idx = 0
+
+        # 프레임과 이벤트를 [1]로 인덱싱하면 차원이 하나 줄어드니,
+        # .unsqueeze(0)으로 배치 차원을 다시 붙여줍니다.
+        rgb = fixed_batch['frame'][sample_idx].unsqueeze(0).to(device)    # shape: [1, C, H, W]
+        event = fixed_batch['voxel'][sample_idx].unsqueeze(0).to(device)  # shape: [1, 6, H, W]
         B = event.shape[0]
 
         # latent 계산 (고정 배치)
@@ -737,11 +744,11 @@ class B2ETrainer:
                     timestep=t[j],
                     alphas_cumprod=self.training_noise_scheduler.alphas_cumprod
                 )
-                for j in range(B)
+                for j in range(1)
             ], dim=0)
 
             # 디코딩: 복원된 latent를 event 이미지로 복원 → 첫 번째 샘플 선택
-            debug_out = self.model.decode_event(x0_pred)
+            debug_out = self.model.decode_event(z0)
             gen_event = debug_out[0].detach().cpu().numpy()  # shape: (C, H, W)
 
             # 저장 전에 극성 비교를 위해 최대 절대값으로 정규화하여 [-1, 1] 유지
@@ -756,9 +763,12 @@ class B2ETrainer:
                 channel_data = gen_event[ch]  # (H, W)
                 axs[ch].imshow(channel_data, cmap='seismic', vmin=-1, vmax=1)
                 axs[ch].axis('off')
+
+            fig.suptitle(f"T = {t_val}", fontsize=18)
             plt.tight_layout()
 
             # 각 timestep마다 결과 이미지 저장 (서브 폴더 생성)
-            save_path = os.path.join(save_dir, f"gen_event_{t_val}.png")
+            filename = f"gen_event_{t_val:04d}.png"
+            save_path = os.path.join(save_dir, filename)
             plt.savefig(save_path)
             plt.close(fig)
