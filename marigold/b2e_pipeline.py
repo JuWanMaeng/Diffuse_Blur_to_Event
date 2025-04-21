@@ -74,8 +74,8 @@ class B2EPipeline(DiffusionPipeline):
         self.empty_text_embed = None
 
         self.event_vae =  NAFNetRecon(img_channel=6, width=64, middle_blk_num=28, 
-                                      enc_blk_nums=[1,1,1], dec_blk_nums=[1,1,1],latent_dim=128)
-        weight = 'checkpoint/NAF_VAE_128_noise.pth'
+                                      enc_blk_nums=[1,1,1], dec_blk_nums=[1,1,1],latent_dim=8)
+        weight = 'checkpoint/NAF_VAE_8.pth'
         checkpoint = torch.load(weight)
         self.event_vae.load_state_dict(checkpoint['params'])
         self.event_vae = self.event_vae.cuda()

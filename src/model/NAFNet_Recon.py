@@ -94,7 +94,7 @@ class NAFBlock(nn.Module):
         return y + x * self.gamma
 
 class NAFNetRecon(nn.Module):
-    def __init__(self, img_channel=6, width=16, middle_blk_num=1, enc_blk_nums=[], dec_blk_nums=[],latent_dim=128):
+    def __init__(self, img_channel=6, width=16, middle_blk_num=1, enc_blk_nums=[], dec_blk_nums=[],latent_dim=8):
         """
         Args:
             img_channel: 입력 이미지 채널 수

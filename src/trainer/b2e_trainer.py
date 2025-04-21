@@ -157,61 +157,55 @@ class B2ETrainer:
         self.global_seed_sequence: List = []  # consistent global seed sequence, used to seed random generator, to ensure consistency when resuming
 
     def _replace_unet_conv_in(self):
-        # 기존 UNet의 첫 번째 conv layer weight와 bias 복사 (원래 shape: [320, 4, 3, 3])
+        # replace the first layer to accept 8 in_channels
         _weight = self.model.unet.conv_in.weight.clone()  # [320, 4, 3, 3]
-        _bias = self.model.unet.conv_in.bias.clone()        # [320]
-        
-        # 4채널을 68채널로 확장 (4 * 17 = 68)
-        _weight = _weight.repeat((1, 33, 1, 1))  # 새로운 weight shape: [320, 132, 3, 3]
-        
-        # 복제된 채널에 따른 활성화 값 보정
-        _weight *= 1 / 33.0  # 33배 확장된 것을 보정
-        
-        # 새 conv_in layer 생성: in_channels를 68로 설정
-        _n_conv_in_out_channel = self.model.unet.conv_in.out_channels
+        _bias = self.model.unet.conv_in.bias.clone()  # [320]
+        _weight = _weight.repeat((1, 3, 1, 1))  # Keep selected channel(s)
+
+        # half the activation magnitude
+        _weight *= 1 / 3.0  # 3배 확장된 것을 보정
+        # new conv_in channel
+        _n_convin_out_channel = self.model.unet.conv_in.out_channels
         _new_conv_in = Conv2d(
-            132, _n_conv_in_out_channel, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)
+            12, _n_convin_out_channel, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)
         )
         _new_conv_in.weight = Parameter(_weight)
         _new_conv_in.bias = Parameter(_bias)
         self.model.unet.conv_in = _new_conv_in
-        
-        logging.info("Unet conv_in layer is replaced with 68 channels")
-        # config 업데이트
-        self.model.unet.config["in_channels"] = 132
+        logging.info("Unet conv_in layer is replaced with 12 channels")
+        # replace config
+        self.model.unet.config["in_channels"] = 12
         logging.info("Unet config is updated")
         return
 
     def _replace_unet_conv_out(self):
         """
-        Replace the last conv_out layer of U-Net to output 64 channels.
+        Replace the last conv_out layer of U-Net to output 12 channels.
         """
         # Clone existing weight and bias
-        _weight = self.model.unet.conv_out.weight.clone()  # 기존 가중치, shape: [4, in_channels, 3, 3] (예시)
-        _bias = self.model.unet.conv_out.bias.clone()        # 기존 bias, shape: [4]
+        _weight = self.model.unet.conv_out.weight.clone()  # 기존 가중치
+        _bias = self.model.unet.conv_out.bias.clone()      # 기존 bias
 
         # 기존 가중치 채널 확장 (output 채널을 늘리기 위해)
-        # 예를 들어, 기존 채널이 4개라면 64개로 만들기 위해 16배 반복합니다.
-        _weight = _weight.repeat(32, 1, 1, 1)  # 새로운 weight shape: [4*16=64, in_channels, 3, 3]
+        _weight = _weight.repeat((2, 1, 1, 1))  #
 
         # 출력 값의 스케일 유지 (가중치 값 조정)
-        _weight *= 1 / 32.0  # 16배 확장된 것을 보정
+        _weight *= 0.5
 
-        # 새로운 conv_out 레이어 생성 (out_channels를 64로 설정)
+        # 새로운 conv_out 레이어 생성
         _n_convin_in_channel = self.model.unet.conv_out.in_channels
-        _new_conv_out = Conv2d(
-            in_channels=_n_convin_in_channel, out_channels=128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)
-        )
+        _new_conv_out = Conv2d(in_channels=_n_convin_in_channel, out_channels=8, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+
 
         _new_conv_out.weight = Parameter(_weight)
-        _new_conv_out.bias = Parameter(_bias.repeat(32))  # bias도 동일하게 16배로 복제
+        _new_conv_out.bias = Parameter(_bias.repeat(2))  # bias도 3배로 복제
 
         # U-Net의 마지막 conv_out 레이어 교체
         self.model.unet.conv_out = _new_conv_out
-        logging.info("Unet conv_out layer is replaced with 64 channels")
+        logging.info("Unet conv_out layer is replaced with 8 channels")
 
         # U-Net config 업데이트
-        self.model.unet.config["out_channels"] = 128
+        self.model.unet.config["out_channels"] = 8
         logging.info("Unet config is updated")
         return
 

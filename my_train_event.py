@@ -44,11 +44,11 @@ if "__main__" == __name__:
     )
     parser.add_argument(
         "--resume_run",
-        default='output/NAFNet_VAE/checkpoint/latest',
+        default=None,
         help="Path of checkpoint to be resumed. If given, will ignore --config, and checkpoint in the config",
     )
     parser.add_argument(
-        "--output_dir", type=str, default='output/NAFNet_VAE_KL_debug', help="directory to save checkpoints"
+        "--output_dir", type=str, default='output/NAFNet_VAE_8_debug', help="directory to save checkpoints"
     )
     parser.add_argument("--no_cuda", action="store_true", help="Do not use cuda.")
     parser.add_argument(
@@ -252,7 +252,7 @@ if "__main__" == __name__:
 
     # -------------------- Training & Evaluation Loop --------------------
     try:
-        trainer.debug_recon_vs_timestep()
-        # trainer.train(t_end=t_end)
+        # trainer.debug_recon_vs_timestep()
+        trainer.train(t_end=t_end)
     except Exception as e:
         logging.exception(e)
