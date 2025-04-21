@@ -66,6 +66,9 @@ class B2ETrainer:
         self.vis_loaders: List[DataLoader] = vis_dataloaders
         self.accumulation_steps: int = accumulation_steps
 
+        self.dataset_mean = 0.000016
+        self.dataset_std = 0.046372
+
         # Adapt input layers
         if 132 != self.model.unet.config["in_channels"]:
             self._replace_unet_conv_in()
@@ -259,6 +262,8 @@ class B2ETrainer:
                     event_latent = self.model.encode_event(event)  # [B, 4, h, w] 
                     rgb_latent = self.model.encode_image(rgb)
 
+                # === 데이터셋 전체 통계 기반 정규화 추가 ==
+                event_latent = (event_latent - self.dataset_mean) / self.dataset_std
                 ########################################
                 # 3) Diffusion Forward Process (노이즈 추가)
                 ########################################
