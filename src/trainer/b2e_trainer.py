@@ -688,7 +688,7 @@ class B2ETrainer:
     @torch.no_grad()
     def debug_recon_vs_timestep(
         self,
-        save_dir="./debug/NAFVAE",
+        save_dir="./debug/NAFVAE_noise",
         timesteps_list=None
     ):
         """
@@ -748,7 +748,7 @@ class B2ETrainer:
             ], dim=0)
 
             # 디코딩: 복원된 latent를 event 이미지로 복원 → 첫 번째 샘플 선택
-            debug_out = self.model.decode_event(z0)
+            debug_out = self.model.decode_event(x0_pred)
             gen_event = debug_out[0].detach().cpu().numpy()  # shape: (C, H, W)
 
             # 저장 전에 극성 비교를 위해 최대 절대값으로 정규화하여 [-1, 1] 유지
