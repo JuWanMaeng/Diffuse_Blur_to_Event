@@ -83,7 +83,7 @@ def main():
         VAE_np    = VAE_fmap.cpu().numpy().ravel()
 
         # 3) 원시 통계값 계산·출력
-        naf_mu, naf_sigma = -0.000058,0.043284
+        naf_mu, naf_sigma = NAFVAE_np.mean(), NAFVAE_np.std()
         vae_mu, vae_sigma = VAE_np.mean(),    VAE_np.std()
         print(f"Step {step:04d} NAFVAE raw → mean: {naf_mu:.4f}, std: {naf_sigma:.4f}")
         print(f"Step {step:04d} VAE    raw → mean: {vae_mu:.4f}, std: {vae_sigma:.4f}")
@@ -132,5 +132,5 @@ def main():
 
 
 if __name__ == "__main__":
-    os.environ['CUDA_VISIBLE_DEVICES'] = '1'
+    os.environ['CUDA_VISIBLE_DEVICES'] = '2'
     main()
