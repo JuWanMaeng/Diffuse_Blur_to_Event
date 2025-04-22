@@ -66,8 +66,8 @@ class B2ETrainer:
         self.vis_loaders: List[DataLoader] = vis_dataloaders
         self.accumulation_steps: int = accumulation_steps
 
-        self.dataset_mean = -0.000058
-        self.dataset_std = 0.043284
+        self.dataset_mean = 0.001
+        self.dataset_std = 0.05
 
         # Adapt input layers
         if 12 != self.model.unet.config["in_channels"]:
