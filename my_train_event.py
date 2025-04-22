@@ -48,7 +48,7 @@ if "__main__" == __name__:
         help="Path of checkpoint to be resumed. If given, will ignore --config, and checkpoint in the config",
     )
     parser.add_argument(
-        "--output_dir", type=str, default='output/NAFNet_VAE_UStd_Norm', help="directory to save checkpoints"
+        "--output_dir", type=str, default='output/dd', help="directory to save checkpoints"
     )
     parser.add_argument("--no_cuda", action="store_true", help="Do not use cuda.")
     parser.add_argument(
