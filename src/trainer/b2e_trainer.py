@@ -646,24 +646,25 @@ class B2ETrainer:
                     debug_out = self.model.decode_event(x0_pred)
                 # 여기서는 첫 번째 sample만 선택
                 gen_event = debug_out[0].detach().cpu().numpy()  # shape: (C, H, W)
+                gen_event = gen_event * self.dataset_std + self.dataset_mean
 
                 # 저장 전에 극성 비교를 위해 값 정규화: 최대 절대값으로 나누어 [-1,1] 유지
                 max_val = np.max(np.abs(gen_event))
                 if max_val != 0:
                     gen_event = gen_event / max_val
 
-                # 6채널 이미지를 2x3 서브플롯으로 그리기
-                fig, axs = plt.subplots(2, 3, figsize=(20, 10))
-                axs = axs.ravel()
-                for ch in range(6):
-                    channel_data = gen_event[ch]  # (H, W)
-                    im = axs[ch].imshow(channel_data, cmap='seismic', vmin=-1, vmax=1)
-                    axs[ch].axis('off')
-                plt.tight_layout()
-                # 이미지 파일 저장 (예: gen_event_{t_val}.png)
-                save_path = os.path.join(save_dir, f"gen_event_{t_val}.png")
-                plt.savefig(save_path)
-                plt.close(fig)
+                #### 6채널 이미지를 2x3 서브플롯으로 그리기 ####
+                # fig, axs = plt.subplots(2, 3, figsize=(20, 10))
+                # axs = axs.ravel()
+                # for ch in range(6):
+                #     channel_data = gen_event[ch]  # (H, W)
+                #     im = axs[ch].imshow(channel_data, cmap='seismic', vmin=-1, vmax=1)
+                #     axs[ch].axis('off')
+                # plt.tight_layout()
+                # # 이미지 파일 저장 (예: gen_event_{t_val}.png)
+                # save_path = os.path.join(save_dir, f"gen_event_{t_val}.png")
+                # plt.savefig(save_path)
+                # plt.close(fig)
                 
                 # [-1,1] → [0,1] 스케일 for RMSE 계산
                 x0_pred_scaled = (x0_pred + 1) / 2
