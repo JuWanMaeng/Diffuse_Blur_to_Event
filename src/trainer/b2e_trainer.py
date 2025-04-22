@@ -256,9 +256,6 @@ class B2ETrainer:
                     event_latent = self.model.encode_event(event)  # [B, 4, h, w] 
                     rgb_latent = self.model.encode_image(rgb)
 
-
-                # === 데이터셋 전체 통계 기반 정규화 추가 ==
-                event_latent = (event_latent - self.dataset_mean) / self.dataset_std
                 ########################################
                 # 3) Diffusion Forward Process (노이즈 추가)
                 ########################################
