@@ -29,7 +29,7 @@ from src.util.logging_util import (
 
 
 if "__main__" == __name__:
-    os.environ['CUDA_VISIBLE_DEVICES'] = '1'
+    os.environ['CUDA_VISIBLE_DEVICES'] = '3'
 
     t_start = datetime.now()
     print(f"start at {t_start}")
