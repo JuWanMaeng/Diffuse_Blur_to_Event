@@ -578,7 +578,7 @@ class B2ETrainer:
     @torch.no_grad()
     def debug_reconstruction_error_vs_timestep(
         self,
-        save_dir="./debug",
+        save_dir="./debug/NAFVAE_8",
         timesteps_list=None,
         max_batches=1
     ):
@@ -644,17 +644,17 @@ class B2ETrainer:
                     gen_event = gen_event / max_val
 
                 # 6채널 이미지를 2x3 서브플롯으로 그리기
-                fig, axs = plt.subplots(2, 3, figsize=(20, 10))
-                axs = axs.ravel()
-                for ch in range(6):
-                    channel_data = gen_event[ch]  # (H, W)
-                    im = axs[ch].imshow(channel_data, cmap='seismic', vmin=-1, vmax=1)
-                    axs[ch].axis('off')
-                plt.tight_layout()
-                # 이미지 파일 저장 (예: gen_event_{t_val}.png)
-                save_path = os.path.join(save_dir, f"gen_event_{t_val}.png")
-                plt.savefig(save_path)
-                plt.close(fig)
+                # fig, axs = plt.subplots(2, 3, figsize=(20, 10))
+                # axs = axs.ravel()
+                # for ch in range(6):
+                #     channel_data = gen_event[ch]  # (H, W)
+                #     im = axs[ch].imshow(channel_data, cmap='seismic', vmin=-1, vmax=1)
+                #     axs[ch].axis('off')
+                # plt.tight_layout()
+                # # 이미지 파일 저장 (예: gen_event_{t_val}.png)
+                # save_path = os.path.join(save_dir, f"gen_event_{t_val}.png")
+                # plt.savefig(save_path)
+                # plt.close(fig)
                 
                 # [-1,1] → [0,1] 스케일 for RMSE 계산
                 x0_pred_scaled = (x0_pred + 1) / 2
@@ -685,7 +685,7 @@ class B2ETrainer:
     @torch.no_grad()
     def debug_recon_vs_timestep(
         self,
-        save_dir="./debug/NAFVAE_noise",
+        save_dir="./debug/NAFVAE_8",
         timesteps_list=None
     ):
         """

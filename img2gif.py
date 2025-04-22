@@ -60,5 +60,5 @@ def make_mp4(image_folder, output_path='animation.mp4', duration=0.5):
 
 if __name__ == "__main__":
     # 예시: debug/original 폴더의 이미지를 모아 0.5초 프레임으로 GIF 생성
-    # make_gif('debug/NAFVAE', 'debug/NAFVAE/animation.gif', duration=0.5)
-    make_mp4('debug/NAFVAE_50', 'debug/NAFVAE_50/animation.mp4', duration=0.5)
+    make_gif('debug/NAFVAE_8', 'debug/NAFVAE_8/animation.gif', duration=0.5)
+    # make_mp4('debug/NAFVAE_8', 'debug/NAFVAE_8/animation.mp4', duration=0.5)
