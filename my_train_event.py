@@ -44,7 +44,7 @@ if "__main__" == __name__:
     )
     parser.add_argument(
         "--resume_run",
-        default='/workspace/Marigold/output/NAFNet_VAE_UStd/checkpoint/latest',
+        default=None,
         help="Path of checkpoint to be resumed. If given, will ignore --config, and checkpoint in the config",
     )
     parser.add_argument(
@@ -252,7 +252,7 @@ if "__main__" == __name__:
 
     # -------------------- Training & Evaluation Loop --------------------
     try:
-        trainer.debug_reconstruction_error_vs_timestep()
-        # trainer.train(t_end=t_end)
+        # trainer.debug_reconstruction_error_vs_timestep()
+        trainer.train(t_end=t_end)
     except Exception as e:
         logging.exception(e)
