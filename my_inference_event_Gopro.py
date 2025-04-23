@@ -35,12 +35,37 @@ from ptlflow.utils import flow_utils
 from ptlflow.utils.flow_utils import flow_to_rgb
 from torch.utils.data import DataLoader
 from event_metric import metric_and_output
+import matplotlib.pyplot as plt
 
 EXTENSION_LIST = [".jpg", ".jpeg", ".png"]
 
+# 각 데이터셋에 대해 평균 히스토그램 계산 (범위: -1 ~ 1)
+# 함수: 각 샘플의 raw 히스토그램 계산
+def compute_histogram(data, bins=100, val_range=(-1, 1)):
+    hist, bin_edges = np.histogram(data.flatten(), bins=bins, range=val_range)
+    return hist, bin_edges
+
+# 함수: 리스트에 있는 모든 배열에 대해 평균 히스토그램 계산
+# (각 샘플의 히스토그램을 합산한 후 샘플 수로 나누고, 최종적으로 정규화)
+def average_histogram_raw(array_list, bins=100, val_range=(-1, 1)):
+    hist_sum = None
+    for arr in array_list:
+        hist, bin_edges = compute_histogram(arr, bins=bins, val_range=val_range)
+        if hist_sum is None:
+            hist_sum = hist
+        else:
+            hist_sum += hist
+    hist_avg = hist_sum / len(array_list)
+    # 정규화: 전체 합이 1이 되도록
+    # hist_avg = hist_avg.astype(float)
+    # hist_avg = hist_avg / (hist_avg.sum() + 1e-8)
+    return hist_avg, bin_edges
+
+
+
 
 if "__main__" == __name__:
-    os.environ['CUDA_VISIBLE_DEVICES'] = '1'
+    os.environ['CUDA_VISIBLE_DEVICES'] = '3'
     logging.basicConfig(level=logging.INFO)
 
     # -------------------- Arguments --------------------
@@ -50,7 +75,7 @@ if "__main__" == __name__:
     parser.add_argument(
         "--checkpoint",
         type=str,
-        default="checkpoint/my_NAFVAE",
+        default="checkpoint/NAFVAE_8",
         help="Checkpoint path or hub name.",
     )
 
@@ -249,6 +274,14 @@ if "__main__" == __name__:
                 resample_method=resample_method,
                 generator=generator,
             )
+            output = pipe_out[0].transpose(2,0,1)
+                        # Count zeros in each dataset separately
+            voxel = output.flatten()
+            zero_count_voxel = np.sum(voxel == 0)
+            print(zero_count_voxel)
+
+
+
 
             output = pipe_out[0].transpose(2,0,1)
             # save output folder

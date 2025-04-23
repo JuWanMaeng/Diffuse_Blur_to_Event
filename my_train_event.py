@@ -198,7 +198,7 @@ if "__main__" == __name__:
     # Training dataset
     opt = {'crop_size':(540,960),
            'use_flip': True,
-           'folder_path' : '/workspace/data/GOPRO/test'
+           'folder_path' : '/workspace/data/GOPRO/train'
            }
     
     train_dataset = concatenate_h5_datasets(H5ImageDataset, opt)
@@ -252,7 +252,7 @@ if "__main__" == __name__:
 
     # -------------------- Training & Evaluation Loop --------------------
     try:
-        trainer.debug_recon_vs_timestep()
+        trainer.debug_reconstruction_error_vs_timestep()
         # trainer.train(t_end=t_end)
     except Exception as e:
         logging.exception(e)

@@ -285,7 +285,7 @@ class B2EPipeline(DiffusionPipeline):
 
         # Initial depth map (noise)
         event_latent = torch.randn(
-            (B, 128, H, W),  # 8 channels for event latent
+            (B, 8, H, W),  # 8 channels for event latent
             device=device,
             dtype=self.dtype,
             generator=generator,
