@@ -29,7 +29,7 @@ from src.util.logging_util import (
 
 
 if "__main__" == __name__:
-    os.environ['CUDA_VISIBLE_DEVICES'] = '3'
+    os.environ['CUDA_VISIBLE_DEVICES'] = '2'
 
     t_start = datetime.now()
     print(f"start at {t_start}")
@@ -44,7 +44,7 @@ if "__main__" == __name__:
     )
     parser.add_argument(
         "--resume_run",
-        default='output/L2/checkpoint/best',
+        default=None,
         help="Path of checkpoint to be resumed. If given, will ignore --config, and checkpoint in the config",
     )
     parser.add_argument(
@@ -252,7 +252,7 @@ if "__main__" == __name__:
 
     # -------------------- Training & Evaluation Loop --------------------
     try:
-        trainer.debug_recon_vs_timestep()
-        # trainer.train(t_end=t_end)
+        # trainer.debug_recon_vs_timestep()
+        trainer.train(t_end=t_end)
     except Exception as e:
         logging.exception(e)
