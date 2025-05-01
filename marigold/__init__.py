@@ -18,4 +18,3 @@
 # --------------------------------------------------------------------------
 
 
-from .marigold_pipeline import MarigoldPipeline, MarigoldDepthOutput  # noqa: F401

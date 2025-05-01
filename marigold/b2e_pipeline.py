@@ -181,18 +181,18 @@ class B2EPipeline(DiffusionPipeline):
             depth_pred_ls.append(depth_pred_raw.detach())
 
             # debug 시각화
-            save_dir = 'debug/infer_debug'
-            gen_event = depth_pred_raw[0].cpu().numpy()
-            maxv = np.max(np.abs(gen_event)); gen_event /= maxv if maxv>0 else 1
-            fig, axs = plt.subplots(2, 3, figsize=(20, 10))
-            for ch in range(6):
-                axs.ravel()[ch].imshow(gen_event[ch],cmap='seismic',vmin=-1,vmax=1)
-                axs.ravel()[ch].axis('off')
-            fig.suptitle(f"Step={denoising_steps}")
-            plt.tight_layout(rect=[0,0,1,0.96])
-            os.makedirs(save_dir,exist_ok=True)
-            plt.savefig(os.path.join(save_dir,f"event_debug_{denoising_steps:04d}.png"))
-            plt.close(fig)
+            # save_dir = 'debug/infer_debug'
+            # gen_event = depth_pred_raw[0].cpu().numpy()
+            # maxv = np.max(np.abs(gen_event)); gen_event /= maxv if maxv>0 else 1
+            # fig, axs = plt.subplots(2, 3, figsize=(20, 10))
+            # for ch in range(6):
+            #     axs.ravel()[ch].imshow(gen_event[ch],cmap='seismic',vmin=-1,vmax=1)
+            #     axs.ravel()[ch].axis('off')
+            # fig.suptitle(f"Step={denoising_steps}")
+            # plt.tight_layout(rect=[0,0,1,0.96])
+            # os.makedirs(save_dir,exist_ok=True)
+            # plt.savefig(os.path.join(save_dir,f"event_debug_{denoising_steps:04d}.png"))
+            # plt.close(fig)
 
         depth_preds = torch.concat(depth_pred_ls, dim=0)
         torch.cuda.empty_cache()  # clear vram cache for ensembling

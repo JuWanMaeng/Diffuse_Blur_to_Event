@@ -28,14 +28,14 @@ if "__main__" == __name__:
     parser.add_argument(
         "--checkpoint",
         type=str,
-        default="checkpoint/my",
+        default="checkpoint/NAFVAE_8",
         help="Checkpoint path or hub name.",
     )
 
     parser.add_argument(
         "--input_rgb_dir",
         type=str,
-        default='/workspace/Marigold/dataset/paths/HIDE_test.txt',
+        default='/workspace/Marigold/dataset/paths/HIDE_test_NAFVAE.txt',
         help="Path to the input image folder.",
     )
     parser.add_argument(

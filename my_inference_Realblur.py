@@ -46,7 +46,7 @@ if "__main__" == __name__:
     parser.add_argument(
         "--checkpoint",
         type=str,
-        default="checkpoint/my",
+        default="checkpoint/NAFVAE_8",
         help="Checkpoint path or hub name.",
     )
 
@@ -60,7 +60,7 @@ if "__main__" == __name__:
     parser.add_argument(
         "--dataset_name",
         type=str,
-        default='RealBlur-R',
+        default='RealBlur-J',
         help="Path to the input image folder.",
     )
 
@@ -266,7 +266,7 @@ if "__main__" == __name__:
             input_path = os.path.join(output_dir,img_num,'input.png')
 
             root_path = rgb_path.split('/')[:-3]
-            event_folder_path = '/' + os.path.join(*root_path, scene, 'event') # 'workspace/data/RealBlur/RealBlur-J_ECC_IMCORR_centroid_itensity_ref/scene120'
+            event_folder_path = '/' + os.path.join(*root_path, scene, 'event_NAFVAE') # 'workspace/data/RealBlur/RealBlur-J_ECC_IMCORR_centroid_itensity_ref/scene120'
             os.makedirs(event_folder_path,exist_ok=True)
 
             for idx,out_img in enumerate(pipe_out):

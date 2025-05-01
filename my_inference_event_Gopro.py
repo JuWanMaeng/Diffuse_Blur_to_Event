@@ -65,7 +65,7 @@ def average_histogram_raw(array_list, bins=100, val_range=(-1, 1)):
 
 
 if "__main__" == __name__:
-    os.environ['CUDA_VISIBLE_DEVICES'] = '3'
+    os.environ['CUDA_VISIBLE_DEVICES'] = '0'
     logging.basicConfig(level=logging.INFO)
 
     # -------------------- Arguments --------------------
@@ -89,7 +89,7 @@ if "__main__" == __name__:
     parser.add_argument(
         "--dataset_name",
         type=str,
-        default='Gopro_Event_Train_NAFVAE',
+        default='Gopro_Event_Test_NAFVAE',
         help="Path to the input image folder.",
     )
 
@@ -274,19 +274,10 @@ if "__main__" == __name__:
                 resample_method=resample_method,
                 generator=generator,
             )
-            output = pipe_out[0].transpose(2,0,1)
-                        # Count zeros in each dataset separately
-            voxel = output.flatten()
-            zero_count_voxel = np.sum(voxel == 0)
-            print(zero_count_voxel)
-
-
-
 
             output = pipe_out[0].transpose(2,0,1)
             # save output folder
             os.makedirs(os.path.join(output_dir, img_path[0]),exist_ok=True)
-
 
             gt_event = data['voxel'][0]  # [6,H,W]
             gt_event = np.array(gt_event)

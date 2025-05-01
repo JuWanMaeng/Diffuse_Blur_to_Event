@@ -580,7 +580,7 @@ class B2ETrainer:
         self,
         save_dir="./debug/NAFVAE_8",
         timesteps_list=None,
-        max_batches=100
+        max_batches=50
     ):
         """
         각 timestep에 대해 RMSE(x0_pred, z0) 측정 및 디코딩된 event 결과를 6채널 이미지로 저장하고,
@@ -708,7 +708,7 @@ class B2ETrainer:
         fixed_batch = next(iter(self.train_loader))
 
         # 두 번째 샘플 인덱스
-        sample_idx = 3
+        sample_idx = 0
 
         # 프레임과 이벤트를 [1]로 인덱싱하면 차원이 하나 줄어드니,
         # .unsqueeze(0)으로 배치 차원을 다시 붙여줍니다.
