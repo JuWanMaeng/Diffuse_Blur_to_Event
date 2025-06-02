@@ -75,7 +75,7 @@ if "__main__" == __name__:
     parser.add_argument(
         "--checkpoint",
         type=str,
-        default="checkpoint/my",
+        default="checkpoint/NAFVAE_8",
         help="Checkpoint path or hub name.",
     )
 
@@ -89,7 +89,7 @@ if "__main__" == __name__:
     parser.add_argument(
         "--dataset_name",
         type=str,
-        default='/workspace/data/B2E_results/B2E_L2/Gopro_Event_Test_1280',
+        default='/workspace/data/B2E_results/B2E_NAFVAE/Gopro_Latent_Test_NAFVAE',
         help="Path to the input image folder.",
     )
 
@@ -262,7 +262,7 @@ if "__main__" == __name__:
                 generator.manual_seed(seed)
 
             # Predict depth
-            pipe_out = pipe(
+            pipe_out, event_latent = pipe(
                 input_image,
                 denoising_steps=denoise_steps,
                 ensemble_size=ensemble_size,
@@ -275,26 +275,12 @@ if "__main__" == __name__:
                 generator=generator,
             )
 
-            output = pipe_out[0].transpose(2,0,1)
+            event_latent = event_latent[0].detach().cpu().numpy()
             # save output folder
             os.makedirs(os.path.join(output_dir, img_path[0]),exist_ok=True)
-
-            gt_event = data['voxel'][0]  # [6,H,W]
-            gt_event = np.array(gt_event)
-
-            # rmse
-            max_val = np.max(np.abs(output))
-            output = output/max_val
-            output = (output+1) / 2
-            gt_event = (gt_event+1) / 2
-            mse = np.mean((output-gt_event) ** 2)
-            rmse = np.sqrt(mse)
-            total_rmse += rmse
-
-            np.save(os.path.join(output_dir, img_path[0], 'out'), pipe_out[0])
+            np.save(os.path.join(output_dir, img_path[0], 'out'), event_latent)
 
 
-        print(total_rmse/len(dataloader))
 
 
 
