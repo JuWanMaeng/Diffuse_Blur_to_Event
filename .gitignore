@@ -29,3 +29,7 @@
 *.npy
 
 jj_inference.py
+
+# Allow figs directory
+!figs/
+!figs/*.png
