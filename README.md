@@ -7,6 +7,9 @@
 - **Stable Diffusion v2 (SDv2)기반 or Diffusion Transformer (DiT) 기반**: 고성능 생성 모델을 활용한 정밀한 이벤트 복원
 - **Marigold 파이프라인 활용**: Marigold 깊이 추정 모델의 파이프라인을 이벤트 생성에 맞게 변형하여 사용
 
+## 🏗️ 파이프라인 (Pipeline)
+![Pipeline](figs/pipeline.png)
+
 ## 🛠️ 설치 (Installation)
 
 ### 요구 사항 (Requirements)
@@ -60,6 +63,20 @@ python inference_DIT.py --checkpoint checkpoint/my_DIT --output_dir results/
   - `--output_dir`: 결과 저장 디렉토리
   - `--denoise_steps`: 디퓨전 디노이징 스텝 수 (기본값: 50)
   - `--ensemble_size`: 앙상블 크기 (기본값: 1)
+
+## 📊 결과 (Results)
+
+### 정량적 지표 (Quantitative Metrics)
+![Metric](figs/metric.png)
+
+### 시각화 (Visualization)
+#### Event Generation
+![Event Vis](figs/event_vis.png)
+![Event Vis 2](figs/event_vis2.png)
+
+#### Deblurring (Reference)
+![Deblur Vis](figs/deblur_vis.png)
+![Deblur Vis 2](figs/deblur_vis2.png)
 
 ## ⚙️ 설정 (Configuration)
 `config/` 디렉토리 내의 YAML 파일들을 통해 모델 및 학습 파라미터를 조정할 수 있습니다.
